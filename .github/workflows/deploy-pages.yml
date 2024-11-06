@@ -42,7 +42,7 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
-          github_token: ${{ secrets.TOKEN_GIT }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
           publish_dir: ./dist/nll-frontend/browser  # Reemplaza con el path correcto de tu build
           # Opcional: Puedes especificar la rama y otras opciones
