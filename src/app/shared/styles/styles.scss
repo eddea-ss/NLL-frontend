@@ -1,0 +1,18 @@
+/* You can add global styles to this file, and also import other style files */
+/* Import Theme Files */
+@import '@styles/light-theme.scss';
+@import '@styles/dark-theme.scss';
+
+/* Global Styles */
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+/* Default Theme */
+:root {
+  @extend .light-theme;
+}
+
+/* Additional global styles can go here */

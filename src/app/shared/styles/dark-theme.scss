@@ -1,0 +1,14 @@
+/* Dark Theme Variables - Inspired by Facebook Dark Mode */
+.dark-theme {
+  --primary-color: #011e43;          /* Facebook Blue */
+  --secondary-color: #4267B2;        /* Secondary Blue */
+  --background-color: #18191A;       /* Dark Background */
+  --background-color-blur: rgba(24, 25, 26, 0.5);
+  --card-background: #242526;        /* Dark Card Background */
+  --text-color: #E4E6EB;             /* Light Text */
+  --text-light: #B0B3B8;             /* Lighter Text */
+  --text-background-color: #fff;  /* Text Background */
+  --success-color: #42B72A;          /* Green for Success */
+  --error-color: #FA3E3E;            /* Red for Errors */
+  --warning-color: #FFBA00;          /* Amber for Warnings */
+}
