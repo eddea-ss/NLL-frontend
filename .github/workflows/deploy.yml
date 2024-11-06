@@ -36,7 +36,7 @@ jobs:
 
       # 5. Construir la aplicación Angular
       - name: Build Angular App
-        run: bun run build --prod  # Asegúrate de que el script 'build' está definido en tu package.json
+        run: bun run build # Asegúrate de que el script 'build' está definido en tu package.json
 
       # 6. Desplegar en GitHub Pages
       - name: Deploy to GitHub Pages
