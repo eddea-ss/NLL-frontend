@@ -44,7 +44,8 @@ jobs:
         with:
           github_token: ${{ secrets.TOKEN_GIT }}
 
-          publish_dir: ./dist/nll-frontend  # Reemplaza con el path correcto de tu build
+          publish_dir: ./dist/nll-frontend/browser  # Reemplaza con el path correcto de tu build
           # Opcional: Puedes especificar la rama y otras opciones
           # branch: gh-pages
           # folder: ''
+#a
