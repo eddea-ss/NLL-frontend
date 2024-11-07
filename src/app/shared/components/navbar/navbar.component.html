@@ -1,0 +1,47 @@
+<nav>
+    <li class="logo" routerLink="/" routerLinkActive="active">NuevoLosLagos</li>
+    
+    <!-- Menú principal -->
+    <ul class="main-menu">
+      <li routerLink="/quienes-somos" routerLinkActive="active">
+        <mat-icon>info</mat-icon>
+        <span>Quienes somos</span>
+      </li>
+      <li routerLink="/modelo" routerLinkActive="active">
+        <mat-icon>assessment</mat-icon>
+        <span>Modelo de diagnóstico</span>
+      </li>
+      <li routerLink="/cursos" routerLinkActive="active">
+        <mat-icon>book</mat-icon>
+        <span>Cursos</span>
+      </li>
+      <li routerLink="/proveedores" routerLinkActive="active">
+        <mat-icon>business</mat-icon>
+        <span>Proveedores</span>
+      </li>
+      <li routerLink="/proyectos" routerLinkActive="active">
+        <mat-icon>star</mat-icon>
+        <span>Proyectos destacados</span>
+      </li>
+      <li routerLink="/financiamiento" routerLinkActive="active">
+        <mat-icon>attach_money</mat-icon>
+        <span>Financiamiento</span>
+      </li>
+      <li routerLink="/articulos" routerLinkActive="active">
+        <mat-icon>article</mat-icon>
+        <span>Artículos de interés</span>
+      </li>
+    </ul>
+
+    <!-- Botones de menú -->
+    @if (authState() ===AuthState.LoggedOut) {
+        <button class="menu-toggle" (click)="onToggleSidebar()">
+            <mat-icon>menu</mat-icon>
+        </button>
+    }
+    @if (authState() === AuthState.LoggedIn) {
+        <button class="profile-icon" (click)="onToggleSidebar()">
+            <mat-icon>account_circle</mat-icon>
+        </button>
+    }
+</nav>

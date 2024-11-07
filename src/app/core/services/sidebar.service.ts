@@ -1,32 +1,28 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Injectable, signal, WritableSignal } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SidebarService {
-  private sidebarOpenSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  public sidebarOpen$: Observable<boolean> = this.sidebarOpenSubject.asObservable(); // Observable para escuchar el estado del sidebar
+  private _isSidebarOpen: WritableSignal<boolean> = signal(false);
 
-  constructor() {}
-
-  // Alternar el estado actual del sidebar (abierto/cerrado)
-  toggleSidebar(): void {
-    this.setSidebarState(!this.sidebarOpenSubject.value);
+  get isSidebarOpen(): WritableSignal<boolean> {
+    return this._isSidebarOpen.asReadonly() as WritableSignal<boolean>;
   }
 
-  // Abrir el sidebar
+  toggleSidebar(): void {
+    this.setSidebarState(!this._isSidebarOpen());
+  }
+
   openSidebar(): void {
     this.setSidebarState(true);
   }
 
-  // Cerrar el sidebar
   closeSidebar(): void {
     this.setSidebarState(false);
   }
 
-  // Actualizar el estado del sidebar (true = abierto, false = cerrado)
   private setSidebarState(isOpen: boolean): void {
-    this.sidebarOpenSubject.next(isOpen);
+    this._isSidebarOpen.set(isOpen);
   }
 }

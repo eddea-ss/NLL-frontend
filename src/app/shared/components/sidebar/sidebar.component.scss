@@ -1,0 +1,69 @@
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -250px;
+    width: 250px;
+    height: 100%;
+    background-color: var(--primary-color);
+    border-left: ridge;
+    border-left-color: var(--text-background-color);
+    transition: right 0.3s ease-in-out;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  .sidebar.open {
+    right: 0;
+  }
+  button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: transparent;
+    color: var(--text-background-color);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  button:hover,
+  button:focus,
+  button.active { /* Resaltar en hover, focus y cuando está activo */
+    background-color:var(--primary-color);
+    color: var(--text-background-color); /* Color de resaltado, ajusta según preferencia */
+  }
+  
+  button:active {
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+  
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+    background-color: var(--error-color) ;
+    border-radius: 25%;
+    color: var(--text-background-color);
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+  }
+  .container-lead{
+    padding: 40px 0px;
+  }
+  
+  mat-divider{
+    border-top-color: var(--text-background-color);
+    margin: 30px;
+  }
+  
+  .only-mobile{
+    visibility: hidden;
+    @media (max-width: 770px) {
+      visibility: visible;
+    }
+  }

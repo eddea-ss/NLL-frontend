@@ -1,1 +1,8 @@
-<p>home works!</p>
+<div class="home-page">
+    <app-navbar></app-navbar>
+  
+    <div class="content">
+      <router-outlet></router-outlet> <!-- Aquí se cargarán las rutas hijas -->
+    </div>
+    <app-sidebar (close)="closeSidebar()"></app-sidebar>
+</div>

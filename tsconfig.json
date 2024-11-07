@@ -33,12 +33,13 @@
       //para componentes reutilizables
       "@shared/*": ["app/shared/*"],
       "@models/*": ["app/shared/models/*"],
+      "@enums/*": ["app/shared/enums/*"],
       "@components/*": ["app/shared/components/*"],
       "@pipes/*": ["app/shared/pipes/*"],
       "@directives/*": ["app/shared/directives/*"],
       "@styles/*": ["app/shared/styles/*"],
       //para versionado
-      "@v1/*": ["app/v1/*"],
+      "@v1/*": ["app/v1/modules/*"],
       "@v2/*": ["app/v2/*"],
     }
   },
