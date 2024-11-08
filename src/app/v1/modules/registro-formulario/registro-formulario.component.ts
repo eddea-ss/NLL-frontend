@@ -345,7 +345,6 @@ export class RegistroFormularioComponent implements OnInit, OnDestroy{
 
   // Manejar el envío del formulario
   onSubmit(): void {
-    console.log(this.registroForm, this.registroForm.hasError('passwordsMismatch'))
     this.isLoading = true;
     if (this.registroForm.invalid) {
       this.registroForm.markAllAsTouched();
@@ -362,10 +361,6 @@ export class RegistroFormularioComponent implements OnInit, OnDestroy{
       password: formValue.password,
       ...this.getDynamicFields(formValue)
     };
-
-    console.log('Datos de Registro:', usuario);
-    console.log('Archivo ERUT:', formValue.eRut);
-
     // Aquí se enviaría el formulario al backend
     this.isLoading = false;
   }

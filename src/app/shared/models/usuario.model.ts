@@ -13,10 +13,12 @@ export interface Usuario {
     nombre: string;
     correo: string;
     rol_id: number;
-    estado: any | null;
+    estado: string | null;
     limiteBusquedas: number | null;
-    created_at: any | null;
-    rol: Role;
+    created_at: string | null;
+    rol: {
+      nombreRol: Role;
+    };
     empresas: Industria[] | null;
     proveedores: Proveedor[] | null;
     rut: string | null;

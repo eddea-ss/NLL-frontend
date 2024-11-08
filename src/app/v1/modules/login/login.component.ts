@@ -1,6 +1,6 @@
 // src/app/core/components/login/login.component.ts
 
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { LoginService } from '@core/services/login.service';
 import { CommonModule } from '@angular/common';
@@ -31,19 +31,17 @@ import { RouterLink } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginComponent {
-  loginForm: FormGroup;
+  private loginService = inject(LoginService);
+  protected fb = inject(FormBuilder);
+  private cdRef = inject(ChangeDetectorRef); // Inyectar ChangeDetectorRef
+
+  loginForm: FormGroup = this.fb.group({
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required]]
+  });
+  
   isLoading = false;
   errorMessage = '';
-
-  constructor(
-    private fb: FormBuilder,
-    private loginService: LoginService,
-  ) {
-    this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]]
-    });
-  }
 
   onSubmit() {
     if (this.loginForm.invalid) {
@@ -52,17 +50,23 @@ export class LoginComponent {
 
     this.isLoading = true;
     this.errorMessage = '';
+    this.cdRef.markForCheck(); // Forzar la detección de cambios para actualizar la vista
 
     const { email, password } = this.loginForm.value;
 
     this.loginService.login({ correo: email, password })
       .subscribe({
-        next: (response: any) => { 
+        next: () => {
+          // Manejar el inicio de sesión exitoso
           this.isLoading = false;
+          // Por ejemplo, redirigir al usuario a otra página
+          // this.router.navigate(['/dashboard']);
+          this.cdRef.markForCheck(); // Forzar la detección de cambios
         },
-        error: (error: any) => {
-          this.errorMessage = error.error?.message || 'Error al iniciar sesión.';
+        error: (response) => {
+          this.errorMessage = response?.error?.error || 'Error al iniciar sesión.';
           this.isLoading = false;
+          this.cdRef.markForCheck(); // Forzar la detección de cambios
         }
       });
   }

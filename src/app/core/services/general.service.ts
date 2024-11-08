@@ -225,7 +225,6 @@ export class GeneralService {
     return this.postData('login', data).pipe(
       //Cambiar postdata
       tap((response) => {
-        console.log('texto');
         if (response.token && response.usuario) {
           this.manejarToken(response.token, response.usuario);
         }

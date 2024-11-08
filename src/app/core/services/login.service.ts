@@ -43,14 +43,14 @@ export class LoginService {
       token = localStorage.getItem('authToken') ?? '';
       user = localStorage.getItem('user') ?? '';
     }catch(e){
-      console.log('Error al obtener el token y el usuario desde localStorage', e);
+      console.warn('Error al obtener el token y el usuario desde localStorage', e);
     }
 
     if (token && user) {
       try {
         const parsedUser: Usuario = JSON.parse(user);
         // Verificar si el rol es válido
-        if (Object.values(Role).includes(parsedUser.rol)) {
+        if (Object.values(Role).includes(parsedUser.rol.nombreRol)) {
           this._authState.set(AuthState.LoggedIn);
           this._currentUser.set(parsedUser);
           this._authToken.set(token);
@@ -97,7 +97,7 @@ export class LoginService {
    */
   private handleAuthentication(token: string, usuario: Usuario): void {
     // Verificar si el rol es válido
-    if (!Object.values(Role).includes(usuario.rol)) {
+    if (!Object.values(Role).includes(usuario.rol.nombreRol)) {
       this.handleError(new Error('Rol de usuario inválido.'));
       return;
     }
@@ -112,7 +112,7 @@ export class LoginService {
     this._authToken.set(token);
 
     // Opcional: Navegar a una ruta protegida después del login
-    this.router.navigate(['/home']);
+    this.router.navigate(['/']);
   }
 
   /**
@@ -120,7 +120,6 @@ export class LoginService {
    * @param error - Error ocurrido durante el login.
    */
   private handleError(error: HttpErrorResponse | Error): void {
-    console.error('Error en LoginService:', error);
     this._authState.set(AuthState.Error);
     if (error instanceof HttpErrorResponse) {
       this._authError.set(error.error?.message || 'Error de servidor.');
