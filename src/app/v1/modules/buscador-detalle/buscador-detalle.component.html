@@ -1,1 +1,14 @@
-<p>buscador-detalle works!</p>
+<!-- src/app/v1/modules/buscador-detalle/buscador-detalle.component.html -->
+
+<h2 mat-dialog-title>{{ data.detalles.titulo }}</h2>
+<mat-dialog-content>
+  <p class="text-muted">Año de publicación: {{ getPublicationYear(data.detalles.fecha_publicacion) }}</p>
+  <p class="text-muted highlight" *ngIf="data.detalles.idioma === 'ingles'">Artículo original en inglés</p>
+  <div [innerHTML]="resumenSanitizado" class="text-body"></div>
+  <p class="text-muted fst-italic">Sitio de origen: {{ obtenerDominio(data.detalles.link) }}</p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <a [href]="data.detalles.link" target="_blank" mat-button color="primary">Ir a la fuente</a>
+  <button mat-button color="accent" (click)="siguiente()">Siguiente</button>
+  <button mat-button (click)="cerrar()">Cerrar</button>
+</mat-dialog-actions>
