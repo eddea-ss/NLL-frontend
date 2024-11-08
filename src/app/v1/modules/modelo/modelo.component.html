@@ -1,1 +1,80 @@
-<p>modelo works!</p>
+<mat-card class="modelo-container">
+    <mat-card-title class="title">
+      Plataforma Inteligente Nuevo Los Lagos
+    </mat-card-title>
+    <mat-card-subtitle class="subtitle">
+      Fortalecimiento del ecosistema de Manufactura Avanzada e i4.0
+    </mat-card-subtitle>
+  
+    <!--Cuando el modelo esta completado-->
+    <section *ngIf="estado==='completo'">
+      <div class="modelo-general">
+        <mat-card appearance="outlined">
+          <mat-card-title>{{puntaje.general.letra}}</mat-card-title>
+          <mat-card-subtitle>{{puntaje.general.subtitulo}}</mat-card-subtitle>
+        </mat-card>
+        <mat-card-content>
+          <p>{{puntaje.general.descripcion}}</p>
+        </mat-card-content>
+      </div>
+      <div class="modelo-categoria">
+        <div class="categoria" *ngFor="let item of puntaje.categoria">
+          <mat-card appearance="outlined">
+            <mat-card-title>{{item.letra}}</mat-card-title>
+          </mat-card>
+          <mat-expansion-panel >
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{item.categoria}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <p>
+              {{item.descripcion}}
+            </p>
+          </mat-expansion-panel>
+        </div>
+      </div>
+    </section>
+  
+    <!--Cuando el modelo no esta completo y es perfil empresasa 4.0-->
+    <section *ngIf="estado==='incompleto'">
+      <div class="modelo-general">
+        <mat-card appearance="outlined">
+          <mat-card-subtitle>
+            Completa tu modelo de maduración haciendo click en el boton de abajo.
+          </mat-card-subtitle>
+        </mat-card>
+        <mat-card-content>
+          <button mat-fab class="link-button" (click)="openLink()" extended>
+            <mat-icon class="animated-icon">link</mat-icon>
+            Completa aquí
+          </button>
+        </mat-card-content>
+      </div>
+      <div class="modelo-categoria">
+        <div class="categoria">
+          <mat-card appearance="outlined" class="card-incompleto">
+            <mat-card-title>¿Que es el modelo de maduración industriaal 4.0?</mat-card-title>
+            <mat-card-subtitle>El modelo de maduración industrial 4.0 es una herramienta que evalúa el nivel de adopción de tecnologías avanzadas y transformación digital en las empresas, proporcionando una hoja de ruta para su modernización y competitividad en la era de la Industria 4.0.</mat-card-subtitle>
+          </mat-card>
+        </div>
+      </div>
+    </section>
+  
+    <!--Cuando no ha logeado o no corresponde a empresa 4.0-->
+    <div class="hero" *ngIf="estado===''">
+      <app-carousel [slides]="mySlides" [showIndicators]="false" [showArrows]="false"></app-carousel>
+      <mat-card-content>
+        <button mat-fab *ngIf="rolUsuario!=='proveedor'" class="link-button" routerLink="/registro-proveedor" extended>
+          <mat-icon class="animated-icon">link</mat-icon>
+          Registro Proveedores
+        </button>
+        <button mat-fab class="link-button" routerLink="/registro-empresa" extended>
+          <mat-icon class="animated-icon">link</mat-icon>
+          Registro Empresa
+        </button>
+      </mat-card-content>
+    </div>
+  
+  </mat-card>
+  

@@ -5,6 +5,7 @@ import { ArticleCardComponent, CarouselComponent } from '@shared/components';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { Slide } from '@shared/models';
 import { MatButtonModule } from '@angular/material/button';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-landing-page',
@@ -16,6 +17,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatDividerModule,
     MatToolbarModule,
     MatButtonModule,
+    RouterLink
   ],
   templateUrl: './landing-page.component.html',
   styleUrl: './landing-page.component.scss',
