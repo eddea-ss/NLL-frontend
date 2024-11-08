@@ -1,1 +1,61 @@
-<p>landing-page works!</p>
+<!-- src/app/landing-page/landingPage.component.html -->
+<section>
+    <div class="hero">
+      <app-carousel [slides]="mySlides" [showIndicators]="true" [showArrows]="true"></app-carousel>
+    </div>
+  </section>
+  
+  <section style="margin: 24px 0px;">
+    <div class="articles-container">
+      <mat-toolbar class="transparent-toolbar" style="max-width: 820px;@media (max-width: 768px) {
+        max-width: 260px;
+      }" routerLink="/modelo">
+        <mat-icon class="animated-icon">assessment</mat-icon>
+        <span class="toolbar-title">Evalúa tu empresa con el modelo de diagnóstico 4.0</span>
+      </mat-toolbar>
+    </div>
+    <div class="articles-container">
+      <mat-toolbar class="transparent-toolbar" routerLink="financiamiento">
+        <mat-icon class="animated-icon">attach_money</mat-icon>
+        <span class="toolbar-title">Financiamiento</span>
+      </mat-toolbar>
+  
+      <mat-toolbar class="transparent-toolbar" routerLink="cursos">
+        <mat-icon class="animated-icon">book</mat-icon>
+        <span class="toolbar-title">Cursos</span>
+      </mat-toolbar>
+      
+      <mat-toolbar class="transparent-toolbar" routerLink="proyectos">
+        <mat-icon class="animated-icon">star</mat-icon>
+        <span class="toolbar-title">Proyectos</span>
+      </mat-toolbar>
+    </div>
+  </section>
+  
+  <section>
+    <div class="extra">
+      <div class="extra-content">
+        <h2>Revisa el informe sobre la Industria 4.0 en la Región de Los Lagos</h2>
+        <div>
+          <img loading="lazy" [src]="'assets/images/informe.jpg'" alt="Slide Image" loading="lazy">
+          <button mat-fab class="link-button" routerLink="/informe" extended>
+            <mat-icon class="animated-icon">more</mat-icon>
+            Más información
+          </button>
+        </div>
+      </div>
+  
+      <mat-divider></mat-divider>
+    
+      <div class="extra-content">
+        <div>
+          <img loading="lazy" [src]="'assets/images/podcasts.jpg'" alt="Slide Image" loading="lazy">
+          <button mat-fab class="link-button" routerLink="/podcasts" extended>
+            <mat-icon class="animated-icon">more</mat-icon>
+            Más información
+          </button>
+        </div>
+        <h2>Accede a nuestros podcasts, basados en investigaciones y conversaciones con expertos, te mantienen al día con las últimas tendencias.</h2>
+      </div>
+    </div>
+  </section>

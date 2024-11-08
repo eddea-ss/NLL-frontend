@@ -1,1 +1,50 @@
-<p>carousel works!</p>
+<!-- src/app/Core/Components/carousel/carousel.component.html -->
+<div class="carousel" role="region">
+    <div *ngFor="let slide of slides; let i = index"
+         class="slide"
+         [class.active]="i === currentIndex"
+         [@carouselAnimation]="i === currentIndex ? 'active' : 'inactive'"
+         role="group">
+      
+      <!-- Slide Regular: Imagen y Contenido -->
+      <ng-container *ngIf="slide.type === 'regular'">
+        <img *ngIf="slide.imageUrl" [src]="slide.imageUrl" alt="Slide Image" loading="lazy">
+        <div *ngIf="slide.content" class="slide-content" [innerHTML]="getSanitizedContent(slide.content)"></div>
+      </ng-container>
+  
+      <!-- Slide Personalizado 1 -->
+      <ng-container *ngIf="slide.type === 'custom1'">
+        <div class="logo-container">
+          <h6>"Impulsa tus proyectos con financiamiento inteligente"</h6>
+          <div class="logo">Logo Proyecto A</div>
+          <div class="logo">Logo Proyecto B</div>
+          <div class="logo">Logo Proyecto C</div>
+          <div class="logo">Logo Proyecto D</div>
+        </div>
+      </ng-container>
+  
+      <!-- Slide Personalizado 2 -->
+      <ng-container *ngIf="slide.type === 'callToAction'">
+        <div class="special-content">
+          <h2>Especial Slide</h2>
+          <p>Este es un slide personalizado con contenido único.</p>
+          <button>{{slide.buttonText??'¡Haz Click!'}}</button>
+        </div>
+      </ng-container>
+    </div>
+  
+    <!-- Botones de Navegación -->
+    <button *ngIf="showArrows" class="arrow left" (click)="prevSlide()" aria-label="Anterior">&lt;</button>
+    <button *ngIf="showArrows" class="arrow right" (click)="nextSlide()" aria-label="Siguiente">&gt;</button>
+  
+    <!-- Indicadores -->
+    <div *ngIf="showIndicators" class="indicators">
+      <span *ngFor="let slide of slides; let i = index"
+            [class.active]="i === currentIndex"
+            (click)="goToSlide(i)"
+            role="button"
+            tabindex="0">
+      </span>
+    </div>
+  </div>
+  

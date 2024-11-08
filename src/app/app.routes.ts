@@ -31,7 +31,6 @@ export const routes: Routes = [
         component: RegistroFormularioComponent,
         data: { entityType: 'Proveedor'}
     },
-    { path: 'quienes-somos', component: QuienesSomosComponent },
 
     //rutas con navbar & sidebar
     { 

@@ -13,14 +13,11 @@
       </div>
       
       <div>
-        <!--Opciones segun estado login o perfil-->
-        @for (option of menuOptions; track $index) {
-            <button mat-fab extended (click)="handleMenuClick(option)">
-                <mat-icon>{{option.icon}}</mat-icon>
-                {{option.label}}
-            </button>
-        }
-        
+        <!-- Opciones según estado de login o perfil -->
+        <button mat-fab *ngFor="let option of menuOptions()" extended (click)="handleMenuClick(option)">
+          <mat-icon>{{option.icon}}</mat-icon>
+          {{option.label}}
+        </button>
       </div>
       
       <div class="only-mobile">
@@ -35,17 +32,16 @@
       </div>
   
       @if (authState() === AuthState.LoggedIn) {
-
-      }
         <div>
           <!--Cerrar sesion-->
-        <mat-divider></mat-divider>
-        @for (option of menuBotton; track $index) {
-            <button mat-fab extended (click)="handleMenuClick(option)">
+          <mat-divider></mat-divider>
+          @for (option of menuBotton; track $index) {
+              <button mat-fab extended (click)="handleMenuClick(option)">
                 <mat-icon>{{option.icon}}</mat-icon>
                 {{option.label}}
             </button>
-        }
-      </div>
+          }
+        </div>
+      }
     </div>
   </div>

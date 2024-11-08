@@ -1,6 +1,8 @@
+import { CommonModule } from '@angular/common';
 import { 
   ChangeDetectionStrategy, 
   Component, 
+  computed, 
   inject 
 } from '@angular/core';
 import { MatDividerModule } from '@angular/material/divider';
@@ -13,7 +15,7 @@ import { SidebarOption } from '@shared/models';
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [MatDividerModule, MatIconModule],  
+  imports: [MatDividerModule, MatIconModule, CommonModule],  
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -31,7 +33,19 @@ export class SidebarComponent {
   protected readonly authError = this.loginService.authError;
   protected readonly isOpen = this.sidebarService.isSidebarOpen;
 
-  menuOptions: SidebarOption[] = [];
+  // Definir menuOptions como un Signal computado
+  public readonly menuOptions = computed(() => {
+    if (this.authState() === AuthState.LoggedIn) {
+      return [
+        // { label: 'Mi Perfil', icon: 'person', routerLink: '/mi-perfil' }
+      ];
+    } else {
+      return [
+        { label: 'Ingresar', icon: 'login', routerLink: '/login' },
+        { label: 'Registrar', icon: 'person_add', routerLink: '/registro' },
+      ];
+    }
+  });
   menuNavbar: SidebarOption[] = [
     { label: 'Quienes somos', icon: 'info', routerLink: '/quienes-somos' },
     { label: 'Modelo de diagnóstico', icon: 'assessment', routerLink: '/modelo' },
