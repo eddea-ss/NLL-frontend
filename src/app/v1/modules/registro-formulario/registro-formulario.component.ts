@@ -80,12 +80,6 @@ export class RegistroFormularioComponent implements OnInit, OnDestroy{
         validators: [Validators.required, this.rutValidator]
       },
       {
-        label: 'Documento ERUT',
-        name: 'eRut',
-        type: 'file',
-        validators: [Validators.required, this.fileValidator]
-      },
-      {
         label: 'Nombre del Representante',
         name: 'nombreRepresentante',
         type: 'text',
@@ -130,12 +124,6 @@ export class RegistroFormularioComponent implements OnInit, OnDestroy{
         name: 'rut',
         type: 'text',
         validators: [Validators.required, this.rutValidator]
-      },
-      {
-        label: 'Documento ERUT',
-        name: 'eRut',
-        type: 'file',
-        validators: [Validators.required, this.fileValidator]
       },
       {
         label: 'Nombre del Representante',

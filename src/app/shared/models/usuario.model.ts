@@ -1,12 +1,5 @@
 import { Role } from "@shared/enums";
-import { Empresa } from "@shared/models";
-
-export type Industria = Empresa;
-export type Proveedor = Empresa;
-
-// En caso de diferentes tipos de datos de empresas
-//export interface Industria extends Empresa {};
-//export interface Proveedor extends Empresa {};
+import { Industria,Proveedor } from "@shared/models";
 
 export interface Usuario {
     idUsuario: number;
@@ -22,8 +15,8 @@ export interface Usuario {
     empresas: Industria[] | null;
     proveedores: Proveedor[] | null;
     rut: string | null;
-    nombreEmpresa: string | null;
-    nombreProveedor: string | null;
-    encuestaRealizada: boolean | null;
-    nivelEncuesta: number | null;
+    nombreEmpresa?: string | null;
+    nombreProveedor?: string | null;
+    encuestaRealizada?: boolean | null;
+    nivelEncuesta?: number | null;
   }
