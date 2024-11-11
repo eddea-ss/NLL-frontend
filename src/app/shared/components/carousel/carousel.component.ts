@@ -72,19 +72,16 @@ export class CarouselComponent implements OnInit, OnDestroy {
 
   nextSlide() {
     this.currentIndex = (this.currentIndex + 1) % this.slides.length;
-    this.cdRef.markForCheck(); // Forzar la detección de cambios en el DOM
     this.resetCarouselTimer();
   }
 
   prevSlide() {
     this.currentIndex = (this.currentIndex - 1 + this.slides.length) % this.slides.length;
-    this.cdRef.markForCheck(); // Forzar la detección de cambios en el DOM
     this.resetCarouselTimer();
   }
 
   goToSlide(index: number) {
     this.currentIndex = index;
-    this.cdRef.markForCheck(); // Forzar la detección de cambios en el DOM
     this.resetCarouselTimer();
   }
 

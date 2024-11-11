@@ -128,7 +128,7 @@ export class RegistroFormularioComponent implements OnInit, OnDestroy {
         label: 'RUT de la Empresa',
         name: 'rut',
         type: 'text',
-        validators: [Validators.required, this.rutValidator]
+        validators: [Validators.required, this.rutValidator],
       },
       {
         label: 'Nombre del Representante',
@@ -175,8 +175,9 @@ export class RegistroFormularioComponent implements OnInit, OnDestroy {
       validators: [Validators.required]
     },
     {
+      addedMessage: 'Hola ',
       message:
-        '¿Qué tipo de usuario eres? Por favor selecciona una opción:',
+        ', ¿Qué tipo de usuario eres? Por favor selecciona una opción:',
       field: 'tipoUsuario',
       type: 'select',
       options: [

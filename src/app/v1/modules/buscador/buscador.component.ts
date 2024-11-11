@@ -1,6 +1,4 @@
-// src/app/v1/modules/buscador/buscador.component.ts
-
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { BuscadorService } from '@core/services/buscador.service'; // Asegúrate de que la ruta sea correcta
 import { Articulo } from '@shared/models/articulo.model'; // Asegúrate de que la ruta sea correcta
 import { BuscadorDetalleComponent } from '../buscador-detalle/buscador-detalle.component';

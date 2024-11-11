@@ -12,6 +12,36 @@
     max-width: 70%;
     margin-bottom: 10px;
   }
+  .typewriter {
+  font-family: monospace; /* Opcional: da un estilo de máquina de escribir */
+  //white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+  overflow: hidden; /* Oculta el texto fuera del contenedor */
+  border-right: 0.15em solid; /* Crea el efecto del cursor */
+  //width: 15ch; /* Ajusta el ancho que tomará el texto */
+  animation: typing 2s steps(15, end), blink-caret 0.75s step-end infinite;
+  }
+
+  /* Animación de escritura */
+  @keyframes typing {
+    from {
+      width: 0;
+    }
+    to {
+      width: 15ch; /* Debe coincidir con el ancho del contenedor */
+    }
+  }
+
+  /* Animación de parpadeo del cursor */
+  @keyframes blink-caret {
+    from,
+    to {
+      border-color: transparent;
+    }
+    50% {
+      border-color: black;
+    }
+  }
+
   .instruction {
     font-size: 0.9em;
     color: #757575;

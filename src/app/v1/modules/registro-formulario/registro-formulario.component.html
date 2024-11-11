@@ -5,8 +5,14 @@
         <ng-container *ngFor="let step of conversationSteps; let i = index">
           <div *ngIf="i <= currentStepIndex">
             <!-- Assistant message -->
-            <div class="assistant-message">
-              {{ step.message }}
+            <div class="assistant-message typewriter">
+              @if(step?.addedMessage){
+                {{ step?.addedMessage??'' }}
+                {{registroForm.get('nombre')?.value}}
+                {{ step.message }}
+              }@else{
+                {{ step.message }}
+              }
             </div>
             <!-- Instruction (if any) -->
             <div class="instruction" *ngIf="step.instruction">
