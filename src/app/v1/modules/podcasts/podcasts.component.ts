@@ -20,7 +20,7 @@ import { Podcast } from '@shared/models';
   ],
   templateUrl: './podcasts.component.html',
   styleUrl: './podcasts.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+   
 })
 export class PodcastsComponent {
   podcasts: Podcast[] = [

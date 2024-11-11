@@ -19,7 +19,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
   ],
   templateUrl: './quienes-somos.component.html',
   styleUrl: './quienes-somos.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+   
 })
 export class QuienesSomosComponent {
 

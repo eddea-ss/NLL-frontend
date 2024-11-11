@@ -28,7 +28,7 @@ import { RouterLink } from '@angular/router';
   ], 
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+   
 })
 export class LoginComponent {
   private loginService = inject(LoginService);

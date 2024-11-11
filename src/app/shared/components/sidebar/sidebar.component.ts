@@ -18,7 +18,7 @@ import { SidebarOption } from '@shared/models';
   imports: [MatDividerModule, MatIconModule, CommonModule],  
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+   
 })
 export class SidebarComponent {
   public readonly AuthState = AuthState;

@@ -11,7 +11,7 @@ import {MatButtonModule} from '@angular/material/button';
   imports: [CommonModule, MatCardModule, MatIconModule, RouterLink,MatButtonModule],
   templateUrl: './registro.component.html',
   styleUrl: './registro.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+   
 })
 export class RegistroComponent {
 

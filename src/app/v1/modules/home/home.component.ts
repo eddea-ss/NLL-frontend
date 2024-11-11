@@ -18,7 +18,7 @@ import {
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+   
 })
 export class HomeComponent {
   private sidebarService = inject(SidebarService)

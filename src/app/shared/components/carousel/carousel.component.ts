@@ -22,7 +22,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
       ])
     ])
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+   
 })
 export class CarouselComponent implements OnInit, OnDestroy {
   @Input() slides: Slide[] = [];

@@ -21,7 +21,7 @@ import { MatButtonModule } from '@angular/material/button';
   ],
   templateUrl: './informe.component.html',
   styleUrl: './informe.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+   
 })
 export class InformeComponent {
   openLink(link:string): void {

@@ -29,7 +29,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   ],
   templateUrl: './buscador-detalle.component.html',
   styleUrls: ['./buscador-detalle.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+   
 })
 export class BuscadorDetalleComponent {
   resumenSanitizado: SafeHtml;

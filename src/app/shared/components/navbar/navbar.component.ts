@@ -10,7 +10,7 @@ import { AuthState } from '@shared/enums';
   imports: [MatIconModule, RouterLink],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+   
 })
 export class NavbarComponent {
   isDropdownOpen = false;

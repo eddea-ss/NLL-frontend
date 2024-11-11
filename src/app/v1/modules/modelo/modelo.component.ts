@@ -27,7 +27,7 @@ import { LoginService, ModeloMadurezService } from '@core/services'
   ],
   templateUrl: './modelo.component.html',
   styleUrl: './modelo.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+   
 })
 export class ModeloComponent {
   estado = ''; // completo - incompleto - ''

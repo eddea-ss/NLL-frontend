@@ -7,7 +7,7 @@ import { MatCardModule } from '@angular/material/card';
   imports: [MatCardModule],
   templateUrl: './article-card.component.html',
   styleUrl: './article-card.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+   
 })
 export class ArticleCardComponent {
   @Input() title = 'Título del Artículo';

@@ -34,7 +34,7 @@ import { MatIconModule } from '@angular/material/icon';
   ],
   templateUrl: './buscador.component.html',
   styleUrls: ['./buscador.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+   
 })
 export class BuscadorComponent implements OnInit, OnDestroy {
 
