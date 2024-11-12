@@ -73,10 +73,10 @@
               <h5 class="mb-1 text-primary">{{ item.titulo }}</h5>
               <small class="text-secondary">{{ 'No especificado' }}</small>
             </div>
-            <span class="badge bg-info text-dark mb-2">Origen: {{ capitalizeFirstLetter(item.origen_?.toLowerCase() ?? '' ) }}</span>
-            <span class="badge bg-success text-white mb-2">Localidad: {{ capitalizeFirstLetter(item.localidad?.toLowerCase() ?? '') }}</span>
-            <span class="badge bg-warning text-dark mb-2">Aplicabilidad: {{ capitalizeFirstLetter(item.aplicabilidad_regional_?.toLowerCase() ?? '') }}</span>
-            <div class="mb-1 text-muted text-truncate" style="max-height: 4.5em; overflow: hidden;" [innerHTML]="sanitizedResumen(item.resumen_de_la_solucion_ ?? '')"></div>
+            <span class="badge bg-info text-dark mb-2">Origen: {{ capitalizeFirstLetter(item.origen_.toLowerCase() ) }}</span>
+            <span class="badge bg-success text-white mb-2">Localidad: {{ capitalizeFirstLetter(item.localidad.toLowerCase()) }}</span>
+            <span class="badge bg-warning text-dark mb-2">Aplicabilidad: {{ capitalizeFirstLetter(item.aplicabilidad_regional_.toLowerCase()) }}</span>
+            <div class="mb-1 text-muted text-truncate" style="max-height: 4.5em; overflow: hidden;" [innerHTML]="sanitizedResumen(item.resumen_de_la_solucion_)"></div>
           </div>
         </div>
       </div>
