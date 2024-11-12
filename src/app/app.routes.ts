@@ -10,7 +10,11 @@ import {
     PodcastsComponent,
     QuienesSomosComponent,
     RegistroComponent,
-    RegistroFormularioComponent
+    RegistroFormularioComponent,
+    ArticleSearchComponent,
+    CourseSearchComponent,
+    FinancingSearchComponent,
+    ProjectSearchComponent
 } from '@v1/v1.module';
 
 export const routes: Routes = [
@@ -51,24 +55,14 @@ export const routes: Routes = [
             // Rutas para 'cursos'
             {
                 path: 'cursos',
-                component: BuscadorComponent,
-                data: { entityType: 'cursos', name: 'Cursos' }
-            },
-            {
-                path: 'cursos/:id',
-                component: BuscadorDetalleComponent,
+                component: CourseSearchComponent,
                 data: { entityType: 'cursos', name: 'Cursos' }
             },
 
             // Rutas para 'articulos'
             {
                 path: 'articulos',
-                component: BuscadorComponent,
-                data: { entityType: 'articulos', name: 'Artículos de interés' }
-            },
-            {
-                path: 'articulos/:id',
-                component: BuscadorDetalleComponent,
+                component: ArticleSearchComponent,
                 data: { entityType: 'articulos', name: 'Artículos de interés' }
             },
 
@@ -87,24 +81,14 @@ export const routes: Routes = [
             // Rutas para 'casos-exito'
             {
                 path: 'proyectos',
-                component: BuscadorComponent,
-                data: { entityType: 'proyectos', name: 'Proyectos destacados' }
-            },
-            {
-                path: 'proyectos/:id',
-                component: BuscadorDetalleComponent,
+                component: ProjectSearchComponent,
                 data: { entityType: 'proyectos', name: 'Proyectos destacados' }
             },
 
             // Rutas para 'financiamiento-empleo'
             {
                 path: 'financiamiento',
-                component: BuscadorComponent,
-                data: { entityType: 'financiamiento', name: 'Financiamiento' }
-            },
-            {
-                path: 'financiamiento/:id',
-                component: BuscadorDetalleComponent,
+                component: FinancingSearchComponent,
                 data: { entityType: 'financiamiento', name: 'Financiamiento' }
             },
         ]
