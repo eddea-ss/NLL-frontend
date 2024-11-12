@@ -113,11 +113,11 @@ export class BuscadorComponent implements OnInit, OnDestroy {
     };
 
     this.resultados.sort((a, b) => {
-      const fechaA = this.convertToDate(a.detalles.fecha_publicacion);
-      const fechaB = this.convertToDate(b.detalles.fecha_publicacion);
+      const fechaA = this.convertToDate(a.fecha_publicacion);
+      const fechaB = this.convertToDate(b.fecha_publicacion);
       if (fechaB > fechaA) return 1;
       if (fechaB < fechaA) return -1;
-      return nivelOrder[a.detalles.nivel] - nivelOrder[b.detalles.nivel];
+      return nivelOrder[a.nivel] - nivelOrder[b.nivel];
     });
   }
 

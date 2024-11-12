@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Articulo } from '@shared/models';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
@@ -40,7 +40,7 @@ export class BuscadorDetalleComponent {
     private sanitizer: DomSanitizer
   ) {
     // Sanitizar el resumen usando Angular's DomSanitizer
-    this.resumenSanitizado = this.sanitizer.bypassSecurityTrustHtml(data.detalles.resumen);
+    this.resumenSanitizado = this.sanitizer.bypassSecurityTrustHtml(data.resumen);
   }
 
   /**
@@ -65,6 +65,13 @@ export class BuscadorDetalleComponent {
   getPublicationYear(dateString: string): number {
     const [day, month, year] = dateString.split('/');
     return new Date(`${year}-${month}-${day}`).getFullYear();
+  }
+
+  convertToDate(dateString: string): Date {
+    const year = parseInt(dateString.substring(0, 4), 10);
+    const month = parseInt(dateString.substring(4, 6), 10) - 1; // Los meses en JavaScript van de 0 (Enero) a 11 (Diciembre)
+    const day = parseInt(dateString.substring(6, 8), 10);
+    return new Date(year, month, day);
   }
 
   /**

@@ -30,18 +30,18 @@
           (click)="abrirModal(i)"
         >
           <div class="w-100">
-            <h5 class="text-primary font-midiana">{{ articulo.detalles.titulo }}</h5>
+            <h5 class="text-primary font-midiana">{{ articulo.titulo }}</h5>
             <div class="star-rating">
               <ng-container *ngFor="let star of [].constructor(5); let s = index">
                 <mat-icon color="warn">
-                  {{ s < mapNivelToStars(articulo.detalles.nivel) ? 'star' : 'star_border' }}
+                  {{ s < mapNivelToStars(articulo.nivel) ? 'star' : 'star_border' }}
                 </mat-icon>
               </ng-container>
             </div>
-            <span class="text-muted highlight" *ngIf="articulo.detalles.idioma === 'ingles'">En inglés</span>
-            <span class="text-muted highlight" *ngIf="articulo.detalles.articulo_paper === 'paper'">Paper</span>
-            <p class="text-muted summary mt-2 text-sm">{{ articulo.detalles.resumen }}</p>
-            <small class="text-secondary">Sitio web: {{ obtenerDominio(articulo.detalles.link) }} | {{ convertToDate(articulo.detalles.fecha_publicacion).getFullYear() }}</small>
+            <span class="text-muted highlight" *ngIf="articulo.idioma === 'ingles'">En inglés</span>
+            <span class="text-muted highlight" *ngIf="articulo.articulo_paper === 'paper'">Paper</span>
+            <p class="text-muted summary mt-2 text-sm">{{ articulo.resumen }}</p>
+            <small class="text-secondary">Sitio web: {{ obtenerDominio(articulo.link) }} | {{ convertToDate(articulo.fecha_publicacion).getFullYear() }}</small>
           </div>
         </mat-list-item>
       </mat-list>

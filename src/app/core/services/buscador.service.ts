@@ -25,6 +25,12 @@ export class BuscadorService {
     let type = entityType;
     if (type === 'articulos') {
       type = 'articles';
+    } else if (type === 'proyectos') {
+      type = 'projects';
+    } else if (type === 'cursos') {
+      type = 'curses';
+    } else if (type === 'financiamiento') {
+      type = 'financing';
     }
     const apiUrl = `${this.baseApiUrl}/${type}/search`;
     const params = new HttpParams().set('search', query);
