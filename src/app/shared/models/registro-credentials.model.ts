@@ -16,5 +16,5 @@ export interface RegistroCredentials {
     // Campo específico para Persona
     nombre?: string;
     // Archivo ERUT
-    eRut?: File;
+    eRut?: string;
 }

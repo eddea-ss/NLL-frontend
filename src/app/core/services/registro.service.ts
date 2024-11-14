@@ -7,16 +7,21 @@ import { Role } from '@shared/enums';
 import { LoginService } from './login.service';
 import { Observable, throwError } from 'rxjs';
 import { catchError, switchMap, tap } from 'rxjs/operators';
+import { SnackbarService } from './snackbar.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RegistroService {
-  constructor(private http: HttpClient, private loginService: LoginService) {}
+  constructor(
+    private http: HttpClient,
+    private loginService: LoginService,
+    private snackbarService: SnackbarService
+  ) {}
 
   // Definir endpoints para cada tipo de usuario
   private apiEndpoints: Record<Role, string> = {
-    [Role.Usuario]: 'http://64.176.10.243:3021/api/personas',
+    [Role.Persona]: 'http://64.176.10.243:3021/api/usuarios',
     [Role.Empresa]: 'http://64.176.10.243:3021/api/empresas',
     [Role.Proveedor]: 'http://64.176.10.243:3021/api/proveedores',
   };
@@ -27,39 +32,26 @@ export class RegistroService {
    * @returns Observable con la respuesta de la API.
    */
   register(credentials: RegistroCredentials): Observable<any> {
-    const formData: FormData = new FormData();
-    formData.append('tipoUsuario', credentials.tipoUsuario);
-    formData.append('correo', credentials.correo);
-    formData.append('password', credentials.password);
-    formData.append('eRut', 'https://www.ejemplo.com');
-
-    // Campos específicos según el tipo de usuario
-    switch (credentials.tipoUsuario) {
-      case Role.Empresa:
-        if (credentials.nombreEmpresa) formData.append('nombreEmpresa', credentials.nombreEmpresa);
-        break;
-      case Role.Proveedor:
-        if (credentials.nombreProveedor) formData.append('nombreProveedor', credentials.nombreProveedor);
-        break;
-      case Role.Usuario:
-        if (credentials.nombre) formData.append('nombre', credentials.nombre);
-        break;
-      default:
-        break;
-    }
-
+    
     // Campos comunes para Empresa y Proveedor
-    if (credentials.tipoUsuario === Role.Empresa || credentials.tipoUsuario === Role.Proveedor) {
-      if (credentials.rut) formData.append('rut', credentials.rut);
-      if (credentials.nombreRepresentante) formData.append('nombreRepresentante', credentials.nombreRepresentante);
-      if (credentials.rutRepresentante) formData.append('rutRepresentante', credentials.rutRepresentante);
-      if (credentials.estrategiaDigital !== undefined) formData.append('estrategiaDigital', String(credentials.estrategiaDigital));
-      if (credentials.desafiosIndustria4 !== undefined) formData.append('desafiosIndustria4', String(credentials.desafiosIndustria4));
-      if (credentials.prioridadAdopcion !== undefined) formData.append('prioridadAdopcion', String(credentials.prioridadAdopcion));
+    if (credentials.tipoUsuario.toLocaleLowerCase() === Role.Empresa || credentials.tipoUsuario.toLocaleLowerCase() === Role.Proveedor) {
+      credentials.eRut = 'https://www.ejemplo.com';
     }
+
+    console.log(credentials)
 
     // Determinar el endpoint basado en el tipo de usuario
-    const endpoint = this.apiEndpoints[credentials.tipoUsuario];
+    const tipoUsuario: string = credentials.tipoUsuario.toLocaleLowerCase();
+    const endpoint = this.apiEndpoints[tipoUsuario as Role];
+
+    let formData = {
+      ...credentials,
+      tipoUsuario: undefined,
+      confirmPassword: undefined,
+      prioridadAdopcion: undefined,
+      estrategiaDigital: undefined,
+      desafiosIndustria4: undefined,
+    }
 
     return this.http.post<RegistroResponse>(endpoint, formData).pipe(
       tap(response => {
@@ -70,6 +62,7 @@ export class RegistroService {
       switchMap(() => this.loginService.login({ correo: credentials.correo, password: credentials.password })),
       catchError((error: HttpErrorResponse) => {
         console.error('Error en el registro:', error);
+        this.snackbarService.show(error.error.message, 5000, 'OK');
         return throwError(() => error);
       })
     );

@@ -1,3 +1,5 @@
+// src/app/components/registro-formulario/registro-formulario.component.ts
+
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
@@ -17,6 +19,7 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, Validators, AbstractContro
 import { MatSelectModule } from '@angular/material/select';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Question } from '@shared/models';
+import { RegistroService } from '@core/services';
 
 @Component({
   selector: 'app-registro-formulario',
@@ -39,10 +42,10 @@ import { Question } from '@shared/models';
     MatProgressSpinnerModule
   ],
   templateUrl: './registro-formulario.component.html',
-  styleUrl: './registro-formulario.component.scss',
+  styleUrls: ['./registro-formulario.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RegistroFormularioComponent implements OnInit, OnDestroy{
+export class RegistroFormularioComponent implements OnInit, OnDestroy {
   private unsubscribe$ = new Subject<void>();
   entityType = '';
   registroForm: FormGroup;
@@ -56,9 +59,13 @@ export class RegistroFormularioComponent implements OnInit, OnDestroy{
   // Propiedad para manejar el hover de las estrellas
   hoverRatings: Record<string, number> = {};
 
+  // Mensajes de feedback
+  errorMessage: string | null = null;
+  successMessage: string | null = null;
+
   // Definición de preguntas para cada tipo de entidad
   preguntas: Record<string, Question[]> = {
-    Personal: [
+    Persona: [
       {
         label: 'Nombre',
         name: 'nombre',
@@ -159,7 +166,11 @@ export class RegistroFormularioComponent implements OnInit, OnDestroy{
     ]
   };
 
-  constructor(private route: ActivatedRoute, private fb: FormBuilder) {
+  constructor(
+    private route: ActivatedRoute,
+    private fb: FormBuilder,
+    private registroService: RegistroService // Inyección del servicio
+  ) {
     this.registroForm = this.fb.group({
       tipoUsuario: [{ value: '', disabled: true }, Validators.required],
       correo: ['', [Validators.required, Validators.email]],
@@ -334,6 +345,9 @@ export class RegistroFormularioComponent implements OnInit, OnDestroy{
   // Manejar el envío del formulario
   onSubmit(): void {
     this.isLoading = true;
+    this.errorMessage = null;
+    this.successMessage = null;
+
     if (this.registroForm.invalid) {
       this.registroForm.markAllAsTouched();
       this.isLoading = false;
@@ -347,10 +361,32 @@ export class RegistroFormularioComponent implements OnInit, OnDestroy{
       tipoUsuario: this.entityType,
       correo: formValue.correo,
       password: formValue.password,
+      confirmPassword: formValue.confirmPassword,
       ...this.getDynamicFields(formValue)
     };
-    // Aquí se enviaría el formulario al backend
-    this.isLoading = false;
+
+    // Llamar al servicio de registro
+    this.registroService.register(usuario).pipe(
+      takeUntil(this.unsubscribe$)
+    ).subscribe({
+      next: (response) => {
+        // Manejar el éxito del registro
+        this.isLoading = false;
+        this.successMessage = response.message || 'Registro exitoso.';
+        this.registroForm.reset({ tipoUsuario: this.entityType });
+        this.setupForm();
+      },
+      error: (error) => {
+        // Manejar errores del registro
+        this.isLoading = false;
+        if (error.error && error.error.message) {
+          this.errorMessage = error.error.message;
+        } else {
+          this.errorMessage = 'Ocurrió un error durante el registro. Por favor, intenta nuevamente.';
+        }
+        console.error('Error en el registro:', error);
+      }
+    });
   }
 
   // Obtener campos dinámicos basados en el tipo de entidad
@@ -372,5 +408,7 @@ export class RegistroFormularioComponent implements OnInit, OnDestroy{
   onReset(): void {
     this.registroForm.reset({ tipoUsuario: this.entityType });
     this.setupForm();
+    this.errorMessage = null;
+    this.successMessage = null;
   }
 }

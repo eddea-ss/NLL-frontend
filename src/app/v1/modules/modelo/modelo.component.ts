@@ -47,7 +47,7 @@ export class ModeloComponent {
   public Role = Role;
 
   // Signal del ModeloMadurezService
-  modeloMadurez = this.modeloMadurezService.modeloMadurez();
+  modeloMadurez = this.modeloMadurezService.modeloMadurez;
 
   mySlides: Slide[] = [
     {
@@ -109,9 +109,12 @@ export class ModeloComponent {
       const user = this.currentUser();
       console.log(authState, user);
 
-      if (authState === AuthState.LoggedIn && user?.rol.nombreRol === Role.Empresa) {
+      console.log(user?.rol.nombreRol,Role.Empresa)
+      console.log(authState === AuthState.LoggedIn,authState,AuthState.LoggedIn)
+      if (authState === AuthState.LoggedIn && user?.rol.nombreRol.toLocaleLowerCase() === Role.Empresa) {
         // El usuario está logueado y su rol es 'empresa'
         // Pedir al ModeloMadurezService que actualice los valores
+        console.log('recheckData')
         this.modeloMadurezService.recheckData();
       }
     });

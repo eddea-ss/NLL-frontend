@@ -10,22 +10,22 @@
     @if (authState() && authState() === AuthState.LoggedIn 
       && currentUser() && currentUser()?.rol 
       && currentUser()?.rol?.nombreRol === Role.Empresa
-      && modeloMadurez) {
+      && modeloMadurez()) {
       <section>
         <div class="modelo-general">
           <mat-card appearance="outlined">
-            <mat-card-title>{{modeloMadurez[0].ResultGrade}}</mat-card-title>
+            <mat-card-title>{{modeloMadurez()![0].ResultGrade }}</mat-card-title>
             <mat-card-subtitle></mat-card-subtitle>
           </mat-card>
           <mat-card-content>
-            <p>{{getGradeDescription(modeloMadurez[0].ResultGrade)}}</p>
+            <p>{{getGradeDescription(modeloMadurez()![0].ResultGrade)}}</p>
           </mat-card-content>
         </div>
         <div class="modelo-categoria">
           <!--Capital Humano-->
           <div class="categoria">
             <mat-card appearance="outlined">
-              <mat-card-title>{{modeloMadurez[0].GradeCapitalHumano}}</mat-card-title>
+              <mat-card-title>{{modeloMadurez()![0].GradeCapitalHumano}}</mat-card-title>
             </mat-card>
             <mat-expansion-panel >
               <mat-expansion-panel-header>
@@ -41,7 +41,7 @@
           <!--Estrategia y Liderazgo-->
           <div class="categoria">
             <mat-card appearance="outlined">
-              <mat-card-title>{{modeloMadurez[0].GradeEstrategiaLiderazgo}}</mat-card-title>
+              <mat-card-title>{{modeloMadurez()![0].GradeEstrategiaLiderazgo}}</mat-card-title>
             </mat-card>
             <mat-expansion-panel >
               <mat-expansion-panel-header>
@@ -57,7 +57,7 @@
           <!--Tecnologia Gestion de Datos-->
           <div class="categoria">
             <mat-card appearance="outlined">
-              <mat-card-title>{{modeloMadurez[0].GradeTecnologiaGestionDatos}}</mat-card-title>
+              <mat-card-title>{{modeloMadurez()![0].GradeTecnologiaGestionDatos}}</mat-card-title>
             </mat-card>
             <mat-expansion-panel >
               <mat-expansion-panel-header>
@@ -73,7 +73,7 @@
           <!--Gestion de Innovacion y Conocimiento-->
           <div class="categoria">
             <mat-card appearance="outlined">
-              <mat-card-title>{{modeloMadurez[0].GradeGestionInnovacionConocimiento}}</mat-card-title>
+              <mat-card-title>{{modeloMadurez()![0].GradeGestionInnovacionConocimiento}}</mat-card-title>
             </mat-card>
             <mat-expansion-panel >
               <mat-expansion-panel-header>
@@ -86,7 +86,7 @@
           <!--Procesos y Automatizacion-->
           <div class="categoria">
             <mat-card appearance="outlined">
-              <mat-card-title>{{modeloMadurez[0].GradeProcesosAutomatizacion}}</mat-card-title>
+              <mat-card-title>{{modeloMadurez()![0].GradeProcesosAutomatizacion}}</mat-card-title>
             </mat-card>
             <mat-expansion-panel >
               <mat-expansion-panel-header>
@@ -99,7 +99,7 @@
           <!--Estrategia liderzago-->
           <div class="categoria">
             <mat-card appearance="outlined">
-              <mat-card-title>{{modeloMadurez[0].GradeEstrategiaLiderazgo}}</mat-card-title>
+              <mat-card-title>{{modeloMadurez()![0].GradeEstrategiaLiderazgo}}</mat-card-title>
             </mat-card>
             <mat-expansion-panel >
               <mat-expansion-panel-header>
@@ -114,10 +114,10 @@
     }
   
     <!--Cuando el modelo no esta completo y es perfil empresasa 4.0-->
-    @if (authState() && authState() === AuthState.LoggedIn 
+    @if (authState() === AuthState.LoggedIn 
       && currentUser() && currentUser()?.rol 
       && currentUser()?.rol?.nombreRol === Role.Empresa
-      && !modeloMadurez) {
+      && !modeloMadurez()) {
         <section>
           <div class="modelo-general">
             <mat-card appearance="outlined">
