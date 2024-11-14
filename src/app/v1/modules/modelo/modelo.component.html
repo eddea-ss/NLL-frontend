@@ -7,74 +7,160 @@
     </mat-card-subtitle>
   
     <!--Cuando el modelo esta completado-->
-    <section *ngIf="estado==='completo'">
-      <div class="modelo-general">
-        <mat-card appearance="outlined">
-          <mat-card-title>{{puntaje.general.letra}}</mat-card-title>
-          <mat-card-subtitle>{{puntaje.general.subtitulo}}</mat-card-subtitle>
-        </mat-card>
-        <mat-card-content>
-          <p>{{puntaje.general.descripcion}}</p>
-        </mat-card-content>
-      </div>
-      <div class="modelo-categoria">
-        <div class="categoria" *ngFor="let item of puntaje.categoria">
+    @if (authState() && authState() === AuthState.LoggedIn 
+      && currentUser() && currentUser()?.rol 
+      && currentUser()?.rol?.nombreRol === Role.Empresa
+      && modeloMadurez) {
+      <section>
+        <div class="modelo-general">
           <mat-card appearance="outlined">
-            <mat-card-title>{{item.letra}}</mat-card-title>
+            <mat-card-title>{{modeloMadurez[0].ResultGrade}}</mat-card-title>
+            <mat-card-subtitle></mat-card-subtitle>
           </mat-card>
-          <mat-expansion-panel >
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                {{item.categoria}}
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-            <p>
-              {{item.descripcion}}
-            </p>
-          </mat-expansion-panel>
+          <mat-card-content>
+            <p>{{getGradeDescription(modeloMadurez[0].ResultGrade)}}</p>
+          </mat-card-content>
         </div>
-      </div>
-    </section>
+        <div class="modelo-categoria">
+          <!--Capital Humano-->
+          <div class="categoria">
+            <mat-card appearance="outlined">
+              <mat-card-title>{{modeloMadurez[0].GradeCapitalHumano}}</mat-card-title>
+            </mat-card>
+            <mat-expansion-panel >
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <p>Capital Humano</p>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <p>
+                <!--{{item.descripcion}}-->
+              </p>
+            </mat-expansion-panel>
+          </div>
+          <!--Estrategia y Liderazgo-->
+          <div class="categoria">
+            <mat-card appearance="outlined">
+              <mat-card-title>{{modeloMadurez[0].GradeEstrategiaLiderazgo}}</mat-card-title>
+            </mat-card>
+            <mat-expansion-panel >
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <p>Estrategia y Liderazgo</p>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <p>
+                <!--{{item.descripcion}}-->
+              </p>
+            </mat-expansion-panel>
+          </div>
+          <!--Tecnologia Gestion de Datos-->
+          <div class="categoria">
+            <mat-card appearance="outlined">
+              <mat-card-title>{{modeloMadurez[0].GradeTecnologiaGestionDatos}}</mat-card-title>
+            </mat-card>
+            <mat-expansion-panel >
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <p>Tecnologia Gestion de Datos</p>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <p>
+                <!--{{item.descripcion}}-->
+              </p>
+            </mat-expansion-panel>
+          </div>
+          <!--Gestion de Innovacion y Conocimiento-->
+          <div class="categoria">
+            <mat-card appearance="outlined">
+              <mat-card-title>{{modeloMadurez[0].GradeGestionInnovacionConocimiento}}</mat-card-title>
+            </mat-card>
+            <mat-expansion-panel >
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <p>Gestion de Innovacion y Conocimiento</p>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+            </mat-expansion-panel>
+          </div>
+          <!--Procesos y Automatizacion-->
+          <div class="categoria">
+            <mat-card appearance="outlined">
+              <mat-card-title>{{modeloMadurez[0].GradeProcesosAutomatizacion}}</mat-card-title>
+            </mat-card>
+            <mat-expansion-panel >
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <p>Procesos y Automatizacion</p>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+            </mat-expansion-panel>
+          </div>
+          <!--Estrategia liderzago-->
+          <div class="categoria">
+            <mat-card appearance="outlined">
+              <mat-card-title>{{modeloMadurez[0].GradeEstrategiaLiderazgo}}</mat-card-title>
+            </mat-card>
+            <mat-expansion-panel >
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <p>Estrategia liderzago</p>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+            </mat-expansion-panel>
+          </div>
+        </div>
+      </section>
+    }
   
     <!--Cuando el modelo no esta completo y es perfil empresasa 4.0-->
-    <section *ngIf="estado==='incompleto'">
-      <div class="modelo-general">
-        <mat-card appearance="outlined">
-          <mat-card-subtitle>
-            Completa tu modelo de maduración haciendo click en el boton de abajo.
-          </mat-card-subtitle>
-        </mat-card>
+    @if (authState() && authState() === AuthState.LoggedIn 
+      && currentUser() && currentUser()?.rol 
+      && currentUser()?.rol?.nombreRol === Role.Empresa
+      && !modeloMadurez) {
+        <section>
+          <div class="modelo-general">
+            <mat-card appearance="outlined">
+              <mat-card-subtitle>
+                Completa tu modelo de maduración haciendo click en el boton de abajo.
+              </mat-card-subtitle>
+            </mat-card>
+            <mat-card-content>
+              <button mat-fab class="link-button" (click)="openLink()" extended>
+                <mat-icon class="animated-icon">link</mat-icon>
+                Completa aquí
+              </button>
+            </mat-card-content>
+          </div>
+          <div class="modelo-categoria">
+            <div class="categoria">
+              <mat-card appearance="outlined" class="card-incompleto">
+                <mat-card-title>¿Que es el modelo de maduración industriaal 4.0?</mat-card-title>
+                <mat-card-subtitle>El modelo de maduración industrial 4.0 es una herramienta que evalúa el nivel de adopción de tecnologías avanzadas y transformación digital en las empresas, proporcionando una hoja de ruta para su modernización y competitividad en la era de la Industria 4.0.</mat-card-subtitle>
+              </mat-card>
+            </div>
+          </div>
+        </section>
+      }
+  
+    <!--Cuando no ha logeado o no corresponde a empresa 4.0-->
+    @if ( authState() === AuthState.LoggedOut
+      || (currentUser() && currentUser()?.rol 
+      && currentUser()?.rol?.nombreRol !== Role.Empresa)) {
+      <div class="hero">
+        <app-carousel [slides]="mySlides" [showIndicators]="false" [showArrows]="false"></app-carousel>
         <mat-card-content>
-          <button mat-fab class="link-button" (click)="openLink()" extended>
+          <button mat-fab class="link-button" routerLink="/registro-proveedor" extended>
             <mat-icon class="animated-icon">link</mat-icon>
-            Completa aquí
+            Registro Proveedores
+          </button>
+          <button mat-fab class="link-button" routerLink="/registro-empresa" extended>
+            <mat-icon class="animated-icon">link</mat-icon>
+            Registro Empresa
           </button>
         </mat-card-content>
       </div>
-      <div class="modelo-categoria">
-        <div class="categoria">
-          <mat-card appearance="outlined" class="card-incompleto">
-            <mat-card-title>¿Que es el modelo de maduración industriaal 4.0?</mat-card-title>
-            <mat-card-subtitle>El modelo de maduración industrial 4.0 es una herramienta que evalúa el nivel de adopción de tecnologías avanzadas y transformación digital en las empresas, proporcionando una hoja de ruta para su modernización y competitividad en la era de la Industria 4.0.</mat-card-subtitle>
-          </mat-card>
-        </div>
-      </div>
-    </section>
-  
-    <!--Cuando no ha logeado o no corresponde a empresa 4.0-->
-    <div class="hero" *ngIf="estado===''">
-      <app-carousel [slides]="mySlides" [showIndicators]="false" [showArrows]="false"></app-carousel>
-      <mat-card-content>
-        <button mat-fab *ngIf="rolUsuario!=='proveedor'" class="link-button" routerLink="/registro-proveedor" extended>
-          <mat-icon class="animated-icon">link</mat-icon>
-          Registro Proveedores
-        </button>
-        <button mat-fab class="link-button" routerLink="/registro-empresa" extended>
-          <mat-icon class="animated-icon">link</mat-icon>
-          Registro Empresa
-        </button>
-      </mat-card-content>
-    </div>
+    }
   
   </mat-card>
   

@@ -110,6 +110,7 @@ export class ModeloMadurezService {
         catchError(this.handleError)
       ).subscribe(response => {
         if (response.success) {
+          console.log(response)
           const processedData = response.data.map(item => ({
             SurveyID: item.SurveyID,
             Rut: rutOriginal, // Reemplazamos el hash por el RUT original

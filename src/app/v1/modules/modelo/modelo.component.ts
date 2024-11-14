@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Component, effect, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
@@ -8,6 +8,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatButtonModule } from '@angular/material/button';
 import { CarouselComponent } from '@shared/components';
 import { Slide } from '@shared/models';
+import { AuthState, Role } from '@shared/enums';
 import { RouterLink,Router } from '@angular/router';
 import { LoginService, ModeloMadurezService } from '@core/services'
 
@@ -30,13 +31,22 @@ import { LoginService, ModeloMadurezService } from '@core/services'
    
 })
 export class ModeloComponent {
+  
   estado = ''; // completo - incompleto - ''
-  rolUsuario = '';
-  modeloDeMadurez=false;
 
   private loginService = inject(LoginService);
   private modeloMadurezService = inject(ModeloMadurezService);
   private router = inject(Router);  
+
+  // Signals del LoginService
+  authState = this.loginService.authState;
+  currentUser = this.loginService.currentUser;
+
+  public AuthState = AuthState;
+  public Role = Role;
+
+  // Signal del ModeloMadurezService
+  modeloMadurez = this.modeloMadurezService.modeloMadurez();
 
   mySlides: Slide[] = [
     {
@@ -92,37 +102,25 @@ export class ModeloComponent {
     ]
   };
 
-  constructor(
-  ) {
-    this.setEstado();
-  }
+  constructor() {
+    effect(() => {
+      const authState = this.authState();
+      const user = this.currentUser();
+      console.log(authState, user);
 
-  private setEstado(): void {
-    try {
-      const nombreRol = localStorage.getItem('nombreRol') || '';
-  
-      if (nombreRol==='empresa') {
-        //this.obtenerDatosEncuesta();
-      }else{
-        this.estado= '';
+      if (authState === AuthState.LoggedIn && user?.rol.nombreRol === Role.Empresa) {
+        // El usuario está logueado y su rol es 'empresa'
+        // Pedir al ModeloMadurezService que actualice los valores
+        this.modeloMadurezService.recheckData();
       }
-    } catch (error) {
-      console.error('Error al obtener nombreRol o encuestaRealizada de localStorage:', error);
-      this.estado = '';
-    }
+    });
   }
 
   openLink(): void {
     try {
-      const rut = localStorage.getItem('rut') || '';
-
-      if (rut) {
-        const url = `https://modelomadurez.nuevoloslagos.org/evaluar_madurez_tecnologica?rut=${rut}`;
-        window.open(url, '_blank');
-      } else {
-        console.warn('RUT no encontrado en localStorage. Recargando la página actual.');
-        window.location.reload();
-      }
+      const rut = this.currentUser()?.rut;
+      const url = `https://modelomadurez.nuevoloslagos.org?rut=${rut}`;
+      window.open(url, '_blank');
     } catch (error) {
       console.error('Error al obtener RUT de localStorage:', error);
       window.location.href = '/404';
