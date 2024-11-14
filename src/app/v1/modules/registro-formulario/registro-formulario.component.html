@@ -1,184 +1,148 @@
 <div class="registro-formulario">
   <div class="content">
     <form [formGroup]="registroForm" (ngSubmit)="onSubmit()">
-      <div class="conversation-container">
-        <ng-container *ngFor="let step of conversationSteps; let i = index">
-          <div *ngIf="i <= currentStepIndex">
-            <!-- Assistant message -->
-            <div class="assistant-message typewriter">
-              @if(step?.addedMessage){
-                {{ step?.addedMessage??'' }}
-                {{registroForm.get('nombre')?.value}}
-                {{ step.message }}
-              }@else{
-                {{ step.message }}
-              }
-            </div>
-            <!-- Instruction (if any) -->
-            <div class="instruction" *ngIf="step.instruction">
-              {{ step.instruction }}
-            </div>
-            <!-- User input -->
-            <div class="user-input">
-              <ng-container [ngSwitch]="step.type">
-                <!-- Campo de texto -->
-                <div *ngSwitchCase="'text'">
-                  <mat-form-field appearance="outline" class="full-width">
-                    <input
-                      matInput
-                      [formControlName]="step.field"
-                      (blur)="onQuestionAnswered(i)"
-                    />
-                    <mat-error
-                      *ngIf="registroForm.get(step.field)?.hasError('required')"
-                    >
-                      Este campo es obligatorio
-                    </mat-error>
-                    <mat-error
-                      *ngIf="registroForm.get(step.field)?.hasError('email')"
-                    >
-                      Ingresa un correo electrónico válido
-                    </mat-error>
-                  </mat-form-field>
+      <mat-card class="account-card">
+        <mat-card-title>Registro de {{ entityType | titlecase }}</mat-card-title>
+        <mat-card-content>
+
+          <!-- Campos Dinámicos -->
+          <ng-container *ngIf="preguntas[entityType]">
+            <div *ngFor="let question of preguntas[entityType]">
+              <!-- Campo de texto -->
+              <ng-container *ngIf="question.type === 'text'">
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>{{ question.label }}</mat-label>
+                  <input matInput [formControlName]="question.name" [placeholder]="question.label">
+                  <mat-error *ngIf="registroForm.get(question.name)?.hasError('required')">
+                    {{ question.label }} es obligatorio
+                  </mat-error>
+                </mat-form-field>
+              </ng-container>
+
+              <!-- Campo de archivo (fuera de mat-form-field) -->
+              <ng-container *ngIf="question.type === 'file'">
+                <div class="file-input-container">
+                  <label>{{ question.label }}</label>
+                  <input type="file" (change)="onFileChange($event, question.name)" accept="application/pdf">
+                  <mat-error *ngIf="registroForm.get(question.name)?.hasError('required')">
+                    {{ question.label }} es obligatorio
+                  </mat-error>
+                  <mat-error *ngIf="registroForm.get(question.name)?.hasError('fileType')">
+                    Solo se permiten archivos PDF
+                  </mat-error>
+                  <mat-error *ngIf="registroForm.get(question.name)?.hasError('fileSize')">
+                    El archivo no debe exceder los 2MB
+                  </mat-error>
                 </div>
-                <!-- Campo de contraseña -->
-                <div *ngSwitchCase="'password'">
-                  <mat-form-field appearance="outline" class="full-width">
-                    <input
-                      matInput
-                      [type]="
-                        step.field === 'password'
-                          ? hidePassword
-                            ? 'password'
-                            : 'text'
-                          : hideConfirmPassword
-                          ? 'password'
-                          : 'text'
-                      "
-                      [formControlName]="step.field"
-                      (blur)="onQuestionAnswered(i)"
-                    />
+              </ng-container>
+
+              <!-- Campo de valoración -->
+              <ng-container *ngIf="question.type === 'rating'">
+                <div class="rating-container">
+                  <label>{{ question.label }}</label>
+                  <div class="stars">
                     <button
-                      mat-icon-button
-                      matSuffix
+                      *ngFor="let star of [1, 2, 3, 4, 5]"
                       type="button"
-                      (click)="
-                        step.field === 'password'
-                          ? togglePasswordVisibility()
-                          : toggleConfirmPasswordVisibility()
-                      "
-                      [attr.aria-label]="'Mostrar u ocultar contraseña'"
+                      class="star-button"
+                      (click)="setRating(question.name, star)"
+                      (mouseenter)="hoverRating(question.name, star)"
+                      (mouseleave)="leaveRating(question.name)"
+                      [attr.aria-label]="'Calificación de ' + star + ' estrellas'"
+                      [attr.aria-pressed]="star <= getRating(question.name)"
                     >
-                      <mat-icon>{{
-                        (step.field === 'password' && hidePassword) ||
-                        (step.field === 'confirmPassword' && hideConfirmPassword)
-                          ? 'visibility_off'
-                          : 'visibility'
-                      }}</mat-icon>
+                      <mat-icon [ngClass]="{'active': star <= getRating(question.name)}">
+                        {{ star <= getRating(question.name) ? 'star' : 'star_border' }}
+                      </mat-icon>
                     </button>
-                    <mat-error
-                      *ngIf="registroForm.get(step.field)?.hasError('required')"
-                    >
-                      Este campo es obligatorio
-                    </mat-error>
-                    <mat-error
-                      *ngIf="
-                        registroForm.get(step.field)?.hasError(
-                          'passwordStrength'
-                        )
-                      "
-                    >
-                      La contraseña no cumple con los requisitos
-                    </mat-error>
-                    <mat-error
-                      *ngIf="
-                        registroForm.hasError('passwordsMismatch') &&
-                        (registroForm.get('confirmPassword')?.touched ||
-                          registroForm.get('password')?.touched)
-                      "
-                    >
-                      Las contraseñas no coinciden
-                    </mat-error>
-                  </mat-form-field>
-                </div>
-                <!-- Campo de selección -->
-                <div *ngSwitchCase="'select'">
-                  <mat-form-field appearance="outline" class="full-width">
-                    <mat-select
-                      [formControlName]="step.field"
-                      (selectionChange)="onQuestionAnswered(i)"
-                    >
-                      <mat-option
-                        *ngFor="let option of step.options"
-                        [value]="option.value"
-                      >
-                        {{ option.label }}
-                      </mat-option>
-                    </mat-select>
-                    <mat-error
-                      *ngIf="registroForm.get(step.field)?.hasError('required')"
-                    >
-                      Este campo es obligatorio
-                    </mat-error>
-                  </mat-form-field>
-                </div>
-                <!-- Campo de valoración -->
-                <div *ngSwitchCase="'rating'">
-                  <div class="rating-container">
-                    <div class="stars">
-                      <button
-                        *ngFor="let star of [1, 2, 3, 4, 5]"
-                        type="button"
-                        class="star-button"
-                        (click)="setRating(step.field, star)"
-                        (mouseenter)="hoverRating(step.field, star)"
-                        (mouseleave)="leaveRating(step.field)"
-                        [attr.aria-label]="'Calificación de ' + star + ' estrellas'"
-                        [attr.aria-pressed]="star <= getRating(step.field)"
-                      >
-                        <mat-icon [ngClass]="{ 'active': star <= getRating(step.field) }">
-                          {{ star <= getRating(step.field) ? 'star' : 'star_border' }}
-                        </mat-icon>
-                      </button>
-                    </div>
-                    <mat-error
-                      *ngIf="registroForm.get(step.field)?.hasError('required')"
-                    >
-                      La pregunta es obligatoria
-                    </mat-error>
                   </div>
-                  <div (mouseleave)="onQuestionAnswered(i)"></div>
+                  <mat-error *ngIf="registroForm.get(question.name)?.hasError('required')">
+                    La pregunta es obligatoria
+                  </mat-error>
                 </div>
               </ng-container>
             </div>
-          </div>
-        </ng-container>
-        <div style="margin-bottom: 40vh;"></div>
-      </div>
+          </ng-container>
+
+          <!-- Campos Comunes -->
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Correo Electrónico</mat-label>
+            <input matInput formControlName="correo" placeholder="Ingresa tu correo">
+            <mat-error *ngIf="registroForm.get('correo')?.hasError('required')">
+              El correo es obligatorio
+            </mat-error>
+            <mat-error *ngIf="registroForm.get('correo')?.hasError('email')">
+              Ingresa un correo electrónico válido
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Contraseña</mat-label>
+            <input
+              matInput
+              [type]="hidePassword ? 'password' : 'text'"
+              formControlName="password"
+              placeholder="Ingresa tu contraseña"
+            >
+            <button
+              mat-icon-button
+              matSuffix
+              type="button"
+              (click)="togglePasswordVisibility()"
+              [attr.aria-label]="'Mostrar o ocultar contraseña'"
+              [attr.aria-pressed]="!hidePassword"
+            >
+              <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
+            <mat-error *ngIf="registroForm.get('password')?.hasError('required')">
+              La contraseña es obligatoria
+            </mat-error>
+            <mat-error *ngIf="registroForm.get('password')?.hasError('passwordStrength')">
+              La contraseña debe tener al menos 8 caracteres, incluir mayúsculas, minúsculas, números y caracteres especiales
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Confirmar Contraseña</mat-label>
+            <input
+              matInput
+              [type]="hideConfirmPassword ? 'password' : 'text'"
+              formControlName="confirmPassword"
+              placeholder="Reingresa tu contraseña"
+            >
+            <button
+              mat-icon-button
+              matSuffix
+              type="button"
+              (click)="toggleConfirmPasswordVisibility()"
+              [attr.aria-label]="'Mostrar o ocultar contraseña'"
+              [attr.aria-pressed]="!hideConfirmPassword"
+            >
+              <mat-icon>{{ hideConfirmPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
+            <mat-error *ngIf="registroForm.get('confirmPassword')?.hasError('required')">
+              Confirmar contraseña es obligatorio
+            </mat-error>
+            <mat-error *ngIf="registroForm.hasError('passwordsMismatch') && ((registroForm.get('confirmPassword')?.touched || registroForm.get('password')?.touched))">
+              Las contraseñas no coinciden
+            </mat-error>
+          </mat-form-field>
+
+        </mat-card-content>
+      </mat-card>
 
       <!-- Botones de Acción -->
-      <div
-        class="buttons"
-        *ngIf="
-          registroForm.valid && currentStepIndex >= conversationSteps.length
-        "
-      >
-        <button class="volver-button" mat-button (click)="onReset()">
+      <div class="buttons">
+        <button class="volver-button" mat-button routerLink="/registro" (click)="onReset()">
           Volver
         </button>
-        <button
-          mat-flat-button
-          class="registrar-button"
-          type="submit"
-          [disabled]="isLoading"
-        >
+        <button mat-flat-button class="registrar-button" type="submit" [disabled]="isLoading">
           <mat-icon *ngIf="!isLoading">save</mat-icon>
           <mat-progress-spinner
             *ngIf="isLoading"
             diameter="20"
             mode="indeterminate"
-            color="accent"
-          >
+            color="accent">
           </mat-progress-spinner>
           Registrar
         </button>

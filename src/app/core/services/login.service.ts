@@ -137,6 +137,7 @@ export class LoginService {
     // Remover los datos de autenticación del localStorage
     localStorage.removeItem('authToken');
     localStorage.removeItem('user');
+    localStorage.removeItem('modelo-madurez');
 
     // Actualizar los Signals
     this._authState.set(AuthState.LoggedOut);

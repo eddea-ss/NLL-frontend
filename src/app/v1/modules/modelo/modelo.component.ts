@@ -8,6 +8,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatButtonModule } from '@angular/material/button';
 import { CarouselComponent } from '@shared/components';
 import { Slide } from '@shared/models';
+import * as CryptoJS from 'crypto-js';
 import { AuthState, Role } from '@shared/enums';
 import { RouterLink,Router } from '@angular/router';
 import { LoginService, ModeloMadurezService } from '@core/services'
@@ -117,14 +118,7 @@ export class ModeloComponent {
   }
 
   openLink(): void {
-    try {
-      const rut = this.currentUser()?.rut;
-      const url = `https://modelomadurez.nuevoloslagos.org?rut=${rut}`;
-      window.open(url, '_blank');
-    } catch (error) {
-      console.error('Error al obtener RUT de localStorage:', error);
-      window.location.href = '/404';
-    }
+    this.modeloMadurezService.openLink();
   }
 
 

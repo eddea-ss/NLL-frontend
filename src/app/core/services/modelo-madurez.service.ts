@@ -53,10 +53,14 @@ export interface ProcessedSurveyItem {
 })
 export class ModeloMadurezService {
 
+  private saltHash = 'xdxd';
+
   private readonly apiUrl = 'https://apimadurez.nuevoloslagos.org/api/results/';
 
   private http = inject(HttpClient);
   private loginService = inject(LoginService);
+
+  currentUser = this.loginService.currentUser;
 
   // Signal para almacenar los datos del modelo de madurez
   private _modeloMadurez: WritableSignal<ProcessedSurveyItem[] | null> = signal(null);
@@ -103,7 +107,7 @@ export class ModeloMadurezService {
     const currentUser = this.loginService.getCurrentUser();
     if (currentUser && currentUser.rut) {
       const rutOriginal = currentUser.rut;
-      const rutMd5 = CryptoJS.MD5(rutOriginal).toString();
+      const rutMd5 = this.stringToHash(rutOriginal);
       const url = `${this.apiUrl}${rutMd5}`;
 
       this.http.get<ApiResponse>(url).pipe(
@@ -159,5 +163,26 @@ export class ModeloMadurezService {
    */
   public recheckData(): void {
     this.fetchSurveyData();
+  }
+
+  public openLink(): void {
+    try {
+      const currentUser = this.currentUser();
+      if (!currentUser || !currentUser.rut) {
+        throw new Error('RUT no disponible');
+      }
+  
+      const rutMd5 = this.stringToHash(currentUser.rut);
+  
+      const url = `https://modelomadurez.nuevoloslagos.org?rut=${rutMd5}`;
+      window.open(url, '_blank');
+    } catch (error) {
+      console.error('Error al obtener RUT de localStorage:', error);
+    }
+  }
+
+  private stringToHash(string: string): string {
+    const rutConSalt = `${string}-${this.saltHash}`;
+    return CryptoJS.SHA256(rutConSalt).toString();
   }
 }

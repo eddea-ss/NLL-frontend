@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { ActivatedRoute } from '@angular/router';
@@ -13,14 +13,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { ArticleCardComponent } from '@shared/components';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import {
-  ReactiveFormsModule,
-  FormBuilder,
-  FormGroup,
-  Validators,
-  AbstractControl,
-  ValidationErrors
-} from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Question } from '@shared/models';
@@ -39,16 +32,17 @@ import { Question } from '@shared/models';
     MatListModule,
     MatExpansionModule,
     ArticleCardComponent,
-    RouterLink,
+    RouterLink, 
     RouterLinkActive,
     ReactiveFormsModule,
     MatSelectModule,
     MatProgressSpinnerModule
   ],
   templateUrl: './registro-formulario.component.html',
-  styleUrls: ['./registro-formulario.component.scss'],
+  styleUrl: './registro-formulario.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RegistroFormularioComponent implements OnInit, OnDestroy {
+export class RegistroFormularioComponent implements OnInit, OnDestroy{
   private unsubscribe$ = new Subject<void>();
   entityType = '';
   registroForm: FormGroup;
@@ -62,12 +56,15 @@ export class RegistroFormularioComponent implements OnInit, OnDestroy {
   // Propiedad para manejar el hover de las estrellas
   hoverRatings: Record<string, number> = {};
 
-  currentStepIndex = 0;
-
   // Definición de preguntas para cada tipo de entidad
   preguntas: Record<string, Question[]> = {
     Personal: [
-      // Preguntas específicas para Personal (si las hay)
+      {
+        label: 'Nombre',
+        name: 'nombre',
+        type: 'text',
+        validators: [Validators.required]
+      }
     ],
     Empresa: [
       {
@@ -94,26 +91,24 @@ export class RegistroFormularioComponent implements OnInit, OnDestroy {
         type: 'text',
         validators: [Validators.required, this.rutValidator]
       },
+      // Nuevas preguntas para empresas y proveedores
       {
-        label:
-          '¿Qué tan clara es la estrategia digital de tu organización?',
+        label: '¿Qué tan clara es la estrategia digital de tu organización?',
         name: 'estrategiaDigital',
         type: 'rating',
-        validators: [Validators.required]
+        validators: [Validators.required],
       },
       {
-        label:
-          '¿Qué tan complejos son los desafíos para implementar soluciones de la Industria 4.0 en tu organización?',
+        label: '¿Qué tan complejos son los desafíos para implementar soluciones de la Industria 4.0 en tu organización?',
         name: 'desafiosIndustria4',
         type: 'rating',
-        validators: [Validators.required]
+        validators: [Validators.required],
       },
       {
-        label:
-          '¿Qué tan alta es la prioridad de la adopción de tecnologías digitales y la integración de la Industria 4.0 en tu organización?',
+        label: '¿Qué tan alta es la prioridad de la adopción de tecnologías digitales y la integración de la Industria 4.0 en tu organización?',
         name: 'prioridadAdopcion',
         type: 'rating',
-        validators: [Validators.required]
+        validators: [Validators.required],
       }
     ],
     Proveedor: [
@@ -128,7 +123,7 @@ export class RegistroFormularioComponent implements OnInit, OnDestroy {
         label: 'RUT de la Empresa',
         name: 'rut',
         type: 'text',
-        validators: [Validators.required, this.rutValidator],
+        validators: [Validators.required, this.rutValidator]
       },
       {
         label: 'Nombre del Representante',
@@ -142,76 +137,51 @@ export class RegistroFormularioComponent implements OnInit, OnDestroy {
         type: 'text',
         validators: [Validators.required, this.rutValidator]
       },
+      // Nuevas preguntas para empresas y proveedores
       {
-        label:
-          '¿Qué tan clara es la estrategia digital de tu organización?',
+        label: '¿Qué tan clara es la estrategia digital de tu organización?',
         name: 'estrategiaDigital',
         type: 'rating',
-        validators: [Validators.required]
+        validators: [Validators.required],
       },
       {
-        label:
-          '¿Qué tan complejos son los desafíos para implementar soluciones de la Industria 4.0 en tu organización?',
+        label: '¿Qué tan complejos son los desafíos para implementar soluciones de la Industria 4.0 en tu organización?',
         name: 'desafiosIndustria4',
         type: 'rating',
-        validators: [Validators.required]
+        validators: [Validators.required],
       },
       {
-        label:
-          '¿Qué tan alta es la prioridad de la adopción de tecnologías digitales y la integración de la Industria 4.0 en tu organización?',
+        label: '¿Qué tan alta es la prioridad de la adopción de tecnologías digitales y la integración de la Industria 4.0 en tu organización?',
         name: 'prioridadAdopcion',
         type: 'rating',
-        validators: [Validators.required]
+        validators: [Validators.required],
       }
     ]
   };
 
-  conversationSteps: any[] = [
-    {
-      message:
-        '¡Hola! Soy tu asistente virtual. Te ayudaré a completar el formulario. ¿Cuál es tu nombre?',
-      field: 'nombre',
-      type: 'text',
-      validators: [Validators.required]
-    },
-    {
-      addedMessage: 'Hola ',
-      message:
-        ', ¿Qué tipo de usuario eres? Por favor selecciona una opción:',
-      field: 'tipoUsuario',
-      type: 'select',
-      options: [
-        { value: 'Personal', label: 'Persona - Usuario individual' },
-        {
-          value: 'Empresa',
-          label:
-            'Empresa Industrial 4.0 de la Región de los Lagos'
-        },
-        { value: 'Proveedor', label: 'Proveedor de servicios' }
-      ],
-      validators: [Validators.required]
-    }
-    // Las demás preguntas se agregarán dinámicamente
-  ];
-
-  constructor(
-    private fb: FormBuilder
-  ) {
-    this.registroForm = this.fb.group(
-      {
-        nombre: ['', Validators.required],
-        tipoUsuario: ['', Validators.required],
-        correo: ['', [Validators.required, Validators.email]],
-        password: ['', [Validators.required, this.passwordStrengthValidator]],
-        confirmPassword: ['', [Validators.required]]
-        // Campos dinámicos se agregarán después
-      },
-      { validators: this.passwordMatchValidator }
-    );
+  constructor(private route: ActivatedRoute, private fb: FormBuilder) {
+    this.registroForm = this.fb.group({
+      tipoUsuario: [{ value: '', disabled: true }, Validators.required],
+      correo: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, this.passwordStrengthValidator]],
+      confirmPassword: ['', [Validators.required]],
+      // Campos específicos
+      nombreEmpresa: [''],
+      rut: [''],
+      eRut: [null],
+      nombreRepresentante: [''],
+      rutRepresentante: ['']
+    }, { validators: this.passwordMatchValidator });
   }
 
   ngOnInit(): void {
-    this.currentStepIndex = 0;
+    // Obtener el tipo de entidad desde los datos de la ruta
+    this.route.data
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(data => {
+        this.entityType = data['entityType'] || '';
+        this.setupForm();
+      });
   }
 
   ngOnDestroy(): void {
@@ -219,69 +189,33 @@ export class RegistroFormularioComponent implements OnInit, OnDestroy {
     this.unsubscribe$.complete();
   }
 
-  // Configurar el formulario según el tipo de usuario
+  // Configurar el formulario según el tipo de usuario o empresa
   setupForm(): void {
-    // Limpiar preguntas dinámicas previas
+    // Primero, limpiar todas las preguntas adicionales
     this.clearAllDynamicFields();
 
-    // Eliminar pasos adicionales en conversationSteps
-    this.conversationSteps = this.conversationSteps.slice(0, 2);
-
-    if (this.entityType && this.preguntas[this.entityType]) {
+    // Establecer los validadores y campos dinámicamente
+    if (this.preguntas[this.entityType]) {
       this.preguntas[this.entityType].forEach(question => {
         if (!this.registroForm.contains(question.name)) {
-          this.registroForm.addControl(
-            question.name,
-            this.fb.control('', question.validators)
-          );
+          if (question.type === 'file') {
+            // Inicializar el control con null para archivos
+            this.registroForm.addControl(question.name, this.fb.control(null, question.validators));
+          } else {
+            this.registroForm.addControl(question.name, this.fb.control('', question.validators));
+          }
         }
-        this.conversationSteps.push({
-          message: question.label,
-          field: question.name,
-          type: question.type,
-          options: question.options || null,
-          validators: question.validators || null
-        });
       });
     }
 
-    // Agregar campos comunes al final
-    this.conversationSteps.push(
-      {
-        message: 'Por favor, ingresa tu correo electrónico.',
-        field: 'correo',
-        type: 'text',
-        validators: [Validators.required, Validators.email]
-      },
-      {
-        message: 'Crea una contraseña segura.',
-        field: 'password',
-        type: 'password',
-        validators: [Validators.required, this.passwordStrengthValidator],
-        instruction:
-          'La contraseña debe tener al menos 8 caracteres, incluir mayúsculas, minúsculas, números y caracteres especiales.'
-      },
-      {
-        message: 'Confirma tu contraseña.',
-        field: 'confirmPassword',
-        type: 'password',
-        validators: [Validators.required]
-      }
-    );
+    // Actualizar el valor de tipoUsuario
+    this.registroForm.patchValue({ tipoUsuario: this.entityType });
   }
 
   // Limpiar todos los campos dinámicos
   clearAllDynamicFields(): void {
     Object.keys(this.registroForm.controls).forEach(controlName => {
-      if (
-        ![
-          'tipoUsuario',
-          'correo',
-          'password',
-          'confirmPassword',
-          'nombre'
-        ].includes(controlName)
-      ) {
+      if (!['tipoUsuario', 'correo', 'password', 'confirmPassword'].includes(controlName)) {
         this.registroForm.removeControl(controlName);
       }
     });
@@ -300,12 +234,7 @@ export class RegistroFormularioComponent implements OnInit, OnDestroy {
     const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]+/.test(value);
     const isValidLength = value.length >= 8;
 
-    const passwordValid =
-      hasUpperCase &&
-      hasLowerCase &&
-      hasNumeric &&
-      hasSpecialChar &&
-      isValidLength;
+    const passwordValid = hasUpperCase && hasLowerCase && hasNumeric && hasSpecialChar && isValidLength;
 
     return !passwordValid ? { passwordStrength: true } : null;
   }
@@ -321,18 +250,35 @@ export class RegistroFormularioComponent implements OnInit, OnDestroy {
 
     if (isNaN(Number(body))) return { rutInvalid: true };
 
-    let sum = 0,
-      multiplier = 2;
+    let sum = 0, multiplier = 2;
     for (let i = body.length - 1; i >= 0; i--) {
       sum += Number(body.charAt(i)) * multiplier;
       multiplier = multiplier === 7 ? 2 : multiplier + 1;
     }
 
     const rest = sum % 11;
-    const calculatedDV =
-      rest === 1 ? 'K' : rest === 0 ? '0' : String(11 - rest);
+    const calculatedDV = rest === 1 ? 'K' : rest === 0 ? '0' : String(11 - rest);
 
     return calculatedDV !== dv ? { rutInvalid: true } : null;
+  }
+
+  // Validador personalizado para archivos (solo PDF y máximo 2MB)
+  fileValidator(control: AbstractControl): ValidationErrors | null {
+    const file = control.value;
+    if (!file) return null;
+
+    const maxSize = 2 * 1024 * 1024; // 2MB
+    const allowedTypes = ['application/pdf'];
+
+    if (file.size > maxSize) {
+      return { fileSize: true };
+    }
+
+    if (!allowedTypes.includes(file.type)) {
+      return { fileType: true };
+    }
+
+    return null;
   }
 
   // Validador para confirmar contraseña
@@ -343,6 +289,18 @@ export class RegistroFormularioComponent implements OnInit, OnDestroy {
     return isValid ? null : { passwordsMismatch: true };
   }
 
+  // Manejar la subida del archivo ERUT
+  onFileChange(event: any, controlName: string): void {
+    const file: File = event.target.files[0];
+    if (file) {
+      this.registroForm.patchValue({
+        [controlName]: file
+      });
+      // Necesario para que Angular detecte el cambio
+      this.registroForm.get(controlName)?.updateValueAndValidity();
+    }
+  }
+
   // Manejar la selección de valoración
   setRating(questionName: string, rating: number): void {
     this.registroForm.get(questionName)?.setValue(rating);
@@ -351,11 +309,7 @@ export class RegistroFormularioComponent implements OnInit, OnDestroy {
 
   // Obtener la valoración actual para un campo específico
   getRating(questionName: string): number {
-    return (
-      this.hoverRatings[questionName] ||
-      this.registroForm.get(questionName)?.value ||
-      0
-    );
+    return this.hoverRatings[questionName] || this.registroForm.get(questionName)?.value || 0;
   }
 
   // Manejar el hover de las estrellas
@@ -365,8 +319,7 @@ export class RegistroFormularioComponent implements OnInit, OnDestroy {
 
   // Manejar el mouseleave de las estrellas
   leaveRating(questionName: string): void {
-    this.hoverRatings[questionName] =
-      this.registroForm.get(questionName)?.value || 0;
+    this.hoverRatings[questionName] = this.registroForm.get(questionName)?.value || 0;
   }
 
   // Métodos para alternar la visibilidad de las contraseñas
@@ -376,22 +329,6 @@ export class RegistroFormularioComponent implements OnInit, OnDestroy {
 
   toggleConfirmPasswordVisibility(): void {
     this.hideConfirmPassword = !this.hideConfirmPassword;
-  }
-
-  // Manejar el avance de las preguntas
-  onQuestionAnswered(index: number): void {
-    if (index !== this.currentStepIndex) {
-      return;
-    }
-    const step = this.conversationSteps[index];
-    const control = this.registroForm.get(step.field);
-    if (control && control.valid) {
-      if (step.field === 'tipoUsuario') {
-        this.entityType = control.value;
-        this.setupForm();
-      }
-      this.currentStepIndex++;
-    }
   }
 
   // Manejar el envío del formulario
@@ -419,27 +356,21 @@ export class RegistroFormularioComponent implements OnInit, OnDestroy {
   // Obtener campos dinámicos basados en el tipo de entidad
   getDynamicFields(formValue: any): any {
     const dynamicFields: any = {};
-    this.conversationSteps.forEach(step => {
-      if (
-        ![
-          'tipoUsuario',
-          'correo',
-          'password',
-          'confirmPassword',
-          'nombre'
-        ].includes(step.field)
-      ) {
-        dynamicFields[step.field] = formValue[step.field];
-      }
-    });
+    if (this.preguntas[this.entityType]) {
+      this.preguntas[this.entityType].forEach(question => {
+        if (question.type !== 'file') {
+          dynamicFields[question.name] = formValue[question.name];
+        } else {
+          dynamicFields[question.name] = formValue[question.name]; // Archivo
+        }
+      });
+    }
     return dynamicFields;
   }
 
   // Resetear el formulario
   onReset(): void {
-    this.registroForm.reset();
-    this.currentStepIndex = 0;
-    this.conversationSteps = this.conversationSteps.slice(0, 2);
-    this.clearAllDynamicFields();
+    this.registroForm.reset({ tipoUsuario: this.entityType });
+    this.setupForm();
   }
 }
