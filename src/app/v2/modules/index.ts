@@ -7,3 +7,7 @@ export * from './evaluaciones-proveedor/evaluaciones-proveedor.component';
 export * from './evaluaciones-startup/evaluaciones-startup.component';
 export * from './podcasts/podcasts.component';
 export * from './informe/informe.component';
+export * from './course-search/course-search.component';
+export * from './financing-search/financing-search.component';
+export * from './article-search/article-search.component';
+export * from './project-search/project-search.component';
