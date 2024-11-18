@@ -1,504 +1,230 @@
-<!DOCTYPE html>
-<html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Nuevo Los Lagos</title>
-    <link rel="stylesheet" href="/_astro/articulos.DP1ku9RF.css" />
-  </head>
-  <body>
-    <!-- Establecer fuente base para el sitio -->
-    <div class="font-body">
-      <!-- Barra de navegación -->
-      <header class="bg-gray-800 text-white shadow-lg border-b-4">
-        <div class="container mx-auto flex justify-between items-center">
-          <!-- Logo -->
+<!-- Migas de pan para navegación -->
+<div class="bg-gray-200 py-4 border-b-4 border-gray-200">
+  <div class="container mx-auto">
+    <nav class="flex" aria-label="Breadcrumb">
+      <ol class="inline-flex items-center space-x-1 md:space-x-3">
+        <!-- Primer segmento: enlace a la página de Inicio -->
+        <li class="inline-flex items-center">
           <a
             href="/"
-            class="font-black text-2xl tracking-wider bg-yellow-500 p-5 text-gray-800"
+            class="inline-flex items-center text-sm font-bold transition-colors duration-300"
           >
-            NuevoLosLagos
+            <!-- Icono de Inicio -->
+            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 2L2 7h3v7h4v-5h2v5h4V7h3L10 2z"></path>
+            </svg>
+            Inicio
           </a>
-          <!-- Navegación -->
-          <nav class="space-x-6 flex items-center relative">
-            <div class="relative group" key="Proyecto">
-              <button
-                class="hover:text-yellow-400 transition-colors duration-300 flex items-center focus:outline-none"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                Proyecto
-                <svg
-                  class="w-4 h-4 ml-1"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                  ></path>
-                </svg>
-              </button>
-              <div
-                class="absolute left-0 top-full w-48 bg-gray-800 text-white rounded-md shadow-lg opacity-0 invisible pointer-events-none group-hover:opacity-100 group-hover:visible group-hover:pointer-events-auto transition-opacity duration-300 z-10"
-              >
-                <a
-                  href="/proyecto/equipo"
-                  key="/proyecto/equipo"
-                  class="block px-4 py-2 hover:bg-gray-700"
-                  >Equipo</a
-                ><a
-                  href="/proyecto/plataforma"
-                  key="/proyecto/plataforma"
-                  class="block px-4 py-2 hover:bg-gray-700"
-                  >Plataforma</a
-                >
-              </div>
-            </div>
-            <div class="relative group" key="Evaluaciones">
-              <button
-                class="hover:text-yellow-400 transition-colors duration-300 flex items-center focus:outline-none"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                Evaluaciones
-                <svg
-                  class="w-4 h-4 ml-1"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                  ></path>
-                </svg>
-              </button>
-              <div
-                class="absolute left-0 top-full w-48 bg-gray-800 text-white rounded-md shadow-lg opacity-0 invisible pointer-events-none group-hover:opacity-100 group-hover:visible group-hover:pointer-events-auto transition-opacity duration-300 z-10"
-              >
-                <a
-                  href="/evaluaciones/madurez"
-                  key="/evaluaciones/madurez"
-                  class="block px-4 py-2 hover:bg-gray-700"
-                  >Madurez Tecnológica</a
-                ><a
-                  href="/evaluaciones/proveedores"
-                  key="/evaluaciones/proveedores"
-                  class="block px-4 py-2 hover:bg-gray-700"
-                  >Proveedores</a
-                ><a
-                  href="/evaluaciones/startup"
-                  key="/evaluaciones/startup"
-                  class="block px-4 py-2 hover:bg-gray-700"
-                  >Startup</a
-                >
-              </div>
-            </div>
-            <div class="relative group" key="Investigación">
-              <button
-                class="hover:text-yellow-400 transition-colors duration-300 flex items-center focus:outline-none"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                Investigación
-                <svg
-                  class="w-4 h-4 ml-1"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                  ></path>
-                </svg>
-              </button>
-              <div
-                class="absolute left-0 top-full w-48 bg-gray-800 text-white rounded-md shadow-lg opacity-0 invisible pointer-events-none group-hover:opacity-100 group-hover:visible group-hover:pointer-events-auto transition-opacity duration-300 z-10"
-              >
-                <a
-                  href="/investigacion/podcast"
-                  key="/investigacion/podcast"
-                  class="block px-4 py-2 hover:bg-gray-700"
-                  >Podcast i4.0</a
-                ><a
-                  href="/investigacion/diagnostico"
-                  key="/investigacion/diagnostico"
-                  class="block px-4 py-2 hover:bg-gray-700"
-                  >Diagnóstico Regional i4.0</a
-                >
-              </div>
-            </div>
-            <div class="relative group" key="Buscadores">
-              <button
-                class="hover:text-yellow-400 transition-colors duration-300 flex items-center focus:outline-none"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                Buscadores
-                <svg
-                  class="w-4 h-4 ml-1"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                  ></path>
-                </svg>
-              </button>
-              <div
-                class="absolute left-0 top-full w-48 bg-gray-800 text-white rounded-md shadow-lg opacity-0 invisible pointer-events-none group-hover:opacity-100 group-hover:visible group-hover:pointer-events-auto transition-opacity duration-300 z-10"
-              >
-                <a
-                  href="/buscadores/proveedores"
-                  key="/buscadores/proveedores"
-                  class="block px-4 py-2 hover:bg-gray-700"
-                  >Proveedores</a
-                ><a
-                  href="/buscadores/cursos"
-                  key="/buscadores/cursos"
-                  class="block px-4 py-2 hover:bg-gray-700"
-                  >Cursos</a
-                ><a
-                  href="/buscadores/financiamiento"
-                  key="/buscadores/financiamiento"
-                  class="block px-4 py-2 hover:bg-gray-700"
-                  >Financiamiento</a
-                ><a
-                  href="/buscadores/articulos"
-                  key="/buscadores/articulos"
-                  class="block px-4 py-2 hover:bg-gray-700"
-                  >Artículos de Interés</a
-                ><a
-                  href="/buscadores/proyectos-destacados"
-                  key="/buscadores/proyectos-destacados"
-                  class="block px-4 py-2 hover:bg-gray-700"
-                  >Proyectos Destacados</a
-                >
-              </div>
-            </div>
-            <!-- Botón Registrarse -->
-            <a
-              href="/registrarse"
-              class="bg-yellow-500 hover:bg-yellow-600 text-gray-800 font-bold py-2 px-4 ml-4 border border-yellow-700 rounded shadow-md transform hover:scale-105 transition-transform duration-200"
-            >
-              Registrarse
-            </a>
-          </nav>
-        </div>
-      </header>
-      <!-- Migas de pan para navegación -->
-      <div class="bg-gray-200 py-4 border-b-4 border-gray-200">
-        <div class="container mx-auto">
-          <nav class="flex" aria-label="Breadcrumb">
-            <ol class="inline-flex items-center space-x-1 md:space-x-3">
-              <!-- Primer segmento: enlace a la página de Inicio -->
-              <li class="inline-flex items-center">
-                <a
-                  href="/"
-                  class="inline-flex items-center text-sm font-bold transition-colors duration-300"
-                >
-                  <!-- Icono de Inicio -->
-                  <svg
-                    class="w-5 h-5 mr-2"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path d="M10 2L2 7h3v7h4v-5h2v5h4V7h3L10 2z"></path>
-                  </svg>
-                  Inicio
-                </a>
-              </li>
-              <!-- Iterar sobre los segmentos y generar enlaces acumulativos -->
-            </ol>
-          </nav>
-        </div>
-      </div>
-      <!-- Contenido dinámico del sitio -->
-      <section class="bg-white dark:bg-gray-900">
-        <div
-          class="grid container px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12"
+        </li>
+        <!-- Iterar sobre los segmentos y generar enlaces acumulativos -->
+      </ol>
+    </nav>
+  </div>
+</div>
+<!-- Contenido dinámico del sitio -->
+<section class="bg-white">
+  <div
+    class="grid container px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12"
+  >
+    <div class="mr-auto place-self-center lg:col-span-7">
+      <h1
+        class="max-w-2xl mb-5 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl"
+      >
+        Evaluación Nivel de Madurez Tecnológica
+      </h1>
+      <p
+        class="max-w-2xl mb-6 mt-4 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl"
+      >
+        Evalua el nivel de madurez tecnológica de tu empresa y conoce que
+        acciones debes realizar para alcanzar la madurez tecnológica
+      </p>
+      <a
+        href="#"
+        class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center rounded-lg bg-primary hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 border border-yellow-500 border-3 hover:border-yellow-600 hover:bg-yellow-500"
+      >
+        Evaluar Ahora
+        <svg
+          class="w-5 h-5 ml-2 -mr-1"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg"
         >
-          <div class="mr-auto place-self-center lg:col-span-7">
-            <h1
-              class="max-w-2xl mb-5 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white"
-            >
-              Evaluación Nivel de Madurez Tecnológica
-            </h1>
-            <p
-              class="max-w-2xl mb-6 mt-4 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400"
-            >
-              Evalua el nivel de madurez tecnológica de tu empresa y conoce que
-              acciones debes realizar para alcanzar la madurez tecnológica
-            </p>
-            <a
-              href="#"
-              class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center rounded-lg bg-primary hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900 border border-yellow-500 border-3 hover:border-yellow-600 hover:bg-yellow-500"
-            >
-              Evaluar Ahora
-              <svg
-                class="w-5 h-5 ml-2 -mr-1"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                  clip-rule="evenodd"
-                ></path>
-              </svg>
-            </a>
-          </div>
-          <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
-            <img src="/hero.webp" alt="mockup" />
-          </div>
-        </div>
-      </section>
-      <section>
-        <div
-          class="container pb-10 pt-5 mx-auto sm:px-12 md:px-16 lg:py-20 sm:py-16"
-        >
-          <div
-            class="grid gap-x-8 gap-y-12 sm:gap-y-16 md:grid-cols-2 lg:grid-cols-3"
-          >
-            <div class="relative mt-5 bg-gray-100 p-6">
-              <a href="#" class="block mb-3">
-                <h2 class="text-2xl font-bold leading-5 text-black">
-                  Registro Empresas
-                </h2>
-              </a>
-              <p class="mb-4 text-gray-700 dark:text-gray-300">
-                ¿Formas parte de la Industria 4.0 y necesitas formación o
-                proveedores para tu negocio?
-              </p>
-              <a href="#" class="font-medium text-purple-600"> Registrarse </a>
-            </div>
-            <div class="relative mt-5 bg-gray-100 p-6">
-              <a href="#" class="block mb-3">
-                <h2 class="text-2xl font-bold leading-5 text-black">
-                  Registro Proveedores
-                </h2>
-              </a>
-              <p class="mb-4 text-gray-700 dark:text-gray-300">
-                ¿Quieres unirte a nuestra plataforma como proveedor de productos
-                o servicios para la Industria 4.0?
-              </p>
-              <a href="#" class="font-medium text-purple-600"> Registrarse </a>
-            </div>
-            <div class="relative mt-5 bg-gray-100 p-6">
-              <a href="#" class="block mb-3">
-                <h2 class="text-2xl font-bold leading-5 text-black">
-                  Registro Usuarios
-                </h2>
-              </a>
-              <p class="mb-4 text-gray-700 dark:text-gray-300">
-                ¿Te interesa conocer tendencias, innovaciones y mejores
-                prácticas en la Industria 4.0, sin ser empresa o proveedor?
-              </p>
-              <a href="#" class="font-medium text-purple-600"> Registrarse </a>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section class="bg-yellow-500 py-10">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="flex flex-col gap-12 lg:flex-row items-center">
-            <div class="lg:w-1/2">
-              <h1 class="text-4xl font-bold leading-tight mb-4">
-                Escucha nuestros Podcast
-              </h1>
-              <p class="text-xl mb-8">
-                Podcast creados con IA, acerca de la industria 4.0 y sus
-                tecnologías.
-              </p>
-              <a
-                href="#"
-                class="bg-gray-800 text-white py-3 px-6 rounded-lg shadow-lg hover:shadow-xl transition duration-200"
-                >Ir a Escuchar
-              </a>
-            </div>
-            <div class="lg:w-1/4 lg:flex lg:justify-end hidden lg:block">
-              <img src="/podcast.webp" alt="Podcast" />
-            </div>
-          </div>
-        </div>
-      </section>
-      <section>
-        <div class="py-12 bg-white">
-          <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <!-- Sección de título y descripción -->
-            <div class="lg:text-center">
-              <h2
-                class="font-heading mb-4 bg-yellow-500 inline-block px-4 py-2 rounded-lg md:w-64 md:mx-auto text-xs font-semibold tracking-widest text-black uppercase title-font"
-              >
-                ¿ Qué es Nuevo los lagos ?
-              </h2>
-              <p
-                class="font-heading mt-2 text-3xl leading-8 font-semibold tracking-tight text-gray-900 sm:text-4xl"
-              >
-                Plataforma para fortalecer la industria regional
-              </p>
-              <p class="mt-4 max-w-2xl text-lg text-gray-500 lg:mx-auto">
-                Iniciativa web desarrollada por Corfo Los Lagos, Universidad
-                Santo Tomás, Asimet y Grupo Centinela.
-              </p>
-            </div>
-            <!-- Grid de características -->
-            <div class="mt-10">
-              <dl
-                class="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10"
-              >
-                <div class="relative border-l-2 border-gray-200 p-2">
-                  <div class="flex items-center">
-                    <p class="text-lg leading-6 font-bold text-gray-700">
-                      Buscador Proveedores
-                    </p>
-                  </div>
-                  <div class="mt-2 text-lg text-gray-500">
-                    Herramienta para conectar empresas y proveedores de la
-                    industria en la región de Los Lagos.
-                  </div>
-                </div>
-                <div class="relative border-l-2 border-gray-200 p-2">
-                  <div class="flex items-center">
-                    <p class="text-lg leading-6 font-bold text-gray-700">
-                      Buscador de Cursos I 4.0
-                    </p>
-                  </div>
-                  <div class="mt-2 text-lg text-gray-500">
-                    Plataforma para busqueda de cursos especializados en
-                    Industria 4.0 para el desarrollo de profesionales.
-                  </div>
-                </div>
-                <div class="relative border-l-2 border-gray-200 p-2">
-                  <div class="flex items-center">
-                    <p class="text-lg leading-6 font-bold text-gray-700">
-                      Artículos de interés
-                    </p>
-                  </div>
-                  <div class="mt-2 text-lg text-gray-500">
-                    Compendio de artículos relevantes sobre Industria 4.0,
-                    enfocados en ofrecer información útil a las empresas.
-                  </div>
-                </div>
-                <div class="relative border-l-2 border-gray-200 p-2">
-                  <div class="flex items-center">
-                    <p class="text-lg leading-6 font-bold text-gray-700">
-                      Proyectos destacados
-                    </p>
-                  </div>
-                  <div class="mt-2 text-lg text-gray-500">
-                    Selección de proyectos sobresalientes en Industria 4.0, con
-                    información relevante para el sector empresarial.
-                  </div>
-                </div>
-                <div class="relative border-l-2 border-gray-200 p-2">
-                  <div class="flex items-center">
-                    <p class="text-lg leading-6 font-bold text-gray-700">
-                      Investigaciones sobre la Industria Regional
-                    </p>
-                  </div>
-                  <div class="mt-2 text-lg text-gray-500">
-                    Acceso a investigaciones y estudios que analizan el impacto
-                    y desarrollo de la industria en la región de Los Lagos.
-                  </div>
-                </div>
-                <div class="relative border-l-2 border-gray-200 p-2">
-                  <div class="flex items-center">
-                    <p class="text-lg leading-6 font-bold text-gray-700">
-                      Contenido Exclusivo en Industria 4.0
-                    </p>
-                  </div>
-                  <div class="mt-2 text-lg text-gray-500">
-                    Recursos especializados y contenido exclusivo sobre
-                    tendencias, innovaciones y mejores prácticas en Industria
-                    4.0.
-                  </div>
-                </div>
-              </dl>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- Sección de patrocinadores -->
-      <div class="w-full bg-gray-100 py-10">
-        <div class="max-w-full px-6">
-          <div class="flex flex-col items-center">
-            <!-- Encabezado y descripción -->
-            <div class="text-center">
-              <h2 class="text-3xl font-extrabold text-gray-800">
-                Organización
-              </h2>
-              <p class="mt-6 text-xl text-gray-600 max-w-3xl mx-auto">
-                Nuevo Los Lagos es una colaboración entre la Universidad Santo
-                Tomás, Asimet y Grupo Centinela, con financiamiento de Corfo Los
-                Lagos.
-              </p>
-            </div>
-            <!-- Sección de logos de patrocinadores -->
-            <div
-              class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 gap-12 mt-16"
-            >
-              <div class="flex items-center justify-center" key="Santo Tomás">
-                <img
-                  src="/logo_santotomas.webp"
-                  alt="Santo Tomás"
-                  class="w-full max-w-xs h-auto object-contain"
-                  loading="lazy"
-                />
-              </div>
-              <div class="flex items-center justify-center" key="Asimet">
-                <img
-                  src="/logo_asimet.webp"
-                  alt="Asimet"
-                  class="w-full max-w-xs h-auto object-contain"
-                  loading="lazy"
-                />
-              </div>
-              <div class="flex items-center justify-center" key="Corfo">
-                <img
-                  src="/logo_corfo.webp"
-                  alt="Corfo"
-                  class="w-full max-w-xs h-auto object-contain"
-                  loading="lazy"
-                />
-              </div>
-              <div
-                class="flex items-center justify-center"
-                key="Grupo Centinela"
-              >
-                <img
-                  src="https://dummyimage.com/200x200/eeeeee/000000"
-                  alt="Grupo Centinela"
-                  class="w-full max-w-xs h-auto object-contain"
-                  loading="lazy"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Pie de página del sitio -->
-      <!-- Footer -->
-      <footer class="bg-[#262626] text-white py-8 border-t-4 border-yellow-500">
-        <div
-          class="container mx-auto flex flex-col md:flex-row justify-between items-center"
-        >
-          <!-- Derechos reservados -->
-          <p>&copy; NuevoLosLagos 2024. Todos los derechos reservados.</p>
-          <!-- Enlaces de pie de página -->
-          <nav class="space-x-4 mt-4 md:mt-0">
-            <a
-              href="/sitio/aviso-legal"
-              key="/sitio/aviso-legal"
-              class="hover:text-gray-400"
-              >Aviso legal</a
-            ><a
-              href="/sitio/politica-de-privacidad"
-              key="/sitio/politica-de-privacidad"
-              class="hover:text-gray-400"
-              >Política de privacidad</a
-            >
-          </nav>
-        </div>
-      </footer>
+          <path
+            fill-rule="evenodd"
+            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+            clip-rule="evenodd"
+          ></path>
+        </svg>
+      </a>
     </div>
-  </body>
-</html>
+    <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
+      <img src="assets/hero.webp" alt="mockup" />
+    </div>
+  </div>
+</section>
+<section>
+  <div class="container pb-10 pt-5 mx-auto sm:px-12 md:px-16 lg:py-20 sm:py-16">
+    <div
+      class="grid gap-x-8 gap-y-12 sm:gap-y-16 md:grid-cols-2 lg:grid-cols-3"
+    >
+      <div class="relative mt-5 bg-gray-100 p-6">
+        <a href="#" class="block mb-3">
+          <h2 class="text-2xl font-bold leading-5 text-black">
+            Registro Empresas
+          </h2>
+        </a>
+        <p class="mb-4 text-gray-700">
+          ¿Formas parte de la Industria 4.0 y necesitas formación o proveedores
+          para tu negocio?
+        </p>
+        <a href="#" class="font-medium text-purple-600"> Registrarse </a>
+      </div>
+      <div class="relative mt-5 bg-gray-100 p-6">
+        <a href="#" class="block mb-3">
+          <h2 class="text-2xl font-bold leading-5 text-black">
+            Registro Proveedores
+          </h2>
+        </a>
+        <p class="mb-4 text-gray-700">
+          ¿Quieres unirte a nuestra plataforma como proveedor de productos o
+          servicios para la Industria 4.0?
+        </p>
+        <a href="#" class="font-medium text-purple-600"> Registrarse </a>
+      </div>
+      <div class="relative mt-5 bg-gray-100 p-6">
+        <a href="#" class="block mb-3">
+          <h2 class="text-2xl font-bold leading-5 text-black">
+            Registro Usuarios
+          </h2>
+        </a>
+        <p class="mb-4 text-gray-700">
+          ¿Te interesa conocer tendencias, innovaciones y mejores prácticas en
+          la Industria 4.0, sin ser empresa o proveedor?
+        </p>
+        <a href="#" class="font-medium text-purple-600"> Registrarse </a>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="bg-yellow-500 py-10">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col gap-12 lg:flex-row items-center">
+      <div class="lg:w-1/2">
+        <h1 class="text-4xl font-bold leading-tight mb-4">
+          Escucha nuestros Podcast
+        </h1>
+        <p class="text-xl mb-8">
+          Podcast creados con IA, acerca de la industria 4.0 y sus tecnologías.
+        </p>
+        <a
+          href="#"
+          class="bg-gray-800 text-white py-3 px-6 rounded-lg shadow-lg hover:shadow-xl transition duration-200"
+          >Ir a Escuchar
+        </a>
+      </div>
+      <div class="lg:w-1/4 lg:flex lg:justify-end hidden lg:block">
+        <img src="assets/podcast.webp" alt="Podcast" />
+      </div>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="py-12 bg-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Sección de título y descripción -->
+      <div class="lg:text-center">
+        <h2
+          class="font-heading mb-4 bg-yellow-500 inline-block px-4 py-2 rounded-lg md:w-64 md:mx-auto text-xs font-semibold tracking-widest text-black uppercase title-font"
+        >
+          ¿ Qué es Nuevo los lagos ?
+        </h2>
+        <p
+          class="font-heading mt-2 text-3xl leading-8 font-semibold tracking-tight text-gray-900 sm:text-4xl"
+          style="letter-spacing: 0.025em"
+        >
+          Plataforma para fortalecer la industria regional
+        </p>
+        <p
+          class="mt-4 max-w-2xl text-lg text-gray-500 lg:mx-auto"
+          style="margin-left: auto; margin-right: auto"
+        >
+          Iniciativa web desarrollada por Corfo Los Lagos, Universidad Santo
+          Tomás, Asimet y Grupo Centinela.
+        </p>
+      </div>
+      <!-- Grid de características -->
+      <div class="mt-10">
+        <dl
+          class="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10"
+        >
+          <div class="relative border-l-2 border-gray-200 p-2">
+            <div class="flex items-center">
+              <p class="text-lg leading-6 font-bold text-gray-700">
+                Buscador Proveedores
+              </p>
+            </div>
+            <div class="mt-2 text-lg text-gray-500">
+              Herramienta para conectar empresas y proveedores de la industria
+              en la región de Los Lagos.
+            </div>
+          </div>
+          <div class="relative border-l-2 border-gray-200 p-2">
+            <div class="flex items-center">
+              <p class="text-lg leading-6 font-bold text-gray-700">
+                Buscador de Cursos I 4.0
+              </p>
+            </div>
+            <div class="mt-2 text-lg text-gray-500">
+              Plataforma para busqueda de cursos especializados en Industria 4.0
+              para el desarrollo de profesionales.
+            </div>
+          </div>
+          <div class="relative border-l-2 border-gray-200 p-2">
+            <div class="flex items-center">
+              <p class="text-lg leading-6 font-bold text-gray-700">
+                Artículos de interés
+              </p>
+            </div>
+            <div class="mt-2 text-lg text-gray-500">
+              Compendio de artículos relevantes sobre Industria 4.0, enfocados
+              en ofrecer información útil a las empresas.
+            </div>
+          </div>
+          <div class="relative border-l-2 border-gray-200 p-2">
+            <div class="flex items-center">
+              <p class="text-lg leading-6 font-bold text-gray-700">
+                Proyectos destacados
+              </p>
+            </div>
+            <div class="mt-2 text-lg text-gray-500">
+              Selección de proyectos sobresalientes en Industria 4.0, con
+              información relevante para el sector empresarial.
+            </div>
+          </div>
+          <div class="relative border-l-2 border-gray-200 p-2">
+            <div class="flex items-center">
+              <p class="text-lg leading-6 font-bold text-gray-700">
+                Investigaciones sobre la Industria Regional
+              </p>
+            </div>
+            <div class="mt-2 text-lg text-gray-500">
+              Acceso a investigaciones y estudios que analizan el impacto y
+              desarrollo de la industria en la región de Los Lagos.
+            </div>
+          </div>
+          <div class="relative border-l-2 border-gray-200 p-2">
+            <div class="flex items-center">
+              <p class="text-lg leading-6 font-bold text-gray-700">
+                Contenido Exclusivo en Industria 4.0
+              </p>
+            </div>
+            <div class="mt-2 text-lg text-gray-500">
+              Recursos especializados y contenido exclusivo sobre tendencias,
+              innovaciones y mejores prácticas en Industria 4.0.
+            </div>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>

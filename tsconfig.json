@@ -19,10 +19,7 @@
     "importHelpers": true,
     "target": "ES2022",
     "module": "ES2022",
-    "lib": [
-      "ES2022",
-      "dom"
-    ],
+    "lib": ["ES2022", "dom"],
     "baseUrl": "src",
     "paths": {
       //para componentes singleton
@@ -41,6 +38,7 @@
       //para versionado
       "@v1/*": ["app/v1/modules/*"],
       "@v2/*": ["app/v2/*"],
+      "@v2/components/*": ["app/v2/components/*"]
     }
   },
   "angularCompilerOptions": {

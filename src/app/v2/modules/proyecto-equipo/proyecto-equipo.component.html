@@ -1,0 +1,155 @@
+<!-- Migas de pan para navegación -->
+<div class="bg-gray-200 py-4 border-b-4 border-gray-200">
+  <div class="container mx-auto">
+    <nav class="flex" aria-label="Breadcrumb">
+      <ol class="inline-flex items-center space-x-1 md:space-x-3">
+        <!-- Primer segmento: enlace a la página de Inicio -->
+        <li class="inline-flex items-center">
+          <a
+            href="/"
+            class="inline-flex items-center text-sm font-bold transition-colors duration-300"
+          >
+            <!-- Icono de Inicio -->
+            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 2L2 7h3v7h4v-5h2v5h4V7h3L10 2z"></path>
+            </svg>
+            Inicio
+          </a>
+        </li>
+        <!-- Iterar sobre los segmentos y generar enlaces acumulativos -->
+        <li key="0" class="flex items-center">
+          <!-- Separador de segmento -->
+          <svg
+            class="w-5 h-5 text-gray-500 mx-2"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+              clip-rule="evenodd"
+            ></path>
+          </svg>
+          <!-- Enlace al segmento con ruta acumulativa -->
+          <a
+            href="/"
+            class="text-sm font-bold transition-colors duration-300 hover:text-gray-500"
+          >
+            Proyecto
+          </a>
+        </li>
+        <li key="1" class="flex items-center">
+          <!-- Separador de segmento -->
+          <svg
+            class="w-5 h-5 text-gray-500 mx-2"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+              clip-rule="evenodd"
+            ></path>
+          </svg>
+          <!-- Enlace al segmento con ruta acumulativa -->
+          <a
+            href="/proyecto/equipo"
+            class="text-sm font-bold transition-colors duration-300 hover:text-gray-500"
+          >
+            Equipo
+          </a>
+        </li>
+      </ol>
+    </nav>
+  </div>
+</div>
+<!-- Contenido principal -->
+<main class="container mx-auto py-12 flex flex-col lg:flex-row">
+  <!-- Sección de búsqueda y resultados -->
+  <div class="w-full lg:w-3/4 pr-8">
+    <h2 class="text-3xl font-bold mb-5">Nuestro Equipo</h2>
+    <!-- Espacio para contenido dinámico -->
+    <section id="our-team" class="">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div class="bg-white p-6 my-6 text-center">
+            <img
+              src="https://dummyimage.com/200x200/eeeeee/000000"
+              alt="Nombre 1 Apellido"
+              class="w-full rounded-full mb-4"
+            />
+            <h3 class="text-xl font-semibold mb-2">Nombre 1 Apellido</h3>
+            <p class="text-gray-700">Cargo 1</p>
+          </div>
+          <div class="bg-white p-6 my-6 text-center">
+            <img
+              src="https://dummyimage.com/200x200/eeeeee/000000"
+              alt="Nombre 2 Apellido"
+              class="w-full rounded-full mb-4"
+            />
+            <h3 class="text-xl font-semibold mb-2">Nombre 2 Apellido</h3>
+            <p class="text-gray-700">Cargo 2</p>
+          </div>
+          <div class="bg-white p-6 my-6 text-center">
+            <img
+              src="https://dummyimage.com/200x200/eeeeee/000000"
+              alt="Nombre 3 Apellido"
+              class="w-full rounded-full mb-4"
+            />
+            <h3 class="text-xl font-semibold mb-2">Nombre 3 Apellido</h3>
+            <p class="text-gray-700">Cargo 3</p>
+          </div>
+          <div class="bg-white p-6 my-6 text-center">
+            <img
+              src="https://dummyimage.com/200x200/eeeeee/000000"
+              alt="Nombre 4 Apellido"
+              class="w-full rounded-full mb-4"
+            />
+            <h3 class="text-xl font-semibold mb-2">Nombre 4 Apellido</h3>
+            <p class="text-gray-700">Cargo 4</p>
+          </div>
+          <div class="bg-white p-6 my-6 text-center">
+            <img
+              src="https://dummyimage.com/200x200/eeeeee/000000"
+              alt="Nombre 5 Apellido"
+              class="w-full rounded-full mb-4"
+            />
+            <h3 class="text-xl font-semibold mb-2">Nombre 5 Apellido</h3>
+            <p class="text-gray-700">Cargo 5</p>
+          </div>
+          <div class="bg-white p-6 my-6 text-center">
+            <img
+              src="https://dummyimage.com/200x200/eeeeee/000000"
+              alt="Nombre 6 Apellido"
+              class="w-full rounded-full mb-4"
+            />
+            <h3 class="text-xl font-semibold mb-2">Nombre 6 Apellido</h3>
+            <p class="text-gray-700">Cargo 6</p>
+          </div>
+          <div class="bg-white p-6 my-6 text-center">
+            <img
+              src="https://dummyimage.com/200x200/eeeeee/000000"
+              alt="Nombre 7 Apellido"
+              class="w-full rounded-full mb-4"
+            />
+            <h3 class="text-xl font-semibold mb-2">Nombre 7 Apellido</h3>
+            <p class="text-gray-700">Cargo 7</p>
+          </div>
+          <div class="bg-white p-6 my-6 text-center">
+            <img
+              src="https://dummyimage.com/200x200/eeeeee/000000"
+              alt="Nombre 8 Apellido"
+              class="w-full rounded-full mb-4"
+            />
+            <h3 class="text-xl font-semibold mb-2">Nombre 8 Apellido</h3>
+            <p class="text-gray-700">Cargo 8</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <!-- Sección de artículos sugeridos -->
+  <aside class="w-full lg:w-1/4 mt-12 lg:mt-0">
+    <app-sugeridos></app-sugeridos>
+  </aside>
+</main>
