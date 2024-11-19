@@ -28,7 +28,7 @@ interface Course {
   tipo_de_conocimiento: string[];
 }
 
-declare var bootstrap: any;
+//declare var bootstrap: any;
 @Component({
   selector: 'app-course-search',
   standalone: true,
@@ -43,6 +43,9 @@ declare var bootstrap: any;
   styleUrl: './course-search.component.scss',
 })
 export class CourseSearchComponent implements OnInit, AfterViewInit {
+  isModalOpen = false;
+  courseModal: Course | undefined;
+
   searchTip: string = '';
   searchMessage: string = '';
   searchInput: string = '';
@@ -195,78 +198,16 @@ export class CourseSearchComponent implements OnInit, AfterViewInit {
 
   // Abrir el modal con los detalles del curso seleccionado
   openModal(index: number): void {
+    console.log('openModal', index);
     this.currentIndex = index;
     const item = this.currentData[this.currentIndex];
+    this.isModalOpen = true;
+    this.courseModal = item;
+  }
 
-    const modalTitle = this.elRef.nativeElement.querySelector('#modalTitle');
-    const modalEntidad =
-      this.elRef.nativeElement.querySelector('#modalEntidad');
-    const modalIdioma = this.elRef.nativeElement.querySelector('#modalIdioma');
-    const modalTipoPago =
-      this.elRef.nativeElement.querySelector('#modalTipoPago');
-    const modalTipoGratuito =
-      this.elRef.nativeElement.querySelector('#modalTipoGratuito');
-    const modalModalidad =
-      this.elRef.nativeElement.querySelector('#modalModalidad');
-    const modalModalidadOnline = this.elRef.nativeElement.querySelector(
-      '#modalModalidadOnline'
-    );
-    const modalNivel = this.elRef.nativeElement.querySelector('#modalNivel');
-    const modalDuracion =
-      this.elRef.nativeElement.querySelector('#modalDuracion');
-    const modalDescripcion =
-      this.elRef.nativeElement.querySelector('#modalDescripcion');
-    const modalTipoConocimiento = this.elRef.nativeElement.querySelector(
-      '#modalTipoConocimiento'
-    );
-    const modalLink = this.elRef.nativeElement.querySelector('#modalLink');
-
-    modalTitle.textContent = item.titulo;
-    modalEntidad.textContent = `Entidad: ${item.entidad}`;
-    modalIdioma.textContent = `Idioma: ${this.capitalizeFirstLetter(
-      item.idioma
-    )}`;
-    modalTipoPago.textContent = `Tipo: De Pago`;
-    modalTipoGratuito.textContent = `Tipo: Gratuito`;
-    modalModalidad.textContent = `Modalidad: ${this.capitalizeFirstLetter(
-      item.modalidad
-    )}`;
-    modalModalidadOnline.textContent = `Modalidad: Online`;
-    modalNivel.textContent = `Nivel: ${item.nivel}`;
-    modalDuracion.textContent = `Duración: ${item.duracion}`;
-    modalDescripcion.innerHTML = `<strong>Descripción:</strong><br>${DOMPurify.sanitize(
-      item.descripcion
-    ).replace(/\r\n/g, '<br><br>')}`;
-
-    modalTipoConocimiento.textContent = `Tipo de Conocimiento: ${item.tipo_de_conocimiento.join(
-      ', '
-    )}`;
-    modalLink.href = item.link;
-
-    // Mostrar u ocultar etiquetas según los datos
-    modalIdioma.classList.toggle(
-      'd-none',
-      item.idioma.toLowerCase() !== 'ingles'
-    );
-    modalTipoPago.classList.toggle(
-      'd-none',
-      item.tipo.toLowerCase() !== 'de pago'
-    );
-    modalTipoGratuito.classList.toggle(
-      'd-none',
-      item.tipo.toLowerCase() === 'de pago'
-    );
-    modalModalidad.classList.toggle(
-      'd-none',
-      item.modalidad.toLowerCase() !== 'presencial'
-    );
-    modalModalidadOnline.classList.toggle(
-      'd-none',
-      item.modalidad.toLowerCase() !== 'online'
-    );
-    modalNivel.classList.toggle('d-none', !item.nivel);
-    modalDuracion.classList.toggle('d-none', !item.duracion);
-    this.modal.show();
+  closeModal() {
+    this.isModalOpen = false;
+    this.courseModal = undefined;
   }
 
   // Mostrar el siguiente curso en el modal
@@ -338,5 +279,18 @@ export class CourseSearchComponent implements OnInit, AfterViewInit {
   // Sanitizar la descripción del curso
   sanitizedDescripcion(descripcion: string): string {
     return DOMPurify.sanitize(descripcion);
+  }
+
+  openLink(link: string): void {
+    try {
+      if (!link) {
+        console.warn('No se proporcionó un link');
+        return;
+      }
+
+      window.open(link, '_blank');
+    } catch (error) {
+      console.error('Error al abrir el link:', error);
+    }
   }
 }
