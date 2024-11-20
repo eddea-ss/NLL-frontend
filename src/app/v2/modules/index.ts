@@ -11,3 +11,6 @@ export * from './course-search/course-search.component';
 export * from './financing-search/financing-search.component';
 export * from './article-search/article-search.component';
 export * from './project-search/project-search.component';
+export * from './login/login.component';
+export * from './selection-register/selection-register.component';
+export * from './form-register/form-register.component';

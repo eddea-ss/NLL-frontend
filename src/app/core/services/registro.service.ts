@@ -32,13 +32,7 @@ export class RegistroService {
    * @returns Observable con la respuesta de la API.
    */
   register(credentials: RegistroCredentials): Observable<any> {
-    
-    // Campos comunes para Empresa y Proveedor
-    if (credentials.tipoUsuario.toLocaleLowerCase() === Role.Empresa || credentials.tipoUsuario.toLocaleLowerCase() === Role.Proveedor) {
-      credentials.eRut = 'https://www.ejemplo.com';
-    }
-
-    console.log(credentials)
+    console.log(credentials);
 
     // Determinar el endpoint basado en el tipo de usuario
     const tipoUsuario: string = credentials.tipoUsuario.toLocaleLowerCase();
@@ -47,19 +41,23 @@ export class RegistroService {
     let formData = {
       ...credentials,
       tipoUsuario: undefined,
-      confirmPassword: undefined,
-      prioridadAdopcion: undefined,
-      estrategiaDigital: undefined,
-      desafiosIndustria4: undefined,
-    }
+      password_confirm: undefined,
+    };
+
+    console.log(formData, endpoint, credentials);
 
     return this.http.post<RegistroResponse>(endpoint, formData).pipe(
-      tap(response => {
+      tap((response) => {
         // Manejar mensaje de éxito si es necesario
         console.log(response.message);
       }),
       // Después del registro exitoso, iniciar sesión automáticamente
-      switchMap(() => this.loginService.login({ correo: credentials.correo, password: credentials.password })),
+      switchMap(() =>
+        this.loginService.login({
+          correo: credentials.correo,
+          password: credentials.password,
+        })
+      ),
       catchError((error: HttpErrorResponse) => {
         console.error('Error en el registro:', error);
         this.snackbarService.show(error.error.message, 5000, 'OK');
