@@ -1,16 +1,43 @@
+<!-- src/app/core/components/navbar/navbar.component.html -->
+
 <!-- Barra de navegación -->
-<div class="bg-gray-800 text-white shadow-lg border-b-4">
-  <div class="container mx-auto flex justify-between items-center">
+<header class="bg-gray-800 text-white shadow-lg border-b-4">
+  <div class="container mx-auto flex justify-between items-center px-4 py-3">
     <!-- Logo -->
     <a
       href="/"
-      key="/"
-      class="font-black text-2xl tracking-wider bg-yellow-500 p-5 text-gray-800"
+      class="font-black text-2xl tracking-wider bg-yellow-500 p-2 text-gray-800 rounded"
+      (click)="closeMobileMenu()"
     >
       NuevoLosLagos
     </a>
-    <!-- Navegación -->
-    <nav class="space-x-6 flex items-center relative">
+
+    <!-- Botón de Menú Hamburguesa (Visible en móviles) -->
+    <button
+      style="padding: 1em"
+      class="md:hidden focus:outline-none"
+      (click)="toggleMobileMenu()"
+      aria-label="Toggle navigation menu"
+    >
+      <svg
+        class="w-6 h-6"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M4 6h16M4 12h16M4 18h16"
+        ></path>
+      </svg>
+    </button>
+
+    <!-- Navegación (Visible en escritorio) -->
+    <nav class="hidden md:flex space-x-6 items-center">
+      <!-- Menús Desplegables -->
       <div class="relative group" key="Proyecto">
         <button
           class="hover:text-yellow-400 transition-colors duration-300 flex items-center focus:outline-none"
@@ -25,21 +52,20 @@
           </svg>
         </button>
         <div
-          class="absolute left-0 top-full w-48 bg-gray-800 text-white rounded-md shadow-lg opacity-0 invisible pointer-events-none group-hover:opacity-100 group-hover:visible group-hover:pointer-events-auto transition-opacity duration-300 z-10"
+          class="absolute left-0 top-full w-48 bg-gray-800 text-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-300 z-10"
         >
+          <a href="/proyecto-equipo" class="block px-4 py-2 hover:bg-gray-700">
+            Equipo
+          </a>
           <a
-            href="/proyecto-equipo"
-            key="/proyecto-equipo"
-            class="block px-4 py-2 hover:bg-gray-700"
-            >Equipo</a
-          ><a
             href="/proyecto-plataforma"
-            key="/proyecto-plataforma"
             class="block px-4 py-2 hover:bg-gray-700"
-            >Plataforma</a
           >
+            Plataforma
+          </a>
         </div>
       </div>
+
       <div class="relative group" key="Evaluaciones">
         <button
           class="hover:text-yellow-400 transition-colors duration-300 flex items-center focus:outline-none"
@@ -54,26 +80,29 @@
           </svg>
         </button>
         <div
-          class="absolute left-0 top-full w-48 bg-gray-800 text-white rounded-md shadow-lg opacity-0 invisible pointer-events-none group-hover:opacity-100 group-hover:visible group-hover:pointer-events-auto transition-opacity duration-300 z-10"
+          class="absolute left-0 top-full w-48 bg-gray-800 text-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-300 z-10"
         >
           <a
             href="/evaluaciones-madurez"
-            key="/evaluaciones-madurez"
             class="block px-4 py-2 hover:bg-gray-700"
-            >Madurez Tecnológica</a
-          ><a
-            href="/evaluaciones-proveedor"
-            key="/evaluaciones-proveedor"
-            class="block px-4 py-2 hover:bg-gray-700"
-            >Proveedores</a
-          ><a
-            href="/evaluaciones-startup"
-            key="/evaluaciones-startup"
-            class="block px-4 py-2 hover:bg-gray-700"
-            >Startup</a
           >
+            Madurez Tecnológica
+          </a>
+          <a
+            href="/evaluaciones-proveedor"
+            class="block px-4 py-2 hover:bg-gray-700"
+          >
+            Proveedores
+          </a>
+          <a
+            href="/evaluaciones-startup"
+            class="block px-4 py-2 hover:bg-gray-700"
+          >
+            Startup
+          </a>
         </div>
       </div>
+
       <div class="relative group" key="Investigación">
         <button
           class="hover:text-yellow-400 transition-colors duration-300 flex items-center focus:outline-none"
@@ -88,21 +117,23 @@
           </svg>
         </button>
         <div
-          class="absolute left-0 top-full w-48 bg-gray-800 text-white rounded-md shadow-lg opacity-0 invisible pointer-events-none group-hover:opacity-100 group-hover:visible group-hover:pointer-events-auto transition-opacity duration-300 z-10"
+          class="absolute left-0 top-full w-48 bg-gray-800 text-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-300 z-10"
         >
           <a
             href="/investigacion-podcasts"
-            key="/investigacion-podcasts"
             class="block px-4 py-2 hover:bg-gray-700"
-            >Podcast i4.0</a
-          ><a
-            href="/investigacion-diagnostico"
-            key="/investigacion-diagnostico"
-            class="block px-4 py-2 hover:bg-gray-700"
-            >Diagnóstico Regional i4.0</a
           >
+            Podcast i4.0
+          </a>
+          <a
+            href="/investigacion-diagnostico"
+            class="block px-4 py-2 hover:bg-gray-700"
+          >
+            Diagnóstico Regional i4.0
+          </a>
         </div>
       </div>
+
       <div class="relative group" key="Buscadores">
         <button
           class="hover:text-yellow-400 transition-colors duration-300 flex items-center focus:outline-none"
@@ -117,43 +148,376 @@
           </svg>
         </button>
         <div
-          class="absolute left-0 top-full w-48 bg-gray-800 text-white rounded-md shadow-lg opacity-0 invisible pointer-events-none group-hover:opacity-100 group-hover:visible group-hover:pointer-events-auto transition-opacity duration-300 z-10"
+          class="absolute left-0 top-full w-48 bg-gray-800 text-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-300 z-10"
         >
           <a
             href="/buscador-proveedores"
-            key="/buscador-proveedores"
             class="block px-4 py-2 hover:bg-gray-700"
-            >Proveedores</a
-          ><a
-            href="/buscador-cursos"
-            key="/buscador-cursos"
-            class="block px-4 py-2 hover:bg-gray-700"
-            >Cursos</a
-          ><a
-            href="/buscador-financiamiento"
-            key="/buscador-financiamiento"
-            class="block px-4 py-2 hover:bg-gray-700"
-            >Financiamiento</a
-          ><a
-            href="/buscador-articulos"
-            key="/buscador-articulos"
-            class="block px-4 py-2 hover:bg-gray-700"
-            >Artículos de Interés</a
-          ><a
-            href="/buscador-proyectos"
-            key="/buscador-proyectos"
-            class="block px-4 py-2 hover:bg-gray-700"
-            >Proyectos Destacados</a
           >
+            Proveedores
+          </a>
+          <a href="/buscador-cursos" class="block px-4 py-2 hover:bg-gray-700">
+            Cursos
+          </a>
+          <a
+            href="/buscador-financiamiento"
+            class="block px-4 py-2 hover:bg-gray-700"
+          >
+            Financiamiento
+          </a>
+          <a
+            href="/buscador-articulos"
+            class="block px-4 py-2 hover:bg-gray-700"
+          >
+            Artículos de Interés
+          </a>
+          <a
+            href="/buscador-proyectos"
+            class="block px-4 py-2 hover:bg-gray-700"
+          >
+            Proyectos Destacados
+          </a>
         </div>
       </div>
+
+      <!-- Botón Iniciar Sesión y cuenta -->
+      <div class="relative group" key="Buscadores">
+        <button
+          class="hover:text-yellow-400 transition-colors duration-300 flex items-center focus:outline-none"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          Cuenta
+          <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
+            <path
+              d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+            ></path>
+          </svg>
+        </button>
+        <div
+          class="absolute left-0 top-full w-48 bg-gray-800 text-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-300 z-10"
+        >
+          @if (authState()===AuthState.LoggedOut) {
+          <a href="/login" class="block px-4 py-2 hover:bg-gray-700">
+            Ingresa a tu cuenta
+          </a>
+          } @if (authState()===AuthState.LoggedIn) {
+          <a href="/" class="block px-4 py-2 hover:bg-gray-700">
+            <p>
+              Mi cuenta:
+              {{
+                currentUser()?.rol?.nombreRol === "usuario"
+                  ? "Personal"
+                  : currentUser()?.rol?.nombreRol?.toLocaleUpperCase()
+              }}
+              {{
+                currentUser()?.nombreRepresentante ??
+                  currentUser()?.nombreEmpresa
+              }}
+            </p>
+          </a>
+          <a (click)="logout()" class="block px-4 py-2 hover:bg-gray-700">
+            Cerrar sesión
+          </a>
+          }
+        </div>
+      </div>
+
       <!-- Botón Registrarse -->
+      @if (authState()===AuthState.LoggedOut) {
       <a
-        href="/registrarse"
-        class="bg-yellow-500 hover:bg-yellow-600 text-gray-800 font-bold py-2 px-4 ml-4 border border-yellow-700 rounded shadow-md transform hover:scale-105 transition-transform duration-200"
+        href="/registro"
+        class="hidden md:inline-block bg-yellow-500 hover:bg-yellow-600 text-gray-800 font-bold py-2 px-4 ml-4 border border-yellow-700 rounded shadow-md transform hover:scale-105 transition-transform duration-200"
       >
         Registrarse
       </a>
+      }
     </nav>
   </div>
-</div>
+
+  <!-- Menú Móvil -->
+  <!-- Menú Móvil -->
+  <div
+    class="md:hidden"
+    [ngClass]="{
+      block: isMobileMenuOpen,
+      hidden: !isMobileMenuOpen
+    }"
+  >
+    <nav class="px-2 pt-2 pb-4 space-y-1 sm:px-3">
+      <!-- Menú Proyecto -->
+      <div class="relative group">
+        <button
+          class="w-full text-left px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300 flex items-center justify-between"
+          (click)="toggleProyectoSubmenu()"
+        >
+          Proyecto
+          <svg
+            class="w-4 h-4 ml-1 transform transition-transform duration-300"
+            [ngClass]="{ 'rotate-180': isProyectoSubmenuOpen }"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
+            <path
+              d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+            ></path>
+          </svg>
+        </button>
+        <!-- Submenú Proyecto -->
+        <div
+          class="mt-1 space-y-1 pl-5 border-l border-gray-700"
+          [ngClass]="{
+            block: isProyectoSubmenuOpen,
+            hidden: !isProyectoSubmenuOpen
+          }"
+        >
+          <a
+            href="/proyecto-equipo"
+            class="block px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300"
+            (click)="closeMobileMenu()"
+          >
+            Equipo
+          </a>
+          <a
+            href="/proyecto-plataforma"
+            class="block px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300"
+            (click)="closeMobileMenu()"
+          >
+            Plataforma
+          </a>
+        </div>
+      </div>
+
+      <!-- Menú Evaluaciones -->
+      <div class="relative group">
+        <button
+          class="w-full text-left px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300 flex items-center justify-between"
+          (click)="toggleEvaluacionesSubmenu()"
+        >
+          Evaluaciones
+          <svg
+            class="w-4 h-4 ml-1 transform transition-transform duration-300"
+            [ngClass]="{ 'rotate-180': isEvaluacionesSubmenuOpen }"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
+            <path
+              d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+            ></path>
+          </svg>
+        </button>
+        <!-- Submenú Evaluaciones -->
+        <div
+          class="mt-1 space-y-1 pl-5 border-l border-gray-700"
+          [ngClass]="{
+            block: isEvaluacionesSubmenuOpen,
+            hidden: !isEvaluacionesSubmenuOpen
+          }"
+        >
+          <a
+            href="/evaluaciones-madurez"
+            class="block px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300"
+            (click)="closeMobileMenu()"
+          >
+            Madurez Tecnológica
+          </a>
+          <a
+            href="/evaluaciones-proveedor"
+            class="block px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300"
+            (click)="closeMobileMenu()"
+          >
+            Proveedores
+          </a>
+          <a
+            href="/evaluaciones-startup"
+            class="block px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300"
+            (click)="closeMobileMenu()"
+          >
+            Startup
+          </a>
+        </div>
+      </div>
+
+      <!-- Menú Investigación -->
+      <div class="relative group">
+        <button
+          class="w-full text-left px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300 flex items-center justify-between"
+          (click)="toggleInvestigacionSubmenu()"
+        >
+          Investigación
+          <svg
+            class="w-4 h-4 ml-1 transform transition-transform duration-300"
+            [ngClass]="{ 'rotate-180': isInvestigacionSubmenuOpen }"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
+            <path
+              d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+            ></path>
+          </svg>
+        </button>
+        <!-- Submenú Investigación -->
+        <div
+          class="mt-1 space-y-1 pl-5 border-l border-gray-700"
+          [ngClass]="{
+            block: isInvestigacionSubmenuOpen,
+            hidden: !isInvestigacionSubmenuOpen
+          }"
+        >
+          <a
+            href="/investigacion-podcasts"
+            class="block px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300"
+            (click)="closeMobileMenu()"
+          >
+            Podcast i4.0
+          </a>
+          <a
+            href="/investigacion-diagnostico"
+            class="block px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300"
+            (click)="closeMobileMenu()"
+          >
+            Diagnóstico Regional i4.0
+          </a>
+        </div>
+      </div>
+
+      <!-- Menú Buscadores -->
+      <div class="relative group">
+        <button
+          class="w-full text-left px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300 flex items-center justify-between"
+          (click)="toggleBuscadoresSubmenu()"
+        >
+          Buscadores
+          <svg
+            class="w-4 h-4 ml-1 transform transition-transform duration-300"
+            [ngClass]="{ 'rotate-180': isBuscadoresSubmenuOpen }"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
+            <path
+              d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+            ></path>
+          </svg>
+        </button>
+        <!-- Submenú Buscadores -->
+        <div
+          class="mt-1 space-y-1 pl-5 border-l border-gray-700"
+          [ngClass]="{
+            block: isBuscadoresSubmenuOpen,
+            hidden: !isBuscadoresSubmenuOpen
+          }"
+        >
+          <a
+            href="/buscador-proveedores"
+            class="block px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300"
+            (click)="closeMobileMenu()"
+          >
+            Proveedores
+          </a>
+          <a
+            href="/buscador-cursos"
+            class="block px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300"
+            (click)="closeMobileMenu()"
+          >
+            Cursos
+          </a>
+          <a
+            href="/buscador-financiamiento"
+            class="block px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300"
+            (click)="closeMobileMenu()"
+          >
+            Financiamiento
+          </a>
+          <a
+            href="/buscador-articulos"
+            class="block px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300"
+            (click)="closeMobileMenu()"
+          >
+            Artículos de Interés
+          </a>
+          <a
+            href="/buscador-proyectos"
+            class="block px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300"
+            (click)="closeMobileMenu()"
+          >
+            Proyectos Destacados
+          </a>
+        </div>
+      </div>
+
+      <!-- Menú Cuenta -->
+      <div class="relative group">
+        <button
+          class="w-full text-left px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300 flex items-center justify-between"
+          (click)="toggleCuentaSubmenu()"
+        >
+          Cuenta
+          <svg
+            class="w-4 h-4 ml-1 transform transition-transform duration-300"
+            [ngClass]="{ 'rotate-180': isCuentaSubmenuOpen }"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
+            <path
+              d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+            ></path>
+          </svg>
+        </button>
+        <!-- Submenú Cuenta -->
+        <div
+          class="mt-1 space-y-1 pl-5 border-l border-gray-700"
+          [ngClass]="{
+            block: isCuentaSubmenuOpen,
+            hidden: !isCuentaSubmenuOpen
+          }"
+        >
+          @if (authState()===AuthState.LoggedOut) {
+          <a
+            href="/login"
+            class="block px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300"
+            (click)="closeMobileMenu()"
+          >
+            Ingresa a tu cuenta
+          </a>
+          } @if (authState()===AuthState.LoggedIn) {
+          <a
+            href="/"
+            class="block px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300"
+            (click)="closeMobileMenu()"
+          >
+            <p>
+              Mi cuenta:
+              {{
+                currentUser()?.rol?.nombreRol === "usuario"
+                  ? "Personal"
+                  : currentUser()?.rol?.nombreRol?.toLocaleUpperCase()
+              }}
+              {{
+                currentUser()?.nombreRepresentante ??
+                  currentUser()?.nombreEmpresa
+              }}
+            </p>
+          </a>
+          <a
+            class="block px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300"
+            (click)="logout()"
+          >
+            Cerrar sesión
+          </a>
+          }
+        </div>
+      </div>
+
+      <!-- Botón Registrarse (Visible en móviles) -->
+      @if (authState()===AuthState.LoggedOut) {
+      <a
+        href="/registro"
+        class="block w-full text-center bg-yellow-500 hover:bg-yellow-600 text-gray-800 font-bold py-2 px-4 mt-4 border border-yellow-700 rounded shadow-md transform hover:scale-105 transition-transform duration-200"
+        (click)="closeMobileMenu()"
+      >
+        Registrarse
+      </a>
+      }
+    </nav>
+  </div>
+</header>

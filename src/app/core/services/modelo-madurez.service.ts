@@ -47,12 +47,10 @@ export interface ProcessedSurveyItem {
   ResultGrade: string;
 }
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ModeloMadurezService {
-
   private saltHash = 'xdxd';
 
   private readonly apiUrl = 'https://apimadurez.nuevoloslagos.org/api/results/';
@@ -63,7 +61,8 @@ export class ModeloMadurezService {
   currentUser = this.loginService.currentUser;
 
   // Signal para almacenar los datos del modelo de madurez
-  private _modeloMadurez: WritableSignal<ProcessedSurveyItem[] | null> = signal(null);
+  private _modeloMadurez: WritableSignal<ProcessedSurveyItem[] | null> =
+    signal(null);
 
   // Signal de solo lectura para exponer los datos
   public modeloMadurez = this._modeloMadurez.asReadonly();
@@ -88,7 +87,10 @@ export class ModeloMadurezService {
             const parsedData: ProcessedSurveyItem[] = JSON.parse(storedData);
             this._modeloMadurez.set(parsedData);
           } catch (e) {
-            console.error('Error al parsear modelo-madurez desde localStorage:', e);
+            console.error(
+              'Error al parsear modelo-madurez desde localStorage:',
+              e
+            );
             // Si hay error al parsear, eliminar del localStorage
             localStorage.removeItem('modelo-madurez');
           }
@@ -110,41 +112,48 @@ export class ModeloMadurezService {
       const rutMd5 = this.stringToHash(rutOriginal);
       const url = `${this.apiUrl}${rutMd5}`;
 
-      this.http.get<ApiResponse>(url).pipe(
-        catchError(this.handleError)
-      ).subscribe(response => {
-        if (response.success) {
-          console.log(response)
-          const processedData = response.data.map(item => ({
-            SurveyID: item.SurveyID,
-            Rut: rutOriginal, // Reemplazamos el hash por el RUT original
-            DateTime: item.DateTime,
-            IndustryName: item.IndustryName,
-            GradeCapitalHumano: item.GradeCapitalHumano,
-            GradeEstrategiaLiderazgo: item.GradeEstrategiaLiderazgo,
-            GradeTecnologiaGestionDatos: item.GradeTecnologiaGestionDatos,
-            GradeGestionInnovacionConocimiento: item.GradeGestionInnovacionConocimiento,
-            GradeProcesosAutomatizacion: item.GradeProcesosAutomatizacion,
-            TotalIndustryGrade: item.TotalIndustryGrade,
-            ResultGrade: item.ResultGrade
-          }));
+      this.http
+        .get<ApiResponse>(url)
+        .pipe(catchError(this.handleError))
+        .subscribe((response) => {
+          if (response.success) {
+            console.log(response);
+            const processedData = response.data.map((item) => ({
+              SurveyID: item.SurveyID,
+              Rut: rutOriginal, // Reemplazamos el hash por el RUT original
+              DateTime: item.DateTime,
+              IndustryName: item.IndustryName,
+              GradeCapitalHumano: item.GradeCapitalHumano,
+              GradeEstrategiaLiderazgo: item.GradeEstrategiaLiderazgo,
+              GradeTecnologiaGestionDatos: item.GradeTecnologiaGestionDatos,
+              GradeGestionInnovacionConocimiento:
+                item.GradeGestionInnovacionConocimiento,
+              GradeProcesosAutomatizacion: item.GradeProcesosAutomatizacion,
+              TotalIndustryGrade: item.TotalIndustryGrade,
+              ResultGrade: item.ResultGrade,
+            }));
 
-          // Obtener los datos almacenados en localStorage
-          const storedData = this._modeloMadurez();
+            // Obtener los datos almacenados en localStorage
+            const storedData = this._modeloMadurez();
 
-          // Comparar los datos
-          if (JSON.stringify(storedData) !== JSON.stringify(processedData)) {
-            // Si son diferentes, actualizar el Signal y el localStorage
-            this._modeloMadurez.set(processedData);
-            localStorage.setItem('modelo-madurez', JSON.stringify(processedData));
+            // Comparar los datos
+            if (JSON.stringify(storedData) !== JSON.stringify(processedData)) {
+              // Si son diferentes, actualizar el Signal y el localStorage
+              this._modeloMadurez.set(processedData);
+              localStorage.setItem(
+                'modelo-madurez',
+                JSON.stringify(processedData)
+              );
+            }
+          } else {
+            console.warn(
+              'No se encontraron resultados para el RUT especificado.'
+            );
+            // Opcional: Puedes limpiar el modelo si no hay datos
+            this._modeloMadurez.set(null);
+            localStorage.removeItem('modelo-madurez');
           }
-        } else {
-          console.warn('No se encontraron resultados para el RUT especificado.');
-          // Opcional: Puedes limpiar el modelo si no hay datos
-          this._modeloMadurez.set(null);
-          localStorage.removeItem('modelo-madurez');
-        }
-      });
+        });
     }
   }
 
@@ -155,7 +164,9 @@ export class ModeloMadurezService {
    */
   private handleError(error: HttpErrorResponse) {
     console.error('Error en la petición del modelo de madurez:', error);
-    return throwError(() => new Error('Error en la petición del modelo de madurez.'));
+    return throwError(
+      () => new Error('Error en la petición del modelo de madurez.')
+    );
   }
 
   /**
@@ -171,11 +182,11 @@ export class ModeloMadurezService {
       if (!currentUser || !currentUser.rut) {
         throw new Error('RUT no disponible');
       }
-  
+
       const rutMd5 = this.stringToHash(currentUser.rut);
-  
+
       const url = `https://modelomadurez.nuevoloslagos.org?rut=${rutMd5}`;
-      window.open(url, '_blank');
+      window.open(url, '_self');
     } catch (error) {
       console.error('Error al obtener RUT de localStorage:', error);
     }
