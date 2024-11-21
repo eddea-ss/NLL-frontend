@@ -30,6 +30,7 @@ export class FormRegisterComponent implements OnInit {
   formGroup!: FormGroup;
   formFields: any[] = [];
   tipoRegistro!: string;
+  errorGeneral = '';
 
   formGeneral = [
     {
@@ -139,7 +140,7 @@ export class FormRegisterComponent implements OnInit {
     switch (this.tipoRegistro) {
       case 'registro-persona':
         this.formFields = [...this.formPersona, ...this.formGeneral];
-        this.tipoRegistro = 'persona';
+        this.tipoRegistro = 'usuario';
         break;
       case 'registro-industria':
         this.formFields = [...this.formIndustria4, ...this.formGeneral];
@@ -164,7 +165,12 @@ export class FormRegisterComponent implements OnInit {
   }
 
   onSubmit(): void {
+    if (!this.checkPassword(this.formGroup)) {
+      this.errorGeneral = 'Las contraseñas no coinciden';
+      return;
+    }
     if (this.formGroup.valid) {
+      this.errorGeneral = '';
       this.registroService
         .register({ ...this.formGroup.value, tipoUsuario: this.tipoRegistro })
         .subscribe({
@@ -172,5 +178,17 @@ export class FormRegisterComponent implements OnInit {
           error: (err) => console.error(err),
         });
     }
+  }
+
+  checkPassword(formGroup: FormGroup): boolean {
+    const password = formGroup.get('password')?.value;
+    const confirmPassword = formGroup.get('password_confirm')?.value;
+    console.log(
+      password,
+      confirmPassword,
+      password === confirmPassword,
+      formGroup
+    );
+    return password === confirmPassword;
   }
 }

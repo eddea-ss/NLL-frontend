@@ -99,6 +99,11 @@
               </div>
             </div>
           </ng-container>
+          @if (field.type == 'password') {
+          <div class="text-red-500 text-xs italic">
+            {{ errorGeneral }}
+          </div>
+          }
           <div
             *ngIf="
               formGroup.get(field.name)?.invalid &&
@@ -110,6 +115,7 @@
           </div>
         </div>
       </div>
+
       <div class="flex justify-between w-full px-3">
         <button
           type="button"

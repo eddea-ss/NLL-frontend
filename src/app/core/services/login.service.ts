@@ -1,11 +1,15 @@
 // src/app/services/login.service.ts
 
 import { Injectable, WritableSignal, inject, signal } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+} from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
 import { throwError, Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import { LoginCredentials, LoginResponse, Usuario} from '@shared/models';
+import { LoginCredentials, LoginResponse, Usuario } from '@shared/models';
 import { AuthState, Role } from '@shared/enums';
 
 @Injectable({
@@ -15,7 +19,7 @@ export class LoginService {
   private http = inject(HttpClient);
   private router = inject(Router);
 
-  private apiUrlUsers = 'http://64.176.10.243:3021/api/usuarios';
+  private apiUrlUsers = 'http://64.176.10.243:3020/api/usuarios';
 
   private httpOptions = {
     headers: new HttpHeaders({
@@ -31,19 +35,27 @@ export class LoginService {
 
   // Señales públicas de solo lectura
   public authState = this._authState.asReadonly() as WritableSignal<AuthState>;
-  public authError = this._authError.asReadonly() as WritableSignal<string | null>;
-  public currentUser = this._currentUser.asReadonly() as WritableSignal<Usuario | null>;
-  public authToken = this._authToken.asReadonly() as WritableSignal<string | null>;
+  public authError = this._authError.asReadonly() as WritableSignal<
+    string | null
+  >;
+  public currentUser =
+    this._currentUser.asReadonly() as WritableSignal<Usuario | null>;
+  public authToken = this._authToken.asReadonly() as WritableSignal<
+    string | null
+  >;
 
   constructor() {
     // Inicializar el estado de autenticación basado en el token en localStorage
     let token: string | null = null;
     let user: string | null = null;
-    try{
+    try {
       token = localStorage.getItem('authToken') ?? '';
       user = localStorage.getItem('user') ?? '';
-    }catch(e){
-      console.warn('Error al obtener el token y el usuario desde localStorage', e);
+    } catch (e) {
+      console.warn(
+        'Error al obtener el token y el usuario desde localStorage',
+        e
+      );
     }
 
     if (token && user) {
@@ -75,19 +87,28 @@ export class LoginService {
     this._authState.set(AuthState.Loading);
     this._authError.set(null);
 
-    return this.http.post<LoginResponse>(`${this.apiUrlUsers}/login`, credentials, this.httpOptions).pipe(
-      tap((response: LoginResponse) => {
-        if (response.token && response.usuario) {
-          this.handleAuthentication(response.token, response.usuario);
-        } else {
-          this.handleError(new Error('Respuesta de login inválida.'));
-        }
-      }),
-      catchError((error: HttpErrorResponse) => {
-        this.handleError(error);
-        return throwError(() => error);
-      })
-    );
+    return this.http
+      .post<LoginResponse>(
+        `${this.apiUrlUsers}/login`,
+        credentials,
+        this.httpOptions
+      )
+      .pipe(
+        tap((response: LoginResponse) => {
+          console.log(response);
+          if (response.token && response.usuario) {
+            this.handleAuthentication(response.token, response.usuario);
+          } else {
+            console.log('err1');
+            this.handleError(new Error('Respuesta de login inválida.'));
+          }
+        }),
+        catchError((error: HttpErrorResponse) => {
+          console.log('err2');
+          this.handleError(error);
+          return throwError(() => error);
+        })
+      );
   }
 
   /**
@@ -98,6 +119,7 @@ export class LoginService {
   private handleAuthentication(token: string, usuario: Usuario): void {
     // Verificar si el rol es válido
     if (!Object.values(Role).includes(usuario.rol.nombreRol)) {
+      console.log('err3', usuario);
       this.handleError(new Error('Rol de usuario inválido.'));
       return;
     }
@@ -120,6 +142,7 @@ export class LoginService {
    * @param error - Error ocurrido durante el login.
    */
   private handleError(error: HttpErrorResponse | Error): void {
+    console.log('err4', error);
     this._authState.set(AuthState.Error);
     if (error instanceof HttpErrorResponse) {
       this._authError.set(error.error?.message || 'Error de servidor.');
