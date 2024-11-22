@@ -54,6 +54,8 @@ export class ModeloMadurezService {
   private saltHash = 'xdxd';
 
   private readonly apiUrl = 'https://apimadurez.nuevoloslagos.org/api/results/';
+  private readonly apiUrlFormacion =
+    'https://apiemprendedores.nuevoloslagos.org/madurez/';
 
   private http = inject(HttpClient);
   private loginService = inject(LoginService);
@@ -67,8 +69,13 @@ export class ModeloMadurezService {
   // Signal de solo lectura para exponer los datos
   public modeloMadurez = this._modeloMadurez.asReadonly();
 
+  //para formacion
+  private _modeloFormacion: WritableSignal<boolean | null> = signal(null);
+  public modeloFormacion = this._modeloFormacion.asReadonly();
+
   constructor() {
     this.initializeModeloMadurez();
+    this.initializeModeloFormacion();
   }
 
   /**
@@ -98,6 +105,34 @@ export class ModeloMadurezService {
 
         // Realizar la petición para obtener los datos actualizados
         this.fetchSurveyData();
+      }
+    }
+  }
+
+  private initializeModeloFormacion(): void {
+    // Verificar si el usuario está autenticado y es de rol "empresa"
+    if (this.loginService.isAuthenticated()) {
+      const currentUser = this.loginService.getCurrentUser();
+      if (currentUser && currentUser.rol.nombreRol === Role.Empresa) {
+        // Intentar obtener los datos del localStorage
+        const storedData = localStorage.getItem('modelo-formacion');
+        if (storedData) {
+          try {
+            const parsedData: boolean = JSON.parse(storedData);
+            this._modeloFormacion.set(parsedData);
+          } catch (e) {
+            console.error(
+              'Error al parsear modelo-formacion desde localStorage:',
+              e
+            );
+            // Si hay error al parsear, eliminar del localStorage
+            localStorage.removeItem('modelo-formacion');
+          }
+        }
+
+        // Realizar la petición para obtener los datos actualizados
+        this.fetchSurveyData();
+        this.fetchSurveyDataFormacion();
       }
     }
   }
@@ -157,6 +192,39 @@ export class ModeloMadurezService {
     }
   }
 
+  private fetchSurveyDataFormacion(): void {
+    const currentUser = this.loginService.getCurrentUser();
+    if (currentUser && currentUser.rut) {
+      const rutOriginal = currentUser.rut;
+      const rutMd5 = this.stringToHash(rutOriginal);
+      const url = `${this.apiUrlFormacion}${rutMd5}`;
+
+      this.http
+        .get<ApiResponse>(url)
+        .pipe(catchError(this.handleError))
+        .subscribe((response) => {
+          if (response) {
+            const storedData = this._modeloFormacion();
+
+            try {
+              this._modeloFormacion.set(response.success);
+              localStorage.setItem(
+                'modelo-formacion',
+                String(response.success)
+              );
+            } catch (err) {
+              console.warn(
+                'No se encontraron resultados para el RUT especificado.'
+              );
+              // Opcional: Puedes limpiar el modelo si no hay datos
+              this._modeloFormacion.set(null);
+              localStorage.removeItem('modelo-formacion');
+            }
+          }
+        });
+    }
+  }
+
   /**
    * Maneja los errores de la petición HTTP.
    * @param error Error de la petición
@@ -174,6 +242,7 @@ export class ModeloMadurezService {
    */
   public recheckData(): void {
     this.fetchSurveyData();
+    this.fetchSurveyDataFormacion();
   }
 
   public openLink(): void {
@@ -186,6 +255,22 @@ export class ModeloMadurezService {
       const rutMd5 = this.stringToHash(currentUser.rut);
 
       const url = `https://modelomadurez.nuevoloslagos.org?rut=${rutMd5}`;
+      window.open(url, '_self');
+    } catch (error) {
+      console.error('Error al obtener RUT de localStorage:', error);
+    }
+  }
+
+  openLinkFormacion(): void {
+    try {
+      const currentUser = this.currentUser();
+      if (!currentUser || !currentUser.rut) {
+        throw new Error('RUT no disponible');
+      }
+
+      const rutMd5 = this.stringToHash(currentUser.rut);
+
+      const url = `https://modelomadurez.nuevoloslagos.org/formacion.html?rut=${rutMd5}`;
       window.open(url, '_self');
     } catch (error) {
       console.error('Error al obtener RUT de localStorage:', error);
