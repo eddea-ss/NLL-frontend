@@ -163,6 +163,7 @@ export class LoginService {
     localStorage.removeItem('modelo-madurez');
     localStorage.removeItem('modelo-formacion');
     localStorage.removeItem('modelo-caracter');
+    localStorage.removeItem('formacion-emprendedor');
 
     // Actualizar los Signals
     this._authState.set(AuthState.LoggedOut);

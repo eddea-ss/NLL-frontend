@@ -68,6 +68,14 @@ export class FormRegisterComponent implements OnInit {
       error: 'Este campo es obligatorio.',
       validator: [Validators.required],
     },
+    {
+      type: 'text',
+      label: 'Rut',
+      name: 'rutRepresentante',
+      placeholder: 'example 11111111-1',
+      error: null,
+      validator: [Validators.required],
+    },
   ];
 
   formIndustria4 = [

@@ -1,1 +1,208 @@
-<p>evaluaciones-startup works!</p>
+<div>
+  <!--Login como empresa y modelo completado-->
+  @if (authState()===AuthState.LoggedIn && currentUser()?.rol?.nombreRol ===
+  Role.Usuario) {
+  <section class="max-w-7xl mx-auto px-4 py-8">
+    <!-- Company Header -->
+    <h1 class="text-4xl font-bold text-gray-700 mb-8">
+      <strong> </strong>
+      {{
+        currentUser()?.nombreRepresentante?.toLocaleUpperCase() ??
+          "No disponible"
+      }}
+    </h1>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div class="lg:col-span-2">
+        <!-- Evaluation Status Section -->
+        <div class="mb-8">
+          <h2 class="text-2xl text-gray-600 mb-4">
+            Completa modelo de formación de emprendedores
+          </h2>
+          <p class="text-gray-500 mb-6">
+            Actualmente, tu Modelo de formación de emprendedores no ha sido
+            completado. Te invitamos a contestar este modelo y a conocer las
+            acciones necesarias para alcanzar la madurez tecnológica. Para
+            completar el modelo y acceder a todas sus funcionalidades.
+          </p>
+          <p class="text-gray-500 mb-6">
+            Por favor, haz clic en el botón a continuación:
+          </p>
+        </div>
+      </div>
+
+      <!-- Take Survey Button -->
+      <div class="lg:col-span-1">
+        <!--Modelo de madurez-->
+        @if (formacionEmprendedores()) {
+        <button
+          disabled
+          (click)="openLink()"
+          class="my-1 w-full border border-blue-700 p-8 bg-white-700 flex text-blue-700"
+        >
+          Modelo de formación realizado
+          <svg
+            aria-hidden="true"
+            class="w-5 h-5 text-blue-700"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M16.707 5.293a1 1 0 010 1.414L8.414 15 5 11.586a1 1 0 011.414-1.414L8.414 12.172l7.879-7.879a1 1 0 011.414 0z"
+              clip-rule="evenodd"
+            ></path>
+          </svg>
+        </button>
+        }@else {
+        <div class="lg:col-span-1">
+          <button
+            (click)="openLink()"
+            class="my-1 w-full border border-blue-700 p-8 bg-white-700 flex text-blue-700 hover:bg-gray-100 transition"
+          >
+            Realizar Modelo de Formación para emprendedores
+          </button>
+        </div>
+        }
+      </div>
+    </div>
+  </section>
+  }
+  <!--sin login-->
+  @if (authState() === AuthState.LoggedOut) {
+  <section class="relative overflow-hidden bg-white-50">
+    <div
+      class="grid container px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12"
+    >
+      <div class="mr-auto place-self-center lg:col-span-7">
+        <h1
+          class="max-w-2xl mb-5 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl"
+        >
+          Modelo de Formación para emprendedores
+        </h1>
+        <p
+          class="max-w-2xl mb-6 mt-4 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl"
+        >
+          Completa tu modelo de Formación para emprendedores o startup y te
+          ayudaremos a crecer en la region de los Lagos.
+        </p>
+        <p
+          class="max-w-2xl mb-6 mt-4 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl"
+        >
+          Haz clic en el botón a continuación y comienza ahora.
+        </p>
+        <a
+          style="cursor: pointer"
+          routerLink="/registro-persona"
+          class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center rounded-lg bg-primary hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 border border-yellow-500 border-3 hover:border-yellow-600 hover:bg-yellow-500"
+        >
+          Registrate con una cuenta Personal
+          <svg
+            class="w-5 h-5 ml-2 -mr-1"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+              clip-rule="evenodd"
+            ></path>
+          </svg>
+        </a>
+      </div>
+      <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
+        <img src="assets/hero.webp" alt="mockup" />
+      </div>
+    </div>
+    <div
+      style="padding-top: 0px"
+      class="mt-2 md:mt-0 py-12 pb-6 sm:py-16 lg:pb-24 overflow-hidden"
+    >
+      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 relative">
+        <div class="relative mt-12 lg:mt-20">
+          <div
+            class="absolute inset-x-0 hidden xl:px-44 top-2 md:block md:px-20 lg:px-28"
+          >
+            <svg
+              class="w-full"
+              xmlns="http://www.w3.org/2000/svg"
+              width="875"
+              height="48"
+              viewBox="0 0 875 48"
+              fill="none"
+            >
+              <path
+                d="M2 29C20.2154 33.6961 38.9915 35.1324 57.6111 37.5555C80.2065 40.496 102.791 43.3231 125.556 44.5555C163.184 46.5927 201.26 45 238.944 45C312.75 45 385.368 30.7371 458.278 20.6666C495.231 15.5627 532.399 11.6429 569.278 6.11109C589.515 3.07551 609.767 2.09927 630.222 1.99998C655.606 1.87676 681.208 1.11809 706.556 2.44442C739.552 4.17096 772.539 6.75565 805.222 11.5C828 14.8064 850.34 20.2233 873 24"
+                stroke="#D4D4D8"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-dasharray="1 12"
+              />
+            </svg>
+          </div>
+          <div
+            class="relative grid grid-cols-1 text-center gap-y-8 sm:gap-y-10 md:gap-y-12 md:grid-cols-3 gap-x-12"
+          >
+            <div>
+              <div
+                class="flex items-center justify-center w-16 h-16 mx-auto bg-white border-2 border-gray-200 rounded-full shadow"
+              >
+                <span class="text-xl font-semibold text-gray-700">1</span>
+              </div>
+              <h3
+                class="mt-4 sm:mt-6 text-xl font-semibold leading-tight text-gray-900 md:mt-10"
+              >
+                Registrate
+              </h3>
+              <p class="mt-3 sm:mt-4 text-base text-gray-600">
+                Haz clic en el botón <strong>Registrarse</strong> en la barra de
+                navegación y selecciona la opción
+                <strong>Cuenta personal</strong>. ¡Empieza ahora y conéctate con
+                la región!
+              </p>
+            </div>
+            <div>
+              <div
+                class="flex items-center justify-center w-16 h-16 mx-auto bg-white border-2 border-gray-200 rounded-full shadow"
+              >
+                <span class="text-xl font-semibold text-gray-700">2</span>
+              </div>
+              <h3
+                class="mt-4 sm:mt-6 text-xl font-semibold leading-tight text-gray-900 md:mt-10"
+              >
+                Completa tu Modelo
+              </h3>
+              <p class="mt-3 sm:mt-4 text-base text-gray-600">
+                Completa tu modelo de
+                <strong>Formación para emprendedores</strong> y comparte los
+                datos necesarios para que podamos conectarte con la región.
+                ¡Empieza ahora y abre la puerta a nuevas oportunidades!
+              </p>
+            </div>
+            <div>
+              <div
+                class="flex items-center justify-center w-16 h-16 mx-auto bg-white border-2 border-gray-200 rounded-full shadow"
+              >
+                <span class="text-xl font-semibold text-gray-700">3</span>
+              </div>
+              <h3
+                class="mt-4 sm:mt-6 text-xl font-semibold leading-tight text-gray-900 md:mt-10"
+              >
+                Descubre
+              </h3>
+              <p class="mt-3 sm:mt-4 text-base text-gray-600">
+                Descubre las acciones clave para promoverte en la Región de los
+                Lagos. Accede a cursos, artículos, opciones de financiamiento y
+                muchos otros recursos informativos diseñados para tu éxito.
+                ¡Empieza hoy mismo y lleva tu negocio al siguiente nivel!
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  }
+</div>

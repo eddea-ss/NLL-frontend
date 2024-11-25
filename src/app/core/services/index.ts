@@ -7,3 +7,4 @@ export * from './modelo-madurez.service';
 export * from './registro.service';
 export * from './buscador.service';
 export * from './modelo-caracter.service';
+export * from './formacion-emprendedores.service';

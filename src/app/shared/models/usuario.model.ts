@@ -15,6 +15,7 @@ export interface Usuario {
   empresas: Industria[] | null;
   proveedores: Proveedor[] | null;
   rut: string | null;
+  rutRepresentante?: string | null;
   nombreEmpresa?: string | null;
   nombreProveedor?: string | null;
   encuestaRealizada?: boolean | null;
