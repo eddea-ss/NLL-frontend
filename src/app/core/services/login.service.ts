@@ -11,6 +11,7 @@ import { throwError, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { LoginCredentials, LoginResponse, Usuario } from '@shared/models';
 import { AuthState, Role } from '@shared/enums';
+import { SnackbarService } from './snackbar.service';
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +19,7 @@ import { AuthState, Role } from '@shared/enums';
 export class LoginService {
   private http = inject(HttpClient);
   private router = inject(Router);
+  snackbar = inject(SnackbarService);
 
   private apiUrlUsers = 'http://64.176.10.243:3020/api/usuarios';
 
@@ -95,16 +97,15 @@ export class LoginService {
       )
       .pipe(
         tap((response: LoginResponse) => {
-          console.log(response);
           if (response.token && response.usuario) {
             this.handleAuthentication(response.token, response.usuario);
+            this.snackbar.show('Ingreso correcto', 3000);
           } else {
-            console.log('err1');
             this.handleError(new Error('Respuesta de login inválida.'));
           }
         }),
         catchError((error: HttpErrorResponse) => {
-          console.log('err2');
+          this.snackbar.show('Error al ingreso: ' + error.message, 3000);
           this.handleError(error);
           return throwError(() => error);
         })
@@ -119,7 +120,6 @@ export class LoginService {
   private handleAuthentication(token: string, usuario: Usuario): void {
     // Verificar si el rol es válido
     if (!Object.values(Role).includes(usuario.rol.nombreRol)) {
-      console.log('err3', usuario);
       this.handleError(new Error('Rol de usuario inválido.'));
       return;
     }
@@ -142,7 +142,6 @@ export class LoginService {
    * @param error - Error ocurrido durante el login.
    */
   private handleError(error: HttpErrorResponse | Error): void {
-    console.log('err4', error);
     this._authState.set(AuthState.Error);
     if (error instanceof HttpErrorResponse) {
       this._authError.set(error.error?.message || 'Error de servidor.');
@@ -164,12 +163,14 @@ export class LoginService {
     localStorage.removeItem('modelo-formacion');
     localStorage.removeItem('modelo-caracter');
     localStorage.removeItem('formacion-emprendedor');
+    localStorage.removeItem('startup-emprendedor');
 
     // Actualizar los Signals
     this._authState.set(AuthState.LoggedOut);
     this._authError.set(null);
     this._currentUser.set(null);
     this._authToken.set(null);
+    this.snackbar.show('Sesión cerrada', 3000);
 
     // Opcional: Navegar a la página de login después del logout
     this.router.navigate(['/']);

@@ -32,8 +32,6 @@ export class RegistroService {
    * @returns Observable con la respuesta de la API.
    */
   register(credentials: RegistroCredentials): Observable<any> {
-    console.log(credentials);
-
     // Determinar el endpoint basado en el tipo de usuario
     const tipoUsuario: string = credentials.tipoUsuario.toLocaleLowerCase();
     const endpoint = this.apiEndpoints[tipoUsuario as Role];
@@ -44,12 +42,10 @@ export class RegistroService {
       password_confirm: undefined,
     };
 
-    console.log(formData, endpoint, credentials);
-
     return this.http.post<RegistroResponse>(endpoint, formData).pipe(
       tap((response) => {
         // Manejar mensaje de éxito si es necesario
-        console.log(response.message);
+        this.snackbarService.show('Registro existoso');
       }),
       // Después del registro exitoso, iniciar sesión automáticamente
       switchMap(() =>

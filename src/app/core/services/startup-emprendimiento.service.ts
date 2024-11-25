@@ -6,46 +6,61 @@ import { throwError } from 'rxjs';
 import { LoginService } from '@core/services/login.service';
 import { Role } from '@shared/enums';
 
+interface SuccessResponse {
+  success: true;
+  data: any;
+}
+
+interface FailureResponse {
+  success: false;
+  message: string;
+}
+
+type ApiResponse = SuccessResponse | FailureResponse;
+
 @Injectable({
   providedIn: 'root',
 })
-export class ModeloCaracterService {
+export class StartupEmprendimientoService {
   private saltHash = 'xdxd';
-  private readonly apiUrl = 'https://proveedores.nuevoloslagos.org/user/rut/';
+  private readonly apiUrl =
+    'https://apiemprendedores.nuevoloslagos.org/startup/';
 
   private http = inject(HttpClient);
   private loginService = inject(LoginService);
   currentUser = this.loginService.currentUser;
   //para caracter
-  private _modeloCaracter: WritableSignal<boolean | null> = signal(null);
-  public modeloCaracter = this._modeloCaracter.asReadonly();
+  private _startupEmprendedores: WritableSignal<boolean | null> = signal(null);
+  public startupEmprendedores = this._startupEmprendedores.asReadonly();
+
+  private nameKeyStorage = 'startup-emprendedor';
 
   getSurveyByRut(rutToUse: string) {
     throw new Error('Method not implemented.');
   }
 
   constructor() {
-    this.initializeModeloCaracter();
+    this.initializeService();
   }
 
-  private initializeModeloCaracter(): void {
-    // Verificar si el usuario está autenticado y es de rol "proveedor"
+  private initializeService(): void {
+    // Verificar si el usuario está autenticado y es de rol "usuario"
     if (this.loginService.isAuthenticated()) {
       const currentUser = this.loginService.getCurrentUser();
-      if (currentUser && currentUser.rol.nombreRol === Role.Proveedor) {
+      if (currentUser && currentUser.rol.nombreRol === Role.Usuario) {
         // Intentar obtener los datos del localStorage
-        const storedData = localStorage.getItem('modelo-caracter');
+        const storedData = localStorage.getItem(this.nameKeyStorage);
         if (storedData) {
           try {
             const parsedData: boolean = JSON.parse(storedData);
-            this._modeloCaracter.set(parsedData);
+            this._startupEmprendedores.set(parsedData);
           } catch (e) {
             console.error(
               'Error al parsear modelo-caracter desde localStorage:',
               e
             );
             // Si hay error al parsear, eliminar del localStorage
-            localStorage.removeItem('modelo-caracter');
+            localStorage.removeItem(this.nameKeyStorage);
           }
         }
 
@@ -57,26 +72,26 @@ export class ModeloCaracterService {
 
   private fetchSurveyData(): void {
     const currentUser = this.loginService.getCurrentUser();
-    if (currentUser && currentUser.rut) {
-      const rutOriginal = currentUser.rut;
+    if (currentUser && currentUser.rutRepresentante) {
+      const rutOriginal = currentUser.rutRepresentante;
       const rutMd5 = this.stringToHash(rutOriginal);
       const url = `${this.apiUrl}${rutMd5}`;
 
       this.http
-        .get<any>(url)
+        .get<ApiResponse>(url)
         .pipe(catchError(this.handleError))
         .subscribe((response) => {
           if (response.success) {
             try {
-              this._modeloCaracter.set(true);
-              localStorage.setItem('modelo-caracter', String(true));
+              this._startupEmprendedores.set(true);
+              localStorage.setItem(this.nameKeyStorage, String(true));
             } catch (err) {
               console.warn(
                 'No se encontraron resultados para el RUT especificado.'
               );
               // Opcional: Puedes limpiar el modelo si no hay datos
-              this._modeloCaracter.set(null);
-              localStorage.removeItem('modelo-caracter');
+              this._startupEmprendedores.set(null);
+              localStorage.removeItem(this.nameKeyStorage);
             }
           }
         });
@@ -94,15 +109,21 @@ export class ModeloCaracterService {
     this.fetchSurveyData();
   }
 
-  public openLink(): void {
+  public openLink(type: string): void {
     try {
       const currentUser = this.currentUser();
-      if (!currentUser || !currentUser.rut) {
+      if (!currentUser || !currentUser.rutRepresentante) {
         throw new Error('RUT no disponible');
       }
 
-      const rutMd5 = this.stringToHash(currentUser.rut);
-      const url = `https://proveedores.nuevoloslagos.org/?rut=${rutMd5}`;
+      const rutMd5 = this.stringToHash(currentUser.rutRepresentante);
+      let url = '';
+      if (type === 'STARTUP') {
+        url = `https://emprendedores.nuevoloslagos.org//startup.html?rut=${rutMd5}`;
+      } else {
+        url = `https://emprendedores.nuevoloslagos.org//emprendedor.html?rut=${rutMd5}`;
+      }
+
       window.open(url, '_self');
     } catch (error) {
       console.error('Error al obtener RUT de localStorage:', error);

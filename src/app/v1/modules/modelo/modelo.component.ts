@@ -10,8 +10,8 @@ import { CarouselComponent } from '@shared/components';
 import { Slide } from '@shared/models';
 import * as CryptoJS from 'crypto-js';
 import { AuthState, Role } from '@shared/enums';
-import { RouterLink,Router } from '@angular/router';
-import { LoginService, ModeloMadurezService } from '@core/services'
+import { RouterLink, Router } from '@angular/router';
+import { LoginService, ModeloMadurezService } from '@core/services';
 
 @Component({
   selector: 'app-modelo',
@@ -29,15 +29,13 @@ import { LoginService, ModeloMadurezService } from '@core/services'
   ],
   templateUrl: './modelo.component.html',
   styleUrl: './modelo.component.scss',
-   
 })
 export class ModeloComponent {
-  
   estado = ''; // completo - incompleto - ''
 
   private loginService = inject(LoginService);
   private modeloMadurezService = inject(ModeloMadurezService);
-  private router = inject(Router);  
+  private router = inject(Router);
 
   // Signals del LoginService
   authState = this.loginService.authState;
@@ -57,7 +55,7 @@ export class ModeloComponent {
         <h3>¡Impulsa tu Empresa con Industria 4.0!</h3>
         <p>Inscríbete y accede a herramientas tecnológicas avanzadas para transformar tu empresa.</p>
       `,
-      duration: 5000
+      duration: 5000,
     },
     {
       type: 'regular',
@@ -66,7 +64,7 @@ export class ModeloComponent {
         <h3>Transforma tu Negocio</h3>
         <p>La Región de Los Lagos avanza hacia la Industria 4.0. No te quedes atrás y moderniza tus procesos.</p>
       `,
-      duration: 7000
+      duration: 7000,
     },
     {
       type: 'regular',
@@ -75,7 +73,7 @@ export class ModeloComponent {
         <h3>Conéctate con la Innovación</h3>
         <p>Accede a una red de proveedores y expertos en la Región de Los Lagos.</p>
       `,
-      duration: 6000
+      duration: 6000,
     },
     {
       type: 'regular',
@@ -84,37 +82,56 @@ export class ModeloComponent {
         <h3>Beneficios para tu Empresa</h3>
         <p>Mejora la productividad, reduce costos y aumenta tu competitividad con la Industria 4.0.</p>
       `,
-      duration: 5000
-    }
+      duration: 5000,
+    },
   ];
 
   puntaje = {
     general: {
-      letra: "A",
-      subtitulo: "Evaluacion",
-      descripcion: "The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was original"
+      letra: 'A',
+      subtitulo: 'Evaluacion',
+      descripcion:
+        'The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was original',
     },
     categoria: [
-      { letra: "A", categoria: "The Shiba", descripcion: "The Shiba Inu is the smallest of the six" },
-      { letra: "A", categoria: "The Shiba", descripcion: "The Shiba Inu is the smallest of the six" },
-      { letra: "B", categoria: "The Shiba", descripcion: "The Shiba Inu is the smallest of the six" },
-      { letra: "A", categoria: "The Shiba", descripcion: "The Shiba Inu is the smallest of the six" },
-      { letra: "A", categoria: "The Shiba", descripcion: "The Shiba Inu is the smallest of the six" }
-    ]
+      {
+        letra: 'A',
+        categoria: 'The Shiba',
+        descripcion: 'The Shiba Inu is the smallest of the six',
+      },
+      {
+        letra: 'A',
+        categoria: 'The Shiba',
+        descripcion: 'The Shiba Inu is the smallest of the six',
+      },
+      {
+        letra: 'B',
+        categoria: 'The Shiba',
+        descripcion: 'The Shiba Inu is the smallest of the six',
+      },
+      {
+        letra: 'A',
+        categoria: 'The Shiba',
+        descripcion: 'The Shiba Inu is the smallest of the six',
+      },
+      {
+        letra: 'A',
+        categoria: 'The Shiba',
+        descripcion: 'The Shiba Inu is the smallest of the six',
+      },
+    ],
   };
 
   constructor() {
     effect(() => {
       const authState = this.authState();
       const user = this.currentUser();
-      console.log(authState, user);
-
-      console.log(user?.rol.nombreRol,Role.Empresa)
-      console.log(authState === AuthState.LoggedIn,authState,AuthState.LoggedIn)
-      if (authState === AuthState.LoggedIn && user?.rol.nombreRol.toLocaleLowerCase() === Role.Empresa) {
+      if (
+        authState === AuthState.LoggedIn &&
+        user?.rol.nombreRol.toLocaleLowerCase() === Role.Empresa
+      ) {
         // El usuario está logueado y su rol es 'empresa'
         // Pedir al ModeloMadurezService que actualice los valores
-        console.log('recheckData')
         this.modeloMadurezService.recheckData();
       }
     });
@@ -123,7 +140,6 @@ export class ModeloComponent {
   openLink(): void {
     this.modeloMadurezService.openLink();
   }
-
 
   getGradeDescription(grade: string): string {
     switch (grade.toUpperCase()) {

@@ -198,7 +198,6 @@ export class CourseSearchComponent implements OnInit, AfterViewInit {
 
   // Abrir el modal con los detalles del curso seleccionado
   openModal(index: number): void {
-    console.log('openModal', index);
     this.currentIndex = index;
     const item = this.currentData[this.currentIndex];
     this.isModalOpen = true;

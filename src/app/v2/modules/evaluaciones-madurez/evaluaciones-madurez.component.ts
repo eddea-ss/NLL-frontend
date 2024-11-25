@@ -255,21 +255,10 @@ export class EvaluacionesMadurezComponent implements AfterViewInit {
     effect(() => {
       const authState = this.authState();
       const user = this.currentUser();
-      console.log(authState, user);
-
-      console.log(user?.rol.nombreRol, Role.Empresa);
-      console.log(
-        authState === AuthState.LoggedIn,
-        authState,
-        AuthState.LoggedIn
-      );
       if (
         authState === AuthState.LoggedIn &&
         user?.rol.nombreRol.toLocaleLowerCase() === Role.Empresa.toLowerCase()
       ) {
-        // El usuario está logueado y su rol es 'empresa'
-        // Pedir al ModeloMadurezService que actualice los valores
-        console.log('recheckData');
         this.modeloMadurezService.recheckData();
         // Esperar 1 segundo antes de llamar a makeChart()
         setTimeout(() => {

@@ -1,6 +1,12 @@
 // src/app/components/registro-formulario/registro-formulario.component.ts
 
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { ActivatedRoute } from '@angular/router';
@@ -15,11 +21,19 @@ import { MatListModule } from '@angular/material/list';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { ArticleCardComponent } from '@shared/components';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
+import {
+  ReactiveFormsModule,
+  FormBuilder,
+  FormGroup,
+  Validators,
+  AbstractControl,
+  ValidationErrors,
+} from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Question } from '@shared/models';
 import { RegistroService } from '@core/services';
+import { SnackbarService } from '@core/services/snackbar.service';
 
 @Component({
   selector: 'app-registro-formulario',
@@ -34,16 +48,14 @@ import { RegistroService } from '@core/services';
     MatDividerModule,
     MatListModule,
     MatExpansionModule,
-    ArticleCardComponent,
-    RouterLink, 
-    RouterLinkActive,
+    RouterLink,
     ReactiveFormsModule,
     MatSelectModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
   ],
   templateUrl: './registro-formulario.component.html',
   styleUrls: ['./registro-formulario.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegistroFormularioComponent implements OnInit, OnDestroy {
   private unsubscribe$ = new Subject<void>();
@@ -70,33 +82,33 @@ export class RegistroFormularioComponent implements OnInit, OnDestroy {
         label: 'Nombre',
         name: 'nombre',
         type: 'text',
-        validators: [Validators.required]
-      }
+        validators: [Validators.required],
+      },
     ],
     Empresa: [
       {
         label: 'Nombre de la Empresa',
         name: 'nombreEmpresa',
         type: 'text',
-        validators: [Validators.required]
+        validators: [Validators.required],
       },
       {
         label: 'RUT de la Empresa',
         name: 'rut',
         type: 'text',
-        validators: [Validators.required, this.rutValidator]
+        validators: [Validators.required, this.rutValidator],
       },
       {
         label: 'Nombre del Representante',
         name: 'nombreRepresentante',
         type: 'text',
-        validators: [Validators.required]
+        validators: [Validators.required],
       },
       {
         label: 'RUT del Representante',
         name: 'rutRepresentante',
         type: 'text',
-        validators: [Validators.required, this.rutValidator]
+        validators: [Validators.required, this.rutValidator],
       },
       // Nuevas preguntas para empresas y proveedores
       {
@@ -106,17 +118,19 @@ export class RegistroFormularioComponent implements OnInit, OnDestroy {
         validators: [Validators.required],
       },
       {
-        label: '¿Qué tan complejos son los desafíos para implementar soluciones de la Industria 4.0 en tu organización?',
+        label:
+          '¿Qué tan complejos son los desafíos para implementar soluciones de la Industria 4.0 en tu organización?',
         name: 'desafiosIndustria4',
         type: 'rating',
         validators: [Validators.required],
       },
       {
-        label: '¿Qué tan alta es la prioridad de la adopción de tecnologías digitales y la integración de la Industria 4.0 en tu organización?',
+        label:
+          '¿Qué tan alta es la prioridad de la adopción de tecnologías digitales y la integración de la Industria 4.0 en tu organización?',
         name: 'prioridadAdopcion',
         type: 'rating',
         validators: [Validators.required],
-      }
+      },
     ],
     Proveedor: [
       // Asumiendo que proveedores tienen las mismas preguntas que empresas
@@ -124,25 +138,25 @@ export class RegistroFormularioComponent implements OnInit, OnDestroy {
         label: 'Nombre de la Empresa',
         name: 'nombreEmpresa',
         type: 'text',
-        validators: [Validators.required]
+        validators: [Validators.required],
       },
       {
         label: 'RUT de la Empresa',
         name: 'rut',
         type: 'text',
-        validators: [Validators.required, this.rutValidator]
+        validators: [Validators.required, this.rutValidator],
       },
       {
         label: 'Nombre del Representante',
         name: 'nombreRepresentante',
         type: 'text',
-        validators: [Validators.required]
+        validators: [Validators.required],
       },
       {
         label: 'RUT del Representante',
         name: 'rutRepresentante',
         type: 'text',
-        validators: [Validators.required, this.rutValidator]
+        validators: [Validators.required, this.rutValidator],
       },
       // Nuevas preguntas para empresas y proveedores
       {
@@ -152,18 +166,20 @@ export class RegistroFormularioComponent implements OnInit, OnDestroy {
         validators: [Validators.required],
       },
       {
-        label: '¿Qué tan complejos son los desafíos para implementar soluciones de la Industria 4.0 en tu organización?',
+        label:
+          '¿Qué tan complejos son los desafíos para implementar soluciones de la Industria 4.0 en tu organización?',
         name: 'desafiosIndustria4',
         type: 'rating',
         validators: [Validators.required],
       },
       {
-        label: '¿Qué tan alta es la prioridad de la adopción de tecnologías digitales y la integración de la Industria 4.0 en tu organización?',
+        label:
+          '¿Qué tan alta es la prioridad de la adopción de tecnologías digitales y la integración de la Industria 4.0 en tu organización?',
         name: 'prioridadAdopcion',
         type: 'rating',
         validators: [Validators.required],
-      }
-    ]
+      },
+    ],
   };
 
   constructor(
@@ -171,28 +187,29 @@ export class RegistroFormularioComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private registroService: RegistroService // Inyección del servicio
   ) {
-    this.registroForm = this.fb.group({
-      tipoUsuario: [{ value: '', disabled: true }, Validators.required],
-      correo: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, this.passwordStrengthValidator]],
-      confirmPassword: ['', [Validators.required]],
-      // Campos específicos
-      nombreEmpresa: [''],
-      rut: [''],
-      eRut: [null],
-      nombreRepresentante: [''],
-      rutRepresentante: ['']
-    }, { validators: this.passwordMatchValidator });
+    this.registroForm = this.fb.group(
+      {
+        tipoUsuario: [{ value: '', disabled: true }, Validators.required],
+        correo: ['', [Validators.required, Validators.email]],
+        password: ['', [Validators.required, this.passwordStrengthValidator]],
+        confirmPassword: ['', [Validators.required]],
+        // Campos específicos
+        nombreEmpresa: [''],
+        rut: [''],
+        eRut: [null],
+        nombreRepresentante: [''],
+        rutRepresentante: [''],
+      },
+      { validators: this.passwordMatchValidator }
+    );
   }
 
   ngOnInit(): void {
     // Obtener el tipo de entidad desde los datos de la ruta
-    this.route.data
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(data => {
-        this.entityType = data['entityType'] || '';
-        this.setupForm();
-      });
+    this.route.data.pipe(takeUntil(this.unsubscribe$)).subscribe((data) => {
+      this.entityType = data['entityType'] || '';
+      this.setupForm();
+    });
   }
 
   ngOnDestroy(): void {
@@ -207,13 +224,19 @@ export class RegistroFormularioComponent implements OnInit, OnDestroy {
 
     // Establecer los validadores y campos dinámicamente
     if (this.preguntas[this.entityType]) {
-      this.preguntas[this.entityType].forEach(question => {
+      this.preguntas[this.entityType].forEach((question) => {
         if (!this.registroForm.contains(question.name)) {
           if (question.type === 'file') {
             // Inicializar el control con null para archivos
-            this.registroForm.addControl(question.name, this.fb.control(null, question.validators));
+            this.registroForm.addControl(
+              question.name,
+              this.fb.control(null, question.validators)
+            );
           } else {
-            this.registroForm.addControl(question.name, this.fb.control('', question.validators));
+            this.registroForm.addControl(
+              question.name,
+              this.fb.control('', question.validators)
+            );
           }
         }
       });
@@ -225,8 +248,12 @@ export class RegistroFormularioComponent implements OnInit, OnDestroy {
 
   // Limpiar todos los campos dinámicos
   clearAllDynamicFields(): void {
-    Object.keys(this.registroForm.controls).forEach(controlName => {
-      if (!['tipoUsuario', 'correo', 'password', 'confirmPassword'].includes(controlName)) {
+    Object.keys(this.registroForm.controls).forEach((controlName) => {
+      if (
+        !['tipoUsuario', 'correo', 'password', 'confirmPassword'].includes(
+          controlName
+        )
+      ) {
         this.registroForm.removeControl(controlName);
       }
     });
@@ -245,7 +272,12 @@ export class RegistroFormularioComponent implements OnInit, OnDestroy {
     const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]+/.test(value);
     const isValidLength = value.length >= 8;
 
-    const passwordValid = hasUpperCase && hasLowerCase && hasNumeric && hasSpecialChar && isValidLength;
+    const passwordValid =
+      hasUpperCase &&
+      hasLowerCase &&
+      hasNumeric &&
+      hasSpecialChar &&
+      isValidLength;
 
     return !passwordValid ? { passwordStrength: true } : null;
   }
@@ -261,14 +293,16 @@ export class RegistroFormularioComponent implements OnInit, OnDestroy {
 
     if (isNaN(Number(body))) return { rutInvalid: true };
 
-    let sum = 0, multiplier = 2;
+    let sum = 0,
+      multiplier = 2;
     for (let i = body.length - 1; i >= 0; i--) {
       sum += Number(body.charAt(i)) * multiplier;
       multiplier = multiplier === 7 ? 2 : multiplier + 1;
     }
 
     const rest = sum % 11;
-    const calculatedDV = rest === 1 ? 'K' : rest === 0 ? '0' : String(11 - rest);
+    const calculatedDV =
+      rest === 1 ? 'K' : rest === 0 ? '0' : String(11 - rest);
 
     return calculatedDV !== dv ? { rutInvalid: true } : null;
   }
@@ -305,7 +339,7 @@ export class RegistroFormularioComponent implements OnInit, OnDestroy {
     const file: File = event.target.files[0];
     if (file) {
       this.registroForm.patchValue({
-        [controlName]: file
+        [controlName]: file,
       });
       // Necesario para que Angular detecte el cambio
       this.registroForm.get(controlName)?.updateValueAndValidity();
@@ -320,7 +354,11 @@ export class RegistroFormularioComponent implements OnInit, OnDestroy {
 
   // Obtener la valoración actual para un campo específico
   getRating(questionName: string): number {
-    return this.hoverRatings[questionName] || this.registroForm.get(questionName)?.value || 0;
+    return (
+      this.hoverRatings[questionName] ||
+      this.registroForm.get(questionName)?.value ||
+      0
+    );
   }
 
   // Manejar el hover de las estrellas
@@ -330,7 +368,8 @@ export class RegistroFormularioComponent implements OnInit, OnDestroy {
 
   // Manejar el mouseleave de las estrellas
   leaveRating(questionName: string): void {
-    this.hoverRatings[questionName] = this.registroForm.get(questionName)?.value || 0;
+    this.hoverRatings[questionName] =
+      this.registroForm.get(questionName)?.value || 0;
   }
 
   // Métodos para alternar la visibilidad de las contraseñas
@@ -362,38 +401,40 @@ export class RegistroFormularioComponent implements OnInit, OnDestroy {
       correo: formValue.correo,
       password: formValue.password,
       confirmPassword: formValue.confirmPassword,
-      ...this.getDynamicFields(formValue)
+      ...this.getDynamicFields(formValue),
     };
 
     // Llamar al servicio de registro
-    this.registroService.register(usuario).pipe(
-      takeUntil(this.unsubscribe$)
-    ).subscribe({
-      next: (response) => {
-        // Manejar el éxito del registro
-        this.isLoading = false;
-        this.successMessage = response.message || 'Registro exitoso.';
-        this.registroForm.reset({ tipoUsuario: this.entityType });
-        this.setupForm();
-      },
-      error: (error) => {
-        // Manejar errores del registro
-        this.isLoading = false;
-        if (error.error && error.error.message) {
-          this.errorMessage = error.error.message;
-        } else {
-          this.errorMessage = 'Ocurrió un error durante el registro. Por favor, intenta nuevamente.';
-        }
-        console.error('Error en el registro:', error);
-      }
-    });
+    this.registroService
+      .register(usuario)
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe({
+        next: (response) => {
+          // Manejar el éxito del registro
+          this.isLoading = false;
+          this.successMessage = response.message || 'Registro exitoso.';
+          this.registroForm.reset({ tipoUsuario: this.entityType });
+          this.setupForm();
+        },
+        error: (error) => {
+          // Manejar errores del registro
+          this.isLoading = false;
+          if (error.error && error.error.message) {
+            this.errorMessage = error.error.message;
+          } else {
+            this.errorMessage =
+              'Ocurrió un error durante el registro. Por favor, intenta nuevamente.';
+          }
+          console.error('Error en el registro:', error);
+        },
+      });
   }
 
   // Obtener campos dinámicos basados en el tipo de entidad
   getDynamicFields(formValue: any): any {
     const dynamicFields: any = {};
     if (this.preguntas[this.entityType]) {
-      this.preguntas[this.entityType].forEach(question => {
+      this.preguntas[this.entityType].forEach((question) => {
         if (question.type !== 'file') {
           dynamicFields[question.name] = formValue[question.name];
         } else {

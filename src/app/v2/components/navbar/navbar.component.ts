@@ -26,14 +26,6 @@ export class NavbarComponent {
     effect(() => {
       const authState = this.authState();
       const user = this.currentUser();
-      console.log(authState, user);
-
-      console.log(user?.rol.nombreRol, Role.Empresa);
-      console.log(
-        authState === AuthState.LoggedIn,
-        authState,
-        AuthState.LoggedIn
-      );
     });
   }
 

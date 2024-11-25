@@ -1,34 +1,17 @@
-import {
-  Component,
-  OnInit,
-  AfterViewInit,
-  ElementRef,
-  ViewChild,
-  NgModule,
-} from '@angular/core';
-
-import { CommonModule } from '@angular/common';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
+import { AfterViewInit, Component, ElementRef, OnInit } from '@angular/core';
+import { SugeridosComponent } from '@v2/components';
 import DOMPurify from 'dompurify';
 import { debounceTime, Subject } from 'rxjs';
-import { FormsModule } from '@angular/forms';
-import { SugeridosComponent } from '@v2/components';
-import { TruncatePipe } from '@shared/pipes/truncate.pipe';
 
 @Component({
-  selector: 'app-provider-search',
+  selector: 'app-startup-search',
   standalone: true,
-  imports: [
-    SugeridosComponent,
-    CommonModule,
-    HttpClientModule,
-    FormsModule,
-    TruncatePipe,
-  ],
-  templateUrl: './provider-search.component.html',
-  styleUrl: './provider-search.component.scss',
+  imports: [SugeridosComponent],
+  templateUrl: './startup-search.component.html',
+  styleUrl: './startup-search.component.scss',
 })
-export class ProviderSearchComponent implements OnInit {
+export class StartupSearchComponent implements OnInit {
   isModalOpen = false;
   dataModal: any | undefined;
 
@@ -127,7 +110,7 @@ export class ProviderSearchComponent implements OnInit {
     this.isLoading = true;
     this.http
       .get<any[]>(
-        `https://control.nuevoloslagos.org/suppliers/search?search=${encodeURIComponent(
+        `https://control.nuevoloslagos.org/financing/search?search=${encodeURIComponent(
           query
         )}`
       )

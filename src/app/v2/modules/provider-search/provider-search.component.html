@@ -67,9 +67,25 @@
 <main class="container mx-auto py-12 flex flex-col lg:flex-row">
   <!-- Search and Results -->
   <div class="w-full lg:w-3/4 pr8 p-8">
-    <h2 class="text-2xl font-bold mb-6">Proveedores</h2>
+    <h2 class="text-2xl font-bold mb-6">Financiamiento</h2>
+    <!-- Tips y Mensajes Dinámicos -->
+    <div class="mb-3 position-relative" style="min-height: 1.5em">
+      <h5
+        *ngIf="searchTip && searchMessage.length === 0"
+        class="text-muted position-absolute top-0 start-0"
+      >
+        {{ searchTip }}
+      </h5>
+      <h5
+        *ngIf="searchMessage"
+        class="text-muted position-absolute top-0 start-0"
+      >
+        {{ searchMessage }}
+      </h5>
+    </div>
+
     <!-- Formulario de búsqueda -->
-    <form class="flex items-center mb-8">
+    <div class="flex items-center mb-3">
       <label for="simple-search" class="sr-only">Buscar</label>
       <div class="relative w-full">
         <div
@@ -92,13 +108,39 @@
         <input
           type="text"
           id="simple-search"
+          [(ngModel)]="searchInput"
+          (ngModelChange)="onSearchInputChange()"
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
-          placeholder="Buscar ..."
+          placeholder="Buscar artículos..."
           required
         />
+        <div
+          style="width: 32px; padding-left: 0px; cursor: pointer"
+          class="absolute inset-y-0 right-0 flex items-center pl-3"
+          type="button"
+          (click)="clearSearch()"
+          *ngIf="searchInput.trim().length > 0"
+          id="clearButton"
+          aria-label="Limpiar búsqueda"
+        >
+          <svg
+            aria-hidden="true"
+            class="w-5 h-5 text-gray-500 dark:text-gray-400"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 011.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+              clip-rule="evenodd"
+            ></path>
+          </svg>
+        </div>
       </div>
       <button
         type="submit"
+        (click)="onSearchInputChange()"
         class="p-2.5 ml-2 text-sm font-medium text-white bg-blue-700 border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
       >
         <svg
@@ -117,131 +159,101 @@
         </svg>
         <span class="sr-only">Buscar</span>
       </button>
-    </form>
+    </div>
+
+    <!-- Palabras Clave Sugeridas -->
+    <div class="mb-8">
+      <span class="me-2">Buscar:</span>
+      <span
+        style="padding: 4px 12px"
+        class="badge border border-blue-100 text-blue-600 px-2 py-1 text-xs suggested-term me-2 mb-2 text-xs"
+        *ngFor="
+          let term of [
+            'Los Lagos',
+            'Robótica',
+            'Alimentos',
+            'Tecnología 5G',
+            'Hasta 10 trabajadores'
+          ]
+        "
+        (click)="addSuggestedTerm(term)"
+        (keypress)="handleKeyPress($event, term)"
+        tabindex="0"
+        role="button"
+        [attr.aria-label]="'Buscar ' + (term === 'ingles' ? 'En Inglés' : term)"
+      >
+        {{
+          term === "ingles"
+            ? "En Inglés"
+            : term === "inteligencia artificial"
+            ? "IA"
+            : (term | titlecase)
+        }}
+      </span>
+    </div>
+
+    <!-- texto estatus -->
+    <div>
+      <div class="form-text text-center text-muted mt-2 mb-3">
+        {{ resultCount }}
+      </div>
+      <div
+        class="text-center my-4"
+        *ngIf="isLoading"
+        aria-live="polite"
+        aria-busy="true"
+      >
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Cargando...</span>
+        </div>
+      </div>
+    </div>
+
     <!-- Resultados de búsqueda simulados -->
     <div class="space-y-8">
       <!-- Resultado 1 -->
-      <div class="group">
-        <a href="#" class="text-xl font-semibold text-blue-600 hover:underline">
-          Lorem ipsum dolor sit amet, consectetur</a
+      @for (item of results; track $index) {
+      <div
+        class="group"
+        (click)="openModal($index)"
+        (keypress.enter)="openModal($index)"
+        (keypress.space)="openModal($index)"
+      >
+        <a class="text-xl font-semibold text-blue-600 hover:underline">
+          {{ item.titulo }}
+        </a>
+
+        <!-- Etiquetas de los articulos -->
+        <p class="mb-1 flex flex-wrap gap-1">
+          <span
+            *ngIf="item.tipo_financiamiento.toLowerCase() === 'público'"
+            class="border border-blue-100 text-blue-600 px-2 py-1 text-xs"
+            >Financiamiento: Público</span
+          >
+          <span class="border border-blue-100 text-blue-600 px-2 py-1 text-xs"
+            >Institución: {{ item.institucion }}</span
+          >
+          <span class="border border-blue-100 text-blue-600 px-2 py-1 text-xs"
+            >Categoría: {{ item.categoria }}</span
+          >
+        </p>
+        <!-- Descripción del curso -->
+        <span
+          [innerHTML]="
+            sanitizedResumen(item.descripcion | truncate : 400 : true)
+          "
         >
-        <p class="text-gray-600">
-          <span class="border border-blue-100 text-blue-600 px-2 py-1 text-xs">
-            Lorem ipsum</span
-          >
-          <span class="border border-blue-100 text-blue-600 px-2 py-1 text-xs">
-            Lorem ipsum</span
-          >
-          <span class="border border-blue-100 text-blue-600 px-2 py-1 text-xs">
-            Lorem ipsum</span
-          >
-        </p>
-        <p class="mt-2 text-gray-700">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim
-        </p>
+        </span>
       </div>
-      <!-- Resultado 1 -->
-      <div class="group">
-        <a href="#" class="text-xl font-semibold text-blue-600 hover:underline">
-          Lorem ipsum dolor sit amet, consectetur</a
-        >
-        <p class="text-gray-600">
-          <span class="border border-blue-100 text-blue-600 px-2 py-1 text-xs">
-            Lorem ipsum</span
-          >
-          <span class="border border-blue-100 text-blue-600 px-2 py-1 text-xs">
-            Lorem ipsum</span
-          >
-          <span class="border border-blue-100 text-blue-600 px-2 py-1 text-xs">
-            Lorem ipsum</span
-          >
-        </p>
-        <p class="mt-2 text-gray-700">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim
-        </p>
-      </div>
-      <!-- Resultado 1 -->
-      <div class="group">
-        <a href="#" class="text-xl font-semibold text-blue-600 hover:underline">
-          Lorem ipsum dolor sit amet, consectetur</a
-        >
-        <p class="text-gray-600">
-          <span class="border border-blue-100 text-blue-600 px-2 py-1 text-xs">
-            Lorem ipsum</span
-          >
-          <span class="border border-blue-100 text-blue-600 px-2 py-1 text-xs">
-            Lorem ipsum</span
-          >
-          <span class="border border-blue-100 text-blue-600 px-2 py-1 text-xs">
-            Lorem ipsum</span
-          >
-        </p>
-        <p class="mt-2 text-gray-700">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim
-        </p>
-      </div>
-      <!-- Resultado 1 -->
-      <div class="group">
-        <a href="#" class="text-xl font-semibold text-blue-600 hover:underline">
-          Lorem ipsum dolor sit amet, consectetur</a
-        >
-        <p class="text-gray-600">
-          <span class="border border-blue-100 text-blue-600 px-2 py-1 text-xs">
-            Lorem ipsum</span
-          >
-          <span class="border border-blue-100 text-blue-600 px-2 py-1 text-xs">
-            Lorem ipsum</span
-          >
-          <span class="border border-blue-100 text-blue-600 px-2 py-1 text-xs">
-            Lorem ipsum</span
-          >
-        </p>
-        <p class="mt-2 text-gray-700">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim
-        </p>
-      </div>
-      <!-- Resultado 1 -->
-      <div class="group">
-        <a href="#" class="text-xl font-semibold text-blue-600 hover:underline">
-          Lorem ipsum dolor sit amet, consectetur</a
-        >
-        <p class="text-gray-600">
-          <span class="border border-blue-100 text-blue-600 px-2 py-1 text-xs">
-            Lorem ipsum</span
-          >
-          <span class="border border-blue-100 text-blue-600 px-2 py-1 text-xs">
-            Lorem ipsum</span
-          >
-          <span class="border border-blue-100 text-blue-600 px-2 py-1 text-xs">
-            Lorem ipsum</span
-          >
-        </p>
-        <p class="mt-2 text-gray-700">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim
-        </p>
-      </div>
+      <p style="margin-top: 0px">
+        <small style="color: gray" class="text-secondary"
+          >Sitio web: {{ getDomain(item.link) }}
+        </small>
+      </p>
+      }
     </div>
     <!-- Paginación -->
+    <!--
     <ol class="flex text-xs font-medium space-x-1 mt-5">
       <li>
         <a
@@ -298,6 +310,7 @@
         ></a>
       </li>
     </ol>
+    -->
   </div>
   <!-- Artículos sugeridos -->
   <app-sugeridos></app-sugeridos>

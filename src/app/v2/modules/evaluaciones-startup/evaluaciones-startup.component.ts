@@ -1,6 +1,7 @@
 import { Component, effect, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { LoginService, FormacionEmprendedoresService } from '@core/services';
+import { StartupEmprendimientoService } from '@core/services/startup-emprendimiento.service';
 import { AuthState, Role } from '@shared/enums';
 
 @Component({
@@ -13,6 +14,7 @@ import { AuthState, Role } from '@shared/enums';
 export class EvaluacionesStartupComponent {
   private loginService = inject(LoginService);
   private formacionEmprendedoresService = inject(FormacionEmprendedoresService);
+  private startupService = inject(StartupEmprendimientoService);
 
   authState = this.loginService.authState;
   currentUser = this.loginService.currentUser;
@@ -23,6 +25,9 @@ export class EvaluacionesStartupComponent {
   //signal formacionEmprendedores
   formacionEmprendedores =
     this.formacionEmprendedoresService.formacionEmprendedores;
+
+  //para startup
+  startup = this.startupService.startupEmprendedores;
   constructor() {
     effect(() => {
       const authState = this.authState();
@@ -31,9 +36,7 @@ export class EvaluacionesStartupComponent {
         authState === AuthState.LoggedIn &&
         user?.rol.nombreRol.toLocaleLowerCase() === Role.Usuario.toLowerCase()
       ) {
-        // El usuario está logueado y su rol es 'empresa'
-        // Pedir al service que actualice los valores
-        console.log('recheckData');
+        this.formacionEmprendedoresService.recheckData();
         this.formacionEmprendedoresService.recheckData();
       }
     });
@@ -41,5 +44,13 @@ export class EvaluacionesStartupComponent {
 
   openLink(): void {
     this.formacionEmprendedoresService.openLink();
+  }
+
+  openLinkStartup(): void {
+    this.startupService.openLink('STARTUP');
+  }
+
+  openLinkEmprendimiento(): void {
+    this.startupService.openLink('EMPRENDIMIENTO');
   }
 }

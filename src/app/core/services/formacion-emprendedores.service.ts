@@ -82,7 +82,6 @@ export class FormacionEmprendedoresService {
         .get<ApiResponse>(url)
         .pipe(catchError(this.handleError))
         .subscribe((response) => {
-          console.log(response);
           if (response.success) {
             try {
               this._formacionEmprendedores.set(true);
@@ -114,7 +113,6 @@ export class FormacionEmprendedoresService {
   public openLink(): void {
     try {
       const currentUser = this.currentUser();
-      console.log(currentUser);
       if (!currentUser || !currentUser.rutRepresentante) {
         throw new Error('RUT no disponible');
       }

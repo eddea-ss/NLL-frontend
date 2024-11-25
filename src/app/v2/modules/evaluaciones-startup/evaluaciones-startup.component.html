@@ -32,7 +32,7 @@
       </div>
 
       <!-- Take Survey Button -->
-      <div class="lg:col-span-1">
+      <div class="lg:col-span-1" style="align-self: flex-end">
         <!--Modelo de madurez-->
         @if (formacionEmprendedores()) {
         <button
@@ -62,6 +62,72 @@
             class="my-1 w-full border border-blue-700 p-8 bg-white-700 flex text-blue-700 hover:bg-gray-100 transition"
           >
             Realizar Modelo de Formación para emprendedores
+          </button>
+        </div>
+        }
+      </div>
+    </div>
+
+    <!---->
+    <div class="lg:col-span-2" style="margin-top: 3em">
+      <!-- Evaluation Status Section -->
+      <div class="mb-8">
+        <h2 class="text-2xl text-gray-600 mb-4">
+          Completa modelo para Startups o Emprendedores
+        </h2>
+        <p class="text-gray-500 mb-6">
+          Actualmente, tu Modelo de formación de emprendedores o de Startup no
+          ha sido completado. Te invitamos a contestar este modelo y a conocer
+          las acciones necesarias para alcanzar la madurez tecnológica. Para
+          completar el modelo y acceder a todas sus funcionalidades.
+        </p>
+        <p class="text-gray-500 mb-6">
+          Por favor, haz clic en el botón a continuación:
+        </p>
+      </div>
+
+      <!--Modelo de madurez-->
+      <div>
+        @if (startup()) {
+        <button
+          style="max-width: 350px"
+          disabled
+          (click)="openLink()"
+          class="my-1 w-full border border-blue-700 p-8 bg-white-700 flex text-blue-700"
+        >
+          Modelo de Startup | Emprendimiento realizado
+          <svg
+            aria-hidden="true"
+            class="w-5 h-5 text-blue-700"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M16.707 5.293a1 1 0 010 1.414L8.414 15 5 11.586a1 1 0 011.414-1.414L8.414 12.172l7.879-7.879a1 1 0 011.414 0z"
+              clip-rule="evenodd"
+            ></path>
+          </svg>
+        </button>
+        }@else {
+        <div
+          class="lg:col-span-1 flex"
+          style="gap: 20px; justify-content: center"
+        >
+          <button
+            style="max-width: 350px"
+            (click)="openLinkStartup()"
+            class="my-1 w-full border border-blue-700 p-8 bg-white-700 flex text-blue-700 hover:bg-gray-100 transition"
+          >
+            Realizar Modelo de Startup
+          </button>
+          <button
+            style="max-width: 350px"
+            (click)="openLinkEmprendimiento()"
+            class="my-1 w-full border border-blue-700 p-8 bg-white-700 flex text-blue-700 hover:bg-gray-100 transition"
+          >
+            Realizar Modelo de Emprendimiento
           </button>
         </div>
         }
