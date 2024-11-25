@@ -191,12 +191,6 @@ export class FormRegisterComponent implements OnInit {
   checkPassword(formGroup: FormGroup): boolean {
     const password = formGroup.get('password')?.value;
     const confirmPassword = formGroup.get('password_confirm')?.value;
-    console.log(
-      password,
-      confirmPassword,
-      password === confirmPassword,
-      formGroup
-    );
     return password === confirmPassword;
   }
 }
