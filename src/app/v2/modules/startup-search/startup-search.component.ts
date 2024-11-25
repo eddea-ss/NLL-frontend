@@ -1,19 +1,31 @@
-import { HttpClient } from '@angular/common/http';
-import { AfterViewInit, Component, ElementRef, OnInit } from '@angular/core';
-import { SugeridosComponent } from '@v2/components';
+import { Component, OnInit, ElementRef } from '@angular/core';
+
+import { CommonModule } from '@angular/common';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import DOMPurify from 'dompurify';
 import { debounceTime, Subject } from 'rxjs';
+import { FormsModule } from '@angular/forms';
+import { SugeridosComponent } from '@v2/components';
+import { TruncatePipe } from '@shared/pipes/truncate.pipe';
 
 @Component({
   selector: 'app-startup-search',
   standalone: true,
-  imports: [SugeridosComponent],
+  imports: [
+    SugeridosComponent,
+    TruncatePipe,
+    CommonModule,
+    HttpClientModule,
+    FormsModule,
+  ],
   templateUrl: './startup-search.component.html',
   styleUrl: './startup-search.component.scss',
 })
 export class StartupSearchComponent implements OnInit {
   isModalOpen = false;
   dataModal: any | undefined;
+
+  urlExcel = 'https://control.nuevoloslagos.org/suppliers/excel/';
 
   searchTip = '';
   searchMessage = '';
@@ -110,7 +122,7 @@ export class StartupSearchComponent implements OnInit {
     this.isLoading = true;
     this.http
       .get<any[]>(
-        `https://control.nuevoloslagos.org/financing/search?search=${encodeURIComponent(
+        `https://control.nuevoloslagos.org/startups/search?search=${encodeURIComponent(
           query
         )}`
       )
@@ -156,6 +168,7 @@ export class StartupSearchComponent implements OnInit {
   openModal(index: number): void {
     this.currentIndex = index;
     const item = this.results[this.currentIndex];
+    console.log('asdas', item);
     this.isModalOpen = true;
     this.dataModal = item;
   }
@@ -243,7 +256,26 @@ export class StartupSearchComponent implements OnInit {
         return;
       }
 
+      // Verifica si el enlace incluye 'http://' o 'https://'
+      if (!/^https?:\/\//i.test(link)) {
+        link = 'https://' + link; // Puedes usar 'http://' si lo prefieres
+      }
+
+      console.log(link);
       window.open(link, '_blank');
+    } catch (error) {
+      console.error('Error al abrir el link:', error);
+    }
+  }
+
+  downloadInfo(link: string): void {
+    try {
+      if (!link) {
+        console.warn('No se proporcionó un link');
+        return;
+      }
+
+      window.open(this.urlExcel + link, '_blank');
     } catch (error) {
       console.error('Error al abrir el link:', error);
     }

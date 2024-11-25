@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { ProviderSearchComponent } from '@v2/modules/provider-search/provider-search.component';
+import { StartupSearchComponent } from '@v2/modules/startup-search/startup-search.component';
 import {
   ArticleSearchComponent,
   CourseSearchComponent,
@@ -68,6 +69,9 @@ export const routes: Routes = [
       { path: 'buscador-proyectos', component: ProjectSearchComponent },
       { path: 'buscador-financiamiento', component: FinancingSearchComponent },
       { path: 'buscador-proveedores', component: ProviderSearchComponent },
+      { path: 'buscador-startup', component: StartupSearchComponent },
     ],
   },
+
+  { path: '**', redirectTo: '', pathMatch: 'full' },
 ];

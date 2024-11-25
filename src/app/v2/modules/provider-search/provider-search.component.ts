@@ -249,6 +249,12 @@ export class ProviderSearchComponent implements OnInit {
         return;
       }
 
+      // Verifica si el enlace incluye 'http://' o 'https://'
+      if (!/^https?:\/\//i.test(link)) {
+        link = 'https://' + link; // Puedes usar 'http://' si lo prefieres
+      }
+
+      console.log(link);
       window.open(link, '_blank');
     } catch (error) {
       console.error('Error al abrir el link:', error);
