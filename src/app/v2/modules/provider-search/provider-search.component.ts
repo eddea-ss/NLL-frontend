@@ -1,11 +1,4 @@
-import {
-  Component,
-  OnInit,
-  AfterViewInit,
-  ElementRef,
-  ViewChild,
-  NgModule,
-} from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
@@ -13,24 +6,19 @@ import DOMPurify from 'dompurify';
 import { debounceTime, Subject } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { SugeridosComponent } from '@v2/components';
-import { TruncatePipe } from '@shared/pipes/truncate.pipe';
 
 @Component({
   selector: 'app-provider-search',
   standalone: true,
-  imports: [
-    SugeridosComponent,
-    CommonModule,
-    HttpClientModule,
-    FormsModule,
-    TruncatePipe,
-  ],
+  imports: [SugeridosComponent, CommonModule, HttpClientModule, FormsModule],
   templateUrl: './provider-search.component.html',
   styleUrl: './provider-search.component.scss',
 })
 export class ProviderSearchComponent implements OnInit {
   isModalOpen = false;
   dataModal: any | undefined;
+
+  urlExcel = 'https://control.nuevoloslagos.org/suppliers/excel/';
 
   searchTip = '';
   searchMessage = '';
@@ -173,6 +161,7 @@ export class ProviderSearchComponent implements OnInit {
   openModal(index: number): void {
     this.currentIndex = index;
     const item = this.results[this.currentIndex];
+    console.log('asdas', item);
     this.isModalOpen = true;
     this.dataModal = item;
   }
@@ -261,6 +250,19 @@ export class ProviderSearchComponent implements OnInit {
       }
 
       window.open(link, '_blank');
+    } catch (error) {
+      console.error('Error al abrir el link:', error);
+    }
+  }
+
+  downloadInfo(link: string): void {
+    try {
+      if (!link) {
+        console.warn('No se proporcionó un link');
+        return;
+      }
+
+      window.open(this.urlExcel + link, '_blank');
     } catch (error) {
       console.error('Error al abrir el link:', error);
     }
