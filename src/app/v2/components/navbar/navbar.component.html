@@ -80,18 +80,30 @@
           class="absolute left-0 top-full w-48 bg-gray-800 text-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-300 z-10"
         >
           <a
+            *ngIf="
+              authState() === AuthState.LoggedOut ||
+              currentUser()?.rol?.nombreRol === Role.Empresa
+            "
             href="/evaluaciones-madurez"
             class="block px-4 py-2 hover:bg-gray-700"
           >
             Madurez Tecnológica
           </a>
           <a
+            *ngIf="
+              authState() === AuthState.LoggedOut ||
+              currentUser()?.rol?.nombreRol === Role.Proveedor
+            "
             href="/evaluaciones-proveedor"
             class="block px-4 py-2 hover:bg-gray-700"
           >
             Proveedores
           </a>
           <a
+            *ngIf="
+              authState() === AuthState.LoggedOut ||
+              currentUser()?.rol?.nombreRol === Role.Usuario
+            "
             href="/evaluaciones-startup"
             class="block px-4 py-2 hover:bg-gray-700"
           >
@@ -315,6 +327,10 @@
           }"
         >
           <a
+            *ngIf="
+              authState() === AuthState.LoggedOut ||
+              currentUser()?.rol?.nombreRol === Role.Empresa
+            "
             href="/evaluaciones-madurez"
             class="block px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300"
             (click)="closeMobileMenu()"
@@ -322,6 +338,10 @@
             Madurez Tecnológica
           </a>
           <a
+            *ngIf="
+              authState() === AuthState.LoggedOut ||
+              currentUser()?.rol?.nombreRol === Role.Proveedor
+            "
             href="/evaluaciones-proveedor"
             class="block px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300"
             (click)="closeMobileMenu()"
@@ -329,6 +349,10 @@
             Proveedores
           </a>
           <a
+            *ngIf="
+              authState() === AuthState.LoggedOut ||
+              currentUser()?.rol?.nombreRol === Role.Usuario
+            "
             href="/evaluaciones-startup"
             class="block px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300"
             (click)="closeMobileMenu()"
