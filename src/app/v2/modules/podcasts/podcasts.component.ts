@@ -5,7 +5,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-import { Podcast } from '@shared/models';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-podcasts',
@@ -22,55 +22,114 @@ import { Podcast } from '@shared/models';
   styleUrl: './podcasts.component.scss',
 })
 export class PodcastsComponent {
-  protected podcasts: Podcast[] = [
+  videos = [
     {
-      id: 1,
-      title: '5G',
-      description:
-        'Descubre cómo la tecnología 5G está revolucionando las comunicaciones y la conectividad en la Industria 4.0.',
-      audioPath: 'assets/podcasts/5g.wav',
+      id: 'xfiEpdZFVIc',
+      title: 'Metodologías ágiles en entornos industriales',
     },
     {
-      id: 2,
-      title: 'Ciberseguridad',
-      description:
-        'Aprende sobre la importancia de la ciberseguridad en la protección de datos y sistemas industriales.',
-      audioPath: 'assets/podcasts/ciberseguridad.wav',
+      id: 'ciAn_qGxUkw',
+      title: 'Desafíos de interoperabilidad en el IoT Industrial',
     },
     {
-      id: 3,
-      title: 'Computación en la Nube',
-      description:
-        'Explora cómo la computación en la nube está transformando la forma en que almacenamos y accedemos a la información.',
-      audioPath: 'assets/podcasts/computacion_en_nube.wav',
+      id: 'NS-XdY4eRF4',
+      title: 'Transformación digital en empresas tradicionales',
     },
     {
-      id: 4,
-      title: 'Diseño 3D y Manufactura Aditiva',
-      description:
-        'Conoce las innovaciones en diseño 3D y cómo la manufactura aditiva está cambiando la producción.',
-      audioPath: 'assets/podcasts/Diseño_3D_y_Manufactura_Aditiva.wav',
+      id: 'MzrobpDg13A',
+      title: 'Consideraciones éticas de la IA en la industria',
+    },
+    //asdas
+    {
+      id: 'SHu_OPsGoyU',
+      title: 'Economía circular y la Industria 4.0',
     },
     {
-      id: 5,
-      title: 'Inteligencia Artificial y Machine Learning',
-      description:
-        'Descubre las aplicaciones de la IA y el aprendizaje automático en la industria moderna.',
-      audioPath: 'assets/podcasts/inteligencia_artificial_y_ml.wav',
+      id: 'LqR-6Gsne04',
+      title: 'Desafíos de la Industria 4.0',
     },
     {
-      id: 6,
-      title: 'Internet de las Cosas (IoT)',
-      description:
-        'Aprende cómo el IoT conecta dispositivos y mejora la eficiencia en los procesos industriales.',
-      audioPath: 'assets/podcasts/iot.wav',
+      id: 'FgmDuCnCcGs',
+      title: 'Blockchain',
     },
     {
-      id: 7,
+      id: '9eMufV7dLJY',
+      title: 'Gemelos Digitales',
+    },
+    //asdasdas
+    {
+      id: 'O_7iYK61kVw',
+      title: 'Industria 4.0',
+    },
+    {
+      id: 'T4ZEZGe4nkE',
       title: 'Robótica Colaborativa',
-      description:
-        'Explora cómo los robots colaborativos trabajan junto a los humanos en entornos industriales.',
-      audioPath: 'assets/podcasts/Robotica_colaborativa.wav',
+    },
+    {
+      id: 'MDhUSHTLn6Q',
+      title: 'Computación en la nube',
+    },
+    {
+      id: 'lxpa7KfxREA',
+      title: 'Habilidades Laborales para la industria 4.0',
+    },
+    //asdasdasdasd
+    {
+      id: '_F-X3p4bRks',
+      title: 'Diseño 3D y Manufactura aditiva',
+    },
+    {
+      id: 'tQxSk9TqEW0',
+      title: 'Mantenimiento predictivo',
+    },
+    {
+      id: 'gqyNm5i3ZJA',
+      title: 'Logística inteligente',
+    },
+    {
+      id: '7H-yixETXdk',
+      title: 'Realidad Aumentada y Realidad Virtual',
+    },
+    //asdasdasdasd
+    {
+      id: 'PuLlAFqjZyk',
+      title: 'Big Data',
+    },
+    {
+      id: '__W8KrlB3m8',
+      title: 'Internet de las cosas',
+    },
+    {
+      id: 'NCkTQcY7f3I',
+      title: 'Inteligencia Artificial',
+    },
+    {
+      id: 'cob8tIoMvb0',
+      title: 'Tecnología 5g',
+    },
+    {
+      id: 'KQXcRWHllpk',
+      title: 'Ciberseguridad',
     },
   ];
+
+  selectedVideo = this.videos[0];
+  selectedVideoUrl: SafeResourceUrl;
+
+  constructor(private sanitizer: DomSanitizer) {
+    this.selectedVideoUrl = this.getEmbedUrl(this.selectedVideo.id);
+  }
+
+  getThumbnailUrl(videoId: string): string {
+    return `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+  }
+  selectVideo(video: any) {
+    this.selectedVideo = video;
+    this.selectedVideoUrl = this.getEmbedUrl(video.id);
+  }
+
+  getEmbedUrl(videoId: string): SafeResourceUrl {
+    const url = `https://www.youtube.com/embed/${videoId}`;
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  }
 }
