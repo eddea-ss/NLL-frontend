@@ -1,59 +1,74 @@
 <!-- login.component.html -->
 <div class="login-container">
-    <mat-card class="login-card">
-      <div class="login-content">
-        <!-- Logo y Nombre de la Empresa -->
-        <div class="logo-container">
-          <h2>NuevoLosLagos</h2>
-        </div>
-  
-        <!-- Formulario -->
-        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form-container">
-          <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Correo</mat-label>
-            <input matInput type="email" formControlName="email" required />
-            <mat-error *ngIf="loginForm.get('email')?.hasError('required')">
-              El correo es obligatorio.
-            </mat-error>
-            <mat-error *ngIf="loginForm.get('email')?.hasError('email')">
-              Por favor, ingresa un correo válido.
-            </mat-error>
-          </mat-form-field>
-  
-          <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Contraseña</mat-label>
-            <input matInput type="password" formControlName="password" required />
-            <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
-              La contraseña es obligatoria.
-            </mat-error>
-          </mat-form-field>
-  
-          <!--<a class="forgot-password" href="#">¿Has olvidado la contraseña?</a>-->
-          @if (errorMessage) {
-            <div class="error-message">
-              {{ errorMessage }}
-            </div>
-          }
-          
-        </form>
+  <mat-card class="login-card">
+    <div class="login-content">
+      <!-- Logo y Nombre de la Empresa -->
+      <div class="logo-container">
+        <h2>NuevoLosLagos</h2>
       </div>
-      <div class="buttons-general">
-        <button class="volver-button" mat-button routerLink="/">
-          Volver
+
+      <!-- Formulario -->
+      <form
+        [formGroup]="loginForm"
+        (ngSubmit)="onSubmit()"
+        class="form-container"
+      >
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Correo</mat-label>
+          <input matInput type="email" formControlName="email" required />
+          <mat-error *ngIf="loginForm.get('email')?.hasError('required')">
+            El correo es obligatorio.
+          </mat-error>
+          <mat-error *ngIf="loginForm.get('email')?.hasError('email')">
+            Por favor, ingresa un correo válido.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Contraseña</mat-label>
+          <input matInput type="password" formControlName="password" required />
+          <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
+            La contraseña es obligatoria.
+          </mat-error>
+        </mat-form-field>
+
+        <!--<a class="forgot-password" routerLink="#">¿Has olvidado la contraseña?</a>-->
+        @if (errorMessage) {
+        <div class="error-message">
+          {{ errorMessage }}
+        </div>
+        }
+      </form>
+    </div>
+    <div class="buttons-general">
+      <button class="volver-button" mat-button routerLink="/">Volver</button>
+      <div class="button-container">
+        <button
+          mat-flat-button
+          color="primary"
+          routerLink="/registro"
+          type="submit"
+          [disabled]="isLoading"
+        >
+          <mat-icon>person_add</mat-icon>
+          Crear cuenta
         </button>
-        <div class="button-container">
-          <button mat-flat-button color="primary" routerLink="/registro" type="submit" [disabled]="isLoading">
-            <mat-icon>person_add</mat-icon>
-            Crear cuenta
-          </button>
-          <button mat-flat-button color="primary" type="submit" [disabled]="isLoading" (click)="onSubmit()">
-            <mat-icon>login</mat-icon>
-            Acceder
-          </button>
-        </div>
-        <!-- Spinner de carga -->
-        <mat-progress-spinner *ngIf="isLoading" mode="indeterminate"></mat-progress-spinner>
+        <button
+          mat-flat-button
+          color="primary"
+          type="submit"
+          [disabled]="isLoading"
+          (click)="onSubmit()"
+        >
+          <mat-icon>login</mat-icon>
+          Acceder
+        </button>
       </div>
-    </mat-card>
-  </div>
-  
+      <!-- Spinner de carga -->
+      <mat-progress-spinner
+        *ngIf="isLoading"
+        mode="indeterminate"
+      ></mat-progress-spinner>
+    </div>
+  </mat-card>
+</div>

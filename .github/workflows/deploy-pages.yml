@@ -4,7 +4,7 @@ name: Deploy Angular App to GitHub Pages
 on:
   push:
     branches:
-      - master  # Cambia esto si tu rama principal tiene otro nombre
+      - master # Cambia esto si tu rama principal tiene otro nombre
 
 jobs:
   build-and-deploy:
@@ -43,8 +43,8 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.TOKEN_GIT }}
-
-          publish_dir: ./dist/nll-frontend/browser  # Reemplaza con el path correcto de tu build
+          publish_dir: ./dist/nll-frontend/browser # Reemplaza con el path correcto de tu build
+          cname: web.nuevoloslagos.org
           # Opcional: Puedes especificar la rama y otras opciones
           # branch: gh-pages
           # folder: ''

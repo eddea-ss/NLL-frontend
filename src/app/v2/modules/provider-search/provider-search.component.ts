@@ -6,11 +6,18 @@ import DOMPurify from 'dompurify';
 import { debounceTime, Subject } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { SugeridosComponent } from '@v2/components';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-provider-search',
   standalone: true,
-  imports: [SugeridosComponent, CommonModule, HttpClientModule, FormsModule],
+  imports: [
+    SugeridosComponent,
+    CommonModule,
+    HttpClientModule,
+    FormsModule,
+    RouterModule,
+  ],
   templateUrl: './provider-search.component.html',
   styleUrl: './provider-search.component.scss',
 })

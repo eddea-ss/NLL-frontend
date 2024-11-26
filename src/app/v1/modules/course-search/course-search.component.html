@@ -1,120 +1,208 @@
+<!-- Contenedor Principal -->
+<div class="container my-4">
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-10">
+      <h3 class="mb-4">Buscador de Cursos</h3>
 
-  
-  <!-- Contenedor Principal -->
-  <div class="container my-4">
-    <div class="row justify-content-center">
-      <div class="col-12 col-lg-10">     
-        <h3 class="mb-4">Buscador de Cursos</h3>
-        
-        <!-- Tips y Mensajes Dinámicos -->
-        <div class="mb-3 position-relative" style="min-height: 1.5em;">
-          <h5 *ngIf="searchTip && searchMessage.length === 0" class="text-muted position-absolute top-0 start-0">{{ searchTip }}</h5>
-          <h5 *ngIf="searchMessage" class="text-muted position-absolute top-0 start-0">{{ searchMessage }}</h5>
-        </div>
-  
-        <!-- Campo de Búsqueda con Botón de Limpiar -->
-        <div class="mb-3">
-          <div class="input-group">
-            <input 
-              type="text" 
-              [(ngModel)]="searchInput" 
-              (ngModelChange)="onSearchInputChange()"
-              placeholder="Buscar cursos..." 
-              class="form-control form-control-lg"
-              aria-label="Buscar cursos"
-              aria-describedby="clearButton"
-            >
-            <button 
-              class="btn btn-outline-secondary" 
-              type="button" 
-              (click)="clearSearch()" 
-              *ngIf="searchInput.trim().length > 0" 
-              id="clearButton" 
-              aria-label="Limpiar búsqueda"
-            >
-              <i class="bi bi-x-circle"></i>
-            </button>
-          </div>
-          <div class="form-text text-muted mt-2">{{ resultCount }}</div>
-          <div class="text-center my-4" *ngIf="isLoading" aria-live="polite" aria-busy="true">
-            <div class="spinner-border text-primary" role="status">
-              <span class="visually-hidden">Cargando...</span>
-            </div>
-          </div>
-        </div>
-      
-        <!-- Palabras Clave Sugeridas -->
-        <div class="mb-4">
-          <span class="me-2">Buscar:</span>
-          <span 
-            class="badge bg-primary text-white suggested-term me-2 mb-2" 
-            *ngFor="let term of ['online', 'presencial', 'gratuito', 'de pago', 'ingles']" 
-            (click)="addSuggestedTerm(term)"
-            (keypress)="handleKeyPress($event, term)"
-            tabindex="0" 
-            role="button" 
-            [attr.aria-label]="'Buscar ' + (term === 'ingles' ? 'En Inglés' : term)"
+      <!-- Tips y Mensajes Dinámicos -->
+      <div class="mb-3 position-relative" style="min-height: 1.5em">
+        <h5
+          *ngIf="searchTip && searchMessage.length === 0"
+          class="text-muted position-absolute top-0 start-0"
+        >
+          {{ searchTip }}
+        </h5>
+        <h5
+          *ngIf="searchMessage"
+          class="text-muted position-absolute top-0 start-0"
+        >
+          {{ searchMessage }}
+        </h5>
+      </div>
+
+      <!-- Campo de Búsqueda con Botón de Limpiar -->
+      <div class="mb-3">
+        <div class="input-group">
+          <input
+            type="text"
+            [(ngModel)]="searchInput"
+            (ngModelChange)="onSearchInputChange()"
+            placeholder="Buscar cursos..."
+            class="form-control form-control-lg"
+            aria-label="Buscar cursos"
+            aria-describedby="clearButton"
+          />
+          <button
+            class="btn btn-outline-secondary"
+            type="button"
+            (click)="clearSearch()"
+            *ngIf="searchInput.trim().length > 0"
+            id="clearButton"
+            aria-label="Limpiar búsqueda"
           >
-            {{ term === 'ingles' ? 'En Inglés' : (term === 'de pago' ? 'De Pago' : term | titlecase) }}
-          </span>
+            <i class="bi bi-x-circle"></i>
+          </button>
         </div>
-  
-        <!-- Resultados de Búsqueda -->
-        <div class="list-group mt-4">
-          <div style="cursor: pointer; text-align: left;"
-            class="list-group-item list-group-item-action p-4 mb-2 bg-white border" 
-            *ngFor="let item of results; let i = index" 
-            tabindex="0" 
-            role="button" 
-            [attr.aria-label]="'Ver detalles del curso: ' + item.titulo"
-            (click)="openModal(i)"
-            (keypress.enter)="openModal(i)"
-            (keypress.space)="openModal(i)"
-          >
-            <div class="d-flex w-100 justify-content-between">
-              <h5 class="mb-1 text-primary">{{ item.titulo }}</h5>
-            </div>
-            <span *ngIf="item.idioma.toLowerCase() === 'ingles'" class="badge bg-primary text-white mb-2">En Inglés</span>
-            <span *ngIf="item.tipo.toLowerCase() === 'de pago'" class="badge bg-primary text-white mb-2">De Pago</span>
-            <span *ngIf="item.tipo.toLowerCase() === 'gratuito'" class="badge bg-primary text-white mb-2">Gratuito</span>
-            <span *ngIf="item.modalidad.toLowerCase() === 'online'" class="badge bg-primary text-white mb-2">Online</span>
-            <span *ngIf="item.modalidad.toLowerCase() === 'presencial'" class="badge bg-primary text-white mb-2">Presencial</span>
-            <div class="mb-1 text-muted text-truncate" style="max-height: 4.5em; overflow: hidden;">
-              <span [innerHTML]="sanitizedDescripcion(item.descripcion)"></span>
-            </div>
-            <small class="text-secondary">Entidad: {{ item.entidad }} | Plataforma: {{ item.plataforma }}</small>
+        <div class="form-text text-muted mt-2">{{ resultCount }}</div>
+        <div
+          class="text-center my-4"
+          *ngIf="isLoading"
+          aria-live="polite"
+          aria-busy="true"
+        >
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Cargando...</span>
           </div>
+        </div>
+      </div>
+
+      <!-- Palabras Clave Sugeridas -->
+      <div class="mb-4">
+        <span class="me-2">Buscar:</span>
+        <span
+          class="badge bg-primary text-white suggested-term me-2 mb-2"
+          *ngFor="
+            let term of [
+              'online',
+              'presencial',
+              'gratuito',
+              'de pago',
+              'ingles'
+            ]
+          "
+          (click)="addSuggestedTerm(term)"
+          (keypress)="handleKeyPress($event, term)"
+          tabindex="0"
+          role="button"
+          [attr.aria-label]="
+            'Buscar ' + (term === 'ingles' ? 'En Inglés' : term)
+          "
+        >
+          {{
+            term === "ingles"
+              ? "En Inglés"
+              : term === "de pago"
+              ? "De Pago"
+              : (term | titlecase)
+          }}
+        </span>
+      </div>
+
+      <!-- Resultados de Búsqueda -->
+      <div class="list-group mt-4">
+        <div
+          style="cursor: pointer; text-align: left"
+          class="list-group-item list-group-item-action p-4 mb-2 bg-white border"
+          *ngFor="let item of results; let i = index"
+          tabindex="0"
+          role="button"
+          [attr.aria-label]="'Ver detalles del curso: ' + item.titulo"
+          (click)="openModal(i)"
+          (keypress.enter)="openModal(i)"
+          (keypress.space)="openModal(i)"
+        >
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1 text-primary">{{ item.titulo }}</h5>
+          </div>
+          <span
+            *ngIf="item.idioma.toLowerCase() === 'ingles'"
+            class="badge bg-primary text-white mb-2"
+            >En Inglés</span
+          >
+          <span
+            *ngIf="item.tipo.toLowerCase() === 'de pago'"
+            class="badge bg-primary text-white mb-2"
+            >De Pago</span
+          >
+          <span
+            *ngIf="item.tipo.toLowerCase() === 'gratuito'"
+            class="badge bg-primary text-white mb-2"
+            >Gratuito</span
+          >
+          <span
+            *ngIf="item.modalidad.toLowerCase() === 'online'"
+            class="badge bg-primary text-white mb-2"
+            >Online</span
+          >
+          <span
+            *ngIf="item.modalidad.toLowerCase() === 'presencial'"
+            class="badge bg-primary text-white mb-2"
+            >Presencial</span
+          >
+          <div
+            class="mb-1 text-muted text-truncate"
+            style="max-height: 4.5em; overflow: hidden"
+          >
+            <span [innerHTML]="sanitizedDescripcion(item.descripcion)"></span>
+          </div>
+          <small class="text-secondary"
+            >Entidad: {{ item.entidad }} | Plataforma:
+            {{ item.plataforma }}</small
+          >
         </div>
       </div>
     </div>
   </div>
-  
-  <!-- Modal para Detalles del Curso -->
-  <div class="modal fade" #courseModal tabindex="-1" aria-labelledby="courseModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-      <div class="modal-content">
-        <div class="modal-header bg-primary text-white">
-          <h5 id="modalTitle" class="modal-title"></h5>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-        </div>
-        <div class="modal-body">
-          <p id="modalEntidad" class="text-muted"></p>
-          <p id="modalIdioma" class="badge bg-primary text-white d-none">Idioma: Inglés</p>
-          <p id="modalTipoPago" class="badge bg-primary text-white d-none">Tipo: De Pago</p>
-          <p id="modalTipoGratuito" class="badge bg-primary text-white d-none">Tipo: Gratuito</p>
-          <p id="modalModalidad" class="badge bg-primary text-white d-none">Modalidad: Presencial</p>
-          <p id="modalModalidadOnline" class="badge bg-primary text-white d-none">Modalidad: Online</p>
-          <p id="modalNivel" class="badge bg-primary text-white d-none">Nivel: Avanzado</p>
-          <p id="modalDuracion" class="badge bg-primary text-white d-none">Duración: 40 horas</p>
-          <div id="modalDescripcion" class="mb-3"></div>
-  
-          <p id="modalTipoConocimiento" class="text-muted fst-italic"></p>
-        </div>
-        <div class="modal-footer">
-          <a id="modalLink" href="#" target="_blank" class="btn btn-primary">Ir al Curso</a>
-          <button type="button" class="btn btn-success" (click)="showNextCourse()">Siguiente</button>
-        </div>
+</div>
+
+<!-- Modal para Detalles del Curso -->
+<div
+  class="modal fade"
+  #courseModal
+  tabindex="-1"
+  aria-labelledby="courseModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 id="modalTitle" class="modal-title"></h5>
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          data-bs-dismiss="modal"
+          aria-label="Cerrar"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <p id="modalEntidad" class="text-muted"></p>
+        <p id="modalIdioma" class="badge bg-primary text-white d-none">
+          Idioma: Inglés
+        </p>
+        <p id="modalTipoPago" class="badge bg-primary text-white d-none">
+          Tipo: De Pago
+        </p>
+        <p id="modalTipoGratuito" class="badge bg-primary text-white d-none">
+          Tipo: Gratuito
+        </p>
+        <p id="modalModalidad" class="badge bg-primary text-white d-none">
+          Modalidad: Presencial
+        </p>
+        <p id="modalModalidadOnline" class="badge bg-primary text-white d-none">
+          Modalidad: Online
+        </p>
+        <p id="modalNivel" class="badge bg-primary text-white d-none">
+          Nivel: Avanzado
+        </p>
+        <p id="modalDuracion" class="badge bg-primary text-white d-none">
+          Duración: 40 horas
+        </p>
+        <div id="modalDescripcion" class="mb-3"></div>
+
+        <p id="modalTipoConocimiento" class="text-muted fst-italic"></p>
+      </div>
+      <div class="modal-footer">
+        <a id="modalLink" routerLink="#" target="_blank" class="btn btn-primary"
+          >Ir al Curso</a
+        >
+        <button
+          type="button"
+          class="btn btn-success"
+          (click)="showNextCourse()"
+        >
+          Siguiente
+        </button>
       </div>
     </div>
   </div>
-  
+</div>
