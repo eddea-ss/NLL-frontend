@@ -21,27 +21,6 @@ import {
 } from '@v2/v2.module';
 
 export const routes: Routes = [
-  {
-    path: 'login',
-    component: LoginComponent,
-  },
-  {
-    path: 'registro',
-    component: SelectionRegisterComponent,
-  },
-  {
-    path: 'registro-persona',
-    component: FormRegisterComponent,
-  },
-  {
-    path: 'registro-industria',
-    component: FormRegisterComponent,
-  },
-  {
-    path: 'registro-proveedor',
-    component: FormRegisterComponent,
-  },
-
   //v2
   {
     path: '',
@@ -70,6 +49,26 @@ export const routes: Routes = [
       { path: 'buscador-financiamiento', component: FinancingSearchComponent },
       { path: 'buscador-proveedores', component: ProviderSearchComponent },
       { path: 'buscador-startup', component: StartupSearchComponent },
+      {
+        path: 'login',
+        component: LoginComponent,
+      },
+      {
+        path: 'registro',
+        component: SelectionRegisterComponent,
+      },
+      {
+        path: 'registro-persona',
+        component: FormRegisterComponent,
+      },
+      {
+        path: 'registro-industria',
+        component: FormRegisterComponent,
+      },
+      {
+        path: 'registro-proveedor',
+        component: FormRegisterComponent,
+      },
     ],
   },
 
