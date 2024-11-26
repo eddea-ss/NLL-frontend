@@ -6,6 +6,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { SugeridosComponent } from '../../components/sugeridos/sugeridos.component';
 
 @Component({
   selector: 'app-podcasts',
@@ -17,6 +18,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
     MatIconModule,
     MatListModule,
     MatExpansionModule,
+    SugeridosComponent,
   ],
   templateUrl: './podcasts.component.html',
   styleUrl: './podcasts.component.scss',
