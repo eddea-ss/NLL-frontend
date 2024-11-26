@@ -72,78 +72,19 @@
     <section id="our-team" class="">
       <div class="container mx-auto px-4">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          @for (item of equipo; track $index) {
           <div class="bg-white p-6 my-6 text-center">
             <img
-              src="https://dummyimage.com/200x200/eeeeee/000000"
+              src="{{ item.imagen }}"
+              loading="lazy"
               alt="Nombre 1 Apellido"
-              class="w-full rounded-full mb-4"
+              class="rounded-full mb-4"
+              style="width: 190px; height: 190px"
             />
-            <h3 class="text-xl font-semibold mb-2">Nombre 1 Apellido</h3>
-            <p class="text-gray-700">Cargo 1</p>
+            <h3 class="text-xl font-semibold mb-2">{{ item.nombre }}</h3>
+            <p class="text-gray-700">{{ item.cargo }}</p>
           </div>
-          <div class="bg-white p-6 my-6 text-center">
-            <img
-              src="https://dummyimage.com/200x200/eeeeee/000000"
-              alt="Nombre 2 Apellido"
-              class="w-full rounded-full mb-4"
-            />
-            <h3 class="text-xl font-semibold mb-2">Nombre 2 Apellido</h3>
-            <p class="text-gray-700">Cargo 2</p>
-          </div>
-          <div class="bg-white p-6 my-6 text-center">
-            <img
-              src="https://dummyimage.com/200x200/eeeeee/000000"
-              alt="Nombre 3 Apellido"
-              class="w-full rounded-full mb-4"
-            />
-            <h3 class="text-xl font-semibold mb-2">Nombre 3 Apellido</h3>
-            <p class="text-gray-700">Cargo 3</p>
-          </div>
-          <div class="bg-white p-6 my-6 text-center">
-            <img
-              src="https://dummyimage.com/200x200/eeeeee/000000"
-              alt="Nombre 4 Apellido"
-              class="w-full rounded-full mb-4"
-            />
-            <h3 class="text-xl font-semibold mb-2">Nombre 4 Apellido</h3>
-            <p class="text-gray-700">Cargo 4</p>
-          </div>
-          <div class="bg-white p-6 my-6 text-center">
-            <img
-              src="https://dummyimage.com/200x200/eeeeee/000000"
-              alt="Nombre 5 Apellido"
-              class="w-full rounded-full mb-4"
-            />
-            <h3 class="text-xl font-semibold mb-2">Nombre 5 Apellido</h3>
-            <p class="text-gray-700">Cargo 5</p>
-          </div>
-          <div class="bg-white p-6 my-6 text-center">
-            <img
-              src="https://dummyimage.com/200x200/eeeeee/000000"
-              alt="Nombre 6 Apellido"
-              class="w-full rounded-full mb-4"
-            />
-            <h3 class="text-xl font-semibold mb-2">Nombre 6 Apellido</h3>
-            <p class="text-gray-700">Cargo 6</p>
-          </div>
-          <div class="bg-white p-6 my-6 text-center">
-            <img
-              src="https://dummyimage.com/200x200/eeeeee/000000"
-              alt="Nombre 7 Apellido"
-              class="w-full rounded-full mb-4"
-            />
-            <h3 class="text-xl font-semibold mb-2">Nombre 7 Apellido</h3>
-            <p class="text-gray-700">Cargo 7</p>
-          </div>
-          <div class="bg-white p-6 my-6 text-center">
-            <img
-              src="https://dummyimage.com/200x200/eeeeee/000000"
-              alt="Nombre 8 Apellido"
-              class="w-full rounded-full mb-4"
-            />
-            <h3 class="text-xl font-semibold mb-2">Nombre 8 Apellido</h3>
-            <p class="text-gray-700">Cargo 8</p>
-          </div>
+          }
         </div>
       </div>
     </section>

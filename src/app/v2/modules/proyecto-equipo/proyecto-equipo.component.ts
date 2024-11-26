@@ -8,4 +8,17 @@ import { SugeridosComponent } from '@v2/components';
   templateUrl: './proyecto-equipo.component.html',
   styleUrl: './proyecto-equipo.component.scss',
 })
-export class ProyectoEquipoComponent {}
+export class ProyectoEquipoComponent {
+  equipo = [
+    {
+      nombre: 'Jorge Muñoz',
+      cargo: 'Director Proyecto',
+      imagen: 'assets/team/jorge.jpg',
+    },
+    {
+      nombre: 'Pablo Rogel',
+      cargo: 'Ingeniero de proyectos',
+      imagen: 'assets/team/pablo.jpg',
+    },
+  ];
+}
