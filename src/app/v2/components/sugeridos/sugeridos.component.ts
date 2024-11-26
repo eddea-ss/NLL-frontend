@@ -85,9 +85,6 @@ export class SugeridosComponent implements OnInit {
           const randomKey = pathKeys[number];
           pathMatch = this.paths[randomKey];
           searchPath = this.key[randomKey];
-          console.log(
-            `Ruta aleatoria seleccionada: ${randomKey} -> ${pathMatch}`
-          );
         }
 
         // Sugerencias para empresas en cursos y proveedores
@@ -109,7 +106,6 @@ export class SugeridosComponent implements OnInit {
         this.recursosService.searchResources(searchPath, pathMatch).subscribe({
           next: (data) => {
             this.sugeridos = data;
-            console.log(this.sugeridos);
           },
           error: (error) => {
             console.error('Error al obtener los datos:', error);
@@ -169,7 +165,6 @@ export class SugeridosComponent implements OnInit {
         link = 'https://' + link; // Puedes usar 'http://' si lo prefieres
       }
 
-      console.log(link);
       window.open(link, '_blank');
     } catch (error) {
       console.error('Error al abrir el link:', error);

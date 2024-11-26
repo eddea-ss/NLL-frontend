@@ -168,7 +168,6 @@ export class ProviderSearchComponent implements OnInit {
   openModal(index: number): void {
     this.currentIndex = index;
     const item = this.results[this.currentIndex];
-    console.log('asdas', item);
     this.isModalOpen = true;
     this.dataModal = item;
   }
@@ -261,7 +260,6 @@ export class ProviderSearchComponent implements OnInit {
         link = 'https://' + link; // Puedes usar 'http://' si lo prefieres
       }
 
-      console.log(link);
       window.open(link, '_blank');
     } catch (error) {
       console.error('Error al abrir el link:', error);
