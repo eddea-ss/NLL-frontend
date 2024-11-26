@@ -6,6 +6,7 @@ import { throwError } from 'rxjs';
 import { LoginService } from '@core/services/login.service';
 import { Usuario } from '@shared/models';
 import { Role } from '@shared/enums';
+import { GoogleAnalyticsService } from './google-analytics.service';
 
 interface SurveyItem {
   SurveyID: number;
@@ -59,6 +60,7 @@ export class ModeloMadurezService {
 
   private http = inject(HttpClient);
   private loginService = inject(LoginService);
+  private google = inject(GoogleAnalyticsService);
 
   currentUser = this.loginService.currentUser;
 
@@ -254,6 +256,10 @@ export class ModeloMadurezService {
       const rutMd5 = this.stringToHash(currentUser.rut);
 
       const url = `https://modelomadurez.nuevoloslagos.org?rut=${rutMd5}`;
+      //google
+      this.google.eventEmitter('click-modelo-madurez-empresas', {
+        label: 'Click Modelo Madurez para Empresas',
+      });
       window.open(url, '_self');
     } catch (error) {
       console.error('Error al obtener RUT de localStorage:', error);
@@ -270,6 +276,11 @@ export class ModeloMadurezService {
       const rutMd5 = this.stringToHash(currentUser.rut);
 
       const url = `https://modelomadurez.nuevoloslagos.org/formacion.html?rut=${rutMd5}`;
+      //google
+      this.google.eventEmitter('click-modelo-formacion-empresas', {
+        label: 'Click Modelo Formacion para Empresas',
+      });
+
       window.open(url, '_self');
     } catch (error) {
       console.error('Error al obtener RUT de localStorage:', error);

@@ -5,6 +5,7 @@ import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { LoginService } from '@core/services/login.service';
 import { Role } from '@shared/enums';
+import { GoogleAnalyticsService } from './google-analytics.service';
 
 interface SuccessResponse {
   success: true;
@@ -28,6 +29,8 @@ export class StartupEmprendimientoService {
 
   private http = inject(HttpClient);
   private loginService = inject(LoginService);
+  private google = inject(GoogleAnalyticsService);
+
   currentUser = this.loginService.currentUser;
   //para caracter
   private _startupEmprendedores: WritableSignal<boolean | null> = signal(null);
@@ -120,8 +123,14 @@ export class StartupEmprendimientoService {
       let url = '';
       if (type === 'STARTUP') {
         url = `https://emprendedores.nuevoloslagos.org//startup.html?rut=${rutMd5}`;
+        this.google.eventEmitter('click-modelo-startup', {
+          label: 'Click registro Success',
+        });
       } else {
         url = `https://emprendedores.nuevoloslagos.org//emprendedor.html?rut=${rutMd5}`;
+        this.google.eventEmitter('click-modelo-emprendedor', {
+          label: 'Click registro Success',
+        });
       }
 
       window.open(url, '_self');

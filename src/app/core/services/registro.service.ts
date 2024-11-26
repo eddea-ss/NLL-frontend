@@ -1,6 +1,6 @@
 // src/app/services/registro.service.ts
 
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { RegistroCredentials, RegistroResponse } from '@shared/models';
 import { Role } from '@shared/enums';
@@ -8,6 +8,7 @@ import { LoginService } from './login.service';
 import { Observable, throwError } from 'rxjs';
 import { catchError, switchMap, tap } from 'rxjs/operators';
 import { SnackbarService } from './snackbar.service';
+import { GoogleAnalyticsService } from './google-analytics.service';
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +19,8 @@ export class RegistroService {
     private loginService: LoginService,
     private snackbarService: SnackbarService
   ) {}
+
+  private google = inject(GoogleAnalyticsService);
 
   // Definir endpoints para cada tipo de usuario
   private apiEndpoints: Record<Role, string> = {
@@ -46,6 +49,9 @@ export class RegistroService {
       tap((response) => {
         // Manejar mensaje de éxito si es necesario
         this.snackbarService.show('Registro existoso');
+        this.google.eventEmitter('click-registro-correcto', {
+          label: 'Click registro Success',
+        });
       }),
       // Después del registro exitoso, iniciar sesión automáticamente
       switchMap(() =>
@@ -57,6 +63,9 @@ export class RegistroService {
       catchError((error: HttpErrorResponse) => {
         console.error('Error en el registro:', error);
         this.snackbarService.show(error.error.message, 5000, 'OK');
+        this.google.eventEmitter('click-registro-fallido', {
+          label: 'Click registro Failed',
+        });
         return throwError(() => error);
       })
     );

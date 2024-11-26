@@ -5,6 +5,7 @@ import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { LoginService } from '@core/services/login.service';
 import { Role } from '@shared/enums';
+import { GoogleAnalyticsService } from './google-analytics.service';
 
 @Injectable({
   providedIn: 'root',
@@ -15,6 +16,7 @@ export class ModeloCaracterService {
 
   private http = inject(HttpClient);
   private loginService = inject(LoginService);
+  private google = inject(GoogleAnalyticsService);
   currentUser = this.loginService.currentUser;
   //para caracter
   private _modeloCaracter: WritableSignal<boolean | null> = signal(null);
@@ -103,6 +105,10 @@ export class ModeloCaracterService {
 
       const rutMd5 = this.stringToHash(currentUser.rut);
       const url = `https://proveedores.nuevoloslagos.org/?rut=${rutMd5}`;
+      //google
+      this.google.eventEmitter('click-modelo-caracterizacion-emprendedores', {
+        label: 'Click Modelo Caracterizacion para Emprendedores',
+      });
       window.open(url, '_self');
     } catch (error) {
       console.error('Error al obtener RUT de localStorage:', error);

@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import { LoginCredentials, LoginResponse, Usuario } from '@shared/models';
 import { AuthState, Role } from '@shared/enums';
 import { SnackbarService } from './snackbar.service';
+import { GoogleAnalyticsService } from './google-analytics.service';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +20,7 @@ import { SnackbarService } from './snackbar.service';
 export class LoginService {
   private http = inject(HttpClient);
   private router = inject(Router);
-  snackbar = inject(SnackbarService);
+  private google = inject(GoogleAnalyticsService);
 
   private apiUrlUsers = 'https://accesos.nuevoloslagos.org/api/usuarios';
 
@@ -99,13 +100,17 @@ export class LoginService {
         tap((response: LoginResponse) => {
           if (response.token && response.usuario) {
             this.handleAuthentication(response.token, response.usuario);
-            this.snackbar.show('Ingreso correcto', 3000);
+            this.google.eventEmitter('click-login-correcto', {
+              label: 'Click Login Success',
+            });
           } else {
             this.handleError(new Error('Respuesta de login inválida.'));
+            this.google.eventEmitter('click-login-fallido', {
+              label: 'Click Login failed',
+            });
           }
         }),
         catchError((error: HttpErrorResponse) => {
-          this.snackbar.show('Error al ingreso: ' + error.message, 3000);
           this.handleError(error);
           return throwError(() => error);
         })
@@ -170,7 +175,6 @@ export class LoginService {
     this._authError.set(null);
     this._currentUser.set(null);
     this._authToken.set(null);
-    this.snackbar.show('Sesión cerrada', 3000);
 
     // Opcional: Navegar a la página de login después del logout
     this.router.navigate(['/']);

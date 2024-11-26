@@ -102,7 +102,9 @@
           (keypress.space)="openModal(i)"
         >
           <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1 text-primary">{{ item.titulo }}</h5>
+            <h5 style="cursor: pointer" class="mb-1 text-primary">
+              {{ item.titulo }}
+            </h5>
           </div>
           <span
             *ngIf="item.idioma.toLowerCase() === 'ingles'"

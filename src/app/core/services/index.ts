@@ -10,3 +10,4 @@ export * from './modelo-caracter.service';
 export * from './formacion-emprendedores.service';
 export * from './startup-emprendimiento.service';
 export * from './recursos.service';
+export * from './google-analytics.service';
