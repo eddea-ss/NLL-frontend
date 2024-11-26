@@ -59,15 +59,37 @@ export class SugeridosComponent implements OnInit {
     'buscador-cursos': '2024',
   };
 
+  constructor() {
+    effect(() => {
+      this.modeloMadurezService.recheckData();
+      this.modeloCaracterService.recheckData();
+    });
+  }
+
   ngOnInit(): void {
     this.route.url.subscribe((segments) => {
       const rutaActual = segments[0]?.path;
       if (rutaActual) {
         this.ruta = rutaActual;
-        const pathMatch = this.paths[this.ruta];
+        let pathMatch = this.paths[this.ruta];
         let searchPath = this.getSearchKey();
 
-        //sugerencias para empresas en cursos y proveedores
+        // Si la ruta es desconocida, seleccionamos una clave aleatoria de 'paths'
+        if (!pathMatch) {
+          console.warn(
+            `Ruta desconocida: ${rutaActual}. Seleccionando ruta aleatoria.`
+          );
+          const pathKeys = Object.keys(this.paths);
+          const number = Math.floor(Math.random() * pathKeys.length);
+          const randomKey = pathKeys[number];
+          pathMatch = this.paths[randomKey];
+          searchPath = this.key[randomKey];
+          console.log(
+            `Ruta aleatoria seleccionada: ${randomKey} -> ${pathMatch}`
+          );
+        }
+
+        // Sugerencias para empresas en cursos y proveedores
         if (
           this.authState() === AuthState.LoggedIn &&
           this.ruta &&
@@ -82,21 +104,16 @@ export class SugeridosComponent implements OnInit {
           }
         }
 
-        if (pathMatch) {
-          this.recursosService
-            .searchResources(searchPath, pathMatch)
-            .subscribe({
-              next: (data) => {
-                this.sugeridos = data;
-                console.log(this.sugeridos);
-              },
-              error: (error) => {
-                console.error('Error al obtener los datos:', error);
-              },
-            });
-        } else {
-          console.warn(`Ruta desconocida: ${rutaActual}`);
-        }
+        // Continuamos con la lógica de búsqueda utilizando 'pathMatch'
+        this.recursosService.searchResources(searchPath, pathMatch).subscribe({
+          next: (data) => {
+            this.sugeridos = data;
+            console.log(this.sugeridos);
+          },
+          error: (error) => {
+            console.error('Error al obtener los datos:', error);
+          },
+        });
       }
     });
   }
