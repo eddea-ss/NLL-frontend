@@ -21,7 +21,7 @@ export class LoginService {
   private router = inject(Router);
   snackbar = inject(SnackbarService);
 
-  private apiUrlUsers = 'http://64.176.10.243:3020/api/usuarios';
+  private apiUrlUsers = 'https:accesos.nuevoloslagos.org/api/usuarios';
 
   private httpOptions = {
     headers: new HttpHeaders({
