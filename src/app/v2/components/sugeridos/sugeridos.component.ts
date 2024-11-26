@@ -80,7 +80,8 @@ export class SugeridosComponent implements OnInit {
             `Ruta desconocida: ${rutaActual}. Seleccionando ruta aleatoria.`
           );
           const pathKeys = Object.keys(this.paths);
-          const number = Math.floor(Math.random() * pathKeys.length);
+          //const number = Math.floor(Math.random() * pathKeys.length);
+          const number = 4;
           const randomKey = pathKeys[number];
           pathMatch = this.paths[randomKey];
           searchPath = this.key[randomKey];

@@ -80,6 +80,7 @@ this.currentUser()?.rol?.nombreRol === Role.Proveedor && this.modeloCaracter())
       {{ item?.descripcion | truncate : 100 : true }}
     </p>
     <a
+      style="cursor: pointer"
       (click)="openModal($index)"
       (keypress.enter)="openModal($index)"
       (keypress.space)="openModal($index)"
@@ -228,6 +229,7 @@ this.currentUser()?.rol?.nombreRol === Role.Proveedor && this.modeloCaracter())
     </p>
     <p style="height: 12px"></p>
     <a
+      style="cursor: pointer"
       (click)="openModal($index)"
       (keypress.enter)="openModal($index)"
       (keypress.space)="openModal($index)"
@@ -453,6 +455,7 @@ this.currentUser()?.rol?.nombreRol === Role.Proveedor && this.modeloCaracter())
     <span [innerHTML]="item.descripcion | truncate : 130 : true"> </span>
     <p style="height: 12px"></p>
     <a
+      style="cursor: pointer"
       (click)="openModal($index)"
       (keypress.enter)="openModal($index)"
       (keypress.space)="openModal($index)"
@@ -604,6 +607,7 @@ this.currentUser()?.rol?.nombreRol === Role.Proveedor && this.modeloCaracter())
     </p>
     <p style="height: 12px"></p>
     <a
+      style="cursor: pointer"
       (click)="openModal($index)"
       (keypress.enter)="openModal($index)"
       (keypress.space)="openModal($index)"
@@ -751,6 +755,7 @@ this.currentUser()?.rol?.nombreRol === Role.Proveedor && this.modeloCaracter())
     </p>
     <p style="height: 12px"></p>
     <a
+      style="cursor: pointer"
       (click)="openModal($index)"
       (keypress.enter)="openModal($index)"
       (keypress.space)="openModal($index)"
@@ -868,7 +873,7 @@ this.currentUser()?.rol?.nombreRol === Role.Proveedor && this.modeloCaracter())
   }
 
   <!--startup-->
-  @if (item?.nombreStartup) {
+  @if (item?.descripcionStartup) {
   <article class="bg-gray-100 p-4">
     <h3 class="text-xl font-bold mb-2">{{ item?.nombreStartup }}</h3>
     <p>
@@ -891,12 +896,13 @@ this.currentUser()?.rol?.nombreRol === Role.Proveedor && this.modeloCaracter())
     </p>
     <p style="margin-top: 0px">
       <small style="color: gray" class="text-secondary"
-        >Sitio web: {{ getDomain(item.link) }}
+        >Sitio web: {{ getDomain(item.paginaWeb) }}
       </small>
     </p>
 
     <p style="height: 12px"></p>
     <a
+      style="cursor: pointer"
       (click)="openModal($index)"
       (keypress.enter)="openModal($index)"
       (keypress.space)="openModal($index)"

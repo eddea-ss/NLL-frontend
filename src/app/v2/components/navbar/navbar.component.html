@@ -3,7 +3,7 @@
     <!-- Logo -->
     <a
       routerLink="/"
-      class="font-black text-2xl tracking-wider bg-yellow-500 p-2 text-gray-800 rounded p-5"
+      class="font-black text-2xl tracking-wider bg-yellow-500 p-2 text-gray-800 p-5"
       (click)="closeMobileMenu()"
     >
       NuevoLosLagos
@@ -223,20 +223,7 @@
             Ingresa a tu cuenta
           </a>
           } @if (authState()===AuthState.LoggedIn) {
-          <a routerLink="/" class="block px-4 py-2 hover:bg-gray-700">
-            <p>
-              Mi cuenta:
-              {{
-                currentUser()?.rol?.nombreRol === "usuario"
-                  ? "Personal"
-                  : currentUser()?.rol?.nombreRol?.toLocaleUpperCase()
-              }}
-              {{
-                currentUser()?.nombreRepresentante ??
-                  currentUser()?.nombreEmpresa
-              }}
-            </p>
-          </a>
+
           <a (click)="logout()" class="block px-4 py-2 hover:bg-gray-700">
             Cerrar sesión
           </a>
@@ -521,24 +508,7 @@
             Ingresa a tu cuenta
           </a>
           } @if (authState()===AuthState.LoggedIn) {
-          <a
-            routerLink="/"
-            class="block px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300"
-            (click)="closeMobileMenu()"
-          >
-            <p>
-              Mi cuenta:
-              {{
-                currentUser()?.rol?.nombreRol === "usuario"
-                  ? "Personal"
-                  : currentUser()?.rol?.nombreRol?.toLocaleUpperCase()
-              }}
-              {{
-                currentUser()?.nombreRepresentante ??
-                  currentUser()?.nombreEmpresa
-              }}
-            </p>
-          </a>
+
           <a
             class="block px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300"
             (click)="logout()"
