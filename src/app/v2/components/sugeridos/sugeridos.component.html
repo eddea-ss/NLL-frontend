@@ -1,10 +1,13 @@
 <!--texto para cuentas sin ingreso-->
-@if (this.authState() === AuthState.LoggedOut) {
+@if (this.authState() === AuthState.LoggedOut || (this.authState() ===
+AuthState.LoggedIn && this.modeloMadurez() && !(ruta ==='buscador-cursos' ||
+ruta ==='buscador-proveedores')) ) {
 <h2 class="text-2xl font-bold mb-6">Últimas publicaciones</h2>
 }
 <!--texto para cuentas con ingreso empresa-->
 @if (this.authState() === AuthState.LoggedIn &&
-this.currentUser()?.rol?.nombreRol === Role.Empresa && this.modeloMadurez()) {
+this.currentUser()?.rol?.nombreRol === Role.Empresa && this.modeloMadurez() &&
+(ruta ==='buscador-cursos' || ruta ==='buscador-proveedores')) {
 <h2 class="text-2xl font-bold mb-6">Según tu Modelo te recomendamos...</h2>
 }
 <!--texto para cuentas con ingreso proveedor-->
