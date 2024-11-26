@@ -21,9 +21,9 @@ export class RegistroService {
 
   // Definir endpoints para cada tipo de usuario
   private apiEndpoints: Record<Role, string> = {
-    [Role.Usuario]: 'https:accesos.nuevoloslagos.org/api/usuarios',
-    [Role.Empresa]: 'https:accesos.nuevoloslagos.org/api/empresas',
-    [Role.Proveedor]: 'https:accesos.nuevoloslagos.org/api/proveedores',
+    [Role.Usuario]: 'https://accesos.nuevoloslagos.org/api/usuarios',
+    [Role.Empresa]: 'https://accesos.nuevoloslagos.org/api/empresas',
+    [Role.Proveedor]: 'https://accesos.nuevoloslagos.org/api/proveedores',
   };
 
   /**
