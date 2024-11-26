@@ -1,12 +1,184 @@
-import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, effect, inject, OnInit } from '@angular/core';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import {
+  LoginService,
+  ModeloCaracterService,
+  ModeloMadurezService,
+  RecursosService,
+} from '@core/services';
+import { AuthState, Role } from '@shared/enums';
+import { TruncatePipe } from '@shared/pipes/truncate.pipe';
+import DOMPurify from 'dompurify';
 
 @Component({
   selector: 'app-sugeridos',
   standalone: true,
-  imports: [],
+  imports: [RouterLink, TruncatePipe, CommonModule],
   templateUrl: './sugeridos.component.html',
-  styleUrl: './sugeridos.component.scss'
+  styleUrl: './sugeridos.component.scss',
 })
-export class SugeridosComponent {
+export class SugeridosComponent implements OnInit {
+  private route = inject(ActivatedRoute);
+  private recursosService = inject(RecursosService);
+  private loginService = inject(LoginService);
+  private modeloMadurezService = inject(ModeloMadurezService);
+  private modeloCaracterService = inject(ModeloCaracterService);
 
+  modeloMadurez = this.modeloMadurezService.modeloMadurez;
+  modeloCaracter = this.modeloCaracterService.modeloCaracter;
+
+  authState = this.loginService.authState;
+  currentUser = this.loginService.currentUser;
+
+  public AuthState = AuthState;
+  public Role = Role;
+
+  sugeridos: any[] = [];
+
+  ruta: string | undefined;
+  isModalOpen = false;
+  dataModal: any | undefined;
+  currentIndex = 0;
+
+  paths: Record<string, string> = {
+    'buscador-proveedores': 'suppliers',
+    'buscador-startup': 'startups',
+    'buscador-proyectos': 'projects',
+    'buscador-financiamiento': 'financing',
+    'buscador-articulos': 'articles',
+    'buscador-cursos': 'curses',
+  };
+
+  key: Record<string, string> = {
+    'buscador-proveedores': 'sí',
+    'buscador-startup': 'emprendimiento',
+    'buscador-proyectos': 'nacional',
+    'buscador-financiamiento': 'https',
+    'buscador-articulos': 'articulo',
+    'buscador-cursos': '2024',
+  };
+
+  ngOnInit(): void {
+    this.route.url.subscribe((segments) => {
+      const rutaActual = segments[0]?.path;
+      if (rutaActual) {
+        this.ruta = rutaActual;
+        const pathMatch = this.paths[this.ruta];
+        let searchPath = this.getSearchKey();
+
+        //sugerencias para empresas en cursos y proveedores
+        if (
+          this.authState() === AuthState.LoggedIn &&
+          this.ruta &&
+          (this.ruta === 'buscador-cursos' ||
+            this.ruta === 'buscador-proveedores')
+        ) {
+          if (
+            this.currentUser()?.rol?.nombreRol === Role.Empresa &&
+            this.modeloMadurez()
+          ) {
+            searchPath = this.modeloMadurez()![0].IndustryName ?? '';
+          }
+        }
+
+        if (pathMatch) {
+          this.recursosService
+            .searchResources(searchPath, pathMatch)
+            .subscribe({
+              next: (data) => {
+                this.sugeridos = data;
+                console.log(this.sugeridos);
+              },
+              error: (error) => {
+                console.error('Error al obtener los datos:', error);
+              },
+            });
+        } else {
+          console.warn(`Ruta desconocida: ${rutaActual}`);
+        }
+      }
+    });
+  }
+
+  getSearchKey(): string {
+    let value = '';
+
+    if (this.ruta) {
+      const pathMatch = this.key[this.ruta];
+      if (pathMatch) {
+        return pathMatch;
+      } else {
+        console.warn(`Ruta desconocida: ${this.ruta}`);
+      }
+    }
+    return value;
+  }
+
+  getDomain(url: string): string {
+    try {
+      return new URL(url).hostname.replace('www.', '');
+    } catch {
+      return 'URL inválida';
+    }
+  }
+  getPublicationYear(fecha_publicacion: string): number {
+    return this.convertToDate(fecha_publicacion).getFullYear();
+  }
+
+  convertToDate(dateString: string): Date {
+    if (dateString.length !== 8) {
+      console.warn(`Formato de fecha inesperado: ${dateString}`);
+      return new Date(0); // Fecha por defecto
+    }
+    const year = dateString.substring(0, 4);
+    const month = dateString.substring(4, 6);
+    const day = dateString.substring(6, 8);
+    return new Date(`${year}-${month}-${day}`);
+  }
+  sanitizedResumen(resumen: string): string {
+    return DOMPurify.sanitize(resumen);
+  }
+  openLink(link: string): void {
+    try {
+      if (!link) {
+        console.warn('No se proporcionó un link');
+        return;
+      }
+
+      // Verifica si el enlace incluye 'http://' o 'https://'
+      if (!/^https?:\/\//i.test(link)) {
+        link = 'https://' + link; // Puedes usar 'http://' si lo prefieres
+      }
+
+      console.log(link);
+      window.open(link, '_blank');
+    } catch (error) {
+      console.error('Error al abrir el link:', error);
+    }
+  }
+  closeModal() {
+    this.isModalOpen = false;
+    this.dataModal = undefined;
+  }
+  openModal(index: number): void {
+    this.currentIndex = index;
+    const item = this.sugeridos[this.currentIndex];
+    this.isModalOpen = true;
+    this.dataModal = item;
+  }
+
+  downloadInfo(link: string): void {
+    try {
+      if (!link) {
+        console.warn('No se proporcionó un link');
+        return;
+      }
+      const urlExcel = 'https://control.nuevoloslagos.org/suppliers/excel/';
+
+      window.open(urlExcel + link, '_blank');
+    } catch (error) {
+      console.error('Error al abrir el link:', error);
+    }
+  }
 }
