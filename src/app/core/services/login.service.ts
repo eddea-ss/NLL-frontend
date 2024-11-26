@@ -89,6 +89,8 @@ export class LoginService {
     this._authState.set(AuthState.Loading);
     this._authError.set(null);
 
+    console.log(this.apiUrlUsers);
+
     return this.http
       .post<LoginResponse>(
         `${this.apiUrlUsers}/login`,

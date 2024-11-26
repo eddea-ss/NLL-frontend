@@ -42,6 +42,8 @@ export class RegistroService {
       password_confirm: undefined,
     };
 
+    console.log(endpoint);
+
     return this.http.post<RegistroResponse>(endpoint, formData).pipe(
       tap((response) => {
         // Manejar mensaje de éxito si es necesario
