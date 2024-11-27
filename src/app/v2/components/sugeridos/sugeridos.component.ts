@@ -69,9 +69,6 @@ export class SugeridosComponent implements OnInit {
         let searchPath = this.getSearchKey();
 
         if (!pathMatch) {
-          console.warn(
-            `Ruta desconocida: ${rutaActual}. Seleccionando ruta aleatoria.`
-          );
           const pathKeys = Object.keys(this.paths);
           const randomKey = pathKeys[2]; //para articulos por default
           pathMatch = this.paths[randomKey];
@@ -113,8 +110,6 @@ export class SugeridosComponent implements OnInit {
       const pathMatch = this.key[this.ruta];
       if (pathMatch) {
         return pathMatch;
-      } else {
-        console.warn(`Ruta desconocida: ${this.ruta}`);
       }
     }
     return value;

@@ -5,8 +5,10 @@ import {
   effect,
   ElementRef,
   inject,
+  OnInit,
   ViewChild,
 } from '@angular/core';
+import { Meta, Title } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router';
 import { LoginService, ModeloCaracterService } from '@core/services';
 import { AuthState, Role } from '@shared/enums';
@@ -18,9 +20,11 @@ import { AuthState, Role } from '@shared/enums';
   templateUrl: './evaluaciones-proveedor.component.html',
   styleUrl: './evaluaciones-proveedor.component.scss',
 })
-export class EvaluacionesProveedorComponent {
+export class EvaluacionesProveedorComponent implements OnInit {
   private loginService = inject(LoginService);
   private modeloCaracterService = inject(ModeloCaracterService);
+  private title = inject(Title);
+  private meta = inject(Meta);
 
   authState = this.loginService.authState;
   currentUser = this.loginService.currentUser;
@@ -41,6 +45,18 @@ export class EvaluacionesProveedorComponent {
       ) {
         this.modeloCaracterService.recheckData();
       }
+    });
+  }
+
+  ngOnInit(): void {
+    // Establecer el título de la página
+    this.title.setTitle('Modelo Caracterización | Nuevo Los Lagos');
+
+    // Agregar meta etiquetas
+    this.meta.updateTag({
+      name: 'description',
+      content:
+        'Completa tu modelo de Caracterización de Proveedores y ayúdanos a identificar cómo podemos conectarte con clientes de tu región. Da el siguiente paso hacia nuevas oportunidades.',
     });
   }
 

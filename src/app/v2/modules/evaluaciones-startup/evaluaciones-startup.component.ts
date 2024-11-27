@@ -1,4 +1,5 @@
-import { Component, effect, inject } from '@angular/core';
+import { Component, effect, inject, OnInit } from '@angular/core';
+import { Meta, Title } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router';
 import { LoginService, FormacionEmprendedoresService } from '@core/services';
 import { StartupEmprendimientoService } from '@core/services/startup-emprendimiento.service';
@@ -11,10 +12,12 @@ import { AuthState, Role } from '@shared/enums';
   templateUrl: './evaluaciones-startup.component.html',
   styleUrl: './evaluaciones-startup.component.scss',
 })
-export class EvaluacionesStartupComponent {
+export class EvaluacionesStartupComponent implements OnInit {
   private loginService = inject(LoginService);
   private formacionEmprendedoresService = inject(FormacionEmprendedoresService);
   private startupService = inject(StartupEmprendimientoService);
+  private title = inject(Title);
+  private meta = inject(Meta);
 
   authState = this.loginService.authState;
   currentUser = this.loginService.currentUser;
@@ -39,6 +42,18 @@ export class EvaluacionesStartupComponent {
         this.formacionEmprendedoresService.recheckData();
         this.formacionEmprendedoresService.recheckData();
       }
+    });
+  }
+
+  ngOnInit(): void {
+    // Establecer el título de la página
+    this.title.setTitle('Modelo Startup y Emprendedores | Nuevo Los Lagos');
+
+    // Agregar meta etiquetas
+    this.meta.updateTag({
+      name: 'description',
+      content:
+        'Completa tu modelo de Formación para emprendedores o startup y te ayudaremos a crecer en la region de los Lagos.',
     });
   }
 

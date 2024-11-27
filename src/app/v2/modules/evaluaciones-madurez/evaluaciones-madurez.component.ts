@@ -5,8 +5,10 @@ import {
   effect,
   ElementRef,
   inject,
+  OnInit,
   ViewChild,
 } from '@angular/core';
+import { Meta, Title } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router';
 import { LoginService, ModeloMadurezService } from '@core/services';
 import { AuthState, Role } from '@shared/enums';
@@ -23,9 +25,11 @@ import Chart, {
   templateUrl: './evaluaciones-madurez.component.html',
   styleUrls: ['./evaluaciones-madurez.component.scss'], // Corregido: 'styleUrls' en lugar de 'styleUrl'
 })
-export class EvaluacionesMadurezComponent implements AfterViewInit {
+export class EvaluacionesMadurezComponent implements AfterViewInit, OnInit {
   private loginService = inject(LoginService);
   private modeloMadurezService = inject(ModeloMadurezService);
+  private title = inject(Title);
+  private meta = inject(Meta);
 
   authState = this.loginService.authState;
   currentUser = this.loginService.currentUser;
@@ -265,6 +269,18 @@ export class EvaluacionesMadurezComponent implements AfterViewInit {
           this.makeChart();
         }, 1000); // 1000 milisegundos = 1 segundo
       }
+    });
+  }
+
+  ngOnInit(): void {
+    // Establecer el título de la página
+    this.title.setTitle('Modelo Madurez | Nuevo Los Lagos');
+
+    // Agregar meta etiquetas
+    this.meta.updateTag({
+      name: 'description',
+      content:
+        'Evalua el nivel de madurez tecnológica de tu empresa y conoce que acciones debes realizar para alcanzar la madurez tecnológica.',
     });
   }
 

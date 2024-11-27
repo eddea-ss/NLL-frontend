@@ -12,6 +12,7 @@ import {
   Validators,
   ReactiveFormsModule,
 } from '@angular/forms';
+import { Meta, Title } from '@angular/platform-browser';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { RegistroService } from '@core/services';
 
@@ -26,6 +27,8 @@ export class FormRegisterComponent implements OnInit {
   private fb = inject(FormBuilder);
   private route = inject(ActivatedRoute);
   private registroService = inject(RegistroService);
+  private title = inject(Title);
+  private meta = inject(Meta);
 
   formGroup!: FormGroup;
   formFields: any[] = [];
@@ -141,6 +144,14 @@ export class FormRegisterComponent implements OnInit {
     this.route.url.subscribe((segments) => {
       this.tipoRegistro = segments[0].path;
       this.initializeForm();
+    });
+    this.title.setTitle('Registro | Nuevo Los Lagos');
+
+    // Agregar meta etiquetas
+    this.meta.updateTag({
+      name: 'description',
+      content:
+        'Registrate y Únete a una red de colaboración y aprovecha oportunidades de negocio en crecimiento.',
     });
   }
 

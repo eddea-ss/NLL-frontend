@@ -1,11 +1,16 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import {
+  DomSanitizer,
+  Meta,
+  SafeResourceUrl,
+  Title,
+} from '@angular/platform-browser';
 import { SugeridosComponent } from '../../components/sugeridos/sugeridos.component';
 
 @Component({
@@ -23,7 +28,22 @@ import { SugeridosComponent } from '../../components/sugeridos/sugeridos.compone
   templateUrl: './podcasts.component.html',
   styleUrl: './podcasts.component.scss',
 })
-export class PodcastsComponent {
+export class PodcastsComponent implements OnInit {
+  private title = inject(Title);
+  private meta = inject(Meta);
+
+  ngOnInit(): void {
+    // Establecer el título de la página
+    this.title.setTitle('Podcasts | Nuevo Los Lagos');
+
+    // Agregar meta etiquetas
+    this.meta.updateTag({
+      name: 'description',
+      content:
+        'Nuestros podcasts, generados por inteligencia artificial, están basados en nuestras investigaciones y conversaciones con expertos en áreas como automatización, inteligencia artificial, Internet de las Cosas (IoT) y más.',
+    });
+  }
+
   videos = [
     {
       id: 'xfiEpdZFVIc',
