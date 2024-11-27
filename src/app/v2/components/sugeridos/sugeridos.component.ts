@@ -43,20 +43,14 @@ export class SugeridosComponent implements OnInit {
 
   paths: Record<string, string> = {
     'buscador-proveedores': 'suppliers',
-    'buscador-startup': 'startups',
-    'buscador-proyectos': 'projects',
-    'buscador-financiamiento': 'financing',
-    'buscador-articulos': 'articles',
     'buscador-cursos': 'curses',
+    'buscador-articulos': 'articles',
   };
 
   key: Record<string, string> = {
     'buscador-proveedores': 'sí',
-    'buscador-startup': 'emprendimiento',
-    'buscador-proyectos': 'nacional',
-    'buscador-financiamiento': 'https',
-    'buscador-articulos': 'articulo',
     'buscador-cursos': '2024',
+    'buscador-articulos': 'articulo',
   };
 
   constructor() {
@@ -74,15 +68,12 @@ export class SugeridosComponent implements OnInit {
         let pathMatch = this.paths[this.ruta];
         let searchPath = this.getSearchKey();
 
-        // Si la ruta es desconocida, seleccionamos una clave aleatoria de 'paths'
         if (!pathMatch) {
           console.warn(
             `Ruta desconocida: ${rutaActual}. Seleccionando ruta aleatoria.`
           );
           const pathKeys = Object.keys(this.paths);
-          //const number = Math.floor(Math.random() * pathKeys.length);
-          const number = 4;
-          const randomKey = pathKeys[number];
+          const randomKey = pathKeys[2]; //para articulos por default
           pathMatch = this.paths[randomKey];
           searchPath = this.key[randomKey];
         }

@@ -10,25 +10,19 @@ this.currentUser()?.rol?.nombreRol === Role.Empresa && this.modeloMadurez() &&
 (ruta ==='buscador-cursos' || ruta ==='buscador-proveedores')) {
 <h2 class="text-2xl font-bold mb-6">Según tu Modelo te recomendamos...</h2>
 }
-<!--texto para cuentas con ingreso proveedor-->
-@if (this.authState() === AuthState.LoggedIn &&
-this.currentUser()?.rol?.nombreRol === Role.Proveedor && this.modeloCaracter())
-{
-<h2 class="text-2xl font-bold mb-6">Te recomendamos...</h2>
-}
 
 <!-- Sección de artículos sugeridos -->
 <div class="space-y-6" style="min-height: 50vh; max-width: 500px">
   @if (authState()===AuthState.LoggedOut) {
   <article class="bg-gray-100 p-4 border border">
     <h3 class="text-xl font-bold mb-2">Registrate</h3>
-    <p class="text-gray-600 mb-4">
-      Registrate para acceder a nuestros Modelos de Evaluación
-      y recomendaciones personalizadas.
+    <p style="font-size: 0.9rem" class="text-gray-600 mb-4">
+      Registrate para acceder a nuestros Modelos de Evaluación y recomendaciones
+      personalizadas.
     </p>
     <a
       routerLink="/registro"
-      class="font-bold py-2 px-5 bg-yellow-500 hover:bg-yellow-600  transition duration-300 ease-in-out transform hover:scale-105"
+      class="font-bold text-gray-700 py-2 px-5 bg-yellow-500 hover:bg-yellow-600 transition duration-300 ease-in-out transform hover:scale-105"
     >
       Registrarse
     </a>
@@ -42,42 +36,8 @@ this.currentUser()?.rol?.nombreRol === Role.Proveedor && this.modeloCaracter())
   @if (item?.modalidad && item?.duracion) {
   <article class="bg-gray-100 p-4 border">
     <h3 class="text-xl font-bold mb-2">{{ item?.titulo }}</h3>
-    <p class="mb-1 flex flex-wrap gap-1">
-      <span
-        *ngIf="item.idioma.toLowerCase() === 'ingles'"
-        class="border border-blue-100 text-blue-600 px-2 py-1 text-xs"
-        >En Inglés</span
-      >
-      <span
-        *ngIf="item.tipo.toLowerCase() === 'de pago'"
-        class="border border-blue-100 text-blue-600 px-2 py-1 text-xs"
-        >De Pago</span
-      >
-      <span
-        *ngIf="item.tipo.toLowerCase() === 'gratuito'"
-        class="border border-blue-100 text-blue-600 px-2 py-1 text-xs"
-        >Gratuito</span
-      >
-      <span
-        *ngIf="item.modalidad.toLowerCase() === 'online'"
-        class="border border-blue-100 text-blue-600 px-2 py-1 text-xs"
-        >Online</span
-      >
-      <span
-        *ngIf="item.modalidad.toLowerCase() === 'presencial'"
-        class="border border-blue-100 text-blue-600 px-2 py-1 text-xs"
-        >Presencial</span
-      >
-      @for (tipo of item.tipo_de_conocimiento; track $index) {
-      <span
-        style="margin-right: 4px"
-        class="border border-blue-100 text-blue-600 px-2 py-1 text-xs"
-      >
-        {{ tipo }}
-      </span>
-      }
-    </p>
-    <p class="text-gray-600 mb-4">
+    <p class="mb-1 flex flex-wrap gap-1"></p>
+    <p style="font-size: 0.9rem" class="text-gray-600 mb-4">
       {{ item?.descripcion | truncate : 100 : true }}
     </p>
     <a
@@ -223,10 +183,6 @@ this.currentUser()?.rol?.nombreRol === Role.Proveedor && this.modeloCaracter())
     <p style="text-align: left; font-size: 0.9rem">
       <th class="px-4">Tecnologías Ofrecidas:</th>
       <td class="px-4">{{ item?.tecnologiasOfrecidas }}</td>
-    </p>
-    <p style="text-align: left; font-size: 0.9rem">
-      <th class="px-4">Productos y/o Servicios Avanzados:</th>
-      <td class="px-4">{{ item?.productosServiciosAvanzados }}</td>
     </p>
     <p style="height: 12px"></p>
     <a
@@ -439,21 +395,11 @@ this.currentUser()?.rol?.nombreRol === Role.Proveedor && this.modeloCaracter())
   @if (item?.porcentaje_cobertura ) {
   <article class="bg-gray-100 p-4 border">
     <h3 class="text-xl font-bold mb-2">{{ item?.titulo }}</h3>
-    <!-- Etiquetas de los articulos -->
-    <p class="mb-1 flex flex-wrap gap-1">
-      <span
-        *ngIf="item.tipo_financiamiento.toLowerCase() === 'público'"
-        class="border border-blue-100 text-blue-600 px-2 py-1 text-xs"
-        >Financiamiento: Público</span
-      >
-      <span class="border border-blue-100 text-blue-600 px-2 py-1 text-xs"
-        >Institución: {{ item.institucion }}</span
-      >
-      <span class="border border-blue-100 text-blue-600 px-2 py-1 text-xs"
-        >Categoría: {{ item.categoria }}</span
-      >
-    </p>
-    <span [innerHTML]="item.descripcion | truncate : 130 : true"> </span>
+    <span
+      style="font-size: 0.9rem"
+      [innerHTML]="item.descripcion | truncate : 130 : true"
+    >
+    </span>
     <p style="height: 12px"></p>
     <a
       style="cursor: pointer"
@@ -584,28 +530,11 @@ this.currentUser()?.rol?.nombreRol === Role.Proveedor && this.modeloCaracter())
   @if (item?.articulo_paper) {
   <article class="bg-gray-100 p-4 border">
     <h3 class="text-xl font-bold mb-2">{{ item?.titulo }}</h3>
-
-    <!-- Etiquetas de los articulos -->
-    <p class="mb-1 flex flex-wrap gap-1">
-      <span
-        *ngIf="item.idioma.toLowerCase() === 'ingles'"
-        class="border border-blue-100 text-blue-600 px-2 py-1 text-xs"
-        >En Inglés</span
-      >
-      <span
-        *ngIf="item.articulo_paper.toLowerCase() === 'paper'"
-        class="border border-blue-100 text-blue-600 px-2 py-1 text-xs"
-        >Paper</span
-      >
-    </p>
-    <!-- Descripción del curso -->
-    <span [innerHTML]="item.resumen | truncate : 120 : true"> </span>
-    <p style="margin-top: 0px">
-      <small style="color: gray" class="text-secondary"
-        >Sitio web: {{ getDomain(item.link) }} |
-        {{ getPublicationYear(item.fecha_publicacion) }}</small
-      >
-    </p>
+    <span
+      style="font-size: 0.9rem"
+      [innerHTML]="item.resumen | truncate : 120 : true"
+    >
+    </span>
     <p style="height: 12px"></p>
     <a
       style="cursor: pointer"
@@ -727,33 +656,13 @@ this.currentUser()?.rol?.nombreRol === Role.Proveedor && this.modeloCaracter())
   @if (item?.localidad) {
   <article class="bg-gray-100 p-4 border">
     <h3 class="text-xl font-bold mb-2">{{ item?.titulo }}</h3>
-
-    <!-- Etiquetas de los articulos -->
-    <p class="mb-1 flex flex-wrap gap-1">
-      <span
-        *ngIf="item.origen_"
-        class="border border-blue-100 text-blue-600 px-2 py-1 text-xs"
-        >Origen: {{ item.origen_ }}</span
-      >
-      <span
-        *ngIf="item.localidad"
-        class="border border-blue-100 text-blue-600 px-2 py-1 text-xs"
-        >Localidad: {{ item.localidad }}</span
-      >
-      <span
-        *ngIf="item.aplicabilidad_regional_"
-        class="border border-blue-100 text-blue-600 px-2 py-1 text-xs"
-        >Aplicabilidad Regional: {{ item.aplicabilidad_regional_ }}</span
-      >
-    </p>
     <!-- Descripción del curso -->
-    <span [innerHTML]="item.resumen_de_la_solucion_ | truncate : 120 : true">
+    <span
+      style="font-size: 0.9rem"
+      [innerHTML]="item.resumen_de_la_solucion_ | truncate : 120 : true"
+    >
     </span>
-    <p style="margin-top: 0px">
-      <small style="color: gray" class="text-secondary"
-        >Sitio web: {{ getDomain(item.link) }}
-      </small>
-    </p>
+
     <p style="height: 12px"></p>
     <a
       style="cursor: pointer"
@@ -877,29 +786,12 @@ this.currentUser()?.rol?.nombreRol === Role.Proveedor && this.modeloCaracter())
   @if (item?.descripcionStartup) {
   <article class="bg-gray-100 p-4 border">
     <h3 class="text-xl font-bold mb-2">{{ item?.nombreStartup }}</h3>
-    <p>
-      <!-- Descripción del curso -->
-      <span [innerHTML]="item?.descripcionStartup | truncate : 120 : true">
-      </span>
-    </p>
-    <!-- Etiquetas de los articulos -->
-    <p class="mb-1 flex flex-wrap gap-1">
-      <span
-        *ngIf="item?.tiempoOperando"
-        class="border border-blue-100 text-blue-600 px-2 py-1 text-xs"
-        >{{ item?.tiempoOperando }}</span
-      >
-      <span
-        *ngIf="item?.tipo"
-        class="border border-blue-100 text-blue-600 px-2 py-1 text-xs"
-        >{{ item?.tipo }}</span
-      >
-    </p>
-    <p style="margin-top: 0px">
-      <small style="color: gray" class="text-secondary"
-        >Sitio web: {{ getDomain(item.paginaWeb) }}
-      </small>
-    </p>
+
+    <span
+      style="font-size: 0.9rem"
+      [innerHTML]="item?.descripcionStartup | truncate : 120 : true"
+    >
+    </span>
 
     <p style="height: 12px"></p>
     <a

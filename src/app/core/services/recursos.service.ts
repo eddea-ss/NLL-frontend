@@ -22,7 +22,7 @@ export class RecursosService {
    * @returns Un Observable que emite un arreglo de cursos.
    */
   searchResources(query: string, path: string): Observable<any[]> {
-    const params = new HttpParams().set('search', query).set('limit', 3);
+    const params = new HttpParams().set('search', query).set('limit', 5);
 
     return this.http
       .get<any[]>(`${this.API_BASE_URL}/${path}/search`, { params })
