@@ -20,14 +20,14 @@ this.currentUser()?.rol?.nombreRol === Role.Proveedor && this.modeloCaracter())
 <!-- Sección de artículos sugeridos -->
 <div class="space-y-6" style="min-height: 50vh; max-width: 500px">
   @if (authState()===AuthState.LoggedOut) {
-  <article class="bg-gray-100 p-4">
-    <h3 class="text-xl font-bold mb-2">Registrate como Empresa</h3>
+  <article class="bg-gray-100 p-4 border border">
+    <h3 class="text-xl font-bold mb-2">Registrate</h3>
     <p class="text-gray-600 mb-4">
-      Registrate y completa tu modelo para obtener un resultado inteligente.
+      Registrate para acceder nuevos modelos de madurez y recomendaciones
     </p>
     <a
       routerLink="/registro"
-      class="font-bold py-2 px-4 bg-yellow-500 hover:bg-yellow-600 text-white transition duration-300 ease-in-out transform hover:scale-105"
+      class="font-bold py-2 px-5 bg-yellow-500 hover:bg-yellow-600  transition duration-300 ease-in-out transform hover:scale-105"
     >
       Registrarse
     </a>
@@ -39,7 +39,7 @@ this.currentUser()?.rol?.nombreRol === Role.Proveedor && this.modeloCaracter())
   @for (item of sugeridos; track $index) {
   <!--curso-->
   @if (item?.modalidad && item?.duracion) {
-  <article class="bg-gray-100 p-4">
+  <article class="bg-gray-100 p-4 border">
     <h3 class="text-xl font-bold mb-2">{{ item?.titulo }}</h3>
     <p class="mb-1 flex flex-wrap gap-1">
       <span
@@ -217,7 +217,7 @@ this.currentUser()?.rol?.nombreRol === Role.Proveedor && this.modeloCaracter())
   <!--proveedores-->
   @if (item?.nombreEmpresa && (item?.rut_md5 ||item?.correoElectronicoEmpresa))
   {
-  <article class="bg-gray-100 p-4">
+  <article class="bg-gray-100 p-4 border">
     <h3 class="text-xl font-bold mb-2">{{ item?.nombreEmpresa }}</h3>
     <p style="text-align: left; font-size: 0.9rem">
       <th class="px-4">Tecnologías Ofrecidas:</th>
@@ -436,7 +436,7 @@ this.currentUser()?.rol?.nombreRol === Role.Proveedor && this.modeloCaracter())
   }
   <!--financiamiento-->
   @if (item?.porcentaje_cobertura ) {
-  <article class="bg-gray-100 p-4">
+  <article class="bg-gray-100 p-4 border">
     <h3 class="text-xl font-bold mb-2">{{ item?.titulo }}</h3>
     <!-- Etiquetas de los articulos -->
     <p class="mb-1 flex flex-wrap gap-1">
@@ -581,7 +581,7 @@ this.currentUser()?.rol?.nombreRol === Role.Proveedor && this.modeloCaracter())
   }
   <!--articulos-->
   @if (item?.articulo_paper) {
-  <article class="bg-gray-100 p-4">
+  <article class="bg-gray-100 p-4 border">
     <h3 class="text-xl font-bold mb-2">{{ item?.titulo }}</h3>
 
     <!-- Etiquetas de los articulos -->
@@ -724,7 +724,7 @@ this.currentUser()?.rol?.nombreRol === Role.Proveedor && this.modeloCaracter())
 
   <!--proyecto-->
   @if (item?.localidad) {
-  <article class="bg-gray-100 p-4">
+  <article class="bg-gray-100 p-4 border">
     <h3 class="text-xl font-bold mb-2">{{ item?.titulo }}</h3>
 
     <!-- Etiquetas de los articulos -->
@@ -874,7 +874,7 @@ this.currentUser()?.rol?.nombreRol === Role.Proveedor && this.modeloCaracter())
 
   <!--startup-->
   @if (item?.descripcionStartup) {
-  <article class="bg-gray-100 p-4">
+  <article class="bg-gray-100 p-4 border">
     <h3 class="text-xl font-bold mb-2">{{ item?.nombreStartup }}</h3>
     <p>
       <!-- Descripción del curso -->
