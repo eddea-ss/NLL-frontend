@@ -12,29 +12,15 @@ this.currentUser()?.rol?.nombreRol === Role.Empresa && this.modeloMadurez() &&
 }
 
 <!-- Sección de artículos sugeridos -->
-<div class="space-y-6" style="min-height: 50vh; max-width: 500px">
-  @if (authState()===AuthState.LoggedOut) {
-  <article class="bg-gray-100 p-4 border border">
-    <h3 class="text-xl font-bold mb-2">Registrate</h3>
-    <p style="font-size: 0.9rem" class="text-gray-600 mb-4">
-      Registrate para acceder a nuestros Modelos de Evaluación y recomendaciones
-      personalizadas.
-    </p>
-    <a
-      routerLink="/registro"
-      class="font-bold text-gray-700 py-2 px-5 bg-yellow-500 hover:bg-yellow-600 transition duration-300 ease-in-out transform hover:scale-105"
-    >
-      Registrarse
-    </a>
-  </article>
-  } @if (!sugeridos.length) {
+<div class="space-y-6 animate-fade-in" style="min-height: 50vh; max-width: 500px ">
+ @if (!sugeridos.length) {
   <h1 class="text-gray-300">No hay sugerencias coincidentes.</h1>
   }
   <!--sugeridos-->
   @for (item of sugeridos; track $index) {
   <!--curso-->
   @if (item?.modalidad && item?.duracion) {
-  <article class="bg-gray-100 p-4 border">
+  <article class="bg-gray-100 p-4 border ">
     <h3 class="text-xl font-bold mb-2">{{ item?.titulo }}</h3>
     <p class="mb-1 flex flex-wrap gap-1"></p>
     <p style="font-size: 0.9rem" class="text-gray-600 mb-4">
