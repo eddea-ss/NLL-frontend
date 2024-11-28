@@ -76,13 +76,16 @@ export class RecursosService {
   }
 
   // Sanitizar textos
-  sanitizedString(text: string): string {
+  sanitizedString(text: string, jumpDot = false): string {
     if (!text) return '';
-    const oraciones = text
-      .split('.')
-      .map((oracion) => oracion.trim())
-      .filter((oracion) => oracion.length > 0);
-    const parrafos = oraciones.map((oracion) => `<p>${oracion}.</p>`).join('');
+    let parrafos = text;
+    if (jumpDot) {
+      const oraciones = text
+        .split('.')
+        .map((oracion) => oracion.trim())
+        .filter((oracion) => oracion.length > 0);
+      parrafos = oraciones.map((oracion) => `<p>${oracion}.</p>`).join('');
+    }
     return DOMPurify.sanitize(parrafos);
   }
 

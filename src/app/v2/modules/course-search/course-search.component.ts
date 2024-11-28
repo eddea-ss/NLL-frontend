@@ -8,6 +8,8 @@ import { Course } from '@shared/models/Course.model';
 import { CourseItemComponent } from '@v2/components/course-item/course-item.component';
 import { CourseModalComponent } from '@v2/components/course-modal/course-modal.component';
 import { SearchControlsComponent } from '@v2/components/search-controls/search-controls.component';
+import { Breadcrumb } from '@shared/models/breadcrumb.model';
+import { BreadcrumbsComponent } from '@v2/components/breadcrumbs/breadcrumbs.component';
 
 @Component({
   selector: 'app-course-search',
@@ -19,6 +21,7 @@ import { SearchControlsComponent } from '@v2/components/search-controls/search-c
     CourseItemComponent,
     CourseModalComponent,
     SearchControlsComponent,
+    BreadcrumbsComponent,
   ],
   templateUrl: './course-search.component.html',
   styleUrl: './course-search.component.scss',
@@ -72,6 +75,22 @@ export class CourseSearchComponent implements OnInit {
     'gratuito',
     'de pago',
     'ingles',
+  ];
+  breadcrumbs: Breadcrumb[] = [
+    {
+      label: 'Inicio',
+      url: '/',
+      icon: 'M10 2L2 7h3v7h4v-5h2v5h4V7h3L10 2z', // Ruta del icono SVG
+    },
+    {
+      label: 'Buscadores',
+      url: '/buscadores',
+    },
+    {
+      label: 'Cursos',
+      url: '/buscadores/cursos',
+      isActive: true, // Indica que es la página actual
+    },
   ];
 
   ngOnInit(): void {
