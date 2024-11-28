@@ -8,8 +8,14 @@ import { Course } from '@shared/models/Course.model';
 import { CourseItemComponent } from '@v2/components/course-item/course-item.component';
 import { CourseModalComponent } from '@v2/components/course-modal/course-modal.component';
 import { SearchControlsComponent } from '@v2/components/search-controls/search-controls.component';
-import { Breadcrumb } from '@shared/models/breadcrumb.model';
 import { BreadcrumbsComponent } from '@v2/components/breadcrumbs/breadcrumbs.component';
+// Importar las constantes de textos
+import {
+  TIPS,
+  CUSTOM_MESSAGES,
+  SEARCH_KEYWORDS,
+  BREADCRUMBS,
+} from '../../constants/course.texts';
 
 @Component({
   selector: 'app-course-search',
@@ -55,43 +61,10 @@ export class CourseSearchComponent implements OnInit {
   results: Course[] = [];
 
   // Para el efecto de escritura de tips y claves sugeridas
-  tips: string[] = [
-    '¿Sabías que puedes buscar cursos por "online" o "presencial"?',
-    'Prueba buscar "gestión de proyectos" para encontrar cursos relacionados.',
-    'Puedes combinar palabras clave para refinar tus resultados, por ejemplo, "calidad alimentaria".',
-    'Agrega "gratuito" al final de tu búsqueda para encontrar cursos sin costo, por ejemplo, "seguridad alimentaria gratuito".',
-  ];
-  customMessages: string[] = [
-    '¡Espero que encuentres el curso que buscas!',
-    '¡Buena suerte en tu aprendizaje!',
-    '¡Éxito en tu búsqueda de formación!',
-    '¡Que encuentres cursos interesantes!',
-    '¡Que la educación te acompañe!',
-    '¡Que tengas un excelente descubrimiento de cursos!',
-  ];
-  searchKeywords: string[] = [
-    'online',
-    'presencial',
-    'gratuito',
-    'de pago',
-    'ingles',
-  ];
-  breadcrumbs: Breadcrumb[] = [
-    {
-      label: 'Inicio',
-      url: '/',
-      icon: 'M10 2L2 7h3v7h4v-5h2v5h4V7h3L10 2z', // Ruta del icono SVG
-    },
-    {
-      label: 'Buscadores',
-      url: '/buscadores',
-    },
-    {
-      label: 'Cursos',
-      url: '/buscadores/cursos',
-      isActive: true, // Indica que es la página actual
-    },
-  ];
+  tips: string[] = TIPS;
+  customMessages: string[] = CUSTOM_MESSAGES;
+  searchKeywords: string[] = SEARCH_KEYWORDS;
+  breadcrumbs = BREADCRUMBS;
 
   ngOnInit(): void {
     this.typeTip();
