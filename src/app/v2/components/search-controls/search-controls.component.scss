@@ -1,0 +1,11 @@
+.suggested-term {
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.suggested-term:hover,
+.suggested-term:focus {
+  background-color: #ebf4ff;
+  color: #1d4ed8;
+  outline: none;
+}

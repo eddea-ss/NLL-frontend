@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { debounceTime, Subject } from 'rxjs';
 import { FormsModule } from '@angular/forms';
@@ -7,6 +7,7 @@ import { GoogleAnalyticsService, RecursosService } from '@core/services';
 import { Course } from '@shared/models/Course.model';
 import { CourseItemComponent } from '@v2/components/course-item/course-item.component';
 import { CourseModalComponent } from '@v2/components/course-modal/course-modal.component';
+import { SearchControlsComponent } from '@v2/components/search-controls/search-controls.component';
 
 @Component({
   selector: 'app-course-search',
@@ -17,6 +18,7 @@ import { CourseModalComponent } from '@v2/components/course-modal/course-modal.c
     SugeridosComponent,
     CourseItemComponent,
     CourseModalComponent,
+    SearchControlsComponent,
   ],
   templateUrl: './course-search.component.html',
   styleUrl: './course-search.component.scss',
