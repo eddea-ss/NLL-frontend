@@ -5,6 +5,7 @@ import {
   ElementRef,
   ViewChild,
   NgModule,
+  inject,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
@@ -13,6 +14,7 @@ import { debounceTime, Subject } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { SugeridosComponent } from '@v2/components';
 import { TruncatePipe } from '@shared/pipes/truncate.pipe';
+import { GoogleAnalyticsService } from '@core/services';
 
 interface Course {
   titulo: string;
@@ -45,6 +47,7 @@ interface Course {
 export class CourseSearchComponent implements OnInit, AfterViewInit {
   isModalOpen = false;
   courseModal: Course | undefined;
+  google = inject(GoogleAnalyticsService);
 
   searchTip: string = '';
   searchMessage: string = '';
@@ -160,6 +163,9 @@ export class CourseSearchComponent implements OnInit, AfterViewInit {
         )}`
       );
       if (!response.ok) throw new Error('Error en la solicitud');
+      this.google.eventEmitter('search-course', {
+        label: 'Busqueda en Cursos: ' + encodeURIComponent(query),
+      });
       const data: Course[] = await response.json();
       this.displayResults(data, query);
     } catch (error) {
