@@ -6,11 +6,18 @@ import { SugeridosComponent } from '@v2/components';
 import { GoogleAnalyticsService, RecursosService } from '@core/services';
 import { Course } from '@shared/models/Course.model';
 import { CourseItemComponent } from '@v2/components/course-item/course-item.component';
+import { CourseModalComponent } from '@v2/components/course-modal/course-modal.component';
 
 @Component({
   selector: 'app-course-search',
   standalone: true,
-  imports: [CommonModule, FormsModule, SugeridosComponent, CourseItemComponent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    SugeridosComponent,
+    CourseItemComponent,
+    CourseModalComponent,
+  ],
   templateUrl: './course-search.component.html',
   styleUrl: './course-search.component.scss',
 })
