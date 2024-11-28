@@ -1,9 +1,17 @@
-import { Component, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  AfterViewInit,
+  ElementRef,
+  ViewChild,
+  inject,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import DOMPurify from 'dompurify';
 import { debounceTime, Subject } from 'rxjs';
 import { FormsModule } from '@angular/forms';
+import { GoogleAnalyticsService } from '@core/services';
 
 interface Course {
   titulo: string;
@@ -26,9 +34,11 @@ declare var bootstrap: any; // Declaración global para Bootstrap
   standalone: true,
   imports: [CommonModule, HttpClientModule, FormsModule],
   templateUrl: './course-search.component.html',
-  styleUrls: ['./course-search.component.scss']
+  styleUrls: ['./course-search.component.scss'],
 })
 export class CourseSearchComponent implements OnInit, AfterViewInit {
+  google = inject(GoogleAnalyticsService);
+
   searchTip: string = '';
   searchMessage: string = '';
   searchInput: string = '';
@@ -49,12 +59,12 @@ export class CourseSearchComponent implements OnInit, AfterViewInit {
     '¡Éxito en tu búsqueda de formación!',
     '¡Que encuentres cursos interesantes!',
     '¡Que la educación te acompañe!',
-    '¡Que tengas un excelente descubrimiento de cursos!'
+    '¡Que tengas un excelente descubrimiento de cursos!',
   ];
   tipIndex: number = 0;
   charIndex: number = 0;
   typingSpeed: number = 50; // ms
-  tipDelay: number = 3000;  // ms
+  tipDelay: number = 3000; // ms
   typingTimeout: any;
   isUserTyping: boolean = false;
 
@@ -71,9 +81,7 @@ export class CourseSearchComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.typeTip();
-    this.searchSubject.pipe(
-      debounceTime(300)
-    ).subscribe(query => {
+    this.searchSubject.pipe(debounceTime(300)).subscribe((query) => {
       this.handleSearch(query);
     });
   }
@@ -139,8 +147,15 @@ export class CourseSearchComponent implements OnInit, AfterViewInit {
 
     try {
       this.isLoading = true;
-      const response = await fetch(`https://control.nuevoloslagos.org/curses/search?search=${encodeURIComponent(query)}`);
+      const response = await fetch(
+        `https://control.nuevoloslagos.org/curses/search?search=${encodeURIComponent(
+          query
+        )}`
+      );
       if (!response.ok) throw new Error('Error en la solicitud');
+      this.google.eventEmitter('search-course', {
+        label: 'Busqueda en curso: ' + encodeURIComponent(query),
+      });
       const data: Course[] = await response.json();
       this.displayResults(data, query);
     } catch (error) {
@@ -156,7 +171,9 @@ export class CourseSearchComponent implements OnInit, AfterViewInit {
   displayResults(data: Course[], query: string): void {
     this.currentData = this.sortResults(data);
     this.results = this.currentData;
-    this.resultCount = `${this.currentData.length} resultado${this.currentData.length !== 1 ? 's' : ''} para "${query}"`;
+    this.resultCount = `${this.currentData.length} resultado${
+      this.currentData.length !== 1 ? 's' : ''
+    } para "${query}"`;
 
     if (this.currentData.length === 0) {
       this.resultCount = 'No se encontraron resultados.';
@@ -165,7 +182,11 @@ export class CourseSearchComponent implements OnInit, AfterViewInit {
 
   // Ordenar los resultados por nivel de importancia
   sortResults(data: Course[]): Course[] {
-    const nivelOrder: { [key: string]: number } = { 'Avanzado': 1, 'Intermedio': 2, 'Básico': 3 };
+    const nivelOrder: { [key: string]: number } = {
+      Avanzado: 1,
+      Intermedio: 2,
+      Básico: 3,
+    };
     return data.sort((a, b) => {
       return (nivelOrder[a.nivel] || 4) - (nivelOrder[b.nivel] || 4);
     });
@@ -177,38 +198,71 @@ export class CourseSearchComponent implements OnInit, AfterViewInit {
     const item = this.currentData[this.currentIndex];
 
     const modalTitle = this.elRef.nativeElement.querySelector('#modalTitle');
-    const modalEntidad = this.elRef.nativeElement.querySelector('#modalEntidad');
+    const modalEntidad =
+      this.elRef.nativeElement.querySelector('#modalEntidad');
     const modalIdioma = this.elRef.nativeElement.querySelector('#modalIdioma');
-    const modalTipoPago = this.elRef.nativeElement.querySelector('#modalTipoPago');
-    const modalTipoGratuito = this.elRef.nativeElement.querySelector('#modalTipoGratuito');
-    const modalModalidad = this.elRef.nativeElement.querySelector('#modalModalidad');
-    const modalModalidadOnline = this.elRef.nativeElement.querySelector('#modalModalidadOnline');
+    const modalTipoPago =
+      this.elRef.nativeElement.querySelector('#modalTipoPago');
+    const modalTipoGratuito =
+      this.elRef.nativeElement.querySelector('#modalTipoGratuito');
+    const modalModalidad =
+      this.elRef.nativeElement.querySelector('#modalModalidad');
+    const modalModalidadOnline = this.elRef.nativeElement.querySelector(
+      '#modalModalidadOnline'
+    );
     const modalNivel = this.elRef.nativeElement.querySelector('#modalNivel');
-    const modalDuracion = this.elRef.nativeElement.querySelector('#modalDuracion');
-    const modalDescripcion = this.elRef.nativeElement.querySelector('#modalDescripcion');
-    const modalTipoConocimiento = this.elRef.nativeElement.querySelector('#modalTipoConocimiento');
+    const modalDuracion =
+      this.elRef.nativeElement.querySelector('#modalDuracion');
+    const modalDescripcion =
+      this.elRef.nativeElement.querySelector('#modalDescripcion');
+    const modalTipoConocimiento = this.elRef.nativeElement.querySelector(
+      '#modalTipoConocimiento'
+    );
     const modalLink = this.elRef.nativeElement.querySelector('#modalLink');
 
     modalTitle.textContent = item.titulo;
     modalEntidad.textContent = `Entidad: ${item.entidad}`;
-    modalIdioma.textContent = `Idioma: ${this.capitalizeFirstLetter(item.idioma)}`;
+    modalIdioma.textContent = `Idioma: ${this.capitalizeFirstLetter(
+      item.idioma
+    )}`;
     modalTipoPago.textContent = `Tipo: De Pago`;
     modalTipoGratuito.textContent = `Tipo: Gratuito`;
-    modalModalidad.textContent = `Modalidad: ${this.capitalizeFirstLetter(item.modalidad)}`;
+    modalModalidad.textContent = `Modalidad: ${this.capitalizeFirstLetter(
+      item.modalidad
+    )}`;
     modalModalidadOnline.textContent = `Modalidad: Online`;
     modalNivel.textContent = `Nivel: ${item.nivel}`;
     modalDuracion.textContent = `Duración: ${item.duracion}`;
-    modalDescripcion.innerHTML = `<strong>Descripción:</strong><br>${DOMPurify.sanitize(item.descripcion).replace(/\r\n/g, '<br><br>')}`;
+    modalDescripcion.innerHTML = `<strong>Descripción:</strong><br>${DOMPurify.sanitize(
+      item.descripcion
+    ).replace(/\r\n/g, '<br><br>')}`;
 
-    modalTipoConocimiento.textContent = `Tipo de Conocimiento: ${item.tipo_de_conocimiento.join(', ')}`;
+    modalTipoConocimiento.textContent = `Tipo de Conocimiento: ${item.tipo_de_conocimiento.join(
+      ', '
+    )}`;
     modalLink.href = item.link;
 
     // Mostrar u ocultar etiquetas según los datos
-    modalIdioma.classList.toggle('d-none', item.idioma.toLowerCase() !== "ingles");
-    modalTipoPago.classList.toggle('d-none', item.tipo.toLowerCase() !== "de pago");
-    modalTipoGratuito.classList.toggle('d-none', item.tipo.toLowerCase() === "de pago");
-    modalModalidad.classList.toggle('d-none', item.modalidad.toLowerCase() !== "presencial");
-    modalModalidadOnline.classList.toggle('d-none', item.modalidad.toLowerCase() !== "online");
+    modalIdioma.classList.toggle(
+      'd-none',
+      item.idioma.toLowerCase() !== 'ingles'
+    );
+    modalTipoPago.classList.toggle(
+      'd-none',
+      item.tipo.toLowerCase() !== 'de pago'
+    );
+    modalTipoGratuito.classList.toggle(
+      'd-none',
+      item.tipo.toLowerCase() === 'de pago'
+    );
+    modalModalidad.classList.toggle(
+      'd-none',
+      item.modalidad.toLowerCase() !== 'presencial'
+    );
+    modalModalidadOnline.classList.toggle(
+      'd-none',
+      item.modalidad.toLowerCase() !== 'online'
+    );
     modalNivel.classList.toggle('d-none', !item.nivel);
     modalDuracion.classList.toggle('d-none', !item.duracion);
     this.modal.show();
@@ -237,7 +291,10 @@ export class CourseSearchComponent implements OnInit, AfterViewInit {
 
   // Mostrar un mensaje de búsqueda personalizado
   showSearchMessage(): void {
-    const randomMessage = this.customMessages[Math.floor(Math.random() * this.customMessages.length)];
+    const randomMessage =
+      this.customMessages[
+        Math.floor(Math.random() * this.customMessages.length)
+      ];
     this.searchMessage = randomMessage;
   }
 
