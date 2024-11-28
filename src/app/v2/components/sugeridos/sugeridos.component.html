@@ -12,30 +12,24 @@ this.currentUser()?.rol?.nombreRol === Role.Empresa && this.modeloMadurez() &&
 }
 
 <!-- Sección de artículos sugeridos -->
-<div class="space-y-6 animate-fade-in" style="min-height: 50vh; max-width: 500px ">
- @if (!sugeridos.length) {
+<div
+  class="space-y-6 animate-fade-in"
+  style="min-height: 50vh; max-width: 500px"
+>
+  @if (!sugeridos.length) {
   <h1 class="text-gray-300">No hay sugerencias coincidentes.</h1>
   }
   <!--sugeridos-->
   @for (item of sugeridos; track $index) {
   <!--curso-->
   @if (item?.modalidad && item?.duracion) {
-  <article class="bg-gray-100 p-4 border ">
-    <h3 class="text-xl font-bold mb-2">{{ item?.titulo }}</h3>
-    <p class="mb-1 flex flex-wrap gap-1"></p>
-    <p style="font-size: 0.9rem" class="text-gray-600 mb-4">
-      {{ item?.descripcion | truncate : 100 : true }}
-    </p>
-    <a
-      style="cursor: pointer"
-      (click)="openModal($index)"
-      (keypress.enter)="openModal($index)"
-      (keypress.space)="openModal($index)"
-      class="font-bold py-2 text-blue-500 transition duration-300 ease-in-out transform hover:scale-105"
-    >
-      Ver Más
-    </a>
-  </article>
+  <app-course-item
+    class="p-4"
+    [simplified]="true"
+    [course]="item"
+    (openModal)="openModal($index)"
+  >
+  </app-course-item>
   <div
     id="large-modal"
     *ngIf="isModalOpen && dataModal"

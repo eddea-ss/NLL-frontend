@@ -11,10 +11,12 @@ import { AuthState, Role } from '@shared/enums';
 import { TruncatePipe } from '@shared/pipes/truncate.pipe';
 import DOMPurify from 'dompurify';
 
+import { CourseItemComponent } from '@v2/components/course-item/course-item.component';
+
 @Component({
   selector: 'app-sugeridos',
   standalone: true,
-  imports: [RouterLink, TruncatePipe, CommonModule],
+  imports: [RouterLink, TruncatePipe, CommonModule, CourseItemComponent],
   templateUrl: './sugeridos.component.html',
   styleUrl: './sugeridos.component.scss',
 })

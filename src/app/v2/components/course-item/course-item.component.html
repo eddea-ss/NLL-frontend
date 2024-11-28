@@ -1,0 +1,80 @@
+@if (simplified) {
+<article class="bg-gray-100 p-4">
+  <h3 class="text-xl font-bold mb-2">{{ course?.titulo }}</h3>
+  <p class="mb-1 flex flex-wrap gap-1"></p>
+  <p style="font-size: 0.9rem" class="text-gray-600 mb-4">
+    {{ course?.descripcion | truncate : 100 : true }}
+  </p>
+  <a
+    style="cursor: pointer"
+    (click)="onOpenModal()"
+    (keypress.enter)="onOpenModal()"
+    (keypress.space)="onOpenModal()"
+    class="font-bold py-2 text-blue-500 transition duration-300 ease-in-out transform hover:scale-105"
+  >
+    Ver Más
+  </a>
+</article>
+} @else {
+<article
+  class="group"
+  (click)="onOpenModal()"
+  (keypress.enter)="onOpenModal()"
+  (keypress.space)="onOpenModal()"
+  tabindex="0"
+  role="button"
+>
+  <a
+    style="cursor: pointer"
+    class="text-xl font-semibold text-blue-600 hover:underline"
+  >
+    {{ course.titulo }}
+  </a>
+
+  <!-- Etiquetas de los cursos -->
+  <p class="mb-1 flex flex-wrap gap-1">
+    @if (course.idioma.toLowerCase() === 'ingles') {
+    <span class="border border-blue-100 text-blue-600 px-2 py-1 text-xs">
+      En Inglés
+    </span>
+    } @if (course.tipo.toLowerCase() === 'de pago') {
+    <span class="border border-blue-100 text-blue-600 px-2 py-1 text-xs">
+      De Pago
+    </span>
+    } @if (course.tipo.toLowerCase() === 'gratuito') {
+    <span class="border border-blue-100 text-blue-600 px-2 py-1 text-xs">
+      Gratuito
+    </span>
+    } @if(course.modalidad.toLowerCase() === 'online'){
+    <span class="border border-blue-100 text-blue-600 px-2 py-1 text-xs">
+      Online
+    </span>
+    } @if (course.modalidad.toLowerCase() === 'presencial') {
+    <span class="border border-blue-100 text-blue-600 px-2 py-1 text-xs">
+      Presencial
+    </span>
+    } @for (tipo of course.tipo_de_conocimiento; track $index) {
+    <span
+      class="border border-blue-100 text-blue-600 px-2 py-1 text-xs"
+      style="margin-right: 4px"
+    >
+      {{ tipo }}
+    </span>
+    }
+  </p>
+
+  <!-- Descripción del curso -->
+  <span
+    [innerHTML]="
+      recursosService.sanitizedString(
+        course.descripcion | truncate : 400 : true
+      )
+    "
+  ></span>
+  <p>
+    <small style="color: gray" class="text-secondary">
+      Sitio web: {{ recursosService.getDomain(course.link) }}
+    </small>
+  </p>
+</article>
+}

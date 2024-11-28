@@ -1,5 +1,5 @@
 // src/app/services/course.service.ts
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import {
   HttpClient,
   HttpErrorResponse,
@@ -7,6 +7,8 @@ import {
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { GoogleAnalyticsService } from './google-analytics.service';
+import DOMPurify from 'dompurify';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +16,8 @@ import { catchError, map } from 'rxjs/operators';
 export class RecursosService {
   private readonly API_BASE_URL = 'https://control.nuevoloslagos.org';
 
-  constructor(private http: HttpClient) {}
+  google = inject(GoogleAnalyticsService);
+  http = inject(HttpClient);
 
   /**
    * Busca cursos según una consulta dada.
@@ -35,6 +38,24 @@ export class RecursosService {
       );
   }
 
+  // Realizar la búsqueda de cursos según la consulta
+  async fetchResults(query: string, path: string): Promise<any> {
+    try {
+      const response = await fetch(
+        `https://control.nuevoloslagos.org/${path}/search?search=${encodeURIComponent(
+          query
+        )}`
+      );
+      if (!response.ok) throw new Error('Error en la solicitud');
+      this.google.eventEmitter('search-' + path, {
+        search: encodeURIComponent(query),
+      });
+      return await response.json();
+    } catch (error) {
+      console.error('Error al obtener los datos:', error);
+    }
+  }
+
   /**
    * Maneja errores de la petición HTTP.
    * @param error El error de la respuesta HTTP.
@@ -52,5 +73,37 @@ export class RecursosService {
     // Aquí podrías agregar lógica para mostrar notificaciones al usuario
     console.error(errorMessage);
     return throwError(() => new Error(errorMessage));
+  }
+
+  // Sanitizar textos
+  sanitizedString(text: string): string {
+    if (!text) return '';
+    const oraciones = text
+      .split('.')
+      .map((oracion) => oracion.trim())
+      .filter((oracion) => oracion.length > 0);
+    const parrafos = oraciones.map((oracion) => `<p>${oracion}.</p>`).join('');
+    return DOMPurify.sanitize(parrafos);
+  }
+
+  openLink(link: string): void {
+    try {
+      if (!link) {
+        console.warn('No se proporcionó un link');
+        return;
+      }
+
+      window.open(link, '_blank');
+    } catch (error) {
+      console.error('Error al abrir el link:', error);
+    }
+  }
+
+  getDomain(url: string): string {
+    try {
+      return new URL(url).hostname.replace('www.', '');
+    } catch {
+      return 'URL inválida';
+    }
   }
 }
