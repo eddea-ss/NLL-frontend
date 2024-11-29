@@ -17,6 +17,7 @@ import {
   ProjectSearchComponent,
   ProyectoEquipoComponent,
   ProyectoPlataformaComponent,
+  ResourceSearchComponent,
   SelectionRegisterComponent,
 } from '@v2/v2.module';
 
@@ -43,12 +44,37 @@ export const routes: Routes = [
       },
       { path: 'investigacion-podcasts', component: PodcastsComponent },
       { path: 'investigacion-diagnostico', component: InformeComponent },
-      { path: 'buscador-cursos', component: CourseSearchComponent },
-      { path: 'buscador-articulos', component: ArticleSearchComponent },
-      { path: 'buscador-proyectos', component: ProjectSearchComponent },
-      { path: 'buscador-financiamiento', component: FinancingSearchComponent },
-      { path: 'buscador-proveedores', component: ProviderSearchComponent },
-      { path: 'buscador-startup', component: StartupSearchComponent },
+      {
+        path: 'buscador-cursos',
+        component: ResourceSearchComponent,
+        data: { resourceType: 'curses' },
+      },
+      {
+        path: 'buscador-articulos',
+        component: ResourceSearchComponent,
+        data: { resourceType: 'articles' },
+      },
+      {
+        path: 'buscador-proyectos',
+        component: ResourceSearchComponent,
+        data: { resourceType: 'projects' },
+      },
+      {
+        path: 'buscador-financiamiento',
+        component: ResourceSearchComponent,
+        data: { resourceType: 'financing' },
+      },
+      {
+        path: 'buscador-proveedores',
+        component: ResourceSearchComponent,
+        data: { resourceType: 'suppliers' },
+      },
+      {
+        path: 'buscador-startup',
+        component: ResourceSearchComponent,
+        data: { resourceType: 'startups' },
+      },
+
       {
         path: 'login',
         component: LoginComponent,

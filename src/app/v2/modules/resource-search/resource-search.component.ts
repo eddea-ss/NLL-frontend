@@ -2,45 +2,49 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { debounceTime, Subject } from 'rxjs';
 import { FormsModule } from '@angular/forms';
-import { SugeridosComponent } from '@v2/components';
-import { GoogleAnalyticsService, RecursosService } from '@core/services';
-import { Course } from '@shared/models/Course.model';
-import { CourseItemComponent } from '@v2/components/course-item/course-item.component';
-import { CourseModalComponent } from '@v2/components/course-modal/course-modal.component';
+import { ActivatedRoute } from '@angular/router';
+import {
+  CourseItemComponent,
+  CourseModalComponent,
+  SugeridosComponent,
+} from '@v2/components';
+import { GoogleAnalyticsService, ResourceService } from '../../services/index';
 import { SearchControlsComponent } from '@v2/components/search-controls/search-controls.component';
 import { BreadcrumbsComponent } from '@v2/components/breadcrumbs/breadcrumbs.component';
-// Importar las constantes de textos
-import { COURSE_TEXT } from '../../constants/resources.texts';
-import { ActivatedRoute } from '@angular/router';
+import { COURSE_TEXT, ARTICLE_TEXT } from '@v2/constants';
+import { ArticleItemComponent } from '@v2/components/article-item/article-item.component';
+import { ArticleModalComponent } from '@v2/components/article-modal/article-modal.component';
 
 @Component({
-  selector: 'app-course-search',
+  selector: 'app-resource-search',
   standalone: true,
   imports: [
     CommonModule,
     FormsModule,
     SugeridosComponent,
-    CourseItemComponent,
-    CourseModalComponent,
     SearchControlsComponent,
     BreadcrumbsComponent,
+    //recursos
+    CourseItemComponent,
+    CourseModalComponent,
+    ArticleItemComponent,
+    ArticleModalComponent,
   ],
-  templateUrl: './course-search.component.html',
-  styleUrl: './course-search.component.scss',
+  templateUrl: './resource-search.component.html',
+  styleUrl: './resource-search.component.scss',
 })
-export class CourseSearchComponent implements OnInit {
+export class ResourceSearchComponent implements OnInit {
   google = inject(GoogleAnalyticsService);
-  recursosService = inject(RecursosService);
+  recursosService = inject(ResourceService);
   route = inject(ActivatedRoute);
 
-  //modal
+  // Modal variables
   isModalOpen = false;
   dataModal: any | undefined;
-  modal: any;
-  currentData: Course[] = [];
+  currentData: any[] = [];
   currentIndex: number = 0;
 
-  // Para debounce (efecto de tipado)
+  // Debounce variables
   tipIndex: number = 0;
   charIndex: number = 0;
   typingSpeed: number = 50; // ms
@@ -49,54 +53,69 @@ export class CourseSearchComponent implements OnInit {
   isUserTyping: boolean = false;
   private searchSubject: Subject<string> = new Subject();
 
-  //variables de manejo busqueda
+  // Search handling variables
   searchTip: string = '';
   searchMessage: string = '';
   searchInput: string = '';
   resultCount: string = '';
   isLoading: boolean = false;
-  results: Course[] = [];
+  results: any[] = [];
 
-  // Para el efecto de escritura de tips y claves sugeridas
+  // Texts for tips and suggested keywords
   tips: string[] = [];
   customMessages: string[] = [];
   searchKeywords: string[] = [];
-  breadcrumbs = [];
+  breadcrumbs: any[] = [];
   resourceType: string = '';
+  labelType: string = '';
 
   ngOnInit(): void {
     this.route.data.subscribe((data) => {
       this.resourceType = data['resourceType'];
+      this.labelType = data['label'];
       this.initializeTexts();
-    });
-
-    this.typeTip();
-    this.searchSubject.pipe(debounceTime(300)).subscribe((query) => {
-      this.handleSearch(query);
+      this.typeTip();
+      this.searchSubject.pipe(debounceTime(300)).subscribe((query) => {
+        this.handleSearch(query);
+      });
     });
   }
 
   initializeTexts(): void {
     switch (this.resourceType) {
       case 'curses':
-        // Inicializa los textos específicos para cursos
+        this.labelType = COURSE_TEXT.LABEL;
         this.tips = COURSE_TEXT.TIPS;
         this.customMessages = COURSE_TEXT.CUSTOM_MESSAGES;
         this.searchKeywords = COURSE_TEXT.SEARCH_KEYWORDS;
         this.breadcrumbs = COURSE_TEXT.BREADCRUMBS;
         break;
-      case 'articulos':
+      case 'articles':
+        this.labelType = ARTICLE_TEXT.LABEL;
+        this.tips = ARTICLE_TEXT.TIPS;
+        this.customMessages = ARTICLE_TEXT.CUSTOM_MESSAGES;
+        this.searchKeywords = ARTICLE_TEXT.SEARCH_KEYWORDS;
+        this.breadcrumbs = ARTICLE_TEXT.BREADCRUMBS;
         break;
-      // Agrega casos para otros tipos de recursos
+      case 'projects':
+        break;
+      case 'financing':
+        break;
+      case 'suppliers':
+        break;
+      case 'startups':
+        break;
       default:
-        // Textos por defecto
         break;
     }
   }
 
   // Efecto de máquina de escribir para los tips
   typeTip(): void {
-    if (this.tipIndex >= this.tips.length) this.tipIndex = 0;
+    if (!this.tips) {
+      return;
+    }
+    if (this.tipIndex >= this.tips?.length) this.tipIndex = 0;
     const currentTip = this.tips[this.tipIndex];
 
     if (this.charIndex < currentTip.length) {
@@ -139,7 +158,7 @@ export class CourseSearchComponent implements OnInit {
     }
   }
 
-  // Realizar la búsqueda de cursos según la consulta
+  // Realizar la búsqueda de recursos según la consulta
   async fetchResults(query: string): Promise<void> {
     if (query.length < 2) {
       this.results = [];
@@ -149,7 +168,7 @@ export class CourseSearchComponent implements OnInit {
 
     try {
       this.isLoading = true;
-      const response: Course[] = await this.recursosService.fetchResults(
+      const response: any[] = await this.recursosService.fetchResults(
         query,
         this.resourceType
       );
@@ -164,7 +183,7 @@ export class CourseSearchComponent implements OnInit {
   }
 
   // Mostrar los resultados de búsqueda en el DOM
-  displayResults(data: Course[], query: string): void {
+  displayResults(data: any[], query: string): void {
     this.currentData = data;
     this.results = this.currentData;
     this.resultCount = `${this.currentData.length} resultado${

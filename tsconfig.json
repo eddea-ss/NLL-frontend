@@ -37,8 +37,17 @@
       "@styles/*": ["app/shared/styles/*"],
       //para versionado
       "@v1/*": ["app/v1/modules/*"],
+
+      //v2
       "@v2/*": ["app/v2/*"],
-      "@v2/components/*": ["app/v2/components/*"]
+      "@v2/components/*": ["app/v2/components/*"],
+      "@v2/services/*": ["app/v2/services/*"],
+      "@v2/guards/*": ["app/v2/guards/*"],
+      "@v2/interceptors/*": ["app/v2/interceptors/*"],
+      "@v2/enums/*": ["app/v2/enums/*"],
+      "@v2/models/*": ["app/v2/models/*"],
+      "@v2/pipes/*": ["app/v2/pipes/*"],
+      "@v2/modules/*": ["app/v2/modules/*"]
     }
   },
   "angularCompilerOptions": {

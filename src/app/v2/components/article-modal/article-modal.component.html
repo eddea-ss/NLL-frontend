@@ -1,4 +1,5 @@
 <div
+  id="large-modal"
   tabindex="-1"
   class="fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full flex items-center justify-center bg-black bg-opacity-20"
 >
@@ -15,6 +16,7 @@
         <button
           type="button"
           class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
+          data-modal-hide="large-modal"
           (click)="onClose()"
         >
           <svg
@@ -38,48 +40,34 @@
       <!-- Modal body -->
       <div class="p-4 md:p-5 space-y-4">
         <p class="mb-1 flex flex-wrap gap-1">
-          @if (data.idioma.toLowerCase() === 'ingles') {
           <span class="border border-blue-100 text-blue-600 px-2 py-1 text-xs">
-            En Inglés
+            Idioma: {{ data.idioma }}
           </span>
-          } @if (data.tipo.toLowerCase() === 'de pago') {
+          @if (data.articulo_paper.toLowerCase() === 'paper') {
           <span class="border border-blue-100 text-blue-600 px-2 py-1 text-xs">
-            De Pago
+            Paper
           </span>
-          } @if(data.tipo.toLowerCase() === 'gratuito'){
+          } @if (data.articulo_paper.toLowerCase() === 'articulo') {
           <span class="border border-blue-100 text-blue-600 px-2 py-1 text-xs">
-            Gratuito
-          </span>
-          } @if(data.modalidad.toLowerCase() === 'online'){
-          <span class="border border-blue-100 text-blue-600 px-2 py-1 text-xs">
-            Online
-          </span>
-          } @if(data.modalidad.toLowerCase() === 'presencial'){
-          <span class="border border-blue-100 text-blue-600 px-2 py-1 text-xs">
-            Presencial
-          </span>
-          } @for (tipo of data.tipo_de_conocimiento; track $index) {
-          <span
-            class="border border-blue-100 text-blue-600 px-2 py-1 text-xs"
-            style="margin-right: 4px"
-          >
-            {{ tipo }}
+            Artículo
           </span>
           }
+          <span class="border border-blue-100 text-blue-600 px-2 py-1 text-xs">
+            Nivel: {{ data.nivel }}
+          </span>
         </p>
-        <p><strong>Entidad:</strong> {{ data.entidad }}</p>
-        <p><strong>Nivel:</strong> {{ data.nivel }}</p>
-        <p><strong>Idioma:</strong> {{ data.idioma }}</p>
-        <p><strong>Duración:</strong> {{ data.duracion }}</p>
-        <!-- Descripción del curso -->
-        <p><strong>Descripción:</strong></p>
+        <p style="text-align: center"></p>
+        <p><strong>Resumen:</strong></p>
         <span
-          [innerHTML]="resourseService.sanitizedString(data.descripcion, true)"
+          [innerHTML]="resourseService.sanitizedString(data.resumen)"
         ></span>
         <p>
-          <small style="color: gray" class="text-secondary">
-            Sitio web: {{ resourseService.getDomain(data.link) }}
-          </small>
+          <small style="color: gray" class="text-secondary"
+            >Sitio web: {{ resourseService.getDomain(data.link) }} |
+            {{
+              resourseService.getPublicationYear(data.fecha_publicacion)
+            }}</small
+          >
         </p>
       </div>
       <!-- Modal footer -->
@@ -88,6 +76,7 @@
         class="flex items-center p-4 md:p-5 space-x-3 rtl:space-x-reverse border-t border-gray-200 rounded-b"
       >
         <button
+          data-modal-hide="large-modal"
           type="button"
           (click)="resourseService.openLink(data.link)"
           style="gap: 6px; padding: 8px 16px"
@@ -109,7 +98,7 @@
             />
           </svg>
 
-          Ir al curso
+          Ir al artículo
         </button>
         @if (showNext) {
         <button

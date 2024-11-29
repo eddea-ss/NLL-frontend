@@ -3,14 +3,14 @@ import { ResourceService } from '@v2/services';
 import { TruncatePipe } from '@v2/pipes';
 
 @Component({
-  selector: 'app-course-item',
+  selector: 'app-article-item',
   standalone: true,
   imports: [TruncatePipe],
-  templateUrl: './course-item.component.html',
-  styleUrl: './course-item.component.scss',
+  templateUrl: './article-item.component.html',
+  styleUrl: './article-item.component.scss',
 })
-export class CourseItemComponent {
-  recursosService = inject(ResourceService);
+export class ArticleItemComponent {
+  resourceService = inject(ResourceService);
 
   @Input() data: any;
   @Input() simplified: boolean = false;

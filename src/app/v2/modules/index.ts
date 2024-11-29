@@ -14,3 +14,4 @@ export * from './project-search/project-search.component';
 export * from './login/login.component';
 export * from './selection-register/selection-register.component';
 export * from './form-register/form-register.component';
+export * from './resource-search/resource-search.component';

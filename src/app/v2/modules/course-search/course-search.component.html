@@ -25,7 +25,7 @@
       @for (item of results; track $index) {
       <app-course-item
         class="p-4"
-        [course]="item"
+        [data]="item"
         (openModal)="openModal($index)"
       >
       </app-course-item>
@@ -38,7 +38,7 @@
 
 <app-course-modal
   *ngIf="isModalOpen && dataModal"
-  [course]="dataModal"
+  [data]="dataModal"
   (close)="closeModal()"
   (next)="showNextItem()"
 ></app-course-modal>

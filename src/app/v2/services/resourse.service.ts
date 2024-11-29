@@ -13,7 +13,7 @@ import DOMPurify from 'dompurify';
 @Injectable({
   providedIn: 'root',
 })
-export class RecursosService {
+export class ResourceService {
   private readonly API_BASE_URL = 'https://control.nuevoloslagos.org';
 
   google = inject(GoogleAnalyticsService);
@@ -108,5 +108,21 @@ export class RecursosService {
     } catch {
       return 'URL inválida';
     }
+  }
+
+  getPublicationYear(fecha_publicacion: string): number {
+    return this.convertToDate(fecha_publicacion).getFullYear();
+  }
+
+  // Convert date string to Date object
+  convertToDate(dateString: string): Date {
+    if (dateString.length !== 8) {
+      console.warn(`Formato de fecha inesperado: ${dateString}`);
+      return new Date(0); // Fecha por defecto
+    }
+    const year = dateString.substring(0, 4);
+    const month = dateString.substring(4, 6);
+    const day = dateString.substring(6, 8);
+    return new Date(`${year}-${month}-${day}`);
   }
 }

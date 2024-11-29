@@ -13,6 +13,8 @@ import DOMPurify from 'dompurify';
 
 import { CourseItemComponent } from '@v2/components/course-item/course-item.component';
 import { CourseModalComponent } from '../course-modal/course-modal.component';
+import { ArticleItemComponent } from '../article-item/article-item.component';
+import { ArticleModalComponent } from '../article-modal/article-modal.component';
 
 @Component({
   selector: 'app-sugeridos',
@@ -23,6 +25,8 @@ import { CourseModalComponent } from '../course-modal/course-modal.component';
     CommonModule,
     CourseItemComponent,
     CourseModalComponent,
+    ArticleItemComponent,
+    ArticleModalComponent,
   ],
   templateUrl: './sugeridos.component.html',
   styleUrl: './sugeridos.component.scss',

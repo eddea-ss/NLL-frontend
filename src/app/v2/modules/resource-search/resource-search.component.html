@@ -1,0 +1,75 @@
+<!-- resource-search.component.html -->
+<!-- Migas de pan (Breadcrumbs) -->
+<app-breadcrumbs [breadcrumbs]="breadcrumbs"></app-breadcrumbs>
+<!-- Contenido dinámico -->
+<main class="container mx-auto py-12 flex flex-col lg:flex-row">
+  <!-- Search and Results -->
+  <div class="w-full lg:w-3/4 pr8 px-8">
+    <h2 class="text-2xl font-bold mb-6">{{ labelType }}</h2>
+    <!-- Tips y Mensajes Dinámicos -->
+    <!-- Nuevo Componente de Controles de Búsqueda -->
+    <app-search-controls
+      [searchTip]="searchTip"
+      [searchMessage]="searchMessage"
+      [(searchInput)]="searchInput"
+      [searchKeywords]="searchKeywords"
+      [resultCount]="resultCount"
+      [isLoading]="isLoading"
+      (searchInputChange)="onSearchInputChange()"
+      (clearSearch)="clearSearch()"
+      (addSuggestedTerm)="addSuggestedTerm($event)"
+      (triggerSearch)="onSearchInputChange()"
+    ></app-search-controls>
+
+    <!-- Resultados de búsqueda -->
+    <div class="space-y-8">
+      <ng-container [ngSwitch]="resourceType">
+        <ng-container *ngSwitchCase="'curses'">
+          <ng-container *ngFor="let item of results; let i = index">
+            <app-course-item
+              class="p-4"
+              [data]="item"
+              (openModal)="openModal(i)"
+            ></app-course-item>
+          </ng-container>
+        </ng-container>
+        <ng-container *ngSwitchCase="'articles'">
+          <ng-container *ngFor="let item of results; let i = index">
+            <app-article-item
+              class="p-4"
+              [data]="item"
+              (openModal)="openModal(i)"
+            ></app-article-item>
+          </ng-container>
+        </ng-container>
+        <!-- Agrega casos para otros tipos de recursos -->
+      </ng-container>
+    </div>
+  </div>
+  <!-- Artículos sugeridos -->
+  <app-sugeridos></app-sugeridos>
+</main>
+
+<!-- Modales -->
+<!-- Agrega casos para otros tipos de recursos -->
+<ng-container [ngSwitch]="resourceType">
+  <ng-container *ngSwitchCase="'curses'">
+    <ng-container *ngIf="isModalOpen && dataModal">
+      <app-course-modal
+        [data]="dataModal"
+        (close)="closeModal()"
+        (next)="showNextItem()"
+      ></app-course-modal>
+    </ng-container>
+  </ng-container>
+  <!-- Agrega casos para otros tipos de recursos -->
+  <ng-container *ngSwitchCase="'articles'">
+    <ng-container *ngIf="isModalOpen && dataModal">
+      <app-article-modal
+        [data]="dataModal"
+        (close)="closeModal()"
+        (next)="showNextItem()"
+      ></app-article-modal>
+    </ng-container>
+  </ng-container>
+</ng-container>
