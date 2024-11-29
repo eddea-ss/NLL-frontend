@@ -1,5 +1,4 @@
 <div
-  id="large-modal"
   tabindex="-1"
   class="fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full flex items-center justify-center bg-black bg-opacity-20"
 >
@@ -10,8 +9,8 @@
       <div
         class="flex items-center justify-between p-4 md:p-5 border-b rounded-t"
       >
-        <h3 class="text-xl font-semibold text-blue-900">
-          {{ data.titulo }}
+        <h3 class="text-xl font-semibold text-blue-900 uppercase">
+          {{ data?.nombreStartup }}
         </h3>
         <button
           type="button"
@@ -40,37 +39,45 @@
       <!-- Modal body -->
       <div class="p-4 md:p-5 space-y-4">
         <p class="mb-1 flex flex-wrap gap-1">
-          <span class="border border-blue-100 text-blue-600 px-2 py-1 text-xs">
-            Idioma: {{ data.idioma }}
-          </span>
-          @if (data.articulo_paper.toLowerCase() === 'paper') {
-          <span class="border border-blue-100 text-blue-600 px-2 py-1 text-xs">
-            Paper
-          </span>
-          } @if (data.articulo_paper.toLowerCase() === 'articulo') {
-          <span class="border border-blue-100 text-blue-600 px-2 py-1 text-xs">
-            Artículo
-          </span>
-          }
-          <span class="border border-blue-100 text-blue-600 px-2 py-1 text-xs">
-            Nivel: {{ data.nivel }}
-          </span>
+          <span class="border border-blue-100 text-blue-600 px-2 py-1 text-xs"
+            >Región que opera: {{ data?.region }}</span
+          >
         </p>
-        <p style="text-align: center"></p>
-        <p><strong>Resumen:</strong></p>
-        <span
-          [innerHTML]="resourseService.sanitizedString(data.resumen, true)"
-        ></span>
+        <div>
+          <p>
+            <strong>Presentación:</strong>
+          </p>
+          <p>
+            <span
+              [innerHTML]="
+                resourseService.sanitizedString(data?.descripcionStartup, true)
+              "
+            ></span>
+          </p>
+        </div>
 
-        <p>
-          <small style="color: gray" class="text-secondary"
-            >Sitio web: {{ resourseService.getDomain(data.link) }} |
-            {{
-              resourseService.getPublicationYear(data.fecha_publicacion)
-            }}</small
+        <div>
+          <p>
+            <strong>Propuesta:</strong>
+          </p>
+          <p>
+            <span
+              [innerHTML]="
+                resourseService.sanitizedString(data?.unicidadStartup, true)
+              "
+            ></span>
+          </p>
+        </div>
+        <p class="mb-1 flex flex-wrap gap-1">
+          <span class="border border-blue-100 text-blue-600 px-2 py-1 text-xs"
+            >Sectores que atiende: {{ data?.sectores }}</span
+          >
+          <span class="border border-blue-100 text-blue-600 px-2 py-1 text-xs"
+            >Tecnologías que utiliza: {{ data?.tecnologias }}</span
           >
         </p>
       </div>
+
       <!-- Modal footer -->
       <div
         style="width: 100%; justify-content: right"
@@ -79,7 +86,7 @@
         <button
           data-modal-hide="large-modal"
           type="button"
-          (click)="resourseService.openLink(data.link)"
+          (click)="resourseService.openLink(data?.paginaWeb)"
           style="gap: 6px; padding: 8px 16px"
           class="border border-blue-100 text-blue bg-blue-white hover:bg-white-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center"
         >
@@ -99,7 +106,7 @@
             />
           </svg>
 
-          Ir al artículo
+          Ir al sitio web
         </button>
         @if (showNext) {
         <button

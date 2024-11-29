@@ -42,353 +42,37 @@ this.currentUser()?.rol?.nombreRol === Role.Empresa && this.modeloMadurez() &&
   <!--proveedores-->
   @if (item?.nombreEmpresa && (item?.rut_md5 ||item?.correoElectronicoEmpresa))
   {
-  <article class="bg-gray-100 p-4 border">
-    <h3 class="text-xl font-bold mb-2">{{ item?.nombreEmpresa }}</h3>
-    <p style="text-align: left; font-size: 0.9rem">
-      <th class="px-4">Tecnologías Ofrecidas:</th>
-      <td class="px-4">{{ item?.tecnologiasOfrecidas }}</td>
-    </p>
-    <p style="height: 12px"></p>
-    <a
-      style="cursor: pointer"
-      (click)="openModal($index)"
-      (keypress.enter)="openModal($index)"
-      (keypress.space)="openModal($index)"
-      class="font-bold py-2 text-blue-500 transition duration-300 ease-in-out transform hover:scale-105"
-    >
-      Ver Más
-    </a>
-  </article>
-  <div
-    id="large-modal"
-    *ngIf="isModalOpen && dataModal"
-    tabindex="-1"
-    class="fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full flex items-center justify-center bg-black bg-opacity-50"
+  <app-supplier-item
+    class="p-4"
+    [simplified]="true"
+    [data]="item"
+    (openModal)="openModal($index)"
   >
-    <div class="relative w-full max-w-4xl max-h-full">
-      <!-- Modal content -->
-      <div class="relative bg-white rounded-lg shadow">
-        <!-- Modal header -->
-        <div
-          class="flex items-center justify-between p-4 md:p-5 border-b rounded-t"
-        >
-          <h3 class="text-xl font-semibold text-blue-900">
-            {{ dataModal.nombreEmpresa }}
-          </h3>
-          <button
-            type="button"
-            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
-            data-modal-hide="large-modal"
-            (click)="closeModal()"
-          >
-            <svg
-              class="w-3 h-3"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 14 14"
-            >
-              <path
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
-              />
-            </svg>
-            <span class="sr-only">Close modal</span>
-          </button>
-        </div>
-        <div class="py-4" style="font-size: 0.9rem">
-          <p class="py-2 px-6">
-            <strong>Sitio Web:</strong
-            ><a class="mx-2" routerLink="{{ dataModal.sitioWebEmpresa }}">{{
-              dataModal.sitioWebEmpresa
-            }}</a>
-          </p>
-          <p class="py-2 px-6">
-            <strong>Teléfono:</strong>
-            {{ dataModal.telefonoContactoEmpresa }}
-          </p>
-          <p class="py-2 px-6">
-            <strong>Email:</strong>
-            {{ dataModal.correoElectronicoEmpresa }}
-          </p>
-        </div>
-        <!-- Modal body -->
-        <table
-          style="font-size: 0.9rem"
-          class="py-1 px-2 table-auto border-collapse border border-gray-300"
-        >
-          <thead>
-            <tr class="bg-gray-200 bg-opacity-75">
-              <th class="border border-gray-300 px-4 py-2"></th>
-              <th class="border border-gray-300 px-4 py-2">Valor</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="border border-gray-300 px-4 py-2">Área de Trabajo</td>
-              <td class="border border-gray-300 px-4 py-2">
-                {{ dataModal?.areaDeTrabajoEmpresa }}
-              </td>
-            </tr>
-            <tr>
-              <td class="border border-gray-300 px-4 py-2">
-                Años de Experiencia
-              </td>
-              <td class="border border-gray-300 px-4 py-2">
-                {{ dataModal?.aniosExperienciaTecnologica }}
-              </td>
-            </tr>
-            <tr>
-              <td class="border border-gray-300 px-4 py-2">
-                Sectores de Atención Principal
-              </td>
-              <td class="border border-gray-300 px-4 py-2">
-                {{ dataModal?.sectoresAtencionPrincipal }}
-              </td>
-            </tr>
-            <tr>
-              <td class="border border-gray-300 px-4 py-2">
-                Cantidad de Trabajadores
-              </td>
-              <td class="border border-gray-300 px-4 py-2">
-                {{ dataModal?.cantidadTrabajadores }}
-              </td>
-            </tr>
-            <tr>
-              <td class="border border-gray-300 px-4 py-2">
-                Tecnologías Ofrecidas
-              </td>
-              <td class="border border-gray-300 px-4 py-2">
-                {{ dataModal?.tecnologiasOfrecidas }}
-              </td>
-            </tr>
-            <tr>
-              <td class="border border-gray-300 px-4 py-2">
-                Productos y/o Servicios Avanzados
-              </td>
-              <td class="border border-gray-300 px-4 py-2">
-                {{ dataModal?.productosServiciosAvanzados }}
-              </td>
-            </tr>
-            <tr>
-              <td class="border border-gray-300 px-4 py-2">
-                Productos Ofrecidos
-              </td>
-              <td class="border border-gray-300 px-4 py-2">
-                {{ dataModal?.productosOfrecidos }}
-              </td>
-            </tr>
-            <tr>
-              <td class="border border-gray-300 px-4 py-2">
-                Servicios Ofrecidos
-              </td>
-              <td class="border border-gray-300 px-4 py-2">
-                {{ dataModal?.serviciosOfrecidos }}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-
-        <!-- Modal footer -->
-        <div
-          style="width: 100%; justify-content: right"
-          class="flex items-center p-4 md:p-5 space-x-3 rtl:space-x-reverse border-t border-gray-200 rounded-b"
-        >
-          <button
-            data-modal-hide="large-modal"
-            type="button"
-            [disabled]="!dataModal?.sitioWebEmpresa"
-            (click)="openLink(dataModal.sitioWebEmpresa)"
-            style="gap: 6px; padding: 8px 16px"
-            class="border border-blue-100 text-blue bg-blue-white hover:bg-white-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center"
-          >
-            <svg
-              class="w-6 h-6 text-blue-800"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M8.64 4.737A7.97 7.97 0 0 1 12 4a7.997 7.997 0 0 1 6.933 4.006h-.738c-.65 0-1.177.25-1.177.9 0 .33 0 2.04-2.026 2.008-1.972 0-1.972-1.732-1.972-2.008 0-1.429-.787-1.65-1.752-1.923-.374-.105-.774-.218-1.166-.411-1.004-.497-1.347-1.183-1.461-1.835ZM6 4a10.06 10.06 0 0 0-2.812 3.27A9.956 9.956 0 0 0 2 12c0 5.289 4.106 9.619 9.304 9.976l.054.004a10.12 10.12 0 0 0 1.155.007h.002a10.024 10.024 0 0 0 1.5-.19 9.925 9.925 0 0 0 2.259-.754 10.041 10.041 0 0 0 4.987-5.263A9.917 9.917 0 0 0 22 12a10.025 10.025 0 0 0-.315-2.5A10.001 10.001 0 0 0 12 2a9.964 9.964 0 0 0-6 2Zm13.372 11.113a2.575 2.575 0 0 0-.75-.112h-.217A3.405 3.405 0 0 0 15 18.405v1.014a8.027 8.027 0 0 0 4.372-4.307ZM12.114 20H12A8 8 0 0 1 5.1 7.95c.95.541 1.421 1.537 1.835 2.415.209.441.403.853.637 1.162.54.712 1.063 1.019 1.591 1.328.52.305 1.047.613 1.6 1.316 1.44 1.825 1.419 4.366 1.35 5.828Z"
-                clip-rule="evenodd"
-              />
-            </svg>
-
-            Ir al sitio web
-          </button>
-
-          <button
-            data-modal-hide="large-modal"
-            type="button"
-            [disabled]="!dataModal?.rut_md5"
-            (click)="downloadInfo(dataModal?.rut_md5)"
-            style="gap: 6px; padding: 8px 16px"
-            class="border border-blue-100 text-blue bg-blue-white hover:bg-white-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center"
-          >
-            <svg
-              class="w-6 h-6 text-blue-800"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M8.64 4.737A7.97 7.97 0 0 1 12 4a7.997 7.997 0 0 1 6.933 4.006h-.738c-.65 0-1.177.25-1.177.9 0 .33 0 2.04-2.026 2.008-1.972 0-1.972-1.732-1.972-2.008 0-1.429-.787-1.65-1.752-1.923-.374-.105-.774-.218-1.166-.411-1.004-.497-1.347-1.183-1.461-1.835ZM6 4a10.06 10.06 0 0 0-2.812 3.27A9.956 9.956 0 0 0 2 12c0 5.289 4.106 9.619 9.304 9.976l.054.004a10.12 10.12 0 0 0 1.155.007h.002a10.024 10.024 0 0 0 1.5-.19 9.925 9.925 0 0 0 2.259-.754 10.041 10.041 0 0 0 4.987-5.263A9.917 9.917 0 0 0 22 12a10.025 10.025 0 0 0-.315-2.5A10.001 10.001 0 0 0 12 2a9.964 9.964 0 0 0-6 2Zm13.372 11.113a2.575 2.575 0 0 0-.75-.112h-.217A3.405 3.405 0 0 0 15 18.405v1.014a8.027 8.027 0 0 0 4.372-4.307ZM12.114 20H12A8 8 0 0 1 5.1 7.95c.95.541 1.421 1.537 1.835 2.415.209.441.403.853.637 1.162.54.712 1.063 1.019 1.591 1.328.52.305 1.047.613 1.6 1.316 1.44 1.825 1.419 4.366 1.35 5.828Z"
-                clip-rule="evenodd"
-              />
-            </svg>
-
-            Descargar Ficha
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
+  </app-supplier-item>
+  <!--modal-->
+  <app-supplier-modal
+    *ngIf="isModalOpen && dataModal"
+    [data]="dataModal"
+    [showNext]="false"
+    (close)="closeModal()"
+  ></app-supplier-modal>
   }
   <!--financiamiento-->
   @if (item?.porcentaje_cobertura ) {
-  <article class="bg-gray-100 p-4 border">
-    <h3 class="text-xl font-bold mb-2">{{ item?.titulo }}</h3>
-    <span
-      style="font-size: 0.9rem"
-      [innerHTML]="item.descripcion | truncate : 130 : true"
-    >
-    </span>
-    <p style="height: 12px"></p>
-    <a
-      style="cursor: pointer"
-      (click)="openModal($index)"
-      (keypress.enter)="openModal($index)"
-      (keypress.space)="openModal($index)"
-      class="font-bold py-2 text-blue-500 transition duration-300 ease-in-out transform hover:scale-105"
-    >
-      Ver Más
-    </a>
-  </article>
-  <div
-    id="large-modal"
-    *ngIf="isModalOpen && dataModal"
-    tabindex="-1"
-    class="fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full flex items-center justify-center bg-black bg-opacity-50"
+  <app-financing-item
+    class="p-4"
+    [simplified]="true"
+    [data]="item"
+    (openModal)="openModal($index)"
   >
-    <div class="relative w-full max-w-4xl max-h-full">
-      <!-- Modal content -->
-      <div class="relative bg-white rounded-lg shadow">
-        <!-- Modal header -->
-        <div
-          class="flex items-center justify-between p-4 md:p-5 border-b rounded-t"
-        >
-          <h3 class="text-xl font-semibold text-blue-900">
-            {{ dataModal.titulo }}
-          </h3>
-          <button
-            type="button"
-            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
-            data-modal-hide="large-modal"
-            (click)="closeModal()"
-          >
-            <svg
-              class="w-3 h-3"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 14 14"
-            >
-              <path
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
-              />
-            </svg>
-            <span class="sr-only">Close modal</span>
-          </button>
-        </div>
-        <!-- Modal body -->
-        <div class="p-4 md:p-5 space-y-4">
-          <p class="mb-1 flex flex-wrap gap-1">
-            <span class="border border-blue-100 text-blue-600 px-2 py-1 text-xs"
-              >Institución: {{ dataModal.institucion }}</span
-            >
-            <span
-              *ngIf="dataModal.categoria"
-              class="border border-blue-100 text-blue-600 px-2 py-1 text-xs"
-              >Categoría: {{ dataModal.categoria }}</span
-            >
-            <span
-              *ngIf="dataModal.tipo_financiamiento"
-              class="border border-blue-100 text-blue-600 px-2 py-1 text-xs"
-              >Tipo de Financiamiento: {{ dataModal.tipo_financiamiento }}</span
-            >
-            <span
-              *ngIf="dataModal.nivel_de_complejidad_"
-              class="border border-blue-100 text-blue-600 px-2 py-1 text-xs"
-              >Nivel de Complejidad: {{ dataModal.nivel_de_complejidad_ }}</span
-            >
-          </p>
-          <p>
-            <strong>Monto del Subsidio:</strong> {{ dataModal.monto_subsidio }}
-          </p>
-          <p>
-            <strong>Porcentaje de Cobertura:</strong>
-            {{ dataModal.porcentaje_cobertura }}
-          </p>
-          <p><strong>Existe Plazo:</strong> {{ dataModal.existe_plazo }}</p>
-          <p>
-            <strong>Descripción:</strong>
-          </p>
-          <span [innerHTML]="sanitizedResumen(dataModal.descripcion)"></span>
-          <p>
-            <small style="color: gray" class="text-secondary"
-              >Sitio web: {{ getDomain(dataModal.link) }}</small
-            >
-          </p>
-        </div>
-        <!-- Modal footer -->
-        <div
-          style="width: 100%; justify-content: right"
-          class="flex items-center p-4 md:p-5 space-x-3 rtl:space-x-reverse border-t border-gray-200 rounded-b"
-        >
-          <button
-            data-modal-hide="large-modal"
-            type="button"
-            (click)="openLink(dataModal.link)"
-            style="gap: 6px; padding: 8px 16px"
-            class="border border-blue-100 text-blue bg-blue-white hover:bg-white-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center"
-          >
-            <svg
-              class="w-6 h-6 text-blue-800"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M8.64 4.737A7.97 7.97 0 0 1 12 4a7.997 7.997 0 0 1 6.933 4.006h-.738c-.65 0-1.177.25-1.177.9 0 .33 0 2.04-2.026 2.008-1.972 0-1.972-1.732-1.972-2.008 0-1.429-.787-1.65-1.752-1.923-.374-.105-.774-.218-1.166-.411-1.004-.497-1.347-1.183-1.461-1.835ZM6 4a10.06 10.06 0 0 0-2.812 3.27A9.956 9.956 0 0 0 2 12c0 5.289 4.106 9.619 9.304 9.976l.054.004a10.12 10.12 0 0 0 1.155.007h.002a10.024 10.024 0 0 0 1.5-.19 9.925 9.925 0 0 0 2.259-.754 10.041 10.041 0 0 0 4.987-5.263A9.917 9.917 0 0 0 22 12a10.025 10.025 0 0 0-.315-2.5A10.001 10.001 0 0 0 12 2a9.964 9.964 0 0 0-6 2Zm13.372 11.113a2.575 2.575 0 0 0-.75-.112h-.217A3.405 3.405 0 0 0 15 18.405v1.014a8.027 8.027 0 0 0 4.372-4.307ZM12.114 20H12A8 8 0 0 1 5.1 7.95c.95.541 1.421 1.537 1.835 2.415.209.441.403.853.637 1.162.54.712 1.063 1.019 1.591 1.328.52.305 1.047.613 1.6 1.316 1.44 1.825 1.419 4.366 1.35 5.828Z"
-                clip-rule="evenodd"
-              />
-            </svg>
-
-            Ir al artículo
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
+  </app-financing-item>
+  <!--modal-->
+  <app-financing-modal
+    *ngIf="isModalOpen && dataModal"
+    [data]="dataModal"
+    [showNext]="false"
+    (close)="closeModal()"
+  ></app-financing-modal>
   }
   <!--articulos-->
   @if (item?.articulo_paper) {
@@ -411,268 +95,38 @@ this.currentUser()?.rol?.nombreRol === Role.Empresa && this.modeloMadurez() &&
 
   <!--proyecto-->
   @if (item?.localidad) {
-  <article class="bg-gray-100 p-4 border">
-    <h3 class="text-xl font-bold mb-2">{{ item?.titulo }}</h3>
-    <!-- Descripción del curso -->
-    <span
-      style="font-size: 0.9rem"
-      [innerHTML]="item.resumen_de_la_solucion_ | truncate : 120 : true"
-    >
-    </span>
-
-    <p style="height: 12px"></p>
-    <a
-      style="cursor: pointer"
-      (click)="openModal($index)"
-      (keypress.enter)="openModal($index)"
-      (keypress.space)="openModal($index)"
-      class="font-bold py-2 text-blue-500 transition duration-300 ease-in-out transform hover:scale-105"
-    >
-      Ver Más
-    </a>
-  </article>
-  <div
-    id="large-modal"
-    *ngIf="isModalOpen && dataModal"
-    tabindex="-1"
-    class="fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full flex items-center justify-center bg-black bg-opacity-50"
+  <app-projects-item
+    class="p-4"
+    [simplified]="true"
+    [data]="item"
+    (openModal)="openModal($index)"
   >
-    <div class="relative w-full max-w-4xl max-h-full">
-      <!-- Modal content -->
-      <div class="relative bg-white rounded-lg shadow">
-        <!-- Modal header -->
-        <div
-          class="flex items-center justify-between p-4 md:p-5 border-b rounded-t"
-        >
-          <h3 class="text-xl font-semibold text-blue-900">
-            {{ dataModal.titulo }}
-          </h3>
-          <button
-            type="button"
-            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
-            data-modal-hide="large-modal"
-            (click)="closeModal()"
-          >
-            <svg
-              class="w-3 h-3"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 14 14"
-            >
-              <path
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
-              />
-            </svg>
-            <span class="sr-only">Close modal</span>
-          </button>
-        </div>
-        <!-- Modal body -->
-        <div class="p-4 md:p-5 space-y-4">
-          <p class="mb-1 flex flex-wrap gap-1">
-            <span
-              *ngIf="dataModal.origen_"
-              class="border border-blue-100 text-blue-600 px-2 py-1 text-xs"
-              >Origen: {{ dataModal.origen_ }}</span
-            >
-            <span
-              *ngIf="dataModal.localidad"
-              class="border border-blue-100 text-blue-600 px-2 py-1 text-xs"
-              >Localidad: {{ dataModal.localidad }}</span
-            >
-            <span
-              *ngIf="dataModal.aplicabilidad_regional_"
-              class="border border-blue-100 text-blue-600 px-2 py-1 text-xs"
-              >Aplicabilidad Regional:
-              {{ dataModal.aplicabilidad_regional_ }}</span
-            >
-          </p>
-          <p>
-            <strong>Resumen de la Solución:</strong>
-          </p>
-          <span
-            [innerHTML]="sanitizedResumen(dataModal.resumen_de_la_solucion_)"
-          ></span>
-          <p>
-            <small style="color: gray" class="text-secondary"
-              >Sitio web: {{ getDomain(dataModal.link) }}</small
-            >
-          </p>
-        </div>
-        <!-- Modal footer -->
-        <div
-          style="width: 100%; justify-content: right"
-          class="flex items-center p-4 md:p-5 space-x-3 rtl:space-x-reverse border-t border-gray-200 rounded-b"
-        >
-          <button
-            data-modal-hide="large-modal"
-            type="button"
-            (click)="openLink(dataModal.link)"
-            style="gap: 6px; padding: 8px 16px"
-            class="border border-blue-100 text-blue bg-blue-white hover:bg-white-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center"
-          >
-            <svg
-              class="w-6 h-6 text-blue-800"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M8.64 4.737A7.97 7.97 0 0 1 12 4a7.997 7.997 0 0 1 6.933 4.006h-.738c-.65 0-1.177.25-1.177.9 0 .33 0 2.04-2.026 2.008-1.972 0-1.972-1.732-1.972-2.008 0-1.429-.787-1.65-1.752-1.923-.374-.105-.774-.218-1.166-.411-1.004-.497-1.347-1.183-1.461-1.835ZM6 4a10.06 10.06 0 0 0-2.812 3.27A9.956 9.956 0 0 0 2 12c0 5.289 4.106 9.619 9.304 9.976l.054.004a10.12 10.12 0 0 0 1.155.007h.002a10.024 10.024 0 0 0 1.5-.19 9.925 9.925 0 0 0 2.259-.754 10.041 10.041 0 0 0 4.987-5.263A9.917 9.917 0 0 0 22 12a10.025 10.025 0 0 0-.315-2.5A10.001 10.001 0 0 0 12 2a9.964 9.964 0 0 0-6 2Zm13.372 11.113a2.575 2.575 0 0 0-.75-.112h-.217A3.405 3.405 0 0 0 15 18.405v1.014a8.027 8.027 0 0 0 4.372-4.307ZM12.114 20H12A8 8 0 0 1 5.1 7.95c.95.541 1.421 1.537 1.835 2.415.209.441.403.853.637 1.162.54.712 1.063 1.019 1.591 1.328.52.305 1.047.613 1.6 1.316 1.44 1.825 1.419 4.366 1.35 5.828Z"
-                clip-rule="evenodd"
-              />
-            </svg>
-
-            Ir al artículo
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
+  </app-projects-item>
+  <!--modal-->
+  <app-projects-modal
+    *ngIf="isModalOpen && dataModal"
+    [data]="dataModal"
+    [showNext]="false"
+    (close)="closeModal()"
+  ></app-projects-modal>
   }
 
   <!--startup-->
   @if (item?.descripcionStartup) {
-  <article class="bg-gray-100 p-4 border">
-    <h3 class="text-xl font-bold mb-2">{{ item?.nombreStartup }}</h3>
-
-    <span
-      style="font-size: 0.9rem"
-      [innerHTML]="item?.descripcionStartup | truncate : 120 : true"
-    >
-    </span>
-
-    <p style="height: 12px"></p>
-    <a
-      style="cursor: pointer"
-      (click)="openModal($index)"
-      (keypress.enter)="openModal($index)"
-      (keypress.space)="openModal($index)"
-      class="font-bold py-2 text-blue-500 transition duration-300 ease-in-out transform hover:scale-105"
-    >
-      Ver Más
-    </a>
-  </article>
-  <div
-    id="large-modal"
-    *ngIf="isModalOpen && dataModal"
-    tabindex="-1"
-    class="fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full flex items-center justify-center bg-black bg-opacity-50"
+  <app-startup-item
+    class="p-4"
+    [simplified]="true"
+    [data]="item"
+    (openModal)="openModal($index)"
   >
-    <div class="relative w-full max-w-4xl max-h-full">
-      <!-- Modal content -->
-      <div class="relative bg-white rounded-lg shadow">
-        <!-- Modal header -->
-        <div
-          class="flex items-center justify-between p-4 md:p-5 border-b rounded-t"
-        >
-          <h3 class="text-xl font-semibold text-blue-900 uppercase">
-            {{ dataModal?.nombreStartup }}
-          </h3>
-          <button
-            type="button"
-            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
-            data-modal-hide="large-modal"
-            (click)="closeModal()"
-          >
-            <svg
-              class="w-3 h-3"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 14 14"
-            >
-              <path
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
-              />
-            </svg>
-            <span class="sr-only">Close modal</span>
-          </button>
-        </div>
-        <!-- Modal body -->
-        <div class="p-4 md:p-5 space-y-4">
-          <p class="mb-1 flex flex-wrap gap-1">
-            <span class="border border-blue-100 text-blue-600 px-2 py-1 text-xs"
-              >Región que opera: {{ dataModal?.region }}</span
-            >
-          </p>
-          <div>
-            <p>
-              <strong>Presentación:</strong>
-            </p>
-            <p>
-              <span
-                [innerHTML]="sanitizedResumen(dataModal?.descripcionStartup)"
-              ></span>
-            </p>
-          </div>
-
-          <div>
-            <p>
-              <strong>Propuesta:</strong>
-            </p>
-            <p>
-              <span
-                [innerHTML]="sanitizedResumen(dataModal?.unicidadStartup)"
-              ></span>
-            </p>
-          </div>
-          <p class="mb-1 flex flex-wrap gap-1">
-            <span class="border border-blue-100 text-blue-600 px-2 py-1 text-xs"
-              >Sectores que atiende: {{ dataModal?.sectores }}</span
-            >
-            <span class="border border-blue-100 text-blue-600 px-2 py-1 text-xs"
-              >Tecnologías que utiliza: {{ dataModal?.tecnologias }}</span
-            >
-          </p>
-        </div>
-
-        <!-- Modal footer -->
-        <div
-          style="width: 100%; justify-content: right"
-          class="flex items-center p-4 md:p-5 space-x-3 rtl:space-x-reverse border-t border-gray-200 rounded-b"
-        >
-          <button
-            data-modal-hide="large-modal"
-            type="button"
-            (click)="openLink(dataModal?.paginaWeb)"
-            style="gap: 6px; padding: 8px 16px"
-            class="border border-blue-100 text-blue bg-blue-white hover:bg-white-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center"
-          >
-            <svg
-              class="w-6 h-6 text-blue-800"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M8.64 4.737A7.97 7.97 0 0 1 12 4a7.997 7.997 0 0 1 6.933 4.006h-.738c-.65 0-1.177.25-1.177.9 0 .33 0 2.04-2.026 2.008-1.972 0-1.972-1.732-1.972-2.008 0-1.429-.787-1.65-1.752-1.923-.374-.105-.774-.218-1.166-.411-1.004-.497-1.347-1.183-1.461-1.835ZM6 4a10.06 10.06 0 0 0-2.812 3.27A9.956 9.956 0 0 0 2 12c0 5.289 4.106 9.619 9.304 9.976l.054.004a10.12 10.12 0 0 0 1.155.007h.002a10.024 10.024 0 0 0 1.5-.19 9.925 9.925 0 0 0 2.259-.754 10.041 10.041 0 0 0 4.987-5.263A9.917 9.917 0 0 0 22 12a10.025 10.025 0 0 0-.315-2.5A10.001 10.001 0 0 0 12 2a9.964 9.964 0 0 0-6 2Zm13.372 11.113a2.575 2.575 0 0 0-.75-.112h-.217A3.405 3.405 0 0 0 15 18.405v1.014a8.027 8.027 0 0 0 4.372-4.307ZM12.114 20H12A8 8 0 0 1 5.1 7.95c.95.541 1.421 1.537 1.835 2.415.209.441.403.853.637 1.162.54.712 1.063 1.019 1.591 1.328.52.305 1.047.613 1.6 1.316 1.44 1.825 1.419 4.366 1.35 5.828Z"
-                clip-rule="evenodd"
-              />
-            </svg>
-
-            Ir al sitio web
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
+  </app-startup-item>
+  <!--modal-->
+  <app-startup-modal
+    *ngIf="isModalOpen && dataModal"
+    [data]="dataModal"
+    [showNext]="false"
+    (close)="closeModal()"
+  ></app-startup-modal>
   }
 
   <!---->

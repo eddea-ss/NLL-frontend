@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ProviderSearchComponent } from './provider-search.component';
+import { StartupModalComponent } from './startup-modal.component';
 
-describe('ProviderSearchComponent', () => {
-  let component: ProviderSearchComponent;
-  let fixture: ComponentFixture<ProviderSearchComponent>;
+describe('StartupModalComponent', () => {
+  let component: StartupModalComponent;
+  let fixture: ComponentFixture<StartupModalComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ProviderSearchComponent]
+      imports: [StartupModalComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ProviderSearchComponent);
+    fixture = TestBed.createComponent(StartupModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

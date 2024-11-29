@@ -1,0 +1,62 @@
+@if (simplified) {
+<article class="bg-gray-100 p-4 border">
+  <h3 class="text-xl font-bold mb-2">{{ data?.titulo }}</h3>
+  <span
+    style="font-size: 0.9rem"
+    [innerHTML]="data.descripcion | truncate : 130 : true"
+  >
+  </span>
+  <p style="height: 12px"></p>
+  <a
+    style="cursor: pointer"
+    (click)="onOpenModal()"
+    (keypress.enter)="onOpenModal()"
+    (keypress.space)="onOpenModal()"
+    class="font-bold py-2 text-blue-500 transition duration-300 ease-in-out transform hover:scale-105"
+  >
+    Ver Más
+  </a>
+</article>
+}@else {
+<div
+  class="group"
+  (click)="onOpenModal()"
+  (keypress.enter)="onOpenModal()"
+  (keypress.space)="onOpenModal()"
+>
+  <a
+    style="cursor: pointer"
+    class="text-xl font-semibold text-blue-600 hover:underline"
+  >
+    {{ data.titulo }}
+  </a>
+
+  <!-- Etiquetas de los articulos -->
+  <p class="mb-1 flex flex-wrap gap-1">
+    @if (data.tipo_financiamiento.toLowerCase() === 'público') {
+    <span class="border border-blue-100 text-blue-600 px-2 py-1 text-xs">
+      Financiamiento: Público
+    </span>
+    }
+    <span class="border border-blue-100 text-blue-600 px-2 py-1 text-xs">
+      Institución: {{ data.institucion }}
+    </span>
+    <span class="border border-blue-100 text-blue-600 px-2 py-1 text-xs">
+      Categoría: {{ data.categoria }}
+    </span>
+  </p>
+  <!-- Descripción del curso -->
+  <span
+    [innerHTML]="
+      resourcesService.sanitizedString(data.descripcion | truncate : 400 : true)
+    "
+  >
+  </span>
+  <p style="margin-top: 0px">
+    <small style="color: gray" class="text-secondary"
+      >Sitio web: {{ resourcesService.getDomain(data.link) }}
+    </small>
+  </p>
+</div>
+
+}

@@ -16,6 +16,8 @@ import DOMPurify from 'dompurify';
 export class ResourceService {
   private readonly API_BASE_URL = 'https://control.nuevoloslagos.org';
 
+  private readonly EXCEL_URL =
+    'https://control.nuevoloslagos.org/suppliers/excel/';
   google = inject(GoogleAnalyticsService);
   http = inject(HttpClient);
 
@@ -124,5 +126,18 @@ export class ResourceService {
     const month = dateString.substring(4, 6);
     const day = dateString.substring(6, 8);
     return new Date(`${year}-${month}-${day}`);
+  }
+
+  downloadExcelInfo(link: string): void {
+    try {
+      if (!link) {
+        console.warn('No se proporcionó un link');
+        return;
+      }
+
+      window.open(this.EXCEL_URL + link, '_blank');
+    } catch (error) {
+      console.error('Error al abrir el link:', error);
+    }
   }
 }

@@ -40,34 +40,38 @@
       <!-- Modal body -->
       <div class="p-4 md:p-5 space-y-4">
         <p class="mb-1 flex flex-wrap gap-1">
+          <span class="border border-blue-100 text-blue-600 px-2 py-1 text-xs"
+            >Institución: {{ data.institucion }}</span
+          >
+          @if (data.categoria) {
           <span class="border border-blue-100 text-blue-600 px-2 py-1 text-xs">
-            Idioma: {{ data.idioma }}
+            Categoría: {{ data.categoria }}
           </span>
-          @if (data.articulo_paper.toLowerCase() === 'paper') {
+          } @if (data.tipo_financiamiento) {
           <span class="border border-blue-100 text-blue-600 px-2 py-1 text-xs">
-            Paper
+            Tipo de Financiamiento: {{ data.tipo_financiamiento }}
           </span>
-          } @if (data.articulo_paper.toLowerCase() === 'articulo') {
+          } @if (data.nivel_de_complejidad_) {
           <span class="border border-blue-100 text-blue-600 px-2 py-1 text-xs">
-            Artículo
+            Nivel de Complejidad: {{ data.nivel_de_complejidad_ }}
           </span>
           }
-          <span class="border border-blue-100 text-blue-600 px-2 py-1 text-xs">
-            Nivel: {{ data.nivel }}
-          </span>
         </p>
-        <p style="text-align: center"></p>
-        <p><strong>Resumen:</strong></p>
+        <p><strong>Monto del Subsidio:</strong> {{ data.monto_subsidio }}</p>
+        <p>
+          <strong>Porcentaje de Cobertura:</strong>
+          {{ data.porcentaje_cobertura }}
+        </p>
+        <p><strong>Existe Plazo:</strong> {{ data.existe_plazo }}</p>
+        <p>
+          <strong>Descripción:</strong>
+        </p>
         <span
-          [innerHTML]="resourseService.sanitizedString(data.resumen, true)"
+          [innerHTML]="resourseService.sanitizedString(data.descripcion)"
         ></span>
-
         <p>
           <small style="color: gray" class="text-secondary"
-            >Sitio web: {{ resourseService.getDomain(data.link) }} |
-            {{
-              resourseService.getPublicationYear(data.fecha_publicacion)
-            }}</small
+            >Sitio web: {{ resourseService.getDomain(data.link) }}</small
           >
         </p>
       </div>

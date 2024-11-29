@@ -1,20 +1,14 @@
 import { Routes } from '@angular/router';
-import { ProviderSearchComponent } from '@v2/modules/provider-search/provider-search.component';
-import { StartupSearchComponent } from '@v2/modules/startup-search/startup-search.component';
 import {
-  ArticleSearchComponent,
-  CourseSearchComponent,
   EvaluacionesMadurezComponent,
   EvaluacionesProveedorComponent,
   EvaluacionesStartupComponent,
-  FinancingSearchComponent,
   FormRegisterComponent,
   HomeComponent,
   InformeComponent,
   LandingPageComponent,
   LoginComponent,
   PodcastsComponent,
-  ProjectSearchComponent,
   ProyectoEquipoComponent,
   ProyectoPlataformaComponent,
   ResourceSearchComponent,

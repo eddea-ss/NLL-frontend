@@ -6,14 +6,29 @@ import { ActivatedRoute } from '@angular/router';
 import {
   CourseItemComponent,
   CourseModalComponent,
+  FinancingModalComponent,
+  StartupModalComponent,
   SugeridosComponent,
+  SupplierModalComponent,
 } from '@v2/components';
 import { GoogleAnalyticsService, ResourceService } from '../../services/index';
 import { SearchControlsComponent } from '@v2/components/search-controls/search-controls.component';
 import { BreadcrumbsComponent } from '@v2/components/breadcrumbs/breadcrumbs.component';
-import { COURSE_TEXT, ARTICLE_TEXT } from '@v2/constants';
+import {
+  COURSE_TEXT,
+  ARTICLE_TEXT,
+  PROJECT_TEXT,
+  FINNANCING_TEXT,
+  SUPPLIER_TEXT,
+  STARTUPS_TEXT,
+} from '@v2/constants';
 import { ArticleItemComponent } from '@v2/components/article-item/article-item.component';
 import { ArticleModalComponent } from '@v2/components/article-modal/article-modal.component';
+import { ProjectsItemComponent } from '../../components/projects-item/projects-item.component';
+import { FinancingItemComponent } from '../../components/financing-item/financing-item.component';
+import { SupplierItemComponent } from '../../components/supplier-item/supplier-item.component';
+import { StartupItemComponent } from '../../components/startup-item/startup-item.component';
+import { ProjectsModalComponent } from '../../components/projects-modal/projects-modal.component';
 
 @Component({
   selector: 'app-resource-search',
@@ -29,6 +44,14 @@ import { ArticleModalComponent } from '@v2/components/article-modal/article-moda
     CourseModalComponent,
     ArticleItemComponent,
     ArticleModalComponent,
+    ProjectsItemComponent,
+    ProjectsModalComponent,
+    FinancingItemComponent,
+    FinancingModalComponent,
+    SupplierItemComponent,
+    SupplierModalComponent,
+    StartupItemComponent,
+    StartupModalComponent,
   ],
   templateUrl: './resource-search.component.html',
   styleUrl: './resource-search.component.scss',
@@ -98,12 +121,32 @@ export class ResourceSearchComponent implements OnInit {
         this.breadcrumbs = ARTICLE_TEXT.BREADCRUMBS;
         break;
       case 'projects':
+        this.labelType = PROJECT_TEXT.LABEL;
+        this.tips = PROJECT_TEXT.TIPS;
+        this.customMessages = PROJECT_TEXT.CUSTOM_MESSAGES;
+        this.searchKeywords = PROJECT_TEXT.SEARCH_KEYWORDS;
+        this.breadcrumbs = PROJECT_TEXT.BREADCRUMBS;
         break;
       case 'financing':
+        this.labelType = FINNANCING_TEXT.LABEL;
+        this.tips = FINNANCING_TEXT.TIPS;
+        this.customMessages = FINNANCING_TEXT.CUSTOM_MESSAGES;
+        this.searchKeywords = FINNANCING_TEXT.SEARCH_KEYWORDS;
+        this.breadcrumbs = FINNANCING_TEXT.BREADCRUMBS;
         break;
       case 'suppliers':
+        this.labelType = SUPPLIER_TEXT.LABEL;
+        this.tips = SUPPLIER_TEXT.TIPS;
+        this.customMessages = SUPPLIER_TEXT.CUSTOM_MESSAGES;
+        this.searchKeywords = SUPPLIER_TEXT.SEARCH_KEYWORDS;
+        this.breadcrumbs = SUPPLIER_TEXT.BREADCRUMBS;
         break;
       case 'startups':
+        this.labelType = STARTUPS_TEXT.LABEL;
+        this.tips = STARTUPS_TEXT.TIPS;
+        this.customMessages = STARTUPS_TEXT.CUSTOM_MESSAGES;
+        this.searchKeywords = STARTUPS_TEXT.SEARCH_KEYWORDS;
+        this.breadcrumbs = STARTUPS_TEXT.BREADCRUMBS;
         break;
       default:
         break;

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, effect, inject, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import {
   LoginService,
   ModeloCaracterService,
@@ -8,25 +8,38 @@ import {
   RecursosService,
 } from '@core/services';
 import { AuthState, Role } from '@shared/enums';
-import { TruncatePipe } from '@shared/pipes/truncate.pipe';
 import DOMPurify from 'dompurify';
 
 import { CourseItemComponent } from '@v2/components/course-item/course-item.component';
 import { CourseModalComponent } from '../course-modal/course-modal.component';
 import { ArticleItemComponent } from '../article-item/article-item.component';
 import { ArticleModalComponent } from '../article-modal/article-modal.component';
+import { SupplierItemComponent } from '../supplier-item/supplier-item.component';
+import { SupplierModalComponent } from '../supplier-modal/supplier-modal.component';
+import { FinancingItemComponent } from '../financing-item/financing-item.component';
+import { FinancingModalComponent } from '../financing-modal/financing-modal.component';
+import { ProjectsItemComponent } from '../projects-item/projects-item.component';
+import { ProjectsModalComponent } from '../projects-modal/projects-modal.component';
+import { StartupItemComponent } from '../startup-item/startup-item.component';
+import { StartupModalComponent } from '../startup-modal/startup-modal.component';
 
 @Component({
   selector: 'app-sugeridos',
   standalone: true,
   imports: [
-    RouterLink,
-    TruncatePipe,
     CommonModule,
     CourseItemComponent,
     CourseModalComponent,
     ArticleItemComponent,
     ArticleModalComponent,
+    SupplierItemComponent,
+    SupplierModalComponent,
+    FinancingItemComponent,
+    FinancingModalComponent,
+    ProjectsItemComponent,
+    ProjectsModalComponent,
+    StartupItemComponent,
+    StartupModalComponent,
   ],
   templateUrl: './sugeridos.component.html',
   styleUrl: './sugeridos.component.scss',

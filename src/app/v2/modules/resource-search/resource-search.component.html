@@ -42,6 +42,42 @@
             ></app-article-item>
           </ng-container>
         </ng-container>
+        <ng-container *ngSwitchCase="'projects'">
+          <ng-container *ngFor="let item of results; let i = index">
+            <app-projects-item
+              class="p-4"
+              [data]="item"
+              (openModal)="openModal(i)"
+            ></app-projects-item>
+          </ng-container>
+        </ng-container>
+        <ng-container *ngSwitchCase="'financing'">
+          <ng-container *ngFor="let item of results; let i = index">
+            <app-financing-item
+              class="p-4"
+              [data]="item"
+              (openModal)="openModal(i)"
+            ></app-financing-item>
+          </ng-container>
+        </ng-container>
+        <ng-container *ngSwitchCase="'suppliers'">
+          <ng-container *ngFor="let item of results; let i = index">
+            <app-supplier-item
+              class="p-4"
+              [data]="item"
+              (openModal)="openModal(i)"
+            ></app-supplier-item>
+          </ng-container>
+        </ng-container>
+        <ng-container *ngSwitchCase="'startups'">
+          <ng-container *ngFor="let item of results; let i = index">
+            <app-startup-item
+              class="p-4"
+              [data]="item"
+              (openModal)="openModal(i)"
+            ></app-startup-item>
+          </ng-container>
+        </ng-container>
         <!-- Agrega casos para otros tipos de recursos -->
       </ng-container>
     </div>
@@ -53,23 +89,53 @@
 <!-- Modales -->
 <!-- Agrega casos para otros tipos de recursos -->
 <ng-container [ngSwitch]="resourceType">
-  <ng-container *ngSwitchCase="'curses'">
-    <ng-container *ngIf="isModalOpen && dataModal">
+  <ng-container *ngIf="isModalOpen && dataModal">
+    <ng-container *ngSwitchCase="'curses'">
       <app-course-modal
         [data]="dataModal"
         (close)="closeModal()"
         (next)="showNextItem()"
       ></app-course-modal>
     </ng-container>
-  </ng-container>
-  <!-- Agrega casos para otros tipos de recursos -->
-  <ng-container *ngSwitchCase="'articles'">
-    <ng-container *ngIf="isModalOpen && dataModal">
+
+    <ng-container *ngSwitchCase="'articles'">
       <app-article-modal
         [data]="dataModal"
         (close)="closeModal()"
         (next)="showNextItem()"
       ></app-article-modal>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'projects'">
+      <app-projects-modal
+        [data]="dataModal"
+        (close)="closeModal()"
+        (next)="showNextItem()"
+      ></app-projects-modal>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'financing'">
+      <app-financing-modal
+        [data]="dataModal"
+        (close)="closeModal()"
+        (next)="showNextItem()"
+      ></app-financing-modal>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'suppliers'">
+      <app-supplier-modal
+        [data]="dataModal"
+        (close)="closeModal()"
+        (next)="showNextItem()"
+      ></app-supplier-modal>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'startups'">
+      <app-startup-modal
+        [data]="dataModal"
+        (close)="closeModal()"
+        (next)="showNextItem()"
+      ></app-startup-modal>
     </ng-container>
   </ng-container>
 </ng-container>

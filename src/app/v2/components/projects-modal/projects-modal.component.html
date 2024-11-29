@@ -1,5 +1,4 @@
 <div
-  id="large-modal"
   tabindex="-1"
   class="fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full flex items-center justify-center bg-black bg-opacity-20"
 >
@@ -40,34 +39,31 @@
       <!-- Modal body -->
       <div class="p-4 md:p-5 space-y-4">
         <p class="mb-1 flex flex-wrap gap-1">
+          @if (data.origen_) {
           <span class="border border-blue-100 text-blue-600 px-2 py-1 text-xs">
-            Idioma: {{ data.idioma }}
+            Origen: {{ data.origen_ }}
           </span>
-          @if (data.articulo_paper.toLowerCase() === 'paper') {
+          } @if (data.localidad) {
           <span class="border border-blue-100 text-blue-600 px-2 py-1 text-xs">
-            Paper
+            Localidad: {{ data.localidad }}
           </span>
-          } @if (data.articulo_paper.toLowerCase() === 'articulo') {
+          } @if (data.aplicabilidad_regional_) {
           <span class="border border-blue-100 text-blue-600 px-2 py-1 text-xs">
-            Artículo
+            Aplicabilidad Regional: {{ data.aplicabilidad_regional_ }}
           </span>
           }
-          <span class="border border-blue-100 text-blue-600 px-2 py-1 text-xs">
-            Nivel: {{ data.nivel }}
-          </span>
         </p>
-        <p style="text-align: center"></p>
-        <p><strong>Resumen:</strong></p>
+        <p>
+          <strong>Resumen de la Solución:</strong>
+        </p>
         <span
-          [innerHTML]="resourseService.sanitizedString(data.resumen, true)"
+          [innerHTML]="
+            resourseService.sanitizedString(data.resumen_de_la_solucion_, true)
+          "
         ></span>
-
         <p>
           <small style="color: gray" class="text-secondary"
-            >Sitio web: {{ resourseService.getDomain(data.link) }} |
-            {{
-              resourseService.getPublicationYear(data.fecha_publicacion)
-            }}</small
+            >Sitio web: {{ resourseService.getDomain(data.link) }}</small
           >
         </p>
       </div>
