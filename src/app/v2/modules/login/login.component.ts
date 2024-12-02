@@ -1,15 +1,18 @@
-// login.component.ts
+// src/app/core/components/login/login.component.ts
 
-import { Component, ChangeDetectorRef, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  ChangeDetectorRef,
+} from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
   Validators,
   ReactiveFormsModule,
-  ValidatorFn,
-  AbstractControl,
 } from '@angular/forms';
-import { LoginService } from '@v2/services';
+import { LoginService } from '@core/services/login.service';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
@@ -23,7 +26,7 @@ import { RouterLink } from '@angular/router';
 export class LoginComponent {
   private loginService = inject(LoginService);
   protected fb = inject(FormBuilder);
-  private cdRef = inject(ChangeDetectorRef);
+  private cdRef = inject(ChangeDetectorRef); // Inyectar ChangeDetectorRef
 
   loginForm: FormGroup = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
@@ -33,28 +36,6 @@ export class LoginComponent {
   isLoading = false;
   errorMessage = '';
 
-  // Validation variables
-  hasLength: boolean = false;
-  hasUppercase: boolean = false;
-  hasSpecialChar: boolean = false;
-  hasNumber: boolean = false;
-
-  constructor() {
-    this.loginForm
-      .get('password')
-      ?.valueChanges.subscribe((password: string) => {
-        this.validatePassword(password);
-      });
-  }
-
-  validatePassword(password: string) {
-    this.hasLength = password.length >= 8;
-    this.hasUppercase = /[A-Z]/.test(password);
-    this.hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
-    this.hasNumber = /[0-9]/.test(password);
-    this.cdRef.markForCheck(); // Ensure the view updates
-  }
-
   onSubmit() {
     if (this.loginForm.invalid) {
       return;
@@ -62,21 +43,23 @@ export class LoginComponent {
 
     this.isLoading = true;
     this.errorMessage = '';
-    this.cdRef.markForCheck();
+    this.cdRef.markForCheck(); // Forzar la detección de cambios para actualizar la vista
 
     const { email, password } = this.loginForm.value;
 
     this.loginService.login({ correo: email, password }).subscribe({
       next: () => {
-        // Handle successful login
+        // Manejar el inicio de sesión exitoso
         this.isLoading = false;
-        this.cdRef.markForCheck();
+        // Por ejemplo, redirigir al usuario a otra página
+        // this.router.navigate(['/dashboard']);
+        this.cdRef.markForCheck(); // Forzar la detección de cambios
       },
       error: (response) => {
         this.errorMessage =
           response?.error?.error || 'Error al iniciar sesión.';
         this.isLoading = false;
-        this.cdRef.markForCheck();
+        this.cdRef.markForCheck(); // Forzar la detección de cambios
       },
     });
   }
