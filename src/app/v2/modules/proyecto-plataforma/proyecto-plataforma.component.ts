@@ -1,11 +1,14 @@
 import { Component } from '@angular/core';
-import { SugeridosComponent } from '@v2/components';
+import { BreadcrumbsComponent, SugeridosComponent } from '@v2/components';
+import { PROYECTO_PLATAFORMA } from '@v2/constants';
 
 @Component({
   selector: 'app-proyecto-plataforma',
   standalone: true,
-  imports: [SugeridosComponent],
+  imports: [SugeridosComponent, BreadcrumbsComponent],
   templateUrl: './proyecto-plataforma.component.html',
   styleUrl: './proyecto-plataforma.component.scss',
 })
-export class ProyectoPlataformaComponent {}
+export class ProyectoPlataformaComponent {
+  breadcrumbs: any[] = PROYECTO_PLATAFORMA;
+}

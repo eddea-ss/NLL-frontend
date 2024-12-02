@@ -7,11 +7,13 @@ import {
   StartupEntrepreneurshipService,
 } from '@v2/services';
 import { AuthState, Role } from '@shared/enums';
+import { BreadcrumbsComponent } from '@v2/components';
+import { EVALUACION_STARTUP } from '@v2/constants';
 
 @Component({
   selector: 'app-evaluaciones-startup',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, BreadcrumbsComponent],
   templateUrl: './evaluaciones-startup.component.html',
   styleUrl: './evaluaciones-startup.component.scss',
 })
@@ -29,6 +31,8 @@ export class EvaluacionesStartupComponent implements OnInit {
 
   public AuthState = AuthState;
   public Role = Role;
+
+  breadcrumbs: any[] = EVALUACION_STARTUP;
 
   //signal formacionEmprendedores
   formacionEmprendedores =

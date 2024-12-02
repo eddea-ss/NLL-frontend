@@ -1,14 +1,16 @@
 import { Component } from '@angular/core';
-import { SugeridosComponent } from '@v2/components';
+import { BreadcrumbsComponent, SugeridosComponent } from '@v2/components';
+import { PROYECTO_EQUIPO } from '@v2/constants';
 
 @Component({
   selector: 'app-proyecto-equipo',
   standalone: true,
-  imports: [SugeridosComponent],
+  imports: [SugeridosComponent, BreadcrumbsComponent],
   templateUrl: './proyecto-equipo.component.html',
   styleUrl: './proyecto-equipo.component.scss',
 })
 export class ProyectoEquipoComponent {
+  breadcrumbs: any[] = [];
   equipo = [
     {
       nombre: 'Jorge Muñoz',
@@ -21,4 +23,8 @@ export class ProyectoEquipoComponent {
       imagen: 'assets/team/pablo.jpg',
     },
   ];
+
+  constructor() {
+    this.breadcrumbs = PROYECTO_EQUIPO;
+  }
 }

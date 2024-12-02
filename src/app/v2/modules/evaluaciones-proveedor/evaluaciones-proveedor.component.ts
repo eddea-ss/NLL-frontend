@@ -1,22 +1,16 @@
 import { CommonModule } from '@angular/common';
-import {
-  AfterViewInit,
-  Component,
-  effect,
-  ElementRef,
-  inject,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { Component, effect, inject, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router';
 import { LoginService, CharacterizationModelService } from '@v2/services';
 import { AuthState, Role } from '@shared/enums';
+import { EVALUACION_PROVEEDORES } from '@v2/constants';
+import { BreadcrumbsComponent } from '@v2/components';
 
 @Component({
   selector: 'app-evaluaciones-proveedor',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, BreadcrumbsComponent],
   templateUrl: './evaluaciones-proveedor.component.html',
   styleUrl: './evaluaciones-proveedor.component.scss',
 })
@@ -31,6 +25,8 @@ export class EvaluacionesProveedorComponent implements OnInit {
 
   public AuthState = AuthState;
   public Role = Role;
+
+  breadcrumbs: any[] = EVALUACION_PROVEEDORES;
 
   // Signal del ModeloMadurezService
   modeloCaracter = this.modeloCaracterService.modeloCaracter;

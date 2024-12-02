@@ -11,7 +11,8 @@ import {
   SafeResourceUrl,
   Title,
 } from '@angular/platform-browser';
-import { SugeridosComponent } from '../../components/sugeridos/sugeridos.component';
+import { BreadcrumbsComponent, SugeridosComponent } from '@v2/components';
+import { INVESTIGACION_PODCASTS } from '@v2/constants';
 
 @Component({
   selector: 'app-podcasts',
@@ -24,6 +25,7 @@ import { SugeridosComponent } from '../../components/sugeridos/sugeridos.compone
     MatListModule,
     MatExpansionModule,
     SugeridosComponent,
+    BreadcrumbsComponent,
   ],
   templateUrl: './podcasts.component.html',
   styleUrl: './podcasts.component.scss',
@@ -31,6 +33,8 @@ import { SugeridosComponent } from '../../components/sugeridos/sugeridos.compone
 export class PodcastsComponent implements OnInit {
   private title = inject(Title);
   private meta = inject(Meta);
+
+  breadcrumbs: any[] = INVESTIGACION_PODCASTS;
 
   ngOnInit(): void {
     // Establecer el título de la página

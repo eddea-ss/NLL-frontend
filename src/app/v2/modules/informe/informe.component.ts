@@ -6,7 +6,8 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-import { SugeridosComponent } from '@v2/components';
+import { BreadcrumbsComponent, SugeridosComponent } from '@v2/components';
+import { INVESTIGACION_INFORME } from '@v2/constants';
 
 @Component({
   selector: 'app-informe',
@@ -20,11 +21,14 @@ import { SugeridosComponent } from '@v2/components';
     MatListModule,
     MatExpansionModule,
     MatButtonModule,
+    BreadcrumbsComponent,
   ],
   templateUrl: './informe.component.html',
   styleUrl: './informe.component.scss',
 })
 export class InformeComponent {
+  breadcrumbs: any[] = INVESTIGACION_INFORME;
+
   openLink(link: string): void {
     window.open(link, '_blank');
   }

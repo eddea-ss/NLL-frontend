@@ -1,68 +1,5 @@
 <!-- Migas de pan para navegación -->
-<div class="bg-gray-200 py-4 border-b-4 border-gray-200">
-  <div class="container mx-auto">
-    <nav class="flex" aria-label="Breadcrumb">
-      <ol class="inline-flex items-center space-x-1 md:space-x-3">
-        <!-- Primer segmento: enlace a la página de Inicio -->
-        <li class="inline-flex items-center">
-          <a
-            routerLink="/"
-            class="inline-flex items-center text-sm font-bold transition-colors duration-300"
-          >
-            <!-- Icono de Inicio -->
-            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M10 2L2 7h3v7h4v-5h2v5h4V7h3L10 2z"></path>
-            </svg>
-            Inicio
-          </a>
-        </li>
-        <!-- Iterar sobre los segmentos y generar enlaces acumulativos -->
-        <li key="0" class="flex items-center">
-          <!-- Separador de segmento -->
-          <svg
-            class="w-5 h-5 text-gray-500 mx-2"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-              clip-rule="evenodd"
-            ></path>
-          </svg>
-          <!-- Enlace al segmento con ruta acumulativa -->
-          <a
-            routerLink="/"
-            class="text-sm font-bold transition-colors duration-300 hover:text-gray-500"
-          >
-            Investigacion
-          </a>
-        </li>
-        <li key="1" class="flex items-center">
-          <!-- Separador de segmento -->
-          <svg
-            class="w-5 h-5 text-gray-500 mx-2"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-              clip-rule="evenodd"
-            ></path>
-          </svg>
-          <!-- Enlace al segmento con ruta acumulativa -->
-          <a
-            routerLink="/investigacion-diagnostico"
-            class="text-sm font-bold transition-colors duration-300 hover:text-gray-500"
-          >
-            Diagnostico
-          </a>
-        </li>
-      </ol>
-    </nav>
-  </div>
-</div>
+<app-breadcrumbs [breadcrumbs]="breadcrumbs"></app-breadcrumbs>
 
 <!-- Contenido principal -->
 <main class="container mx-auto py-12 flex flex-col lg:flex-row">
@@ -103,7 +40,7 @@
         <h2 class="text-3xl font-bold text-gray-800 mb-6">
           Brechas en la Adopción de Tecnologías 4.0
         </h2>
-        <p class="text-gray-700 leading-relaxed mb-4  text-justify">
+        <p class="text-gray-700 leading-relaxed mb-4 text-justify">
           <strong
             >Uno de los puntos clave es la identificación de las brechas que
             frenan la adopción de tecnologías 4.0 en la región.</strong
@@ -112,7 +49,7 @@
           escasez de personal capacitado, la incertidumbre económica y la
           adaptación a la innovación tecnológica.
         </p>
-        <p class="text-gray-700 leading-relaxed  text-justify">
+        <p class="text-gray-700 leading-relaxed text-justify">
           Para superar estos desafíos, el informe subraya la necesidad de
           fortalecer las políticas de apoyo financiero y formación tecnológica,
           además de fomentar una cultura de colaboración entre empresas e
@@ -127,7 +64,7 @@
         <h2 class="text-3xl font-bold text-gray-800 mb-6">
           Sectores Clave de la Economía Regional
         </h2>
-        <p class="text-gray-700 leading-relaxed mb-4  text-justify">
+        <p class="text-gray-700 leading-relaxed mb-4 text-justify">
           <strong
             >El informe también detalla cinco sectores clave de la economía
             regional: acuicultura, construcción, silvoagropecuario, manufactura
@@ -136,7 +73,7 @@
           Para cada uno, se describen sus características, desafíos y
           oportunidades frente a la adopción de tecnologías 4.0.
         </p>
-        <p class="text-gray-700 leading-relaxed  text-justify">
+        <p class="text-gray-700 leading-relaxed text-justify">
           Se incluyen ejemplos de innovaciones como robots de ordeño, drones
           para la cosecha de manzanas y sistemas de nanoburbujas para
           oxigenación en la acuicultura.
@@ -150,7 +87,7 @@
         <h2 class="text-3xl font-bold text-gray-800 mb-6">
           Fuente de Información
         </h2>
-        <p class="text-gray-700 leading-relaxed mb-4  text-justify">
+        <p class="text-gray-700 leading-relaxed mb-4 text-justify">
           <strong
             >La información del informe proviene de encuestas a empresas de
             distintos sectores, incluyendo la manufactura y el acuícola.</strong
@@ -159,7 +96,7 @@
           de tecnologías, y las barreras y oportunidades que enfrentan las
           empresas en su camino hacia la transformación digital.
         </p>
-        <p class="text-gray-700 leading-relaxed  text-justify">
+        <p class="text-gray-700 leading-relaxed text-justify">
           Los resultados son una herramienta valiosa para entender las
           necesidades del sector y diseñar estrategias que impulsen la adopción
           de tecnologías avanzadas.
@@ -173,7 +110,7 @@
         <h2 class="text-3xl font-bold text-gray-800 mb-6">
           Objetivo del Informe
         </h2>
-        <p class="text-gray-700 leading-relaxed mb-4  text-justify">
+        <p class="text-gray-700 leading-relaxed mb-4 text-justify">
           <strong
             >El informe pretende aportar una visión clara sobre el estado de la
             manufactura avanzada e industria 4.0 en la Región de Los
@@ -183,7 +120,7 @@
           decisiones estratégicas que promuevan un desarrollo económico
           sostenible.
         </p>
-        <p class="text-gray-700 leading-relaxed  text-justify">
+        <p class="text-gray-700 leading-relaxed text-justify">
           El informe completo está disponible para su consulta, y se espera que
           sea un recurso útil para empresas, instituciones públicas y actores
           del ecosistema de innovación de la región.
