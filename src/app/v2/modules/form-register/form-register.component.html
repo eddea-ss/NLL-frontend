@@ -1,3 +1,5 @@
+<!-- form-register.component.html -->
+
 <div
   style="padding: 0px; align-content: center; height: 100vh"
   class="max-w-screen-lg mx-auto"
@@ -5,9 +7,14 @@
   <div class="grid grid-cols-1 md:grid-cols-12 border">
     <div class="bg-gray-900 md:col-span-4 p-10 text-white">
       <p class="mt-4 text-sm leading-7 font-regular uppercase">
-        Registro | @if (tipoRegistro==='proveedor') { Proveedor } @else if
-        (tipoRegistro==='empresa') { Industria 4.0 } @else { Startup -
-        Emprendedor }
+        Registro |
+        {{
+          tipoRegistro === "proveedor"
+            ? "Proveedor"
+            : tipoRegistro === "empresa"
+            ? "Industria 4.0"
+            : "Startup - Emprendedor"
+        }}
       </p>
       <h3
         class="text-3xl sm:text-4xl leading-normal font-extrabold tracking-tight"
@@ -15,18 +22,13 @@
         NuevoLosLagos
       </h3>
       <p style="margin-top: 24px" class="mt-4 leading-7 text-gray-200">
-        @if (tipoRegistro==='proveedor') { Accede a nuestra plataforma como
-        proveedor y conecta con empresas de la Industria 4.0 para ofrecer tus
-        productos o servicios especializados. Únete a una red de colaboración y
-        aprovecha oportunidades de negocio en crecimiento. } @else if
-        (tipoRegistro==='empresa') { Únete como empresa de la región de Los
-        Lagos para aumentar tu visibilidad y competitividad en la Industria 4.0.
-        Accede a recursos exclusivos, oportunidades de financiamiento y contacto
-        directo con proveedores e innovadores. } @else { Regístrate como Startup
-        o Emprendedor, y explora oportunidades de desarrollo, empleo y formación
-        en el ecosistema de la Industria 4.0. Conecta con empresas, accede a
-        cursos en línea y mantente actualizado sobre las últimas tendencias del
-        sector }
+        {{
+          tipoRegistro === "proveedor"
+            ? "Accede a nuestra plataforma como proveedor y conecta con empresas de la Industria 4.0 para ofrecer tus productos o servicios especializados. Únete a una red de colaboración y aprovecha oportunidades de negocio en crecimiento."
+            : tipoRegistro === "empresa"
+            ? "Únete como empresa de la región de Los Lagos para aumentar tu visibilidad y competitividad en la Industria 4.0. Accede a recursos exclusivos, oportunidades de financiamiento y contacto directo con proveedores e innovadores."
+            : "Regístrate como Startup o Emprendedor, y explora oportunidades de desarrollo, empleo y formación en el ecosistema de la Industria 4.0. Conecta con empresas, accede a cursos en línea y mantente actualizado sobre las últimas tendencias del sector"
+        }}
       </p>
     </div>
     <form
@@ -44,6 +46,7 @@
             {{ field.label }}
           </label>
           <ng-container [ngSwitch]="field.type">
+            <!-- Text Input -->
             <input
               *ngSwitchCase="'text'"
               class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -51,6 +54,7 @@
               [id]="field.name"
               [placeholder]="field.placeholder"
             />
+            <!-- Email Input -->
             <input
               *ngSwitchCase="'email'"
               type="email"
@@ -59,15 +63,130 @@
               [id]="field.name"
               [placeholder]="field.placeholder"
             />
-            <input
-              *ngSwitchCase="'password'"
-              type="password"
-              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              [formControlName]="field.name"
-              [id]="field.name"
-              [placeholder]="field.placeholder"
-            />
-            <!-- Campo de tipo "rating" -->
+            <!-- Password Input with Validation Badges and Toggle Button -->
+            <div *ngSwitchCase="'password'">
+              <div class="relative">
+                <input
+                  [type]="
+                    field.name === 'password'
+                      ? isPasswordVisible
+                        ? 'text'
+                        : 'password'
+                      : isConfirmPasswordVisible
+                      ? 'text'
+                      : 'password'
+                  "
+                  class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                  [formControlName]="field.name"
+                  [id]="field.name"
+                  [placeholder]="field.placeholder"
+                />
+                <button
+                  type="button"
+                  class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
+                  (click)="
+                    field.name === 'password'
+                      ? togglePasswordVisibility()
+                      : toggleConfirmPasswordVisibility()
+                  "
+                >
+                  <svg
+                    [ngClass]="
+                      (field.name === 'password' && isPasswordVisible) ||
+                      (field.name === 'password_confirm' &&
+                        isConfirmPasswordVisible)
+                        ? 'text-gray-700'
+                        : 'text-gray-500'
+                    "
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      *ngIf="
+                        (field.name === 'password' && isPasswordVisible) ||
+                        (field.name === 'password_confirm' &&
+                          isConfirmPasswordVisible)
+                      "
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                    />
+                    <path
+                      *ngIf="
+                        (field.name === 'password' && isPasswordVisible) ||
+                        (field.name === 'password_confirm' &&
+                          isConfirmPasswordVisible)
+                      "
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                    />
+                    <path
+                      *ngIf="
+                        (field.name === 'password' && !isPasswordVisible) ||
+                        (field.name === 'password_confirm' &&
+                          !isConfirmPasswordVisible)
+                      "
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M13.875 18.825A10.05 10.05 0 0112 19c-4.477 0-8.268-2.943-9.542-7a9.977 9.977 0 014.058-5.642M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                    />
+                    <path
+                      *ngIf="
+                        (field.name === 'password' && !isPasswordVisible) ||
+                        (field.name === 'password_confirm' &&
+                          !isConfirmPasswordVisible)
+                      "
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M3 3l18 18"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <!-- Password validation badges for the 'password' field only -->
+              <div
+                *ngIf="field.name === 'password'"
+                class="mt-4 grid grid-cols-2 gap-4"
+              >
+                <div class="flex items-center text-sm">
+                  <span
+                    class="w-4 h-4 inline-block rounded-full mr-2"
+                    [ngClass]="hasLength ? 'bg-green-500' : 'bg-gray-300'"
+                  ></span>
+                  Al menos 8 caracteres
+                </div>
+                <div class="flex items-center text-sm">
+                  <span
+                    class="w-4 h-4 inline-block rounded-full mr-2"
+                    [ngClass]="hasUppercase ? 'bg-green-500' : 'bg-gray-300'"
+                  ></span>
+                  Una letra mayúscula
+                </div>
+                <div class="flex items-center text-sm">
+                  <span
+                    class="w-4 h-4 inline-block rounded-full mr-2"
+                    [ngClass]="hasSpecialChar ? 'bg-green-500' : 'bg-gray-300'"
+                  ></span>
+                  Un carácter especial
+                </div>
+                <div class="flex items-center text-sm">
+                  <span
+                    class="w-4 h-4 inline-block rounded-full mr-2"
+                    [ngClass]="hasNumber ? 'bg-green-500' : 'bg-gray-300'"
+                  ></span>
+                  Un número
+                </div>
+              </div>
+            </div>
+            <!-- Rating Input -->
             <div *ngSwitchCase="'rating'" class="mb-3">
               <div style="gap: 12px" class="flex items-center">
                 <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
@@ -100,11 +219,24 @@
               </div>
             </div>
           </ng-container>
-          @if (field.type == 'password') {
-          <div class="text-red-500 text-xs italic">
+          <!-- Passwords match validation badge -->
+          <div
+            *ngIf="field.name === 'password_confirm'"
+            class="mt-4 flex items-center text-sm"
+          >
+            <span
+              class="w-4 h-4 inline-block rounded-full mr-2"
+              [ngClass]="passwordsMatch ? 'bg-green-500' : 'bg-gray-300'"
+            ></span>
+            Las contraseñas coinciden
+          </div>
+          <!-- Error message for password mismatch -->
+          <div
+            *ngIf="field.name === 'password_confirm' && errorGeneral"
+            class="text-red-500 text-xs italic"
+          >
             {{ errorGeneral }}
           </div>
-          }
           <div
             *ngIf="
               formGroup.get(field.name)?.invalid &&

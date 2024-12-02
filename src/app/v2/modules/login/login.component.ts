@@ -1,4 +1,4 @@
-// src/app/core/components/login/login.component.ts
+// login.component.ts
 
 import { Component, inject } from '@angular/core';
 import {
@@ -30,7 +30,10 @@ export class LoginComponent {
   isLoading = false;
   errorMessage = '';
 
-  // Validation variables
+  // Password visibility toggle
+  isPasswordVisible: boolean = false;
+
+  // Password validation variables
   hasLength: boolean = false;
   hasUppercase: boolean = false;
   hasSpecialChar: boolean = false;
@@ -51,6 +54,10 @@ export class LoginComponent {
     this.hasNumber = /[0-9]/.test(password);
   }
 
+  togglePasswordVisibility(): void {
+    this.isPasswordVisible = !this.isPasswordVisible;
+  }
+
   onSubmit() {
     if (this.loginForm.invalid) {
       return;
@@ -63,7 +70,7 @@ export class LoginComponent {
 
     this.loginService.login({ correo: email, password }).subscribe({
       next: () => {
-        // Manejar el inicio de sesión exitoso
+        // Handle successful login
         this.isLoading = false;
       },
       error: (response) => {

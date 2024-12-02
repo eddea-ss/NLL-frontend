@@ -1,11 +1,7 @@
+// form-register.component.ts
+
 import { CommonModule } from '@angular/common';
-import {
-  Component,
-  OnInit,
-  inject,
-  ViewChild,
-  ElementRef,
-} from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -21,7 +17,7 @@ import { RegisterService } from '@v2/services';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, RouterLink],
   templateUrl: './form-register.component.html',
-  styleUrl: './form-register.component.scss',
+  styleUrls: ['./form-register.component.scss'],
 })
 export class FormRegisterComponent implements OnInit {
   private fb = inject(FormBuilder);
@@ -114,7 +110,7 @@ export class FormRegisterComponent implements OnInit {
       error: null,
       validator: [Validators.required],
     },
-    // Agregar preguntas de tipo "rating"
+    // Rating questions
     {
       type: 'rating',
       label: '¿Qué tan clara es la estrategia digital de tu organización?',
@@ -140,6 +136,17 @@ export class FormRegisterComponent implements OnInit {
     },
   ];
 
+  // Password validation variables
+  hasLength: boolean = false;
+  hasUppercase: boolean = false;
+  hasSpecialChar: boolean = false;
+  hasNumber: boolean = false;
+  passwordsMatch: boolean = false;
+
+  // Password visibility toggles
+  isPasswordVisible: boolean = false;
+  isConfirmPasswordVisible: boolean = false;
+
   ngOnInit(): void {
     this.route.url.subscribe((segments) => {
       this.tipoRegistro = segments[0].path;
@@ -147,11 +154,11 @@ export class FormRegisterComponent implements OnInit {
     });
     this.title.setTitle('Registro | Nuevo Los Lagos');
 
-    // Agregar meta etiquetas
+    // Add meta tags
     this.meta.updateTag({
       name: 'description',
       content:
-        'Registrate y Únete a una red de colaboración y aprovecha oportunidades de negocio en crecimiento.',
+        'Regístrate y únete a una red de colaboración y aprovecha oportunidades de negocio en crecimiento.',
     });
   }
 
@@ -176,15 +183,28 @@ export class FormRegisterComponent implements OnInit {
         return acc;
       }, {})
     );
+
+    // Subscribe to password value changes for validation
+    this.formGroup
+      .get('password')
+      ?.valueChanges.subscribe((password: string) => {
+        this.validatePassword(password);
+        this.checkPasswordsMatch();
+      });
+
+    // Subscribe to confirm password value changes for matching check
+    this.formGroup
+      .get('password_confirm')
+      ?.valueChanges.subscribe(() => this.checkPasswordsMatch());
   }
 
-  // Método para actualizar el valor del control cuando se selecciona una estrella
+  // Method to update the value of the control when a star is selected
   rate(controlName: string, value: number): void {
     this.formGroup.get(controlName)?.setValue(value);
   }
 
   onSubmit(): void {
-    if (!this.checkPassword(this.formGroup)) {
+    if (!this.passwordsMatch) {
       this.errorGeneral = 'Las contraseñas no coinciden';
       return;
     }
@@ -199,9 +219,26 @@ export class FormRegisterComponent implements OnInit {
     }
   }
 
-  checkPassword(formGroup: FormGroup): boolean {
-    const password = formGroup.get('password')?.value;
-    const confirmPassword = formGroup.get('password_confirm')?.value;
-    return password === confirmPassword;
+  checkPasswordsMatch(): void {
+    const password = this.formGroup.get('password')?.value;
+    const confirmPassword = this.formGroup.get('password_confirm')?.value;
+    this.passwordsMatch = password === confirmPassword && password !== '';
+  }
+
+  // Password validation
+  validatePassword(password: string) {
+    this.hasLength = password.length >= 8;
+    this.hasUppercase = /[A-Z]/.test(password);
+    this.hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+    this.hasNumber = /[0-9]/.test(password);
+  }
+
+  // Toggle password visibility
+  togglePasswordVisibility(): void {
+    this.isPasswordVisible = !this.isPasswordVisible;
+  }
+
+  toggleConfirmPasswordVisibility(): void {
+    this.isConfirmPasswordVisible = !this.isConfirmPasswordVisible;
   }
 }
