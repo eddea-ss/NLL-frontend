@@ -14,7 +14,7 @@ import {
 } from '@angular/forms';
 import { Meta, Title } from '@angular/platform-browser';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { RegistroService } from '@core/services';
+import { RegisterService } from '@v2/services';
 
 @Component({
   selector: 'app-form-register',
@@ -26,7 +26,7 @@ import { RegistroService } from '@core/services';
 export class FormRegisterComponent implements OnInit {
   private fb = inject(FormBuilder);
   private route = inject(ActivatedRoute);
-  private registroService = inject(RegistroService);
+  private registroService = inject(RegisterService);
   private title = inject(Title);
   private meta = inject(Meta);
 

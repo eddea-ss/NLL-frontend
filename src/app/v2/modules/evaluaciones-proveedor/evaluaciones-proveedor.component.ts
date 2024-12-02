@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router';
-import { LoginService, ModeloCaracterService } from '@core/services';
+import { LoginService, CharacterizationModelService } from '@v2/services';
 import { AuthState, Role } from '@shared/enums';
 
 @Component({
@@ -22,7 +22,7 @@ import { AuthState, Role } from '@shared/enums';
 })
 export class EvaluacionesProveedorComponent implements OnInit {
   private loginService = inject(LoginService);
-  private modeloCaracterService = inject(ModeloCaracterService);
+  private modeloCaracterService = inject(CharacterizationModelService);
   private title = inject(Title);
   private meta = inject(Meta);
 

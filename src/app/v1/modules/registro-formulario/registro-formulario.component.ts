@@ -32,8 +32,8 @@ import {
 import { MatSelectModule } from '@angular/material/select';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Question } from '@shared/models';
-import { RegistroService } from '@core/services';
-import { SnackbarService } from '@core/services/snackbar.service';
+import { RegistroService } from 'app/v1/services';
+import { SnackbarService } from 'app/v1/services/snackbar.service';
 
 @Component({
   selector: 'app-registro-formulario',

@@ -7,7 +7,7 @@ import {
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { GoogleAnalyticsService } from './google-analytics.service';
+import { GoogleAnalyticsService } from '@v2/services';
 import DOMPurify from 'dompurify';
 
 @Injectable({

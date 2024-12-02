@@ -11,7 +11,7 @@ import { throwError, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { LoginCredentials, LoginResponse, Usuario } from '@shared/models';
 import { AuthState, Role } from '@shared/enums';
-import { GoogleAnalyticsService } from './google-analytics.service';
+import { GoogleAnalyticsService } from '@v2/services';
 
 @Injectable({
   providedIn: 'root',

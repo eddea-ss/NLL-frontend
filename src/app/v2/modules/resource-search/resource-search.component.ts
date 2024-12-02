@@ -4,16 +4,25 @@ import { debounceTime, Subject } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import {
+  //recursos
   CourseItemComponent,
   CourseModalComponent,
   FinancingModalComponent,
   StartupModalComponent,
   SugeridosComponent,
   SupplierModalComponent,
+  ArticleItemComponent,
+  ArticleModalComponent,
+  ProjectsItemComponent,
+  FinancingItemComponent,
+  SupplierItemComponent,
+  StartupItemComponent,
+  ProjectsModalComponent,
+  //controlador
+  SearchControlsComponent,
+  BreadcrumbsComponent,
 } from '@v2/components';
-import { GoogleAnalyticsService, ResourceService } from '../../services/index';
-import { SearchControlsComponent } from '@v2/components/search-controls/search-controls.component';
-import { BreadcrumbsComponent } from '@v2/components/breadcrumbs/breadcrumbs.component';
+import { GoogleAnalyticsService, ResourceService } from '@v2/services';
 import {
   COURSE_TEXT,
   ARTICLE_TEXT,
@@ -22,13 +31,6 @@ import {
   SUPPLIER_TEXT,
   STARTUPS_TEXT,
 } from '@v2/constants';
-import { ArticleItemComponent } from '@v2/components/article-item/article-item.component';
-import { ArticleModalComponent } from '@v2/components/article-modal/article-modal.component';
-import { ProjectsItemComponent } from '../../components/projects-item/projects-item.component';
-import { FinancingItemComponent } from '../../components/financing-item/financing-item.component';
-import { SupplierItemComponent } from '../../components/supplier-item/supplier-item.component';
-import { StartupItemComponent } from '../../components/startup-item/startup-item.component';
-import { ProjectsModalComponent } from '../../components/projects-modal/projects-modal.component';
 
 @Component({
   selector: 'app-resource-search',

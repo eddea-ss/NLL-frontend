@@ -3,10 +3,10 @@ import { Component, effect, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
   LoginService,
-  ModeloCaracterService,
-  ModeloMadurezService,
-  RecursosService,
-} from '@core/services';
+  CharacterizationModelService,
+  MaturityModelService,
+  ResourceService,
+} from '@v2/services';
 import { AuthState, Role } from '@shared/enums';
 import DOMPurify from 'dompurify';
 
@@ -46,10 +46,10 @@ import { StartupModalComponent } from '../startup-modal/startup-modal.component'
 })
 export class SugeridosComponent implements OnInit {
   private route = inject(ActivatedRoute);
-  private recursosService = inject(RecursosService);
+  private recursosService = inject(ResourceService);
   private loginService = inject(LoginService);
-  private modeloMadurezService = inject(ModeloMadurezService);
-  private modeloCaracterService = inject(ModeloCaracterService);
+  private modeloMadurezService = inject(MaturityModelService);
+  private modeloCaracterService = inject(CharacterizationModelService);
 
   modeloMadurez = this.modeloMadurezService.modeloMadurez;
   modeloCaracter = this.modeloCaracterService.modeloCaracter;

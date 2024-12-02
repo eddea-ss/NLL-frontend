@@ -3,7 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import * as CryptoJS from 'crypto-js';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
-import { LoginService } from '@core/services/login.service';
+import { LoginService } from '@v2/services';
 import { Role } from '@shared/enums';
 
 interface SuccessResponse {

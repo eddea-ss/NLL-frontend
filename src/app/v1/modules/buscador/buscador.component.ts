@@ -1,9 +1,20 @@
-import { ChangeDetectorRef, Component, inject, OnDestroy, OnInit } from '@angular/core';
-import { BuscadorService } from '@core/services/buscador.service'; // Asegúrate de que la ruta sea correcta
+import {
+  ChangeDetectorRef,
+  Component,
+  inject,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
+import { BuscadorService } from 'app/v1/services';
 import { Articulo } from '@shared/models/articulo.model'; // Asegúrate de que la ruta sea correcta
 import { BuscadorDetalleComponent } from '../buscador-detalle/buscador-detalle.component';
 import { EMPTY, Subject } from 'rxjs';
-import { takeUntil, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import {
+  takeUntil,
+  debounceTime,
+  distinctUntilChanged,
+  switchMap,
+} from 'rxjs/operators';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ActivatedRoute, RouterModule } from '@angular/router';
@@ -28,14 +39,12 @@ import { MatIconModule } from '@angular/material/icon';
     MatListModule,
     MatDialogModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
   ],
   templateUrl: './buscador.component.html',
   styleUrls: ['./buscador.component.scss'],
-   
 })
 export class BuscadorComponent implements OnInit, OnDestroy {
-
   private cdRef = inject(ChangeDetectorRef);
   searchControl = new FormControl('');
   resultados: Articulo[] = [];
@@ -51,45 +60,45 @@ export class BuscadorComponent implements OnInit, OnDestroy {
     private buscadorService: BuscadorService,
     private dialog: MatDialog,
     private route: ActivatedRoute
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     // Obtener los datos de la ruta
-    this.route.data
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(data => {
-        this.entityType = data['entityType'];
-        this.displayName = data['name'];
-      });
+    this.route.data.pipe(takeUntil(this.unsubscribe$)).subscribe((data) => {
+      this.entityType = data['entityType'];
+      this.displayName = data['name'];
+    });
 
     // Suscripción a cambios en el input de búsqueda
-    this.searchControl.valueChanges.pipe(
-      debounceTime(300),
-      distinctUntilChanged(),
-      takeUntil(this.unsubscribe$),
-      switchMap(query => {
-        if (query && query.trim().length >= 2) {
-          this.isLoading = true;
-          this.error = null;
-          return this.buscadorService.buscarRecursos(this.entityType, query);
-        } else {
-          this.resultados = [];
-          return EMPTY;
-        }
-      })
-    ).subscribe({
-      next: (data: Articulo[]) => {
-        this.isLoading = false;
-        this.resultados = data;
-        this.ordenarResultados();
-        this.cdRef.detectChanges();
-      },
-      error: (err: any) => {
-        this.isLoading = false;
-        this.error = err.message;
-        this.cdRef.detectChanges();
-      }
-    });
+    this.searchControl.valueChanges
+      .pipe(
+        debounceTime(300),
+        distinctUntilChanged(),
+        takeUntil(this.unsubscribe$),
+        switchMap((query) => {
+          if (query && query.trim().length >= 2) {
+            this.isLoading = true;
+            this.error = null;
+            return this.buscadorService.buscarRecursos(this.entityType, query);
+          } else {
+            this.resultados = [];
+            return EMPTY;
+          }
+        })
+      )
+      .subscribe({
+        next: (data: Articulo[]) => {
+          this.isLoading = false;
+          this.resultados = data;
+          this.ordenarResultados();
+          this.cdRef.detectChanges();
+        },
+        error: (err: any) => {
+          this.isLoading = false;
+          this.error = err.message;
+          this.cdRef.detectChanges();
+        },
+      });
   }
 
   /**
@@ -106,10 +115,10 @@ export class BuscadorComponent implements OnInit, OnDestroy {
   ordenarResultados(): void {
     const nivelOrder: Record<string, number> = {
       'Muy alto': 1,
-      'Alto': 2,
-      'Medio': 3,
-      'Bajo': 4,
-      'Muy bajo': 5
+      Alto: 2,
+      Medio: 3,
+      Bajo: 4,
+      'Muy bajo': 5,
     };
 
     this.resultados.sort((a, b) => {
@@ -141,10 +150,10 @@ export class BuscadorComponent implements OnInit, OnDestroy {
   mapNivelToStars(nivel: string): number {
     const mapping: Record<string, number> = {
       'Muy alto': 5,
-      'Alto': 4,
-      'Medio': 3,
-      'Bajo': 2,
-      'Muy bajo': 1
+      Alto: 4,
+      Medio: 3,
+      Bajo: 2,
+      'Muy bajo': 1,
     };
     return mapping[nivel] || 0;
   }
@@ -156,7 +165,7 @@ export class BuscadorComponent implements OnInit, OnDestroy {
   abrirModal(index: number): void {
     const dialogRef = this.dialog.open(BuscadorDetalleComponent, {
       width: '800px',
-      data: this.resultados[index]
+      data: this.resultados[index],
     });
 
     dialogRef.afterClosed().subscribe((result: string | undefined) => {
@@ -193,5 +202,4 @@ export class BuscadorComponent implements OnInit, OnDestroy {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
   }
-
 }
