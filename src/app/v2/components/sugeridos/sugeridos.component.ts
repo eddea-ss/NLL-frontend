@@ -10,18 +10,20 @@ import {
 import { AuthState, Role } from '@shared/enums';
 import DOMPurify from 'dompurify';
 
-import { CourseItemComponent } from '@v2/components/course-item/course-item.component';
-import { CourseModalComponent } from '../course-modal/course-modal.component';
-import { ArticleItemComponent } from '../article-item/article-item.component';
-import { ArticleModalComponent } from '../article-modal/article-modal.component';
-import { SupplierItemComponent } from '../supplier-item/supplier-item.component';
-import { SupplierModalComponent } from '../supplier-modal/supplier-modal.component';
-import { FinancingItemComponent } from '../financing-item/financing-item.component';
-import { FinancingModalComponent } from '../financing-modal/financing-modal.component';
-import { ProjectsItemComponent } from '../projects-item/projects-item.component';
-import { ProjectsModalComponent } from '../projects-modal/projects-modal.component';
-import { StartupItemComponent } from '../startup-item/startup-item.component';
-import { StartupModalComponent } from '../startup-modal/startup-modal.component';
+import {
+  CourseItemComponent,
+  CourseModalComponent,
+  ArticleItemComponent,
+  ArticleModalComponent,
+  SupplierItemComponent,
+  SupplierModalComponent,
+  FinancingItemComponent,
+  FinancingModalComponent,
+  ProjectsItemComponent,
+  ProjectsModalComponent,
+  StartupItemComponent,
+  StartupModalComponent,
+} from '@v2/components';
 
 @Component({
   selector: 'app-sugeridos',
@@ -112,7 +114,7 @@ export class SugeridosComponent implements OnInit {
             this.currentUser()?.rol?.nombreRol === Role.Empresa &&
             this.modeloMadurez()
           ) {
-            searchPath = this.modeloMadurez()![0].IndustryName ?? '';
+            searchPath = this.modeloMadurez()![0].IndustryName ?? searchPath;
           }
         }
 
