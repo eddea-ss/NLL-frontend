@@ -1,7 +1,7 @@
 import { Component, effect, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink, RouterModule } from '@angular/router';
-import { LoginService } from '@core/services';
+import { LoginService } from '@v2/services';
 import { AuthState, Role } from '@shared/enums';
 
 @Component({

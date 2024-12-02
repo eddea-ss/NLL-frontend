@@ -1,8 +1,11 @@
 import { Component, effect, inject, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router';
-import { LoginService, FormacionEmprendedoresService } from '@core/services';
-import { StartupEmprendimientoService } from '@core/services/startup-emprendimiento.service';
+import {
+  LoginService,
+  EntrepreneurshipTrainingService,
+  StartupEntrepreneurshipService,
+} from '@v2/services';
 import { AuthState, Role } from '@shared/enums';
 
 @Component({
@@ -14,8 +17,10 @@ import { AuthState, Role } from '@shared/enums';
 })
 export class EvaluacionesStartupComponent implements OnInit {
   private loginService = inject(LoginService);
-  private formacionEmprendedoresService = inject(FormacionEmprendedoresService);
-  private startupService = inject(StartupEmprendimientoService);
+  private formacionEmprendedoresService = inject(
+    EntrepreneurshipTrainingService
+  );
+  private startupService = inject(StartupEntrepreneurshipService);
   private title = inject(Title);
   private meta = inject(Meta);
 

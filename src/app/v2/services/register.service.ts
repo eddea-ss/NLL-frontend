@@ -4,7 +4,7 @@ import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { RegistroCredentials, RegistroResponse } from '@shared/models';
 import { Role } from '@shared/enums';
-import { LoginService } from './login.service';
+import { LoginService } from '@v2/services';
 import { Observable, throwError } from 'rxjs';
 import { catchError, switchMap, tap } from 'rxjs/operators';
 import { GoogleAnalyticsService } from './google-analytics.service';

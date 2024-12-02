@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router';
-import { LoginService, ModeloMadurezService } from '@core/services';
+import { LoginService, MaturityModelService } from '@v2/services';
 import { AuthState, Role } from '@shared/enums';
 import Chart, {
   ChartConfiguration,
@@ -27,7 +27,7 @@ import Chart, {
 })
 export class EvaluacionesMadurezComponent implements AfterViewInit, OnInit {
   private loginService = inject(LoginService);
-  private modeloMadurezService = inject(ModeloMadurezService);
+  private modeloMadurezService = inject(MaturityModelService);
   private title = inject(Title);
   private meta = inject(Meta);
 
