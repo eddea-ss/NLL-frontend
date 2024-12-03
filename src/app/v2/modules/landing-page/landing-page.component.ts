@@ -2,16 +2,20 @@ import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { Meta, Title } from '@angular/platform-browser';
+import { BreadcrumbsComponent } from '@v2/components';
+import { INICIO } from '@v2/constants';
 
 @Component({
   selector: 'app-landing-page',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, BreadcrumbsComponent],
   templateUrl: './landing-page.component.html',
 })
 export class LandingPageComponent implements OnInit {
   private title = inject(Title);
   private meta = inject(Meta);
+
+  breadcrumbs: any[] = INICIO;
 
   ngOnInit(): void {
     // Establecer el título de la página

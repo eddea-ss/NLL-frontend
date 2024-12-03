@@ -1,26 +1,5 @@
 <!-- Migas de pan para navegación -->
-<div class="bg-gray-200 py-4 border-b-4 border-gray-200">
-  <div class="container mx-auto">
-    <nav class="flex" aria-label="Breadcrumb">
-      <ol class="inline-flex items-center space-x-1 md:space-x-3">
-        <!-- Primer segmento: enlace a la página de Inicio -->
-        <li class="inline-flex items-center">
-          <a
-            routerLink="/"
-            class="inline-flex items-center text-sm font-bold transition-colors duration-300"
-          >
-            <!-- Icono de Inicio -->
-            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M10 2L2 7h3v7h4v-5h2v5h4V7h3L10 2z"></path>
-            </svg>
-            Inicio
-          </a>
-        </li>
-        <!-- Iterar sobre los segmentos y generar enlaces acumulativos -->
-      </ol>
-    </nav>
-  </div>
-</div>
+<app-breadcrumbs [breadcrumbs]="breadcrumbs"></app-breadcrumbs>
 <!-- Contenido dinámico del sitio -->
 <section class="bg-white">
   <div
@@ -67,7 +46,7 @@
     <div
       class="grid gap-x-8 gap-y-12 sm:gap-y-16 md:grid-cols-2 lg:grid-cols-3"
     >
-      <div class="relative mt-5 bg-gray-100 p-6  border ">
+      <div class="relative mt-5 bg-gray-100 p-6 border">
         <a routerLink="/registro-industria" class="block mb-3">
           <h2 class="text-2xl font-bold leading-5 text-black">
             Registro Empresas
@@ -81,7 +60,7 @@
           Registrarse
         </a>
       </div>
-      <div class="relative mt-5 bg-gray-100 p-6  border">
+      <div class="relative mt-5 bg-gray-100 p-6 border">
         <a routerLink="/registro-proveedor" class="block mb-3">
           <h2 class="text-2xl font-bold leading-5 text-black">
             Registro Proveedores
@@ -95,7 +74,7 @@
           Registrarse
         </a>
       </div>
-      <div class="relative mt-5 bg-gray-100 p-6  border">
+      <div class="relative mt-5 bg-gray-100 p-6 border">
         <a routerLink="/registro-persona" class="block mb-3">
           <h2 class="text-2xl font-bold leading-5 text-black">
             Registro Usuarios
