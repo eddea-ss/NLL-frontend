@@ -4,7 +4,7 @@ import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { RegistroCredentials, RegistroResponse } from '@shared/models';
 import { Role } from '@shared/enums';
-import { LoginService } from '@v2/services';
+import { LoginService, SnackbarService } from '@v2/services';
 import { Observable, throwError } from 'rxjs';
 import { catchError, switchMap, tap } from 'rxjs/operators';
 import { GoogleAnalyticsService } from './google-analytics.service';
@@ -13,7 +13,9 @@ import { GoogleAnalyticsService } from './google-analytics.service';
   providedIn: 'root',
 })
 export class RegisterService {
-  constructor(private http: HttpClient, private loginService: LoginService) {}
+  private snackbar = inject(SnackbarService);
+  private http = inject(HttpClient);
+  private loginService = inject(LoginService);
 
   private google = inject(GoogleAnalyticsService);
 
@@ -46,6 +48,7 @@ export class RegisterService {
         this.google.eventEmitter('click-registro-correcto', {
           label: 'Click registro Success',
         });
+        this.snackbar.show('Registro correcto', 4000);
       }),
       // Después del registro exitoso, iniciar sesión automáticamente
       switchMap(() =>
@@ -59,6 +62,7 @@ export class RegisterService {
         this.google.eventEmitter('click-registro-fallido', {
           label: 'Click registro Failed',
         });
+        this.snackbar.show('Error en el registro', 4000);
         return throwError(() => error);
       })
     );

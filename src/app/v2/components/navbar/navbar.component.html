@@ -1,5 +1,5 @@
 <header class="bg-gray-800 text-white shadow-lg">
-  <div class="container mx-auto flex justify-between items-center px-4">
+  <div class="container mx-auto flex items-center px-4">
     <!-- Logo -->
     <a
       routerLink="/"
@@ -11,7 +11,7 @@
 
     <!-- Botón de Menú Hamburguesa (Visible en móviles) -->
     <button
-      style="padding: 1em"
+      style="padding: 1em; margin-left: auto"
       class="block lg:hidden focus:outline-none"
       (click)="toggleMobileMenu()"
       aria-label="Toggle navigation menu"
@@ -33,7 +33,10 @@
     </button>
 
     <!-- Navegación (Visible en escritorio) -->
-    <nav class="hidden lg:flex space-x-6 items-center">
+    <nav
+      style="width: 100%; justify-content: center"
+      class="hidden lg:flex space-x-6 items-center"
+    >
       <!-- Menús Desplegables -->
       <div class="relative group" key="Proyecto">
         <button
