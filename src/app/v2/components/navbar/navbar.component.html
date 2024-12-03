@@ -1,9 +1,9 @@
-<header class="bg-gray-800 text-white shadow-lg border-b-4">
+<header class="bg-gray-800 text-white shadow-lg">
   <div class="container mx-auto flex justify-between items-center px-4">
     <!-- Logo -->
     <a
       routerLink="/"
-      class="font-black text-2xl tracking-wider bg-yellow-500 p-2 text-gray-800 p-5"
+      class="font-black text-2l tracking-wider bg-yellow-500 p-2 text-gray-800 p-5"
       (click)="closeMobileMenu()"
     >
       NuevoLosLagos
@@ -12,7 +12,7 @@
     <!-- Botón de Menú Hamburguesa (Visible en móviles) -->
     <button
       style="padding: 1em"
-      class="md:hidden focus:outline-none"
+      class="block lg:hidden focus:outline-none"
       (click)="toggleMobileMenu()"
       aria-label="Toggle navigation menu"
     >
@@ -33,7 +33,7 @@
     </button>
 
     <!-- Navegación (Visible en escritorio) -->
-    <nav class="hidden md:flex space-x-6 items-center">
+    <nav class="hidden lg:flex space-x-6 items-center">
       <!-- Menús Desplegables -->
       <div class="relative group" key="Proyecto">
         <button
@@ -235,7 +235,7 @@
       @if (authState()===AuthState.LoggedOut) {
       <a
         routerLink="/registro"
-        class="hidden md:inline-block bg-yellow-500  text-gray-800 font-bold py-3 px-4 ml-4 border border-yellow-700  "
+        class="hidden md:inline-block bg-yellow-500 text-gray-800 font-bold py-3 px-4 ml-4 border border-yellow-700"
       >
         Registrarse
       </a>
@@ -246,7 +246,7 @@
   <!-- Menú Móvil -->
   <!-- Menú Móvil -->
   <div
-    class="md:hidden"
+    class="lg:hidden"
     [ngClass]="{
       block: isMobileMenuOpen,
       hidden: !isMobileMenuOpen
