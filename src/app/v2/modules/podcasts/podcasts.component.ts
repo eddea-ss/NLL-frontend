@@ -1,10 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
-import { MatCardModule } from '@angular/material/card';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { MatIconModule } from '@angular/material/icon';
-import { MatListModule } from '@angular/material/list';
 import {
   DomSanitizer,
   Meta,
@@ -17,16 +12,7 @@ import { INVESTIGACION_PODCASTS } from '@v2/constants';
 @Component({
   selector: 'app-podcasts',
   standalone: true,
-  imports: [
-    CommonModule,
-    MatCardModule,
-    MatDividerModule,
-    MatIconModule,
-    MatListModule,
-    MatExpansionModule,
-    SugeridosComponent,
-    BreadcrumbsComponent,
-  ],
+  imports: [CommonModule, SugeridosComponent, BreadcrumbsComponent],
   templateUrl: './podcasts.component.html',
   styleUrl: './podcasts.component.scss',
 })
