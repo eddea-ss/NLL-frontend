@@ -13,7 +13,7 @@ this.modeloCaracter()) && (ruta === 'buscador-cursos' || ruta ===
   style="min-height: 50vh; max-width: 500px"
 >
   @if (!sugeridos.length) {
-  <h1 class="text-gray-300">No hay sugerencias coincidentes.</h1>
+  <h2 class="text-gray-300">No hay sugerencias coincidentes.</h2>
   }
   <!--sugeridos-->
   @for (item of sugeridos; track $index) {
