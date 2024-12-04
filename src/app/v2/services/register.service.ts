@@ -57,12 +57,19 @@ export class RegisterService {
           password: credentials.password,
         })
       ),
-      catchError((error: HttpErrorResponse) => {
-        console.error('Error en el registro:', error);
+      catchError((error: any) => {
+        const errorMessage = error?.error?.details
+          ? error?.error?.details
+          : error?.error?.error;
         this.google.eventEmitter('click-registro-fallido', {
           label: 'Click registro Failed',
         });
-        this.snackbar.show('Error en el registro', 4000);
+        this.snackbar.show(
+          'Error en el registro:\n' + errorMessage
+            ? errorMessage
+            : 'Error al crear la cuenta.',
+          4000
+        );
         return throwError(() => error);
       })
     );
