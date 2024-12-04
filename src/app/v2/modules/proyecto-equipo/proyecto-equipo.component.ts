@@ -15,12 +15,12 @@ export class ProyectoEquipoComponent {
     {
       nombre: 'Jorge Muñoz',
       cargo: 'Director Proyecto',
-      imagen: 'assets/team/jorge.jpg',
+      imagen: 'assets/team/jorge.webp',
     },
     {
       nombre: 'Pablo Rogel',
       cargo: 'Ingeniero de proyectos',
-      imagen: 'assets/team/pablo.jpg',
+      imagen: 'assets/team/pablo.webp',
     },
   ];
 
