@@ -31,6 +31,7 @@ import {
   SUPPLIER_TEXT,
   STARTUPS_TEXT,
 } from '@v2/constants';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-resource-search',
@@ -62,6 +63,8 @@ export class ResourceSearchComponent implements OnInit {
   google = inject(GoogleAnalyticsService);
   recursosService = inject(ResourceService);
   route = inject(ActivatedRoute);
+  private title = inject(Title);
+  private meta = inject(Meta);
 
   // Modal variables
   isModalOpen = false;
@@ -95,6 +98,14 @@ export class ResourceSearchComponent implements OnInit {
   labelType: string = '';
 
   ngOnInit(): void {
+    this.title.setTitle('Buscadores | Nuevo Los Lagos');
+
+    // Add meta tags
+    this.meta.updateTag({
+      name: 'description',
+      content:
+        'Encuentra cursos, artículos, financiamiento, entre otros, para mejorar tu empresa o negocio.',
+    });
     this.route.data.subscribe((data) => {
       this.resourceType = data['resourceType'];
       this.labelType = data['label'];

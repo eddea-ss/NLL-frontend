@@ -10,6 +10,7 @@ import {
 import { LoginService } from '@v2/services';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-login',
@@ -19,6 +20,8 @@ import { RouterLink } from '@angular/router';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
+  private title = inject(Title);
+  private meta = inject(Meta);
   private loginService = inject(LoginService);
   protected fb = inject(FormBuilder);
 
@@ -40,6 +43,12 @@ export class LoginComponent {
   hasNumber: boolean = false;
 
   constructor() {
+    this.title.setTitle('Login | Nuevo Los Lagos');
+    this.meta.updateTag({
+      name: 'description',
+      content:
+        'Ingresa y únete a una red de colaboración y aprovecha oportunidades de negocio en crecimiento.',
+    });
     this.loginForm
       .get('password')
       ?.valueChanges.subscribe((password: string) => {
