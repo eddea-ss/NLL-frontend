@@ -59,7 +59,7 @@ export class RegisterService {
       ),
       catchError((error: any) => {
         const errorMessage = error?.error?.error
-          ? error.error.message
+          ? error?.error?.error
           : 'Error al crear la cuenta.';
         this.google.eventEmitter('click-registro-fallido', {
           label: 'Click registro Failed',
