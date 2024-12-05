@@ -3,6 +3,7 @@
     <!-- Logo -->
     <a
       routerLink="/"
+      href="/"
       class="font-black text-2l tracking-wider bg-yellow-500 p-2 text-gray-800 p-5"
       (click)="closeMobileMenu()"
     >
@@ -56,12 +57,14 @@
         >
           <a
             routerLink="/proyecto-equipo"
+            href="/proyecto-equipo"
             class="block px-4 py-2 hover:bg-gray-700"
           >
             Equipo
           </a>
           <a
             routerLink="/proyecto-plataforma"
+            href="/proyecto-plataforma"
             class="block px-4 py-2 hover:bg-gray-700"
           >
             Plataforma
@@ -91,6 +94,7 @@
               currentUser()?.rol?.nombreRol === Role.Empresa
             "
             routerLink="/evaluaciones-madurez"
+            href="/evaluaciones-madurez"
             class="block px-4 py-2 hover:bg-gray-700"
           >
             Madurez Tecnológica
@@ -101,6 +105,7 @@
               currentUser()?.rol?.nombreRol === Role.Proveedor
             "
             routerLink="/evaluaciones-proveedor"
+            href="/evaluaciones-proveedor"
             class="block px-4 py-2 hover:bg-gray-700"
           >
             Proveedores
@@ -111,6 +116,7 @@
               currentUser()?.rol?.nombreRol === Role.Usuario
             "
             routerLink="/evaluaciones-startup"
+            href="/evaluaciones-startup"
             class="block px-4 py-2 hover:bg-gray-700"
           >
             Startup y Emprendimiento
@@ -136,12 +142,14 @@
         >
           <a
             routerLink="/investigacion-podcasts"
+            href="/investigacion-podcasts"
             class="block px-4 py-2 hover:bg-gray-700"
           >
             Podcast i4.0
           </a>
           <a
             routerLink="/investigacion-diagnostico"
+            href="/investigacion-diagnostico"
             class="block px-4 py-2 hover:bg-gray-700"
           >
             Diagnóstico Regional i4.0
@@ -167,36 +175,42 @@
         >
           <a
             routerLink="/buscador-proveedores"
+            href="/buscador-proveedores"
             class="block px-4 py-2 hover:bg-gray-700"
           >
             Proveedores
           </a>
           <a
             routerLink="/buscador-cursos"
+            href="/buscador-cursos"
             class="block px-4 py-2 hover:bg-gray-700"
           >
             Cursos
           </a>
           <a
             routerLink="/buscador-financiamiento"
+            href="/buscador-financiamiento"
             class="block px-4 py-2 hover:bg-gray-700"
           >
             Financiamiento
           </a>
           <a
             routerLink="/buscador-articulos"
+            href="/buscador-articulos"
             class="block px-4 py-2 hover:bg-gray-700"
           >
             Artículos de Interés
           </a>
           <a
             routerLink="/buscador-proyectos"
+            href="/buscador-proyectos"
             class="block px-4 py-2 hover:bg-gray-700"
           >
             Proyectos Destacados
           </a>
           <a
             routerLink="/buscador-startup"
+            href="/buscador-startup"
             class="block px-4 py-2 hover:bg-gray-700"
           >
             Startup y Emprendedores
@@ -222,7 +236,11 @@
           class="absolute left-0 top-full w-48 bg-gray-800 text-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-300 z-10"
         >
           @if (authState()===AuthState.LoggedOut) {
-          <a routerLink="/login" class="block px-4 py-2 hover:bg-gray-700">
+          <a
+            routerLink="/login"
+            href="/login"
+            class="block px-4 py-2 hover:bg-gray-700"
+          >
             Ingresa a tu cuenta
           </a>
           } @if (authState()===AuthState.LoggedIn) {
@@ -238,6 +256,7 @@
       @if (authState()===AuthState.LoggedOut) {
       <a
         routerLink="/registro"
+        href="/registro"
         class="hidden md:inline-block bg-yellow-500 text-gray-800 font-bold py-3 px-4 ml-4 border border-yellow-700"
       >
         Registrarse
@@ -284,6 +303,7 @@
         >
           <a
             routerLink="/proyecto-equipo"
+            href="/proyecto-equipo"
             class="block px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300"
             (click)="closeMobileMenu()"
           >
@@ -291,6 +311,7 @@
           </a>
           <a
             routerLink="/proyecto-plataforma"
+            href="/proyecto-plataforma"
             class="block px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300"
             (click)="closeMobileMenu()"
           >
@@ -331,6 +352,7 @@
               currentUser()?.rol?.nombreRol === Role.Empresa
             "
             routerLink="/evaluaciones-madurez"
+            href="/evaluaciones-madurez"
             class="block px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300"
             (click)="closeMobileMenu()"
           >
@@ -342,6 +364,7 @@
               currentUser()?.rol?.nombreRol === Role.Proveedor
             "
             routerLink="/evaluaciones-proveedor"
+            href="/evaluaciones-proveedor"
             class="block px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300"
             (click)="closeMobileMenu()"
           >
@@ -353,6 +376,7 @@
               currentUser()?.rol?.nombreRol === Role.Usuario
             "
             routerLink="/evaluaciones-startup"
+            href="/evaluaciones-startup"
             class="block px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300"
             (click)="closeMobileMenu()"
           >
@@ -389,6 +413,7 @@
         >
           <a
             routerLink="/investigacion-podcasts"
+            href="/investigacion-podcasts"
             class="block px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300"
             (click)="closeMobileMenu()"
           >
@@ -396,6 +421,7 @@
           </a>
           <a
             routerLink="/investigacion-diagnostico"
+            href="/investigacion-diagnostico"
             class="block px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300"
             (click)="closeMobileMenu()"
           >
@@ -432,6 +458,7 @@
         >
           <a
             routerLink="/buscador-proveedores"
+            href="/buscador-proveedores"
             class="block px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300"
             (click)="closeMobileMenu()"
           >
@@ -439,6 +466,7 @@
           </a>
           <a
             routerLink="/buscador-cursos"
+            href="/buscador-cursos"
             class="block px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300"
             (click)="closeMobileMenu()"
           >
@@ -446,6 +474,7 @@
           </a>
           <a
             routerLink="/buscador-financiamiento"
+            href="/buscador-financiamiento"
             class="block px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300"
             (click)="closeMobileMenu()"
           >
@@ -453,6 +482,7 @@
           </a>
           <a
             routerLink="/buscador-articulos"
+            href="/buscador-articulos"
             class="block px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300"
             (click)="closeMobileMenu()"
           >
@@ -460,6 +490,7 @@
           </a>
           <a
             routerLink="/buscador-proyectos"
+            href="/buscador-proyectos"
             class="block px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300"
             (click)="closeMobileMenu()"
           >
@@ -468,6 +499,7 @@
 
           <a
             routerLink="/buscador-startup"
+            href="/buscador-startup"
             class="block px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300"
             (click)="closeMobileMenu()"
           >
@@ -505,6 +537,7 @@
           @if (authState()===AuthState.LoggedOut) {
           <a
             routerLink="/login"
+            href="/login"
             class="block px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300"
             (click)="closeMobileMenu()"
           >
@@ -526,6 +559,7 @@
       @if (authState()===AuthState.LoggedOut) {
       <a
         routerLink="/registro"
+        href="/registro"
         class="block w-full text-center bg-yellow-500 hover:bg-yellow-600 text-gray-800 font-bold py-2 px-4 mt-4 border border-yellow-700 rounded shadow-md transform hover:scale-105 transition-transform duration-200"
         (click)="closeMobileMenu()"
       >
