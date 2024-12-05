@@ -1,6 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./src/**/*.{html,ts,scss}"],
+  content: [
+    "./src/**/*.{html,ts,scss}",
+    "./src/styles.scss",
+    "./src/v2/styles/styles.scss",
+  ],
 
   theme: {
     extend: {
@@ -16,5 +20,5 @@ module.exports = {
     },
   },
   purge: ["./src/**/*.{html,ts}"],
-  plugins: [],
+  plugins: [require("tailwindcss"), require("autoprefixer")],
 };

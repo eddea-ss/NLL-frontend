@@ -29,10 +29,10 @@
                 "input": "public"
               }
             ],
-            "styles": ["src/app/shared/styles/styles.scss"],
+            "styles": ["src/styles.scss"],
             "scripts": [],
             "stylePreprocessorOptions": {
-              "includePaths": ["src/app/shared/styles"]
+              "includePaths": ["src/"]
             }
           },
           "configurations": {
@@ -86,7 +86,7 @@
                 "input": "public"
               }
             ],
-            "styles": ["src/app/shared/styles/styles.scss"],
+            "styles": ["src/styles.scss"],
             "scripts": []
           }
         },
