@@ -1,0 +1,21 @@
+/* En tu archivo CSS */
+.titulo-principal {
+  max-width: 32rem; /* Equivale a max-w-2xl */
+  margin-bottom: 1.25rem; /* mb-5 */
+  font-size: 2.25rem; /* text-4xl */
+  font-weight: 800; /* font-extrabold */
+  letter-spacing: -0.025em; /* tracking-tight */
+  line-height: 1; /* leading-none */
+}
+
+@media (min-width: 768px) {
+  .titulo-principal {
+    font-size: 3rem; /* md:text-5xl */
+  }
+}
+
+@media (min-width: 1280px) {
+  .titulo-principal {
+    font-size: 3.75rem; /* xl:text-6xl */
+  }
+}
