@@ -1,96 +1,152 @@
+// src/app/app.routes.ts
 import { Routes } from '@angular/router';
-import {
-  EvaluacionesMadurezComponent,
-  EvaluacionesProveedorComponent,
-  EvaluacionesStartupComponent,
-  FormRegisterComponent,
-  HomeComponent,
-  InformeComponent,
-  LandingPageComponent,
-  LoginComponent,
-  PodcastsComponent,
-  ProyectoEquipoComponent,
-  ProyectoPlataformaComponent,
-  ResourceSearchComponent,
-  SelectionRegisterComponent,
-} from '@v2/v2.module';
+import { HomeComponent } from '@v2/v2.module'; // Asegúrate de que HomeComponent sea standalone o mantenlo como está
 
 export const routes: Routes = [
-  //v2
   {
     path: '',
     component: HomeComponent,
     children: [
-      { path: '', component: LandingPageComponent },
-      { path: 'proyecto-equipo', component: ProyectoEquipoComponent },
-      { path: 'proyecto-plataforma', component: ProyectoPlataformaComponent },
+      {
+        path: '',
+        loadComponent: () =>
+          import('@v2/modules/landing-page/landing-page.component').then(
+            (m) => m.LandingPageComponent
+          ),
+      },
+      {
+        path: 'proyecto-equipo',
+        loadComponent: () =>
+          import('@v2/modules/proyecto-equipo/proyecto-equipo.component').then(
+            (m) => m.ProyectoEquipoComponent
+          ),
+      },
+      {
+        path: 'proyecto-plataforma',
+        loadComponent: () =>
+          import(
+            '@v2/modules/proyecto-plataforma/proyecto-plataforma.component'
+          ).then((m) => m.ProyectoPlataformaComponent),
+      },
       {
         path: 'evaluaciones-madurez',
-        component: EvaluacionesMadurezComponent,
+        loadComponent: () =>
+          import(
+            '@v2/modules/evaluaciones-madurez/evaluaciones-madurez.component'
+          ).then((m) => m.EvaluacionesMadurezComponent),
       },
       {
         path: 'evaluaciones-proveedor',
-        component: EvaluacionesProveedorComponent,
+        loadComponent: () =>
+          import(
+            '@v2/modules/evaluaciones-proveedor/evaluaciones-proveedor.component'
+          ).then((m) => m.EvaluacionesProveedorComponent),
       },
       {
         path: 'evaluaciones-startup',
-        component: EvaluacionesStartupComponent,
+        loadComponent: () =>
+          import(
+            '@v2/modules/evaluaciones-startup/evaluaciones-startup.component'
+          ).then((m) => m.EvaluacionesStartupComponent),
       },
-      { path: 'investigacion-podcasts', component: PodcastsComponent },
-      { path: 'investigacion-diagnostico', component: InformeComponent },
+      {
+        path: 'investigacion-podcasts',
+        loadComponent: () =>
+          import('@v2/modules/podcasts/podcasts.component').then(
+            (m) => m.PodcastsComponent
+          ),
+      },
+      {
+        path: 'investigacion-diagnostico',
+        loadComponent: () =>
+          import('@v2/modules/informe/informe.component').then(
+            (m) => m.InformeComponent
+          ),
+      },
       {
         path: 'buscador-cursos',
-        component: ResourceSearchComponent,
+        loadComponent: () =>
+          import('@v2/modules/resource-search/resource-search.component').then(
+            (m) => m.ResourceSearchComponent
+          ),
         data: { resourceType: 'curses' },
       },
       {
         path: 'buscador-articulos',
-        component: ResourceSearchComponent,
+        loadComponent: () =>
+          import('@v2/modules/resource-search/resource-search.component').then(
+            (m) => m.ResourceSearchComponent
+          ),
         data: { resourceType: 'articles' },
       },
       {
         path: 'buscador-proyectos',
-        component: ResourceSearchComponent,
+        loadComponent: () =>
+          import('@v2/modules/resource-search/resource-search.component').then(
+            (m) => m.ResourceSearchComponent
+          ),
         data: { resourceType: 'projects' },
       },
       {
         path: 'buscador-financiamiento',
-        component: ResourceSearchComponent,
+        loadComponent: () =>
+          import('@v2/modules/resource-search/resource-search.component').then(
+            (m) => m.ResourceSearchComponent
+          ),
         data: { resourceType: 'financing' },
       },
       {
         path: 'buscador-proveedores',
-        component: ResourceSearchComponent,
+        loadComponent: () =>
+          import('@v2/modules/resource-search/resource-search.component').then(
+            (m) => m.ResourceSearchComponent
+          ),
         data: { resourceType: 'suppliers' },
       },
       {
         path: 'buscador-startup',
-        component: ResourceSearchComponent,
+        loadComponent: () =>
+          import('@v2/modules/resource-search/resource-search.component').then(
+            (m) => m.ResourceSearchComponent
+          ),
         data: { resourceType: 'startups' },
       },
-
       {
         path: 'login',
-        component: LoginComponent,
+        loadComponent: () =>
+          import('@v2/modules/login/login.component').then(
+            (m) => m.LoginComponent
+          ),
       },
       {
         path: 'registro',
-        component: SelectionRegisterComponent,
+        loadComponent: () =>
+          import(
+            '@v2/modules/selection-register/selection-register.component'
+          ).then((m) => m.SelectionRegisterComponent),
       },
       {
         path: 'registro-persona',
-        component: FormRegisterComponent,
+        loadComponent: () =>
+          import('@v2/modules/form-register/form-register.component').then(
+            (m) => m.FormRegisterComponent
+          ),
       },
       {
         path: 'registro-industria',
-        component: FormRegisterComponent,
+        loadComponent: () =>
+          import('@v2/modules/form-register/form-register.component').then(
+            (m) => m.FormRegisterComponent
+          ),
       },
       {
         path: 'registro-proveedor',
-        component: FormRegisterComponent,
+        loadComponent: () =>
+          import('@v2/modules/form-register/form-register.component').then(
+            (m) => m.FormRegisterComponent
+          ),
       },
+      { path: '**', redirectTo: '', pathMatch: 'full' },
     ],
   },
-
-  { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
