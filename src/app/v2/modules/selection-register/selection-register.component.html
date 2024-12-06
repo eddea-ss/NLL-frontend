@@ -1,17 +1,12 @@
 <section>
   <div class="section-container">
     <div class="registro-section">
-      <!---->
-      <!-- Tarjeta Proveedores -->
-      <div
-        routerLink="/registro-proveedor"
-        href="/registro-proveedor"
-        class="registro-card"
-      >
+      @for (card of cards; track $index) {
+      <div routerLink="{{ card.link }}" class="registro-card">
         <span class="registro-card-bg"></span>
         <div class="registro-card-content">
           <span class="registro-card-icon">
-            <!-- Ícono SVG -->
+            @switch (card.icon) { @case ('dinero') {
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -24,11 +19,6 @@
               <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
-                d="M12 8c1.657 0 3 1.343 3 3s-1.343 3-3 3-3-1.343-3-3 1.343-3 3-3zm0 0v0m0 0v0m0 0v0"
-              />
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
                 d="M6 12h.01M18 12h.01M9 15h6M9 9h6"
               />
               <path
@@ -37,40 +27,7 @@
                 d="M3 12h18M3 12c0-4.418 3.582-8 8-8v0c4.418 0 8 3.582 8 8h-16z"
               />
             </svg>
-          </span>
-          <div class="registro-card-text">
-            <p>Crear cuenta | <strong>Proveedores</strong></p>
-            <p>
-              Accede a nuestra plataforma como proveedor y conecta con empresas
-              de la Industria 4.0 para ofrecer tus productos o servicios
-              especializados. Únete a una red de colaboración y aprovecha
-              oportunidades de negocio en crecimiento.
-            </p>
-          </div>
-          <div class="pt-5 text-base font-semibold leading-7">
-            <p>
-              <a
-                routerLink="/registro-proveedor"
-                href="/registro-proveedor"
-                class="registro-card-link"
-              >
-                Registrarse &rarr;
-              </a>
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tarjeta Empresas -->
-      <div
-        routerLink="/registro-industria"
-        href="/registro-industria"
-        class="registro-card"
-      >
-        <span class="registro-card-bg"></span>
-        <div class="registro-card-content">
-          <span class="registro-card-icon">
-            <!-- Ícono SVG -->
+            }@case ('empresas') {
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -78,6 +35,7 @@
               stroke-width="1.5"
               stroke="currentColor"
               class="h-10 w-10 text-white transition-all"
+              aria-label="Icono de Empresas"
             >
               <path
                 stroke-linecap="round"
@@ -90,40 +48,7 @@
                 d="M13 13h4v8h-4z"
               />
             </svg>
-          </span>
-          <div class="registro-card-text">
-            <p>Crear cuenta | <strong>Empresas de los lagos</strong></p>
-            <p>
-              Únete como empresa de la región de Los Lagos para aumentar tu
-              visibilidad y competitividad en la Industria 4.0. Accede a
-              recursos exclusivos, oportunidades de financiamiento y contacto
-              directo con proveedores e innovadores.
-            </p>
-          </div>
-          <div class="pt-5 text-base font-semibold leading-7">
-            <p>
-              <a
-                routerLink="/registro-industria"
-                href="/registro-industria"
-                class="registro-card-link"
-              >
-                Registrarse &rarr;
-              </a>
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tarjeta Startups -->
-      <div
-        routerLink="/registro-persona"
-        href="/registro-persona"
-        class="registro-card"
-      >
-        <span class="registro-card-bg"></span>
-        <div class="registro-card-content">
-          <span class="registro-card-icon">
-            <!-- Ícono SVG -->
+            } @case ('startups') {
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -131,6 +56,7 @@
               stroke-width="1.5"
               stroke="currentColor"
               class="h-10 w-10 text-white transition-all"
+              aria-label="Icono de Startups"
             >
               <path
                 stroke-linecap="round"
@@ -145,30 +71,26 @@
                 stroke-linejoin="round"
               />
             </svg>
+            } }
           </span>
           <div class="registro-card-text">
-            <p>Crear cuenta | <strong>Startups y Emprendedores</strong></p>
             <p>
-              Regístrate como Startup o Emprendedor, y explora oportunidades de
-              desarrollo, empleo y formación en el ecosistema de la Industria
-              4.0. Conecta con empresas, accede a cursos en línea y mantente
-              actualizado sobre las últimas tendencias del sector
+              Crear cuenta | <strong>{{ card.title }}</strong>
+            </p>
+            <p>
+              {{ card.description }}
             </p>
           </div>
           <div class="pt-5 text-base font-semibold leading-7">
             <p>
-              <a
-                routerLink="/registro-persona"
-                href="/registro-persona"
-                class="registro-card-link"
-              >
-                Registrarse &rarr;
+              <a [routerLink]="card.link" class="registro-card-link">
+                {{ card.buttonLabel }} &rarr;
               </a>
             </p>
           </div>
         </div>
       </div>
-      <!---->
+      }
     </div>
   </div>
 </section>
