@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Página de Inicio -->
+  <url>
+    <loc>https://web.nuevoloslagos.org/</loc>
+    <lastmod>2024-12-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Proyecto Equipo -->
+  <url>
+    <loc>https://web.nuevoloslagos.org/proyecto-equipo</loc>
+    <lastmod>2024-12-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Proyecto Plataforma -->
+  <url>
+    <loc>https://web.nuevoloslagos.org/proyecto-plataforma</loc>
+    <lastmod>2024-12-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Evaluaciones Madurez -->
+  <url>
+    <loc>https://web.nuevoloslagos.org/evaluaciones-madurez</loc>
+    <lastmod>2024-12-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Evaluaciones Proveedor -->
+  <url>
+    <loc>https://web.nuevoloslagos.org/evaluaciones-proveedor</loc>
+    <lastmod>2024-12-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Evaluaciones Startup -->
+  <url>
+    <loc>https://web.nuevoloslagos.org/evaluaciones-startup</loc>
+    <lastmod>2024-12-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Investigación Podcasts -->
+  <url>
+    <loc>https://web.nuevoloslagos.org/investigacion-podcasts</loc>
+    <lastmod>2024-12-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Investigación Diagnóstico -->
+  <url>
+    <loc>https://web.nuevoloslagos.org/investigacion-diagnostico</loc>
+    <lastmod>2024-12-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Buscador Cursos -->
+  <url>
+    <loc>https://web.nuevoloslagos.org/buscador-cursos</loc>
+    <lastmod>2024-12-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Buscador Artículos -->
+  <url>
+    <loc>https://web.nuevoloslagos.org/buscador-articulos</loc>
+    <lastmod>2024-12-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Buscador Proyectos -->
+  <url>
+    <loc>https://web.nuevoloslagos.org/buscador-proyectos</loc>
+    <lastmod>2024-12-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Buscador Financiamiento -->
+  <url>
+    <loc>https://web.nuevoloslagos.org/buscador-financiamiento</loc>
+    <lastmod>2024-12-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Buscador Proveedores -->
+  <url>
+    <loc>https://web.nuevoloslagos.org/buscador-proveedores</loc>
+    <lastmod>2024-12-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Buscador Startup -->
+  <url>
+    <loc>https://web.nuevoloslagos.org/buscador-startup</loc>
+    <lastmod>2024-12-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Login -->
+  <url>
+    <loc>https://web.nuevoloslagos.org/login</loc>
+    <lastmod>2024-12-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Registro -->
+  <url>
+    <loc>https://web.nuevoloslagos.org/registro</loc>
+    <lastmod>2024-12-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Registro Persona -->
+  <url>
+    <loc>https://web.nuevoloslagos.org/registro-persona</loc>
+    <lastmod>2024-12-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Registro Industria -->
+  <url>
+    <loc>https://web.nuevoloslagos.org/registro-industria</loc>
+    <lastmod>2024-12-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Registro Proveedor -->
+  <url>
+    <loc>https://web.nuevoloslagos.org/registro-proveedor</loc>
+    <lastmod>2024-12-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+</urlset>

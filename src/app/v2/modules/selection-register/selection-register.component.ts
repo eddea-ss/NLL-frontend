@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router';
 
@@ -12,6 +12,7 @@ import { RouterLink } from '@angular/router';
 export class SelectionRegisterComponent implements OnInit {
   private title = inject(Title);
   private meta = inject(Meta);
+  @Input() changeMeta: boolean = true;
 
   cards = [
     {
@@ -47,13 +48,15 @@ export class SelectionRegisterComponent implements OnInit {
   ];
 
   ngOnInit(): void {
-    this.title.setTitle('Registro | Nuevo Los Lagos');
+    if (this.changeMeta) {
+      this.title.setTitle('Registro | Nuevo Los Lagos');
 
-    // Agregar meta etiquetas
-    this.meta.updateTag({
-      name: 'description',
-      content:
-        'Registrate y Únete a una red de colaboración y aprovecha oportunidades de negocio en crecimiento.',
-    });
+      // Agregar meta etiquetas
+      this.meta.updateTag({
+        name: 'description',
+        content:
+          'Registrate y Únete a una red de colaboración y aprovecha oportunidades de negocio en crecimiento.',
+      });
+    }
   }
 }
