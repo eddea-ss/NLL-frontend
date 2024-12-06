@@ -20,3 +20,7 @@ export * from './supplier-modal/supplier-modal.component';
 export * from './supplier-item/supplier-item.component';
 export * from './startup-modal/startup-modal.component';
 export * from './startup-item/startup-item.component';
+
+//others
+export * from './step-register/step-register.component';
+export * from './title-section/title-section.component';

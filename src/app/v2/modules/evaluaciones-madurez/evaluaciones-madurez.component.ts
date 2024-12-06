@@ -9,7 +9,6 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
-import { RouterLink } from '@angular/router';
 import { LoginService, MaturityModelService } from '@v2/services';
 import { AuthState, Role } from '@shared/enums';
 import Chart, {
@@ -17,7 +16,11 @@ import Chart, {
   ChartData,
   ChartOptions,
 } from 'chart.js/auto';
-import { BreadcrumbsComponent } from '@v2/components';
+import {
+  BreadcrumbsComponent,
+  StepRegisterComponent,
+  TitleSectionComponent,
+} from '@v2/components';
 import {
   EVALUACION_MADUREZ,
   capitalHumanoSections,
@@ -31,7 +34,13 @@ import {
 @Component({
   selector: 'app-evaluaciones-madurez',
   standalone: true,
-  imports: [CommonModule, RouterLink, BreadcrumbsComponent],
+  imports: [
+    CommonModule,
+
+    BreadcrumbsComponent,
+    StepRegisterComponent,
+    TitleSectionComponent,
+  ],
   templateUrl: './evaluaciones-madurez.component.html',
   styleUrls: ['./evaluaciones-madurez.component.scss'], // Corregido: 'styleUrls' en lugar de 'styleUrl'
 })
@@ -60,6 +69,24 @@ export class EvaluacionesMadurezComponent implements AfterViewInit, OnInit {
   public innovacionSections = innovacionSections;
   public automatizacionSections = automatizacionSections;
   public industriaSections = industriaSections;
+
+  steps = [
+    {
+      title: 'Regístrate',
+      description:
+        'Ve al botón Registrarse en la barra de Navegación y selecciona registrarte como Empresa de la Región de los Lagos.',
+    },
+    {
+      title: 'Completa tu Modelo',
+      description:
+        'Completa tu modelo de Maduración Tecnológica y de Formación para descubrir tu nivel en la Industria 4.0.',
+    },
+    {
+      title: 'Descubre',
+      description:
+        'Descubre qué acciones debes realizar para alcanzar la madurez tecnológica. Encuentra cursos, artículos, financiamiento, entre otros.',
+    },
+  ];
 
   constructor() {
     effect(() => {

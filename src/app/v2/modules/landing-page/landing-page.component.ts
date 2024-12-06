@@ -4,11 +4,19 @@ import { RouterModule } from '@angular/router';
 import { Meta, Title } from '@angular/platform-browser';
 import { BreadcrumbsComponent } from '@v2/components';
 import { INICIO } from '@v2/constants';
+import { SelectionRegisterComponent } from '@v2/modules';
+import { TitleSectionComponent } from '@v2/components';
 
 @Component({
   selector: 'app-landing-page',
   standalone: true,
-  imports: [CommonModule, RouterModule, BreadcrumbsComponent],
+  imports: [
+    CommonModule,
+    RouterModule,
+    BreadcrumbsComponent,
+    SelectionRegisterComponent,
+    TitleSectionComponent,
+  ],
   templateUrl: './landing-page.component.html',
 })
 export class LandingPageComponent implements OnInit {

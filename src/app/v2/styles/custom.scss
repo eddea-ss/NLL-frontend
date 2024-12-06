@@ -1,7 +1,108 @@
 @layer components {
+  // Título principal utilizado en la landing page
   .titulo-principal {
     @apply max-w-2xl mb-5 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl;
   }
+  .feature-grid {
+    @apply space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10;
+  }
+  .feature-item {
+    @apply relative border-l-2 border-gray-200 p-2;
+  }
+  .feature-item-title {
+    @apply flex items-center;
+  }
+  .feature-item-heading {
+    @apply text-lg leading-6 font-bold text-gray-700;
+  }
+  .feature-item-description {
+    @apply mt-2 text-lg text-gray-500;
+  }
+  .section-container {
+    @apply container pb-10 pt-5 mx-auto sm:px-12 md:px-16 lg:py-20 sm:py-16;
+  }
 
-  /* Otras clases personalizadas */
+  //selection register
+  .registro-section {
+    @apply grid gap-x-8 gap-y-12 sm:gap-y-16 md:grid-cols-2 lg:grid-cols-3;
+  }
+  .registro-card {
+    @apply relative cursor-pointer overflow-hidden bg-white px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 transition-all duration-300 sm:mx-auto sm:max-w-sm sm:rounded-lg sm:px-10;
+    &:hover {
+      @apply -translate-y-1 shadow-2xl;
+    }
+  }
+  .registro-card-bg {
+    @apply absolute top-10 z-0 h-20 w-20 rounded-full transition-all duration-300;
+    background-color: rgb(31 41 55 / var(--tw-bg-opacity));
+    .registro-card:hover & {
+      @apply scale-[10];
+    }
+  }
+  .registro-card-content {
+    @apply relative z-10 mx-auto max-w-md;
+  }
+  .registro-card-icon {
+    @apply grid h-20 w-20 place-items-center rounded-full transition-all duration-300;
+    background-color: rgb(31 41 55 / var(--tw-bg-opacity));
+    .registro-card:hover & {
+      background-color: rgb(234 179 8 / var(--tw-bg-opacity));
+    }
+  }
+  .registro-card-text {
+    @apply space-y-6 pt-5 text-base leading-7 text-gray-600 transition-all duration-300;
+    .registro-card:hover & {
+      color: rgba(255, 255, 255, 0.9);
+    }
+  }
+  .registro-card-link {
+    @apply text-base font-semibold leading-7 transition-all duration-300;
+    color: rgb(31 41 55);
+    .registro-card:hover & {
+      color: rgb(234 179 8);
+    }
+  }
+
+  //step register
+  .steps-outer-container {
+    @apply mt-2 md:mt-0 py-12 pb-6 sm:py-16 lg:pb-24 overflow-hidden;
+  }
+  .steps-wrapper {
+    @apply px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 relative;
+  }
+  .steps-relative-section {
+    @apply relative mt-12 lg:mt-20;
+  }
+  .steps-svg-container {
+    @apply absolute inset-x-0 hidden xl:px-44 top-2 md:block md:px-20 lg:px-28;
+  }
+  .steps-grid {
+    @apply relative grid grid-cols-1 text-center gap-y-8 sm:gap-y-10 md:gap-y-12 md:grid-cols-3 gap-x-12;
+  }
+  .step-item-circle {
+    @apply flex items-center justify-center w-16 h-16 mx-auto bg-white border-2 border-gray-200 rounded-full shadow;
+  }
+  .step-item-number {
+    @apply text-xl font-semibold text-gray-700;
+  }
+  .step-item-title {
+    @apply mt-4 sm:mt-6 text-xl font-semibold leading-tight text-gray-900 md:mt-10;
+  }
+  .step-item-description {
+    @apply mt-3 sm:mt-4 text-base text-gray-600;
+  }
+
+  //title section
+  .hero-container {
+    @apply grid container px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12;
+  }
+  .hero-content {
+    @apply mr-auto place-self-center lg:col-span-7;
+  }
+  .hero-description {
+    @apply max-w-2xl mb-6 mt-4 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl;
+  }
+  .hero-image-container {
+    @apply hidden lg:mt-0 lg:col-span-5 lg:flex;
+  }
 }
