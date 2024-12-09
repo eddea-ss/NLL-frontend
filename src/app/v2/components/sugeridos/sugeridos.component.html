@@ -1,130 +1,104 @@
-<!--texto para cuentas con ingreso empresa o proveedor-->
-@if (this.authState()===AuthState.LoggedIn && (this.modeloMadurez() ||
-this.modeloCaracter()) && (ruta === 'buscador-cursos' || ruta ===
-'buscador-proveedores')) {
-<h2 class="py-4 px-8 text-2xl font-bold">Según tu Modelo te recomendamos...</h2>
-} @else {
-<h2 class="py-4 px-8 text-2xl font-bold">Últimas publicaciones</h2>
-}
+<!--
+  Muestra el título según el estado del usuario y modelo.
+  Si el usuario está logueado y tiene modelos de madurez/caracter,
+  y la ruta es cursos o proveedores, se muestra el título "Según tu Modelo..."
+  De lo contrario, "Últimas publicaciones".
+-->
+<h2 class="py-4 px-8 text-2xl font-bold">
+  {{ (authState() === AuthState.LoggedIn && (modeloMadurez() || modeloCaracter()) && (ruta === 'buscador-cursos' || ruta === 'buscador-proveedores'))
+    ? 'Según tu Modelo te recomendamos...' 
+    : 'Últimas publicaciones'
+  }}
+</h2>
 
-<!-- Sección de artículos sugeridos -->
-<div
-  class="space-y-6 py-4 px-8 animate-fade-in"
-  style="min-height: 50vh; max-width: 500px"
->
-  @if (!sugeridos.length) {
-  <h2 class="text-gray-300">No hay sugerencias coincidentes.</h2>
-  }
-  <!--sugeridos-->
-  @for (item of sugeridos; track $index) {
-  <!--curso-->
-  @if (item?.modalidad && item?.duracion) {
-  <!--articulo-->
-  <app-course-item
-    class="p-4"
-    [simplified]="true"
-    [data]="item"
-    (openModal)="openModal($index)"
-  >
-  </app-course-item>
-  <!--modal-->
-  <app-course-modal
-    *ngIf="isModalOpen && dataModal"
-    [data]="dataModal"
-    [showNext]="false"
-    (close)="closeModal()"
-  ></app-course-modal>
-  }
-  <!--proveedores-->
-  @if (item?.nombreEmpresa && (item?.rut_md5 ||item?.correoElectronicoEmpresa))
-  {
-  <app-supplier-item
-    class="p-4"
-    [simplified]="true"
-    [data]="item"
-    (openModal)="openModal($index)"
-  >
-  </app-supplier-item>
-  <!--modal-->
-  <app-supplier-modal
-    *ngIf="isModalOpen && dataModal"
-    [data]="dataModal"
-    [showNext]="false"
-    (close)="closeModal()"
-  ></app-supplier-modal>
-  }
-  <!--financiamiento-->
-  @if (item?.porcentaje_cobertura ) {
-  <app-financing-item
-    class="p-4"
-    [simplified]="true"
-    [data]="item"
-    (openModal)="openModal($index)"
-  >
-  </app-financing-item>
-  <!--modal-->
-  <app-financing-modal
-    *ngIf="isModalOpen && dataModal"
-    [data]="dataModal"
-    [showNext]="false"
-    (close)="closeModal()"
-  ></app-financing-modal>
-  }
-  <!--articulos-->
-  @if (item?.articulo_paper) {
-  <app-article-item
-    class="p-4"
-    [simplified]="true"
-    [data]="item"
-    (openModal)="openModal($index)"
-  >
-  </app-article-item>
-  <!--modal-->
-  <app-article-modal
-    *ngIf="isModalOpen && dataModal"
-    [data]="dataModal"
-    [showNext]="false"
-    (close)="closeModal()"
-  >
-  </app-article-modal>
-  }
+<!-- Contenedor de sugerencias -->
+<div class="space-y-6 py-4 px-8 animate-fade-in" style="min-height: 50vh; max-width: 500px">
+  <!-- Si no hay sugerencias, muestra mensaje -->
+  <h2 class="text-gray-300" *ngIf="!sugeridos.length">No hay sugerencias coincidentes.</h2>
 
-  <!--proyecto-->
-  @if (item?.localidad) {
-  <app-projects-item
-    class="p-4"
-    [simplified]="true"
-    [data]="item"
-    (openModal)="openModal($index)"
-  >
-  </app-projects-item>
-  <!--modal-->
-  <app-projects-modal
-    *ngIf="isModalOpen && dataModal"
-    [data]="dataModal"
-    [showNext]="false"
-    (close)="closeModal()"
-  ></app-projects-modal>
-  }
+  <!-- Listado de sugeridos -->
+  <ng-container *ngFor="let item of sugeridos; let i = index;">
+    <!-- Dependiendo de las propiedades del item, determina el tipo de recurso -->
+    <!-- Cursos: tienen 'modalidad' y 'duracion' -->
+    <ng-container *ngIf="item?.modalidad && item?.duracion">
+      <app-course-item class="p-4" [simplified]="true" [data]="item" (openModal)="openModal(i)"></app-course-item>
+    </ng-container>
 
-  <!--startup-->
-  @if (item?.descripcionStartup) {
-  <app-startup-item
-    class="p-4"
-    [simplified]="true"
-    [data]="item"
-    (openModal)="openModal($index)"
-  >
-  </app-startup-item>
-  <!--modal-->
-  <app-startup-modal
-    *ngIf="isModalOpen && dataModal"
-    [data]="dataModal"
-    [showNext]="false"
-    (close)="closeModal()"
-  ></app-startup-modal>
-  }
+    <!-- Proveedores: tienen 'nombreEmpresa' y (rut_md5 o correoElectronicoEmpresa) -->
+    <ng-container *ngIf="item?.nombreEmpresa && (item?.rut_md5 || item?.correoElectronicoEmpresa)">
+      <app-supplier-item class="p-4" [simplified]="true" [data]="item" (openModal)="openModal(i)"></app-supplier-item>
+    </ng-container>
 
-  <!---->
-  }
+    <!-- Financiamiento: tienen 'porcentaje_cobertura' -->
+    <ng-container *ngIf="item?.porcentaje_cobertura">
+      <app-financing-item class="p-4" [simplified]="true" [data]="item" (openModal)="openModal(i)"></app-financing-item>
+    </ng-container>
+
+    <!-- Artículos: tienen 'articulo_paper' -->
+    <ng-container *ngIf="item?.articulo_paper">
+      <app-article-item class="p-4" [simplified]="true" [data]="item" (openModal)="openModal(i)"></app-article-item>
+    </ng-container>
+
+    <!-- Proyectos: tienen 'localidad' -->
+    <ng-container *ngIf="item?.localidad">
+      <app-projects-item class="p-4" [simplified]="true" [data]="item" (openModal)="openModal(i)"></app-projects-item>
+    </ng-container>
+
+    <!-- Startups: tienen 'descripcionStartup' -->
+    <ng-container *ngIf="item?.descripcionStartup">
+      <app-startup-item class="p-4" [simplified]="true" [data]="item" (openModal)="openModal(i)"></app-startup-item>
+    </ng-container>
+  </ng-container>
 </div>
+
+<!-- Modal dinámico: se muestra solo si hay datos -->
+<ng-container *ngIf="isModalOpen && dataModal">
+  <!-- Determinar el tipo de modal según la dataModal -->
+  <!-- Curso modal -->
+  <app-course-modal 
+    *ngIf="dataModal?.modalidad && dataModal?.duracion"
+    [data]="dataModal"
+    [showNext]="false"
+    (close)="closeModal()">
+  </app-course-modal>
+
+  <!-- Proveedor modal -->
+  <app-supplier-modal
+    *ngIf="dataModal?.nombreEmpresa && (dataModal?.rut_md5 || dataModal?.correoElectronicoEmpresa)"
+    [data]="dataModal"
+    [showNext]="false"
+    (close)="closeModal()">
+  </app-supplier-modal>
+
+  <!-- Financiamiento modal -->
+  <app-financing-modal
+    *ngIf="dataModal?.porcentaje_cobertura"
+    [data]="dataModal"
+    [showNext]="false"
+    (close)="closeModal()">
+  </app-financing-modal>
+
+  <!-- Artículo modal -->
+  <app-article-modal
+    *ngIf="dataModal?.articulo_paper"
+    [data]="dataModal"
+    [showNext]="false"
+    (close)="closeModal()">
+  </app-article-modal>
+
+  <!-- Proyecto modal -->
+  <app-projects-modal
+    *ngIf="dataModal?.localidad"
+    [data]="dataModal"
+    [showNext]="false"
+    (close)="closeModal()">
+  </app-projects-modal>
+
+  <!-- Startup modal -->
+  <app-startup-modal
+    *ngIf="dataModal?.descripcionStartup"
+    [data]="dataModal"
+    [showNext]="false"
+    (close)="closeModal()">
+  </app-startup-modal>
+</ng-container>

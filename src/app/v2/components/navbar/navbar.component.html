@@ -1,19 +1,17 @@
 <header class="bg-gray-800 text-white shadow-lg">
   <div class="container mx-auto flex items-center px-4">
-    <!-- Logo -->
+    <!-- Logo principal, clickea para ir al inicio -->
     <a
       routerLink="/"
-      href="/"
-      class="font-black text-2l tracking-wider bg-yellow-500 p-2 text-gray-800 p-5"
+      class="font-black text-2l tracking-wider bg-yellow-500  text-gray-800 p-5"
       (click)="closeMobileMenu()"
     >
       NuevoLosLagos
     </a>
 
-    <!-- Botón de Menú Hamburguesa (Visible en móviles) -->
+    <!-- Botón hamburguesa para menú móvil -->
     <button
-      style="padding: 1em; margin-left: auto"
-      class="block lg:hidden focus:outline-none"
+      class="block lg:hidden focus:outline-none ml-auto p-4"
       (click)="toggleMobileMenu()"
       aria-label="Toggle navigation menu"
     >
@@ -22,550 +20,160 @@
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
-        xmlns="http://www.w3.org/2000/svg"
       >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M4 6h16M4 12h16M4 18h16"
-        ></path>
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
       </svg>
     </button>
 
-    <!-- Navegación (Visible en escritorio) -->
-    <nav
-      style="width: 100%; justify-content: center"
-      class="hidden lg:flex space-x-6 items-center"
-    >
-      <!-- Menús Desplegables -->
-      <div class="relative group" key="Proyecto">
-        <button
-          class="hover:text-yellow-400 transition-colors duration-300 flex items-center focus:outline-none"
-          aria-haspopup="true"
-          aria-expanded="false"
-        >
-          Proyecto
-          <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
-            <path
-              d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-            ></path>
-          </svg>
-        </button>
-        <div
-          class="absolute left-0 top-full w-48 bg-gray-800 text-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-300 z-10"
-        >
-          <a
-            routerLink="/proyecto-equipo"
-            href="/proyecto-equipo"
-            class="block px-4 py-2 hover:bg-gray-700"
+    <!-- Navegación en escritorio -->
+    <nav class="hidden lg:flex space-x-6 items-center w-full justify-center">
+      <!-- Iteramos sobre menús principales -->
+      <ng-container *ngFor="let menu of mainMenus">
+
+        <!-- Menús normales -->
+        <div class="relative group" *ngIf="menu !== cuentaMenu">
+          <button
+            class="hover:text-yellow-400 transition-colors duration-300 flex items-center focus:outline-none"
+            (click)="$event.stopPropagation()"
           >
-            Equipo
-          </a>
-          <a
-            routerLink="/proyecto-plataforma"
-            href="/proyecto-plataforma"
-            class="block px-4 py-2 hover:bg-gray-700"
-          >
-            Plataforma
-          </a>
+            {{ menu.label }}
+            <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
+              <path
+                d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0L5.25 8.27a.75.75 0 01-.02-1.06z"
+              ></path>
+            </svg>
+          </button>
+          <div class="absolute left-0 top-full w-48 bg-gray-800 text-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-300 z-10">
+            <ng-container *ngFor="let item of menu.items">
+              <a
+                *ngIf="shouldShowMenuItem(item)"
+                class="block px-4 py-2 hover:bg-gray-700"
+                (click)="onMenuItemClick(item)"
+              >
+                {{ item.label }}
+              </a>
+            </ng-container>
+          </div>
         </div>
-      </div>
 
-      <div class="relative group" key="Evaluaciones">
-        <button
-          class="hover:text-yellow-400 transition-colors duration-300 flex items-center focus:outline-none"
-          aria-haspopup="true"
-          aria-expanded="false"
-        >
-          Evaluaciones
-          <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
-            <path
-              d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-            ></path>
-          </svg>
-        </button>
-        <div
-          class="absolute left-0 top-full w-48 bg-gray-800 text-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-300 z-10"
-        >
-          <a
-            *ngIf="
-              authState() === AuthState.LoggedOut ||
-              currentUser()?.rol?.nombreRol === Role.Empresa
-            "
-            routerLink="/evaluaciones-madurez"
-            href="/evaluaciones-madurez"
-            class="block px-4 py-2 hover:bg-gray-700"
+        <!-- Menú de cuenta -->
+        <div class="relative group" *ngIf="menu === cuentaMenu">
+          <button
+            class="hover:text-yellow-400 transition-colors duration-300 flex items-center focus:outline-none"
+            (click)="$event.stopPropagation()"
           >
-            Madurez Tecnológica
-          </a>
-          <a
-            *ngIf="
-              authState() === AuthState.LoggedOut ||
-              currentUser()?.rol?.nombreRol === Role.Proveedor
-            "
-            routerLink="/evaluaciones-proveedor"
-            href="/evaluaciones-proveedor"
-            class="block px-4 py-2 hover:bg-gray-700"
-          >
-            Proveedores
-          </a>
-          <a
-            *ngIf="
-              authState() === AuthState.LoggedOut ||
-              currentUser()?.rol?.nombreRol === Role.Usuario
-            "
-            routerLink="/evaluaciones-startup"
-            href="/evaluaciones-startup"
-            class="block px-4 py-2 hover:bg-gray-700"
-          >
-            Startup y Emprendimiento
-          </a>
+            {{ menu.label }}
+            <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
+              <path
+                d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0L5.25 8.27a.75.75 0 01-.02-1.06z"
+              ></path>
+            </svg>
+          </button>
+          <div class="absolute left-0 top-full w-48 bg-gray-800 text-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-300 z-10">
+            <!-- Opciones si no está logueado -->
+            <a
+              *ngIf="isLoggedOut"
+              class="block px-4 py-2 hover:bg-gray-700"
+              (click)="onMenuItemClick({label:'Ingresa a tu cuenta', route:'/login'})"
+            >
+              Ingresa a tu cuenta
+            </a>
+
+            <!-- Opciones si está logueado -->
+            <a
+              *ngIf="isLoggedIn"
+              class="block px-4 py-2 hover:bg-gray-700"
+              (click)="onMenuItemClick({label:'Cerrar sesión'})"
+            >
+              Cerrar sesión
+            </a>
+          </div>
         </div>
-      </div>
 
-      <div class="relative group" key="Investigación">
-        <button
-          class="hover:text-yellow-400 transition-colors duration-300 flex items-center focus:outline-none"
-          aria-haspopup="true"
-          aria-expanded="false"
-        >
-          Investigación
-          <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
-            <path
-              d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-            ></path>
-          </svg>
-        </button>
-        <div
-          class="absolute left-0 top-full w-48 bg-gray-800 text-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-300 z-10"
-        >
-          <a
-            routerLink="/investigacion-podcasts"
-            href="/investigacion-podcasts"
-            class="block px-4 py-2 hover:bg-gray-700"
-          >
-            Podcast i4.0
-          </a>
-          <a
-            routerLink="/investigacion-diagnostico"
-            href="/investigacion-diagnostico"
-            class="block px-4 py-2 hover:bg-gray-700"
-          >
-            Diagnóstico Regional i4.0
-          </a>
-        </div>
-      </div>
+      </ng-container>
 
-      <div class="relative group" key="Buscadores">
-        <button
-          class="hover:text-yellow-400 transition-colors duration-300 flex items-center focus:outline-none"
-          aria-haspopup="true"
-          aria-expanded="false"
-        >
-          Buscadores
-          <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
-            <path
-              d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-            ></path>
-          </svg>
-        </button>
-        <div
-          class="absolute left-0 top-full w-48 bg-gray-800 text-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-300 z-10"
-        >
-          <a
-            routerLink="/buscador-proveedores"
-            href="/buscador-proveedores"
-            class="block px-4 py-2 hover:bg-gray-700"
-          >
-            Proveedores
-          </a>
-          <a
-            routerLink="/buscador-cursos"
-            href="/buscador-cursos"
-            class="block px-4 py-2 hover:bg-gray-700"
-          >
-            Cursos
-          </a>
-          <a
-            routerLink="/buscador-financiamiento"
-            href="/buscador-financiamiento"
-            class="block px-4 py-2 hover:bg-gray-700"
-          >
-            Financiamiento
-          </a>
-          <a
-            routerLink="/buscador-articulos"
-            href="/buscador-articulos"
-            class="block px-4 py-2 hover:bg-gray-700"
-          >
-            Artículos de Interés
-          </a>
-          <a
-            routerLink="/buscador-proyectos"
-            href="/buscador-proyectos"
-            class="block px-4 py-2 hover:bg-gray-700"
-          >
-            Proyectos Destacados
-          </a>
-          <a
-            routerLink="/buscador-startup"
-            href="/buscador-startup"
-            class="block px-4 py-2 hover:bg-gray-700"
-          >
-            Startup y Emprendedores
-          </a>
-        </div>
-      </div>
-
-      <!-- Botón Iniciar Sesión y cuenta -->
-      <div class="relative group" key="Buscadores">
-        <button
-          class="hover:text-yellow-400 transition-colors duration-300 flex items-center focus:outline-none"
-          aria-haspopup="true"
-          aria-expanded="false"
-        >
-          Cuenta
-          <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
-            <path
-              d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-            ></path>
-          </svg>
-        </button>
-        <div
-          class="absolute left-0 top-full w-48 bg-gray-800 text-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-300 z-10"
-        >
-          @if (authState()===AuthState.LoggedOut) {
-          <a
-            routerLink="/login"
-            href="/login"
-            class="block px-4 py-2 hover:bg-gray-700"
-          >
-            Ingresa a tu cuenta
-          </a>
-          } @if (authState()===AuthState.LoggedIn) {
-
-          <a (click)="logout()" class="block px-4 py-2 hover:bg-gray-700">
-            Cerrar sesión
-          </a>
-          }
-        </div>
-      </div>
-
-      <!-- Botón Registrarse -->
-      @if (authState()===AuthState.LoggedOut) {
+      <!-- Botón Registrarse en escritorio -->
       <a
+        *ngIf="isLoggedOut"
         routerLink="/registro"
-        href="/registro"
         class="hidden md:inline-block bg-yellow-500 text-gray-800 font-bold py-3 px-4 ml-4 border border-yellow-700"
       >
         Registrarse
       </a>
-      }
     </nav>
   </div>
 
-  <!-- Menú Móvil -->
-  <!-- Menú Móvil -->
-  <div
-    class="lg:hidden"
-    [ngClass]="{
-      block: isMobileMenuOpen,
-      hidden: !isMobileMenuOpen
-    }"
-  >
+  <!-- Menú móvil -->
+  <div class="lg:hidden" [ngClass]="{ 'block': isMobileMenuOpen, 'hidden': !isMobileMenuOpen }">
     <nav class="px-2 pt-2 pb-4 space-y-1 sm:px-3">
-      <!-- Menú Proyecto -->
-      <div class="relative group">
-        <button
-          class="w-full text-left px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300 flex items-center justify-between"
-          (click)="toggleProyectoSubmenu()"
-        >
-          Proyecto
-          <svg
-            class="w-4 h-4 ml-1 transform transition-transform duration-300"
-            [ngClass]="{ 'rotate-180': isProyectoSubmenuOpen }"
-            fill="currentColor"
-            viewBox="0 0 20 20"
+      <ng-container *ngFor="let menu of mainMenus">
+        <div>
+          <!-- Botón para desplegar/ocultar submenú en móvil -->
+          <button
+            class="w-full text-left px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300 flex items-center justify-between"
+            (click)="toggleSubmenu(menu)"
           >
-            <path
-              d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-            ></path>
-          </svg>
-        </button>
-        <!-- Submenú Proyecto -->
-        <div
-          class="mt-1 space-y-1 pl-5 border-l border-gray-700"
-          [ngClass]="{
-            block: isProyectoSubmenuOpen,
-            hidden: !isProyectoSubmenuOpen
-          }"
-        >
-          <a
-            routerLink="/proyecto-equipo"
-            href="/proyecto-equipo"
-            class="block px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300"
-            (click)="closeMobileMenu()"
+            {{ menu.label }}
+            <svg
+              class="w-4 h-4 ml-1 transform transition-transform duration-300"
+              [ngClass]="{ 'rotate-180': menu.isOpenSignal() }"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0L5.25 8.27a.75.75 0 01-.02-1.06z"
+              ></path>
+            </svg>
+          </button>
+
+          <!-- Submenú en móvil -->
+          <div
+            class="mt-1 space-y-1 pl-5 border-l border-gray-700"
+            *ngIf="menu.isOpenSignal()"
           >
-            Equipo
-          </a>
-          <a
-            routerLink="/proyecto-plataforma"
-            href="/proyecto-plataforma"
-            class="block px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300"
-            (click)="closeMobileMenu()"
-          >
-            Plataforma
-          </a>
+            <!-- Menús normales en móvil -->
+            <ng-container *ngIf="menu !== cuentaMenu">
+              <ng-container *ngFor="let item of menu.items">
+                <a
+                  *ngIf="shouldShowMenuItem(item)"
+                  class="block px-4 py-2 hover:bg-gray-700"
+                  (click)="onMenuItemClick(item)"
+                >
+                  {{ item.label }}
+                </a>
+              </ng-container>
+            </ng-container>
+
+            <!-- Menú de cuenta en móvil -->
+            <ng-container *ngIf="menu === cuentaMenu">
+              <a
+                *ngIf="isLoggedOut"
+                class="block px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300"
+                (click)="onMenuItemClick({label:'Ingresa a tu cuenta', route:'/login'})"
+              >
+                Ingresa a tu cuenta
+              </a>
+              <a
+                *ngIf="isLoggedIn"
+                class="block px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300"
+                (click)="onMenuItemClick({label:'Cerrar sesión'})"
+              >
+                Cerrar sesión
+              </a>
+            </ng-container>
+          </div>
         </div>
-      </div>
+      </ng-container>
 
-      <!-- Menú Evaluaciones -->
-      <div class="relative group">
-        <button
-          class="w-full text-left px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300 flex items-center justify-between"
-          (click)="toggleEvaluacionesSubmenu()"
-        >
-          Evaluaciones
-          <svg
-            class="w-4 h-4 ml-1 transform transition-transform duration-300"
-            [ngClass]="{ 'rotate-180': isEvaluacionesSubmenuOpen }"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-          >
-            <path
-              d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-            ></path>
-          </svg>
-        </button>
-        <!-- Submenú Evaluaciones -->
-        <div
-          class="mt-1 space-y-1 pl-5 border-l border-gray-700"
-          [ngClass]="{
-            block: isEvaluacionesSubmenuOpen,
-            hidden: !isEvaluacionesSubmenuOpen
-          }"
-        >
-          <a
-            *ngIf="
-              authState() === AuthState.LoggedOut ||
-              currentUser()?.rol?.nombreRol === Role.Empresa
-            "
-            routerLink="/evaluaciones-madurez"
-            href="/evaluaciones-madurez"
-            class="block px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300"
-            (click)="closeMobileMenu()"
-          >
-            Madurez Tecnológica
-          </a>
-          <a
-            *ngIf="
-              authState() === AuthState.LoggedOut ||
-              currentUser()?.rol?.nombreRol === Role.Proveedor
-            "
-            routerLink="/evaluaciones-proveedor"
-            href="/evaluaciones-proveedor"
-            class="block px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300"
-            (click)="closeMobileMenu()"
-          >
-            Proveedores
-          </a>
-          <a
-            *ngIf="
-              authState() === AuthState.LoggedOut ||
-              currentUser()?.rol?.nombreRol === Role.Usuario
-            "
-            routerLink="/evaluaciones-startup"
-            href="/evaluaciones-startup"
-            class="block px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300"
-            (click)="closeMobileMenu()"
-          >
-            Startup y Emprendimiento
-          </a>
-        </div>
-      </div>
-
-      <!-- Menú Investigación -->
-      <div class="relative group">
-        <button
-          class="w-full text-left px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300 flex items-center justify-between"
-          (click)="toggleInvestigacionSubmenu()"
-        >
-          Investigación
-          <svg
-            class="w-4 h-4 ml-1 transform transition-transform duration-300"
-            [ngClass]="{ 'rotate-180': isInvestigacionSubmenuOpen }"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-          >
-            <path
-              d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-            ></path>
-          </svg>
-        </button>
-        <!-- Submenú Investigación -->
-        <div
-          class="mt-1 space-y-1 pl-5 border-l border-gray-700"
-          [ngClass]="{
-            block: isInvestigacionSubmenuOpen,
-            hidden: !isInvestigacionSubmenuOpen
-          }"
-        >
-          <a
-            routerLink="/investigacion-podcasts"
-            href="/investigacion-podcasts"
-            class="block px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300"
-            (click)="closeMobileMenu()"
-          >
-            Podcast i4.0
-          </a>
-          <a
-            routerLink="/investigacion-diagnostico"
-            href="/investigacion-diagnostico"
-            class="block px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300"
-            (click)="closeMobileMenu()"
-          >
-            Diagnóstico Regional i4.0
-          </a>
-        </div>
-      </div>
-
-      <!-- Menú Buscadores -->
-      <div class="relative group">
-        <button
-          class="w-full text-left px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300 flex items-center justify-between"
-          (click)="toggleBuscadoresSubmenu()"
-        >
-          Buscadores
-          <svg
-            class="w-4 h-4 ml-1 transform transition-transform duration-300"
-            [ngClass]="{ 'rotate-180': isBuscadoresSubmenuOpen }"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-          >
-            <path
-              d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-            ></path>
-          </svg>
-        </button>
-        <!-- Submenú Buscadores -->
-        <div
-          class="mt-1 space-y-1 pl-5 border-l border-gray-700"
-          [ngClass]="{
-            block: isBuscadoresSubmenuOpen,
-            hidden: !isBuscadoresSubmenuOpen
-          }"
-        >
-          <a
-            routerLink="/buscador-proveedores"
-            href="/buscador-proveedores"
-            class="block px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300"
-            (click)="closeMobileMenu()"
-          >
-            Proveedores
-          </a>
-          <a
-            routerLink="/buscador-cursos"
-            href="/buscador-cursos"
-            class="block px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300"
-            (click)="closeMobileMenu()"
-          >
-            Cursos
-          </a>
-          <a
-            routerLink="/buscador-financiamiento"
-            href="/buscador-financiamiento"
-            class="block px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300"
-            (click)="closeMobileMenu()"
-          >
-            Financiamiento
-          </a>
-          <a
-            routerLink="/buscador-articulos"
-            href="/buscador-articulos"
-            class="block px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300"
-            (click)="closeMobileMenu()"
-          >
-            Artículos de Interés
-          </a>
-          <a
-            routerLink="/buscador-proyectos"
-            href="/buscador-proyectos"
-            class="block px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300"
-            (click)="closeMobileMenu()"
-          >
-            Proyectos Destacados
-          </a>
-
-          <a
-            routerLink="/buscador-startup"
-            href="/buscador-startup"
-            class="block px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300"
-            (click)="closeMobileMenu()"
-          >
-            Startup y Emprendedores
-          </a>
-        </div>
-      </div>
-
-      <!-- Menú Cuenta -->
-      <div class="relative group">
-        <button
-          class="w-full text-left px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300 flex items-center justify-between"
-          (click)="toggleCuentaSubmenu()"
-        >
-          Cuenta
-          <svg
-            class="w-4 h-4 ml-1 transform transition-transform duration-300"
-            [ngClass]="{ 'rotate-180': isCuentaSubmenuOpen }"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-          >
-            <path
-              d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-            ></path>
-          </svg>
-        </button>
-        <!-- Submenú Cuenta -->
-        <div
-          class="mt-1 space-y-1 pl-5 border-l border-gray-700"
-          [ngClass]="{
-            block: isCuentaSubmenuOpen,
-            hidden: !isCuentaSubmenuOpen
-          }"
-        >
-          @if (authState()===AuthState.LoggedOut) {
-          <a
-            routerLink="/login"
-            href="/login"
-            class="block px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300"
-            (click)="closeMobileMenu()"
-          >
-            Ingresa a tu cuenta
-          </a>
-          } @if (authState()===AuthState.LoggedIn) {
-
-          <a
-            class="block px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300"
-            (click)="logout()"
-          >
-            Cerrar sesión
-          </a>
-          }
-        </div>
-      </div>
-
-      <!-- Botón Registrarse (Visible en móviles) -->
-      @if (authState()===AuthState.LoggedOut) {
+      <!-- Botón Registrarse en móvil -->
       <a
+        *ngIf="isLoggedOut"
         routerLink="/registro"
-        href="/registro"
         class="block w-full text-center bg-yellow-500 hover:bg-yellow-600 text-gray-800 font-bold py-2 px-4 mt-4 border border-yellow-700 rounded shadow-md transform hover:scale-105 transition-transform duration-200"
         (click)="closeMobileMenu()"
       >
         Registrarse
       </a>
-      }
     </nav>
   </div>
 </header>

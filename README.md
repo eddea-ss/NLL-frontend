@@ -1,27 +1,38 @@
+
 # Tt
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.11.
+Este proyecto fue generado con [Angular CLI](https://github.com/angular/angular-cli) versión 18.2.11.
 
-## Development server
+## Instalación con Bun
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+1. Asegúrate de tener instalado [Bun](https://bun.sh/). Si no lo tienes, puedes instalarlo siguiendo las instrucciones oficiales en su sitio web.
 
-## Code scaffolding
+2. Una vez que hayas instalado Bun, navega hasta el directorio raíz del proyecto y ejecuta:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+~~~
+    bash
+    bun install
+~~~
 
-## Build
+Esto instalará todas las dependencias necesarias definidas en el package.json.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Servidor de desarrollo
+Para iniciar el servidor de desarrollo, ejecuta:
 
-## Running unit tests
+~~~
+    bash
+    bun run ng serve
+~~~
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Luego, abre tu navegador y ve a http://localhost:4200/. La aplicación se recargará automáticamente cada vez que modifiques los archivos fuente.
 
-## Running end-to-end tests
+## Compilación
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Para compilar el proyecto y prepararlo para producción, ejecuta:
 
-## Further help
+~~~
+    bash
+    bun run ng build
+~~~
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Los artefactos generados se almacenarán en el directorio dist/. Puedes luego desplegarlos en un servidor de producción.

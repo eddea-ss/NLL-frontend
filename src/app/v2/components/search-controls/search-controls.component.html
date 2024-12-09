@@ -1,29 +1,31 @@
-<!-- Tips y Mensajes Dinámicos -->
+<!--
+  Aquí mostramos ya sea un "tip" de búsqueda o un mensaje específico.
+  Si hay un tip y no hay mensaje, se muestra el tip.
+  Si hay un mensaje, se muestra el mensaje.
+-->
 <div class="mb-3 position-relative" style="min-height: 1.5em">
-  @if (searchTip && !searchMessage) {
-  <h5 class="text-muted position-absolute top-0 start-0">
+  <!-- Mostrar consejo de búsqueda si no hay mensaje -->
+  <h5 *ngIf="searchTip && !searchMessage" class="text-muted position-absolute top-0 start-0">
     {{ searchTip }}
   </h5>
-  } @if(searchMessage){
-  <h5 class="text-muted position-absolute top-0 start-0">
+
+  <!-- Mostrar mensaje si está definido -->
+  <h5 *ngIf="searchMessage" class="text-muted position-absolute top-0 start-0">
     {{ searchMessage }}
   </h5>
-  }
 </div>
 
-<!-- Formulario de búsqueda -->
+<!-- Campo de texto para la búsqueda con icono de lupa -->
 <div class="flex items-center mb-3">
   <label for="simple-search" class="sr-only">Buscar</label>
   <div class="relative w-full flex">
-    <div
-      class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
-    >
+    <!-- Ícono de búsqueda a la izquierda -->
+    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
       <svg
         aria-hidden="true"
         class="w-5 h-5 text-gray-500"
         fill="currentColor"
         viewBox="0 0 20 20"
-        xmlns="http://www.w3.org/2000/svg"
       >
         <path
           fill-rule="evenodd"
@@ -32,6 +34,8 @@
         ></path>
       </svg>
     </div>
+
+    <!-- Input enlazado con ngModel para dos vías de datos -->
     <input
       type="text"
       [(ngModel)]="searchInput"
@@ -41,11 +45,12 @@
       placeholder="Buscar cursos ..."
       required
     />
-    @if (searchInput.trim().length > 0) {
+
+    <!-- Botón para limpiar la búsqueda, visible solo si hay texto -->
     <div
+      *ngIf="searchInput.trim().length > 0"
       style="width: 32px; padding-left: 0px; cursor: pointer"
       class="absolute inset-y-0 right-0 flex items-center pl-3"
-      type="button"
       (click)="onClearSearch()"
       id="clearButton"
       aria-label="Limpiar búsqueda"
@@ -55,7 +60,6 @@
         class="w-5 h-5 text-gray-500"
         fill="currentColor"
         viewBox="0 0 20 20"
-        xmlns="http://www.w3.org/2000/svg"
       >
         <path
           fill-rule="evenodd"
@@ -64,8 +68,9 @@
         ></path>
       </svg>
     </div>
-    }
   </div>
+
+  <!-- Botón para iniciar la búsqueda -->
   <button
     type="button"
     (click)="onSearch()"
@@ -76,7 +81,6 @@
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
     >
       <path
         stroke-linecap="round"
@@ -89,41 +93,38 @@
   </button>
 </div>
 
-<!-- Palabras Clave Sugeridas -->
-<div class="mb-8">
+<!-- Listado de palabras clave sugeridas que el usuario puede agregar -->
+<div class="mb-8 grid sm:flex">
   <span class="me-2">Buscar:</span>
-  @for (term of searchKeywords; track $index) {
-  <span
-    style="padding: 4px 12px"
-    class="badge border border-blue-100 text-blue-600 px-2 py-1 text-xs suggested-term me-2 mb-2"
-    (click)="onAddSuggestedTerm(term)"
-    (keypress)="handleKeyPress($event, term)"
-    tabindex="0"
-    role="button"
-    [attr.aria-label]="'Buscar ' + (term === 'ingles' ? 'En Inglés' : term)"
-  >
-    {{
-      term === "ingles"
-        ? "En Inglés"
-        : term === "de pago"
-        ? "De Pago"
-        : (term | titlecase)
-    }}
-  </span>
-
-  }
+  <ng-container *ngFor="let term of searchKeywords;">
+    <span
+      style="padding: 4px 12px"
+      class="badge border border-blue-100 text-blue-600 px-2 py-1 text-xs suggested-term me-2 mb-2"
+      (click)="onAddSuggestedTerm(term)"
+      (keypress)="handleKeyPress($event, term)"
+      tabindex="0"
+      role="button"
+      [attr.aria-label]="'Buscar ' + (term === 'ingles' ? 'En Inglés' : term)"
+    >
+      {{
+        term === "ingles"
+          ? "En Inglés"
+          : term === "de pago"
+          ? "De Pago"
+          : (term | titlecase)
+      }}
+    </span>
+  </ng-container>
 </div>
 
-<!-- Texto de Estatus -->
+<!-- Muestra el conteo de resultados y el indicador de carga -->
 <div>
   <div class="form-text text-center text-muted mt-2 mb-3">
     {{ resultCount }}
   </div>
-  @if (isLoading) {
-  <div class="text-center my-4" aria-live="polite" aria-busy="true">
+  <div *ngIf="isLoading" class="text-center my-4" aria-live="polite" aria-busy="true">
     <div class="spinner-border text-primary" role="status">
       <span class="visually-hidden">Cargando...</span>
     </div>
   </div>
-  }
 </div>
