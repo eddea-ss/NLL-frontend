@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, effect, inject, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
-import { RouterLink } from '@angular/router';
 import { LoginService, CharacterizationModelService } from '@v2/services';
 import { AuthState, Role } from '@shared/enums';
 import { EVALUACION_PROVEEDORES } from '@v2/constants';
@@ -16,7 +15,6 @@ import {
   standalone: true,
   imports: [
     CommonModule,
-    RouterLink,
     BreadcrumbsComponent,
     TitleSectionComponent,
     StepRegisterComponent,
