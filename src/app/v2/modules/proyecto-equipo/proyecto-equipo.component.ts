@@ -19,9 +19,19 @@ export class ProyectoEquipoComponent {
     },
     {
       nombre: 'Pablo Rogel',
-      cargo: 'Ingeniero de proyectos',
+      cargo: 'Ingeniero de Proyectos',
       imagen: 'assets/team/pablo.webp',
     },
+    {
+      nombre: 'Alexis Pizarro',
+      cargo: 'Ingeniero Backend & Database',
+      imagen: 'assets/team/alexis.webp',
+    },
+    {
+      nombre: 'Carlos Arias',
+      cargo: 'Ingeniero Frontend',
+      imagen: 'assets/team/carlos.webp',
+    }
   ];
 
   constructor() {
