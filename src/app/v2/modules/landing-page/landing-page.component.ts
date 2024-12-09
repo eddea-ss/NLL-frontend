@@ -25,6 +25,33 @@ export class LandingPageComponent implements OnInit {
 
   breadcrumbs: any[] = INICIO;
 
+  cards = [
+    {
+      title: 'Proveedores',
+      icon: 'dinero',
+      link: '/registro-proveedor',
+      buttonLabel: 'Registrarse',
+      description: `¿Quieres unirte a nuestra plataforma como proveedor de productos o
+          servicios para la Industria 4.0?`,
+    },
+    {
+      title: 'Empresas de los lagos',
+      icon: 'empresas',
+      link: '/registro-industria',
+      buttonLabel: 'Registrarse',
+      description: `¿Formas parte de la Industria 4.0 y necesitas formación o proveedores
+          para tu negocio?`,
+    },
+    {
+      title: 'Startups y Emprendedores',
+      icon: 'startups',
+      link: '/registro-persona',
+      buttonLabel: 'Registrarse',
+      description: `Regístrate como Startup o Emprendedor, y explora oportunidades de
+              desarrollo, empleo y formación.`,
+    },
+  ];
+
   ngOnInit(): void {
     // Establecer el título de la página
     this.title.setTitle('Nuevo Los Lagos');

@@ -14,7 +14,7 @@ export class SelectionRegisterComponent implements OnInit {
   private meta = inject(Meta);
   @Input() changeMeta: boolean = true;
 
-  cards = [
+  @Input() cards = [
     {
       title: 'Proveedores',
       icon: 'dinero',
