@@ -75,13 +75,12 @@ export class EvaluacionesStartupComponent implements OnInit {
 
   ngOnInit(): void {
     // Establecer el título de la página
-    this.title.setTitle('Modelo Startup y Emprendedores | Nuevo Los Lagos');
-
+    this.title.setTitle('Formación para Startups y Emprendedores | Nuevo Los Lagos');
     // Agregar meta etiquetas
     this.meta.updateTag({
       name: 'description',
       content:
-        'Completa tu modelo de Formación para emprendedores o startup y te ayudaremos a crecer en la region de los Lagos.',
+        'Desarrolla tu modelo de Formación para startups y emprendedores. Te ayudamos a crecer y destacar en la región de Los Lagos. Da el siguiente paso hacia el éxito.',
     });
   }
 

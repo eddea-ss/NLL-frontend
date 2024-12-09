@@ -49,14 +49,15 @@ export class SelectionRegisterComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.changeMeta) {
-      this.title.setTitle('Registro | Nuevo Los Lagos');
+      this.title.setTitle('Registro de Usuarios | Nuevo Los Lagos');
 
       // Agregar meta etiquetas
       this.meta.updateTag({
         name: 'description',
         content:
-          'Registrate y Únete a una red de colaboración y aprovecha oportunidades de negocio en crecimiento.',
+          'Regístrate y únete a una red de colaboración. Descubre oportunidades de negocio en crecimiento y lleva tu impacto al siguiente nivel.',
       });
+  
     }
   }
 }

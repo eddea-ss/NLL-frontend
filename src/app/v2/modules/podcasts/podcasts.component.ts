@@ -24,13 +24,13 @@ export class PodcastsComponent implements OnInit {
 
   ngOnInit(): void {
     // Establecer el título de la página
-    this.title.setTitle('Podcasts | Nuevo Los Lagos');
+    this.title.setTitle('Podcasts Innovadores | Nuevo Los Lagos');
 
     // Agregar meta etiquetas
     this.meta.updateTag({
       name: 'description',
       content:
-        'Nuestros podcasts, generados por inteligencia artificial, están basados en nuestras investigaciones y conversaciones con expertos en áreas como automatización, inteligencia artificial, Internet de las Cosas (IoT) y más.',
+        'Explora nuestros podcasts generados por inteligencia artificial, con investigaciones y conversaciones sobre automatización, IoT, inteligencia artificial y más. Conecta con la innovación en Nuevo Los Lagos.',
     });
   }
 

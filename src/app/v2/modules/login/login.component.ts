@@ -43,11 +43,11 @@ export class LoginComponent {
   hasNumber: boolean = false;
 
   constructor() {
-    this.title.setTitle('Login | Nuevo Los Lagos');
+    this.title.setTitle('Acceso a la Plataforma | Nuevo Los Lagos');
     this.meta.updateTag({
       name: 'description',
       content:
-        'Ingresa y únete a una red de colaboración y aprovecha oportunidades de negocio en crecimiento.',
+        'Accede a la plataforma "Nuevo Los Lagos" y conéctate con una red colaborativa. Descubre nuevas oportunidades de negocio en la región.',
     });
     this.loginForm
       .get('password')

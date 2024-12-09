@@ -23,6 +23,11 @@ export class ProyectoEquipoComponent {
       imagen: 'assets/team/pablo.webp',
     },
     {
+      nombre: 'Marcelo Soto',
+      cargo: 'Consultor Expero Industria 4.0 y Manufactura Avanzada',
+      imagen: 'assets/team/marcelo.webp',
+    },
+    {
       nombre: 'Alexis Pizarro',
       cargo: 'Ingeniero Backend & Database',
       imagen: 'assets/team/alexis.webp',

@@ -54,17 +54,19 @@ export class LandingPageComponent implements OnInit {
 
   ngOnInit(): void {
     // Establecer el título de la página
-    this.title.setTitle('Nuevo Los Lagos');
+    this.title.setTitle('Plataforma Nuevo Los Lagos | Impulso Industrial');
+
 
     // Agregar meta etiquetas
     this.meta.updateTag({
       name: 'description',
       content:
-        'El proyecto "Nuevo Los Lagos", en desarrollo, es una colaboración entre la Universidad Santo Tomás, Asimet y Grupo Centinela, con financiamiento de Corfo Los Lagos. Esta plataforma web busca fortalecer la infraestructura industrial y profesional de la región.',
+        'La plataforma "Nuevo Los Lagos" es una iniciativa colaborativa para fortalecer la infraestructura industrial y profesional en la Región de Los Lagos, con apoyo de Corfo, Asimet y la Universidad Santo Tomás.',
     });
+
     this.meta.updateTag({
       name: 'keywords',
-      content: 'Region de los Lagos, Industria 4.0',
+      content: 'Región de Los Lagos, Industria 4.0, infraestructura industrial, desarrollo profesional',
     });
   }
 }

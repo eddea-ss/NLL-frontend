@@ -74,13 +74,13 @@ export class EvaluacionesProveedorComponent implements OnInit {
 
   ngOnInit(): void {
     // Establecer el título de la página
-    this.title.setTitle('Modelo Caracterización | Nuevo Los Lagos');
+    this.title.setTitle('Caracterización de Proveedores | Nuevo Los Lagos');
 
     // Agregar meta etiquetas
     this.meta.updateTag({
       name: 'description',
       content:
-        'Completa tu modelo de Caracterización de Proveedores y ayúdanos a identificar cómo podemos conectarte con clientes de tu región. Da el siguiente paso hacia nuevas oportunidades.',
+        'Define tu modelo de Caracterización de Proveedores y descubre cómo conectarte con clientes de tu región. Da el siguiente paso y amplía tus oportunidades de negocio.',
     });
   }
 

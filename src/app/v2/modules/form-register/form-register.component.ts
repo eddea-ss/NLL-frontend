@@ -158,7 +158,7 @@ export class FormRegisterComponent implements OnInit {
     this.meta.updateTag({
       name: 'description',
       content:
-        'Regístrate y únete a una red de colaboración y aprovecha oportunidades de negocio en crecimiento.',
+        'Regístrate ahora y forma parte de una red colaborativa. Descubre nuevas oportunidades de negocio y haz crecer tu impacto en la región de Los Lagos.',
     });
   }
 

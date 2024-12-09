@@ -107,13 +107,13 @@ export class EvaluacionesMadurezComponent implements AfterViewInit, OnInit {
 
   ngOnInit(): void {
     // Establecer el título de la página
-    this.title.setTitle('Modelo Madurez | Nuevo Los Lagos');
+    this.title.setTitle('Evalúa la Madurez Tecnológica | Nuevo Los Lagos');
 
     // Agregar meta etiquetas
     this.meta.updateTag({
       name: 'description',
       content:
-        'Evalua el nivel de madurez tecnológica de tu empresa y conoce que acciones debes realizar para alcanzar la madurez tecnológica.',
+        'Descubre cómo tu empresa puede alcanzar la madurez tecnológica. Evalúa su nivel actual y comienza a implementar cambios estratégicos hoy mismo.',
     });
   }
 

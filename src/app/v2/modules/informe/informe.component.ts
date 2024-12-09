@@ -17,13 +17,13 @@ export class InformeComponent {
   private meta = inject(Meta);
 
   constructor() {
-    this.title.setTitle('Diagnóstico Regional i4.0 | Nuevo Los Lagos');
+    this.title.setTitle('Diagnóstico de la Industria 4.0 | Nuevo Los Lagos');
 
     // Add meta tags
     this.meta.updateTag({
       name: 'description',
       content:
-        'Análisis del ecosistema de manufactura avanzada y sus desafíos. Este informe analiza el ecosistema de manufactura avanzada e industria 4.0 en la Región de Los Lagos.',
+        'Explora el diagnóstico del ecosistema de manufactura avanzada en la Región de Los Lagos. Descubre los desafíos y oportunidades clave para la industria 4.0.',
     });
   }
 

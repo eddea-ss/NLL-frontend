@@ -98,13 +98,12 @@ export class ResourceSearchComponent implements OnInit {
   labelType: string = '';
 
   ngOnInit(): void {
-    this.title.setTitle('Buscadores | Nuevo Los Lagos');
-
+    this.title.setTitle('Buscador de Recursos | Nuevo Los Lagos');
     // Add meta tags
     this.meta.updateTag({
       name: 'description',
       content:
-        'Encuentra cursos, artículos, financiamiento, entre otros, para mejorar tu empresa o negocio.',
+        'Accede a cursos, artículos y opciones de financiamiento diseñados para impulsar tu negocio. Encuentra recursos clave en un solo lugar con nuestro buscador.',
     });
     this.route.data.subscribe((data) => {
       this.resourceType = data['resourceType'];
