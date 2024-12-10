@@ -9,8 +9,8 @@ import {
 import { catchError, tap } from 'rxjs/operators';
 import { throwError, Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import { LoginCredentials, LoginResponse, Usuario } from '@shared/models';
-import { AuthState, Role } from '@shared/enums';
+import { LoginCredentials, LoginResponse, Usuario } from '@v2/models';
+import { AuthState, Role } from '@v2/enums';
 import { GoogleAnalyticsService, SnackbarService } from '@v2/services';
 
 @Injectable({
@@ -113,6 +113,7 @@ export class LoginService {
           }
         }),
         catchError((error: HttpErrorResponse) => {
+          this.snackbar.show('Error al iniciar de sesión', 4000);
           this.handleError(error);
           return throwError(() => error);
         })

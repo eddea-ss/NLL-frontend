@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Breadcrumb } from '@shared/models/breadcrumb.model';
+import { Breadcrumb } from '@v2/models';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 

@@ -2,8 +2,8 @@
 
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { RegistroCredentials, RegistroResponse } from '@shared/models';
-import { Role } from '@shared/enums';
+import { RegistroCredentials, RegistroResponse } from '@v2/models';
+import { Role } from '@v2/enums';
 import { LoginService, SnackbarService } from '@v2/services';
 import { Observable, throwError } from 'rxjs';
 import { catchError, switchMap, tap } from 'rxjs/operators';

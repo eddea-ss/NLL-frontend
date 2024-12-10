@@ -5,7 +5,7 @@ import {
   EntrepreneurshipTrainingService,
   StartupEntrepreneurshipService,
 } from '@v2/services';
-import { AuthState, Role } from '@shared/enums';
+import { AuthState, Role } from '@v2/enums';
 import { BreadcrumbsComponent } from '@v2/components';
 import { EVALUACION_STARTUP } from '@v2/constants';
 import { StepRegisterComponent } from '../../components/step-register/step-register.component';
@@ -75,7 +75,9 @@ export class EvaluacionesStartupComponent implements OnInit {
 
   ngOnInit(): void {
     // Establecer el título de la página
-    this.title.setTitle('Formación para Startups y Emprendedores | Nuevo Los Lagos');
+    this.title.setTitle(
+      'Formación para Startups y Emprendedores | Nuevo Los Lagos'
+    );
     // Agregar meta etiquetas
     this.meta.updateTag({
       name: 'description',

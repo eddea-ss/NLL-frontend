@@ -4,7 +4,7 @@ import * as CryptoJS from 'crypto-js';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { LoginService } from '@v2/services';
-import { Role } from '@shared/enums';
+import { Role } from '@v2/enums';
 import { GoogleAnalyticsService } from './google-analytics.service';
 
 @Injectable({

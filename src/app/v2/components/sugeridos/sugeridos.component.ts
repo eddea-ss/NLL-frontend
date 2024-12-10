@@ -7,8 +7,8 @@ import {
   MaturityModelService,
   ResourceService,
 } from '@v2/services';
-import { AuthState, Role } from '@shared/enums';
-import { 
+import { AuthState, Role } from '@v2/enums';
+import {
   CourseItemComponent,
   ProjectsModalComponent,
   StartupModalComponent,
@@ -20,7 +20,7 @@ import {
   ArticleModalComponent,
   SupplierItemComponent,
   SupplierModalComponent,
-  FinancingItemComponent
+  FinancingItemComponent,
 } from '@v2/components';
 
 @Component({
@@ -110,7 +110,10 @@ export class SugeridosComponent implements OnInit {
   /**
    * Obtiene pathMatch y searchKey según la ruta actual y el estado del usuario.
    */
-  private getRouteConfig(ruta: string): { pathMatch: string; searchKey: string } {
+  private getRouteConfig(ruta: string): {
+    pathMatch: string;
+    searchKey: string;
+  } {
     // Si la ruta existe en el map 'paths' y 'key', utilízalos, si no usa defaults
     const defaultRoute = 'buscador-articulos'; // Ruta por defecto
     const pathMatch = this.paths[ruta] || this.paths[defaultRoute];
@@ -120,7 +123,8 @@ export class SugeridosComponent implements OnInit {
     // y se dispone de datos del modelo, usar IndustryName del modelo.
     const isLoggedIn = this.authState() === AuthState.LoggedIn;
     const hasModelData = this.modeloMadurez() || this.modeloCaracter();
-    const isCourseOrSupplier = ruta === 'buscador-cursos' || ruta === 'buscador-proveedores';
+    const isCourseOrSupplier =
+      ruta === 'buscador-cursos' || ruta === 'buscador-proveedores';
 
     if (isLoggedIn && isCourseOrSupplier && hasModelData) {
       const industryName = this.modeloMadurez()?.[0]?.IndustryName;

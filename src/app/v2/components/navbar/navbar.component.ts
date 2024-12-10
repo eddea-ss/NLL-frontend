@@ -2,13 +2,13 @@ import { Component, effect, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink, RouterModule } from '@angular/router';
 import { LoginService } from '@v2/services';
-import { AuthState, Role } from '@shared/enums';
+import { AuthState, Role } from '@v2/enums';
 
 interface MenuItem {
   label: string;
   route?: string;
-  roleCondition?: Role[]; 
-  alwaysVisible?: boolean; 
+  roleCondition?: Role[];
+  alwaysVisible?: boolean;
 }
 
 interface DropdownMenu {
@@ -30,7 +30,7 @@ export class NavbarComponent {
   private router = inject(Router);
 
   // Estados de autenticación del usuario
-  authState = this.loginService.authState; 
+  authState = this.loginService.authState;
   currentUser = this.loginService.currentUser;
 
   // Hacer disponibles los enums en la plantilla
@@ -45,50 +45,94 @@ export class NavbarComponent {
     label: 'Proyecto',
     items: [
       { label: 'Equipo', route: '/proyecto-equipo', alwaysVisible: true },
-      { label: 'Plataforma', route: '/proyecto-plataforma', alwaysVisible: true }
+      {
+        label: 'Plataforma',
+        route: '/proyecto-plataforma',
+        alwaysVisible: true,
+      },
     ],
-    isOpenSignal: signal(false)
+    isOpenSignal: signal(false),
   };
 
   evaluacionesMenu: DropdownMenu = {
     label: 'Evaluaciones',
     items: [
-      { label: 'Madurez Tecnológica', route: '/evaluaciones-madurez', roleCondition: [Role.Empresa] },
-      { label: 'Proveedores', route: '/evaluaciones-proveedor', roleCondition: [Role.Proveedor] },
-      { label: 'Startup y Emprendimiento', route: '/evaluaciones-startup', roleCondition: [Role.Usuario] }
+      {
+        label: 'Madurez Tecnológica',
+        route: '/evaluaciones-madurez',
+        roleCondition: [Role.Empresa],
+      },
+      {
+        label: 'Proveedores',
+        route: '/evaluaciones-proveedor',
+        roleCondition: [Role.Proveedor],
+      },
+      {
+        label: 'Startup y Emprendimiento',
+        route: '/evaluaciones-startup',
+        roleCondition: [Role.Usuario],
+      },
     ],
-    isOpenSignal: signal(false)
+    isOpenSignal: signal(false),
   };
 
   investigacionMenu: DropdownMenu = {
     label: 'Investigación',
     items: [
-      { label: 'Podcast i4.0', route: '/investigacion-podcasts', alwaysVisible: true },
-      { label: 'Diagnóstico Regional i4.0', route: '/investigacion-diagnostico', alwaysVisible: true }
+      {
+        label: 'Podcast i4.0',
+        route: '/investigacion-podcasts',
+        alwaysVisible: true,
+      },
+      {
+        label: 'Diagnóstico Regional i4.0',
+        route: '/investigacion-diagnostico',
+        alwaysVisible: true,
+      },
     ],
-    isOpenSignal: signal(false)
+    isOpenSignal: signal(false),
   };
 
   buscadoresMenu: DropdownMenu = {
     label: 'Buscadores',
     items: [
-      { label: 'Proveedores', route: '/buscador-proveedores', alwaysVisible: true },
+      {
+        label: 'Proveedores',
+        route: '/buscador-proveedores',
+        alwaysVisible: true,
+      },
       { label: 'Cursos', route: '/buscador-cursos', alwaysVisible: true },
-      { label: 'Financiamiento', route: '/buscador-financiamiento', alwaysVisible: true },
-      { label: 'Artículos de Interés', route: '/buscador-articulos', alwaysVisible: true },
-      { label: 'Proyectos Destacados', route: '/buscador-proyectos', alwaysVisible: true },
-      { label: 'Startup y Emprendedores', route: '/buscador-startup', alwaysVisible: true }
+      {
+        label: 'Financiamiento',
+        route: '/buscador-financiamiento',
+        alwaysVisible: true,
+      },
+      {
+        label: 'Artículos de Interés',
+        route: '/buscador-articulos',
+        alwaysVisible: true,
+      },
+      {
+        label: 'Proyectos Destacados',
+        route: '/buscador-proyectos',
+        alwaysVisible: true,
+      },
+      {
+        label: 'Startup y Emprendedores',
+        route: '/buscador-startup',
+        alwaysVisible: true,
+      },
     ],
-    isOpenSignal: signal(false)
+    isOpenSignal: signal(false),
   };
 
   cuentaMenu: DropdownMenu = {
     label: 'Cuenta',
     items: [
       { label: 'Ingresa a tu cuenta', route: '/login', alwaysVisible: false },
-      { label: 'Cerrar sesión', route: '', alwaysVisible: false }
+      { label: 'Cerrar sesión', route: '', alwaysVisible: false },
     ],
-    isOpenSignal: signal(false)
+    isOpenSignal: signal(false),
   };
 
   mainMenus: DropdownMenu[] = [
@@ -96,7 +140,7 @@ export class NavbarComponent {
     this.evaluacionesMenu,
     this.investigacionMenu,
     this.buscadoresMenu,
-    this.cuentaMenu
+    this.cuentaMenu,
   ];
 
   constructor() {
@@ -139,7 +183,7 @@ export class NavbarComponent {
 
   // Cierra todos los submenús abiertos
   closeAllSubmenus() {
-    this.mainMenus.forEach(menu => menu.isOpenSignal.set(false));
+    this.mainMenus.forEach((menu) => menu.isOpenSignal.set(false));
   }
 
   // Abre o cierra un submenú específico
