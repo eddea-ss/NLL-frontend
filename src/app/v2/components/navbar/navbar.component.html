@@ -3,7 +3,7 @@
     <!-- Logo principal, clickea para ir al inicio -->
     <a
       routerLink="/"
-      class="font-black text-2l tracking-wider bg-yellow-500  text-gray-800 p-5"
+      class="font-black text-2l tracking-wider bg-yellow-500 text-gray-800 p-5"
       (click)="closeMobileMenu()"
     >
       NuevoLosLagos
@@ -21,7 +21,12 @@
         stroke="currentColor"
         viewBox="0 0 24 24"
       >
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M4 6h16M4 12h16M4 18h16"
+        ></path>
       </svg>
     </button>
 
@@ -29,7 +34,6 @@
     <nav class="hidden lg:flex space-x-6 items-center w-full justify-center">
       <!-- Iteramos sobre menús principales -->
       <ng-container *ngFor="let menu of mainMenus">
-
         <!-- Menús normales -->
         <div class="relative group" *ngIf="menu !== cuentaMenu">
           <button
@@ -43,11 +47,13 @@
               ></path>
             </svg>
           </button>
-          <div class="absolute left-0 top-full w-48 bg-gray-800 text-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-300 z-10">
+          <div
+            class="absolute left-0 top-full w-48 bg-gray-800 text-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-300 z-10"
+          >
             <ng-container *ngFor="let item of menu.items">
               <a
                 *ngIf="shouldShowMenuItem(item)"
-                class="block px-4 py-2 hover:bg-gray-700"
+                class="block px-4 py-2 hover:bg-gray-700 cursor-pointer"
                 (click)="onMenuItemClick(item)"
               >
                 {{ item.label }}
@@ -69,12 +75,19 @@
               ></path>
             </svg>
           </button>
-          <div class="absolute left-0 top-full w-48 bg-gray-800 text-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-300 z-10">
+          <div
+            class="absolute left-0 top-full w-48 bg-gray-800 text-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-300 z-10"
+          >
             <!-- Opciones si no está logueado -->
             <a
               *ngIf="isLoggedOut"
               class="block px-4 py-2 hover:bg-gray-700"
-              (click)="onMenuItemClick({label:'Ingresa a tu cuenta', route:'/login'})"
+              (click)="
+                onMenuItemClick({
+                  label: 'Ingresa a tu cuenta',
+                  route: '/login'
+                })
+              "
             >
               Ingresa a tu cuenta
             </a>
@@ -83,13 +96,12 @@
             <a
               *ngIf="isLoggedIn"
               class="block px-4 py-2 hover:bg-gray-700"
-              (click)="onMenuItemClick({label:'Cerrar sesión'})"
+              (click)="onMenuItemClick({ label: 'Cerrar sesión' })"
             >
               Cerrar sesión
             </a>
           </div>
         </div>
-
       </ng-container>
 
       <!-- Botón Registrarse en escritorio -->
@@ -104,7 +116,10 @@
   </div>
 
   <!-- Menú móvil -->
-  <div class="lg:hidden" [ngClass]="{ 'block': isMobileMenuOpen, 'hidden': !isMobileMenuOpen }">
+  <div
+    class="lg:hidden"
+    [ngClass]="{ block: isMobileMenuOpen, hidden: !isMobileMenuOpen }"
+  >
     <nav class="px-2 pt-2 pb-4 space-y-1 sm:px-3">
       <ng-container *ngFor="let menu of mainMenus">
         <div>
@@ -149,14 +164,19 @@
               <a
                 *ngIf="isLoggedOut"
                 class="block px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300"
-                (click)="onMenuItemClick({label:'Ingresa a tu cuenta', route:'/login'})"
+                (click)="
+                  onMenuItemClick({
+                    label: 'Ingresa a tu cuenta',
+                    route: '/login'
+                  })
+                "
               >
                 Ingresa a tu cuenta
               </a>
               <a
                 *ngIf="isLoggedIn"
                 class="block px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300"
-                (click)="onMenuItemClick({label:'Cerrar sesión'})"
+                (click)="onMenuItemClick({ label: 'Cerrar sesión' })"
               >
                 Cerrar sesión
               </a>

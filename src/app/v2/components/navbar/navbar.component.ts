@@ -8,6 +8,7 @@ interface MenuItem {
   label: string;
   route?: string;
   roleCondition?: Role[];
+  showIfLoggedOut?: boolean;
   alwaysVisible?: boolean;
 }
 
@@ -61,16 +62,19 @@ export class NavbarComponent {
         label: 'Madurez Tecnológica',
         route: '/evaluaciones-madurez',
         roleCondition: [Role.Empresa],
+        showIfLoggedOut: true,
       },
       {
         label: 'Proveedores',
         route: '/evaluaciones-proveedor',
         roleCondition: [Role.Proveedor],
+        showIfLoggedOut: true,
       },
       {
         label: 'Startup y Emprendimiento',
         route: '/evaluaciones-startup',
         roleCondition: [Role.Usuario],
+        showIfLoggedOut: true,
       },
     ],
     isOpenSignal: signal(false),
@@ -199,22 +203,27 @@ export class NavbarComponent {
 
   // Determina si un ítem del menú debe ser visible según el estado de autenticación y el rol del usuario
   shouldShowMenuItem(item: MenuItem): boolean {
-    // Si el ítem es siempre visible, no hay más verificaciones
+    // Nuevo caso: si está deslogueado y el ítem está marcado para mostrarse en ese estado
+    if (this.isLoggedOut && (item as any).showIfLoggedOut) {
+      return true;
+    }
+
+    // Lógica existente:
     if (item.alwaysVisible) {
       return true;
     }
 
-    // Si el usuario no está logueado, solo se muestran ítems sin condición de rol
     if (this.isLoggedOut) {
+      // Si el usuario está deslogueado y no tiene showIfLoggedOut, solo mostramos
+      // ítems sin condiciones de rol (esto se mantiene para otros menús).
       return !item.roleCondition;
     }
 
-    // Si el usuario está logueado y el ítem tiene condición de rol, verificamos si el rol actual está en la lista
-    if (item.roleCondition && this.currentRole) {
+    // Si el usuario está logeado y el ítem requiere rol, verificamos si coincide
+    if (this.isLoggedIn && item.roleCondition && this.currentRole) {
       return item.roleCondition.includes(this.currentRole);
     }
 
-    // Si no cumple ninguna condición específica, no se muestra
     return false;
   }
 
