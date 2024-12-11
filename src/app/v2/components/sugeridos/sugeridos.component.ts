@@ -116,8 +116,18 @@ export class SugeridosComponent implements OnInit {
   } {
     // Si la ruta existe en el map 'paths' y 'key', utilízalos, si no usa defaults
     const defaultRoute = 'buscador-articulos'; // Ruta por defecto
-    const pathMatch = this.paths[ruta] || this.paths[defaultRoute];
+    let pathMatch = this.paths[ruta] || this.paths[defaultRoute];
     let searchKey = this.key[ruta] || this.key[defaultRoute];
+
+    //
+    if (!this.modeloCaracter()) {
+      pathMatch = this.paths[defaultRoute];
+      searchKey = this.key[defaultRoute];
+    }
+    if (!this.modeloCaracter()) {
+      pathMatch = this.paths[defaultRoute];
+      searchKey = this.key[defaultRoute];
+    }
 
     // Si el usuario está logueado y la ruta es cursos o proveedores,
     // y se dispone de datos del modelo, usar IndustryName del modelo.

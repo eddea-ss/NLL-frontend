@@ -15,6 +15,13 @@ export const routes: Routes = [
           ),
       },
       {
+        path: 'landing',
+        loadComponent: () =>
+          import('@v2/modules/landing-page2/landing-page2.component').then(
+            (m) => m.LandingPage2Component
+          ),
+      },
+      {
         path: 'proyecto-equipo',
         loadComponent: () =>
           import('@v2/modules/proyecto-equipo/proyecto-equipo.component').then(
