@@ -1,5 +1,0 @@
-export * from './sidebar/sidebar.component'
-export * from './navbar/navbar.component'
-export * from './carousel/carousel.component'
-export * from './footer/footer.component'
-export * from './article-card/article-card.component'
