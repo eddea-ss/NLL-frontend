@@ -1,9 +1,8 @@
 export enum ResourceType {
-  Course = 'COURSE',
-  Article = 'ARTICLE',
-  Project = 'PROJECT',
-  Financing = 'FINANCING',
-  Supplier = 'SUPPLIER',
-  Startup = 'STARTUP',
-  All = 'ALL',
+  COURSE = 'curses',
+  ARTICLE = 'articles',
+  PROJECT = 'projects',
+  FINNANCING = 'financing',
+  SUPPLIER = 'suppliers',
+  STARTUP = 'startups',
 }

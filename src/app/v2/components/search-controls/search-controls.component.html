@@ -100,7 +100,7 @@
 </div>
 
 <!-- Listado de palabras clave sugeridas -->
-<div class="mb-8 grid sm:flex">
+<div class="mb-8 grid sm:flex mx-1">
   <span class="me-2 text-gray-600 font-bold">Buscar:</span>
   <ng-container *ngFor="let term of searchKeywords">
     <span
@@ -125,7 +125,7 @@
 
 <!-- Conteo de resultados e indicador de carga -->
 <div>
-  <div class="form-text text-center text-muted mt-2 mb-3">
+  <div class="form-text text-center text-muted">
     {{ resultCount }}
   </div>
   <div

@@ -27,28 +27,8 @@
       <!-- Resultados de búsqueda -->
       <div class="space-y-8">
         <ng-container [ngSwitch]="resourceType">
-          <!-- Todos -->
-          <ng-container *ngSwitchCase="'all'">
-            <ng-container *ngFor="let item of results; let i = index">
-              <div
-                class="p-4 bg-white text-[rgb(31,41,55)] rounded shadow border border-gray-200 flex items-center justify-between"
-              >
-                <div>
-                  <div class="font-semibold">
-                    {{ item.nombre || item.titulo || "Recurso" }}
-                  </div>
-                </div>
-                <button
-                  (click)="openModal(i)"
-                  class="ml-2 bg-[#EAB308] text-[rgb(31,41,55)] px-3 py-1 rounded hover:opacity-90 transition"
-                >
-                  Ver Detalles
-                </button>
-              </div>
-            </ng-container>
-          </ng-container>
-
-          <ng-container *ngSwitchCase="'curses'">
+          <!--Cursos-->
+          <ng-container *ngSwitchCase="ResourceType.COURSE">
             <ng-container *ngFor="let item of results; let i = index">
               <app-course-item
                 class="p-4"
@@ -57,8 +37,8 @@
               ></app-course-item>
             </ng-container>
           </ng-container>
-
-          <ng-container *ngSwitchCase="'articles'">
+          <!--Artículos-->
+          <ng-container *ngSwitchCase="ResourceType.ARTICLE">
             <ng-container *ngFor="let item of results; let i = index">
               <app-article-item
                 class="p-4"
@@ -67,8 +47,8 @@
               ></app-article-item>
             </ng-container>
           </ng-container>
-
-          <ng-container *ngSwitchCase="'projects'">
+          <!--Proyectos-->
+          <ng-container *ngSwitchCase="ResourceType.PROJECT">
             <ng-container *ngFor="let item of results; let i = index">
               <app-projects-item
                 class="p-4"
@@ -77,8 +57,8 @@
               ></app-projects-item>
             </ng-container>
           </ng-container>
-
-          <ng-container *ngSwitchCase="'financing'">
+          <!--Financiamiento-->
+          <ng-container *ngSwitchCase="ResourceType.FINNANCING">
             <ng-container *ngFor="let item of results; let i = index">
               <app-financing-item
                 class="p-4"
@@ -87,8 +67,8 @@
               ></app-financing-item>
             </ng-container>
           </ng-container>
-
-          <ng-container *ngSwitchCase="'suppliers'">
+          <!--Proveedores-->
+          <ng-container *ngSwitchCase="ResourceType.SUPPLIER">
             <ng-container *ngFor="let item of results; let i = index">
               <app-supplier-item
                 class="p-4"
@@ -97,8 +77,8 @@
               ></app-supplier-item>
             </ng-container>
           </ng-container>
-
-          <ng-container *ngSwitchCase="'startups'">
+          <!--Startups-->
+          <ng-container *ngSwitchCase="ResourceType.STARTUP">
             <ng-container *ngFor="let item of results; let i = index">
               <app-startup-item
                 class="p-4"
@@ -117,7 +97,7 @@
   <!-- Modales -->
   <ng-container [ngSwitch]="resourceType">
     <ng-container *ngIf="isModalOpen && dataModal">
-      <ng-container *ngSwitchCase="'curses'">
+      <ng-container *ngSwitchCase="ResourceType.COURSE">
         <app-course-modal
           [data]="dataModal"
           (close)="closeModal()"
@@ -125,7 +105,7 @@
         ></app-course-modal>
       </ng-container>
 
-      <ng-container *ngSwitchCase="'articles'">
+      <ng-container *ngSwitchCase="ResourceType.ARTICLE">
         <app-article-modal
           [data]="dataModal"
           (close)="closeModal()"
@@ -133,7 +113,7 @@
         ></app-article-modal>
       </ng-container>
 
-      <ng-container *ngSwitchCase="'projects'">
+      <ng-container *ngSwitchCase="ResourceType.PROJECT">
         <app-projects-modal
           [data]="dataModal"
           (close)="closeModal()"
@@ -141,7 +121,7 @@
         ></app-projects-modal>
       </ng-container>
 
-      <ng-container *ngSwitchCase="'financing'">
+      <ng-container *ngSwitchCase="ResourceType.FINNANCING">
         <app-financing-modal
           [data]="dataModal"
           (close)="closeModal()"
@@ -149,7 +129,7 @@
         ></app-financing-modal>
       </ng-container>
 
-      <ng-container *ngSwitchCase="'suppliers'">
+      <ng-container *ngSwitchCase="ResourceType.SUPPLIER">
         <app-supplier-modal
           [data]="dataModal"
           (close)="closeModal()"
@@ -157,17 +137,12 @@
         ></app-supplier-modal>
       </ng-container>
 
-      <ng-container *ngSwitchCase="'startups'">
+      <ng-container *ngSwitchCase="ResourceType.STARTUP">
         <app-startup-modal
           [data]="dataModal"
           (close)="closeModal()"
           (next)="showNextItem()"
         ></app-startup-modal>
-      </ng-container>
-
-      <!-- Caso 'all' o genérico (si lo implementas) -->
-      <ng-container *ngSwitchCase="'all'">
-        <!-- Aquí un modal genérico si fuera necesario -->
       </ng-container>
     </ng-container>
   </ng-container>

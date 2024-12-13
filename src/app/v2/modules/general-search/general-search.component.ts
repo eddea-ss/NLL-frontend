@@ -28,7 +28,12 @@ import {
   STARTUPS_TEXT,
 } from '@v2/constants';
 
-import { ResourceService } from '@v2/services';
+import {
+  CharacterizationModelService,
+  MaturityModelService,
+  ResourceService,
+} from '@v2/services';
+import { ResourceType } from '@v2/enums';
 
 @Component({
   selector: 'app-general-search',
@@ -56,8 +61,12 @@ import { ResourceService } from '@v2/services';
   styleUrls: ['./general-search.component.scss'],
 })
 export class GeneralSearchComponent implements OnInit {
-  recursosService = inject(ResourceService);
-
+  private recursosService = inject(ResourceService);
+  private modeloMadurezService = inject(MaturityModelService);
+  private modeloCaracterService = inject(CharacterizationModelService);
+  modeloMadurez = this.modeloMadurezService.modeloMadurez;
+  modeloCaracter = this.modeloCaracterService.modeloCaracter;
+  public ResourceType = ResourceType;
   // Modal variables
   isModalOpen = false;
   dataModal: any | undefined;
@@ -81,22 +90,35 @@ export class GeneralSearchComponent implements OnInit {
   isLoading: boolean = false;
   results: any[] = [];
 
+  // sugeridos dentro los resultados
+  suggested: any = [];
+  private key: Record<ResourceType, string> = {
+    [ResourceType.SUPPLIER]: 'sí',
+    [ResourceType.COURSE]: '2024',
+    [ResourceType.ARTICLE]: '',
+    [ResourceType.PROJECT]: '',
+    [ResourceType.FINNANCING]: '',
+    [ResourceType.STARTUP]: '',
+  };
+
   // Textos dependientes del tipo de recurso
   tips: string[] = [];
   customMessages: string[] = [];
   searchKeywords: string[] = [];
   breadcrumbs: any[] = [];
-  resourceType: string = 'curses'; // Ahora por defecto "all"
+
+  // Using the enum for resource type
+  resourceType: ResourceType = ResourceType.COURSE;
   labelType: string = 'Cursos';
 
-  // Lista de tipos de recursos disponibles (puedes agregar o quitar)
+  // Lista de tipos de recursos disponibles
   resourceOptions = [
-    { type: 'curses', label: 'Cursos' },
-    { type: 'articles', label: 'Artículos' },
-    { type: 'projects', label: 'Proyectos' },
-    { type: 'financing', label: 'Financiamiento' },
-    { type: 'suppliers', label: 'Proveedores' },
-    { type: 'startups', label: 'Startups' },
+    { type: ResourceType.COURSE, label: 'Cursos' },
+    { type: ResourceType.ARTICLE, label: 'Artículos' },
+    { type: ResourceType.PROJECT, label: 'Proyectos' },
+    { type: ResourceType.FINNANCING, label: 'Financiamiento' },
+    { type: ResourceType.SUPPLIER, label: 'Proveedores' },
+    { type: ResourceType.STARTUP, label: 'Startups' },
   ];
 
   ngOnInit(): void {
@@ -110,7 +132,8 @@ export class GeneralSearchComponent implements OnInit {
 
   // Método para cambiar el tipo de recurso a partir de un botón
   setResourceType(type: string): void {
-    this.resourceType = type;
+    // "type" es string, así que lo casteamos a ResourceType
+    this.resourceType = type as ResourceType;
     this.initializeTexts();
     this.clearSearch();
   }
@@ -118,67 +141,47 @@ export class GeneralSearchComponent implements OnInit {
   initializeTexts(): void {
     // Dependiendo del tipo de recurso seleccionado, configuramos textos
     switch (this.resourceType) {
-      case 'curses':
+      case ResourceType.COURSE:
         this.labelType = COURSE_TEXT.LABEL;
         this.tips = COURSE_TEXT.TIPS;
         this.customMessages = COURSE_TEXT.CUSTOM_MESSAGES;
         this.searchKeywords = COURSE_TEXT.SEARCH_KEYWORDS;
         this.breadcrumbs = COURSE_TEXT.BREADCRUMBS;
         break;
-      case 'articles':
+      case ResourceType.ARTICLE:
         this.labelType = ARTICLE_TEXT.LABEL;
         this.tips = ARTICLE_TEXT.TIPS;
         this.customMessages = ARTICLE_TEXT.CUSTOM_MESSAGES;
         this.searchKeywords = ARTICLE_TEXT.SEARCH_KEYWORDS;
         this.breadcrumbs = ARTICLE_TEXT.BREADCRUMBS;
         break;
-      case 'projects':
+      case ResourceType.PROJECT:
         this.labelType = PROJECT_TEXT.LABEL;
         this.tips = PROJECT_TEXT.TIPS;
         this.customMessages = PROJECT_TEXT.CUSTOM_MESSAGES;
         this.searchKeywords = PROJECT_TEXT.SEARCH_KEYWORDS;
         this.breadcrumbs = PROJECT_TEXT.BREADCRUMBS;
         break;
-      case 'financing':
+      case ResourceType.FINNANCING:
         this.labelType = FINNANCING_TEXT.LABEL;
         this.tips = FINNANCING_TEXT.TIPS;
         this.customMessages = FINNANCING_TEXT.CUSTOM_MESSAGES;
         this.searchKeywords = FINNANCING_TEXT.SEARCH_KEYWORDS;
         this.breadcrumbs = FINNANCING_TEXT.BREADCRUMBS;
         break;
-      case 'suppliers':
+      case ResourceType.SUPPLIER:
         this.labelType = SUPPLIER_TEXT.LABEL;
         this.tips = SUPPLIER_TEXT.TIPS;
         this.customMessages = SUPPLIER_TEXT.CUSTOM_MESSAGES;
         this.searchKeywords = SUPPLIER_TEXT.SEARCH_KEYWORDS;
         this.breadcrumbs = SUPPLIER_TEXT.BREADCRUMBS;
         break;
-      case 'startups':
+      case ResourceType.STARTUP:
         this.labelType = STARTUPS_TEXT.LABEL;
         this.tips = STARTUPS_TEXT.TIPS;
         this.customMessages = STARTUPS_TEXT.CUSTOM_MESSAGES;
         this.searchKeywords = STARTUPS_TEXT.SEARCH_KEYWORDS;
         this.breadcrumbs = STARTUPS_TEXT.BREADCRUMBS;
-        break;
-      case 'all':
-      default:
-        this.labelType = 'Todos';
-        this.tips = [
-          'Busca lo que necesites entre todos los recursos disponibles.',
-        ];
-        this.customMessages = ['Buscando en todos los recursos...'];
-        this.searchKeywords = [
-          'cursos',
-          'artículos',
-          'proyectos',
-          'financiamiento',
-          'proveedores',
-          'startups',
-        ];
-        this.breadcrumbs = [
-          { label: 'Inicio', url: '/' },
-          { label: 'Búsqueda General', url: '/busqueda' },
-        ];
         break;
     }
   }
@@ -241,18 +244,9 @@ export class GeneralSearchComponent implements OnInit {
 
     try {
       this.isLoading = true;
-
-      // Si resourceType es "all", aquí podrías hacer múltiples llamadas
-      // a cada recurso y combinar resultados. Por simplicidad, se asume
-      // un endpoint que devuelva todos los recursos.
-      const typeToFetch =
-        this.resourceType === 'all'
-          ? 'all_resources_endpoint'
-          : this.resourceType;
-
       const response: any[] = await this.recursosService.fetchResults(
         query,
-        typeToFetch
+        this.resourceType
       );
       this.displayResults(response, query);
     } catch (error) {
@@ -261,7 +255,44 @@ export class GeneralSearchComponent implements OnInit {
       this.resultCount = 'Error al obtener los datos.';
     } finally {
       this.isLoading = false;
+      this.fetchSuggested();
     }
+  }
+
+  async fetchSuggested(): Promise<void> {
+    if (
+      this.resourceType !== ResourceType.COURSE &&
+      this.resourceType !== ResourceType.SUPPLIER
+    ) {
+      console.warn('no es curso ni proveedor');
+      return;
+    }
+
+    let query = this.key[this.resourceType];
+    /*if (this.modeloMadurez() && this.modeloMadurez()?.[0]?.IndustryName) {
+      query =
+        this.modeloMadurez()?.[0]?.IndustryName ?? this.key[this.resourceType];
+    }*/
+
+    this.recursosService
+      .searchResources(query, this.resourceType, 3)
+      .subscribe({
+        next: (data) => {
+          this.suggested = data.map((suggestion) => {
+            return {
+              ...suggestion,
+              recomendado: true,
+            };
+          });
+          console.warn(this.suggested);
+          this.results = [...this.suggested, ...this.results];
+        },
+        error: (error) => {
+          console.error('Error al obtener los datos:', error);
+          console.warn('Error al obtener los datos:', error);
+          this.suggested = [];
+        },
+      });
   }
 
   // Mostrar los resultados de búsqueda en el DOM
@@ -280,7 +311,7 @@ export class GeneralSearchComponent implements OnInit {
   // Abrir el modal
   openModal(index: number): void {
     this.currentIndex = index;
-    const item = this.currentData[this.currentIndex];
+    const item = this.results[this.currentIndex];
     this.isModalOpen = true;
     this.dataModal = item;
   }

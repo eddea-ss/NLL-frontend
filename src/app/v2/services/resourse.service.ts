@@ -26,8 +26,8 @@ export class ResourceService {
    * @param query La cadena de búsqueda.
    * @returns Un Observable que emite un arreglo de cursos.
    */
-  searchResources(query: string, path: string): Observable<any[]> {
-    const params = new HttpParams().set('search', query).set('limit', 5);
+  searchResources(query: string, path: string, limit = 5): Observable<any[]> {
+    const params = new HttpParams().set('search', query).set('limit', limit);
 
     return this.http
       .get<any[]>(`${this.API_BASE_URL}/${path}/search`, { params })
@@ -97,14 +97,11 @@ export class ResourceService {
         console.warn('No se proporcionó un link');
         return;
       }
-
       let link = link_raw.trim();
-
       // Si el link no comienza con http:// o https://, entonces le agregamos https://
       if (!/^https?:\/\//i.test(link)) {
         link = 'https://' + link;
       }
-
       window.open(link, '_blank');
     } catch (error) {
       console.error('Error al abrir el link:', error);

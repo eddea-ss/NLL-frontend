@@ -105,4 +105,8 @@
   .hero-image-container {
     @apply hidden lg:mt-0 lg:col-span-5 lg:flex;
   }
+
+  .cards-title-color {
+    @apply text-[#374f71] border-gray-200;
+  }
 }

@@ -2,8 +2,8 @@
 <article class="bg-gray-100 p-4 border">
   <h3 class="text-xl font-bold mb-2">{{ data?.nombreEmpresa }}</h3>
   <p style="text-align: left; font-size: 0.9rem">
-    <th class="px-4">Tecnologías Ofrecidas:</th>
-    <td class="px-4">{{ data?.tecnologiasOfrecidas }}</td>
+    <th class="px-2">Tecnologías Ofrecidas:</th>
+    <td class="px-2">{{ data?.tecnologiasOfrecidas }}</td>
   </p>
   <p style="height: 12px"></p>
   <a
@@ -25,27 +25,41 @@
 >
   <a
     style="margin-bottom: 12px; cursor: pointer"
-    class="text-xl font-semibold text-blue-600 hover:underline"
+    class="text-xl font-semibold cards-title-color hover:underline"
   >
     {{ data?.nombreEmpresa }}
   </a>
-  <p style="height: 12px"></p>
-  <table style="text-align: left; font-size: 0.9rem">
-    <tr>
-      <th class="px-4">Tecnologías Ofrecidas:</th>
-      <td class="px-4">{{ data?.tecnologiasOfrecidas }}</td>
+  @if (data?.recomendado) {
+  <p class="text-md cards-title-color">
+    <span style="color: #eab308">&#9733;</span> <strong>Te recomendamos</strong>
+  </p>
+  }
+  <table style="text-align: left" class="mt-2">
+    <tr class="text-xs">
+      <th class="px-2 cards-title-color align-top">Tecnologías Ofrecidas:</th>
+      <td class="px-2 cards-title-color align-top">
+        {{ data?.tecnologiasOfrecidas }}
+      </td>
     </tr>
-    <tr>
-      <th class="px-4">Productos y/o Servicios Avanzados:</th>
-      <td class="px-4">{{ data?.productosServiciosAvanzados }}</td>
+    <tr class="text-xs">
+      <th class="px-2 cards-title-color align-top">
+        Productos y/o Servicios Avanzados:
+      </th>
+      <td class="px-2 cards-title-color align-top">
+        {{ data?.productosServiciosAvanzados }}
+      </td>
     </tr>
-    <tr>
-      <th class="px-4">Productos Ofrecidos:</th>
-      <td class="px-4">{{ data?.productosOfrecidos }}</td>
+    <tr class="text-xs">
+      <th class="px-2 cards-title-color align-top">Productos Ofrecidos:</th>
+      <td class="px-2 cards-title-color align-top">
+        {{ data?.productosOfrecidos }}
+      </td>
     </tr>
-    <tr>
-      <th class="px-4">Servicios Ofrecidos:</th>
-      <td class="px-4">{{ data?.serviciosOfrecidos }}</td>
+    <tr class="text-xs">
+      <th class="px-2 cards-title-color align-top">Servicios Ofrecidos:</th>
+      <td class="px-2 cards-title-color align-top">
+        {{ data?.serviciosOfrecidos }}
+      </td>
     </tr>
   </table>
 </article>
