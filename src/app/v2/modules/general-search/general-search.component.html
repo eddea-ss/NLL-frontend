@@ -1,0 +1,174 @@
+<div class="bg-[#fff] text-[rgb(31,41,55)] min-h-screen">
+  <!-- Migas de pan (Breadcrumbs) -->
+  <app-breadcrumbs [breadcrumbs]="breadcrumbs"></app-breadcrumbs>
+
+  <!-- Contenido dinámico -->
+  <main class="container mx-auto py-12 flex flex-col lg:flex-row">
+    <div class="w-full lg:w-3/4 px-8">
+      <h1 class="text-3xl font-bold mb-6">{{ labelType }}</h1>
+
+      <!-- Componente de Controles de Búsqueda -->
+      <app-search-controls
+        [searchTip]="searchTip"
+        [searchMessage]="searchMessage"
+        [(searchInput)]="searchInput"
+        [searchKeywords]="searchKeywords"
+        [resultCount]="resultCount"
+        [isLoading]="isLoading"
+        [resourceOptions]="resourceOptions"
+        [selectedResourceType]="resourceType"
+        (resourceTypeChange)="setResourceType($event)"
+        (searchInputChange)="onSearchInputChange()"
+        (clearSearch)="clearSearch()"
+        (addSuggestedTerm)="addSuggestedTerm($event)"
+        (triggerSearch)="onSearchInputChange()"
+      ></app-search-controls>
+
+      <!-- Resultados de búsqueda -->
+      <div class="space-y-8">
+        <ng-container [ngSwitch]="resourceType">
+          <!-- Todos -->
+          <ng-container *ngSwitchCase="'all'">
+            <ng-container *ngFor="let item of results; let i = index">
+              <div
+                class="p-4 bg-white text-[rgb(31,41,55)] rounded shadow border border-gray-200 flex items-center justify-between"
+              >
+                <div>
+                  <div class="font-semibold">
+                    {{ item.nombre || item.titulo || "Recurso" }}
+                  </div>
+                </div>
+                <button
+                  (click)="openModal(i)"
+                  class="ml-2 bg-[#EAB308] text-[rgb(31,41,55)] px-3 py-1 rounded hover:opacity-90 transition"
+                >
+                  Ver Detalles
+                </button>
+              </div>
+            </ng-container>
+          </ng-container>
+
+          <ng-container *ngSwitchCase="'curses'">
+            <ng-container *ngFor="let item of results; let i = index">
+              <app-course-item
+                class="p-4"
+                [data]="item"
+                (openModal)="openModal(i)"
+              ></app-course-item>
+            </ng-container>
+          </ng-container>
+
+          <ng-container *ngSwitchCase="'articles'">
+            <ng-container *ngFor="let item of results; let i = index">
+              <app-article-item
+                class="p-4"
+                [data]="item"
+                (openModal)="openModal(i)"
+              ></app-article-item>
+            </ng-container>
+          </ng-container>
+
+          <ng-container *ngSwitchCase="'projects'">
+            <ng-container *ngFor="let item of results; let i = index">
+              <app-projects-item
+                class="p-4"
+                [data]="item"
+                (openModal)="openModal(i)"
+              ></app-projects-item>
+            </ng-container>
+          </ng-container>
+
+          <ng-container *ngSwitchCase="'financing'">
+            <ng-container *ngFor="let item of results; let i = index">
+              <app-financing-item
+                class="p-4"
+                [data]="item"
+                (openModal)="openModal(i)"
+              ></app-financing-item>
+            </ng-container>
+          </ng-container>
+
+          <ng-container *ngSwitchCase="'suppliers'">
+            <ng-container *ngFor="let item of results; let i = index">
+              <app-supplier-item
+                class="p-4"
+                [data]="item"
+                (openModal)="openModal(i)"
+              ></app-supplier-item>
+            </ng-container>
+          </ng-container>
+
+          <ng-container *ngSwitchCase="'startups'">
+            <ng-container *ngFor="let item of results; let i = index">
+              <app-startup-item
+                class="p-4"
+                [data]="item"
+                (openModal)="openModal(i)"
+              ></app-startup-item>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+      </div>
+    </div>
+    <!-- Artículos sugeridos -->
+    <aside><app-sugeridos></app-sugeridos></aside>
+  </main>
+
+  <!-- Modales -->
+  <ng-container [ngSwitch]="resourceType">
+    <ng-container *ngIf="isModalOpen && dataModal">
+      <ng-container *ngSwitchCase="'curses'">
+        <app-course-modal
+          [data]="dataModal"
+          (close)="closeModal()"
+          (next)="showNextItem()"
+        ></app-course-modal>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'articles'">
+        <app-article-modal
+          [data]="dataModal"
+          (close)="closeModal()"
+          (next)="showNextItem()"
+        ></app-article-modal>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'projects'">
+        <app-projects-modal
+          [data]="dataModal"
+          (close)="closeModal()"
+          (next)="showNextItem()"
+        ></app-projects-modal>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'financing'">
+        <app-financing-modal
+          [data]="dataModal"
+          (close)="closeModal()"
+          (next)="showNextItem()"
+        ></app-financing-modal>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'suppliers'">
+        <app-supplier-modal
+          [data]="dataModal"
+          (close)="closeModal()"
+          (next)="showNextItem()"
+        ></app-supplier-modal>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'startups'">
+        <app-startup-modal
+          [data]="dataModal"
+          (close)="closeModal()"
+          (next)="showNextItem()"
+        ></app-startup-modal>
+      </ng-container>
+
+      <!-- Caso 'all' o genérico (si lo implementas) -->
+      <ng-container *ngSwitchCase="'all'">
+        <!-- Aquí un modal genérico si fuera necesario -->
+      </ng-container>
+    </ng-container>
+  </ng-container>
+</div>

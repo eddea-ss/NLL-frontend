@@ -9,3 +9,4 @@ export * from './usuario.model';
 export * from './industria.model';
 export * from './proveedor.model';
 export * from './empresa.model';
+export * from './resource-text.model';

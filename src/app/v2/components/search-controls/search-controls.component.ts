@@ -13,24 +13,31 @@ export class SearchControlsComponent {
   // Mensajes dinámicos para indicar consejos o estado actual de la búsqueda
   @Input() searchTip: string = '';
   @Input() searchMessage: string = '';
-  
+
   // Valor actual del campo de búsqueda
   @Input() searchInput: string = '';
-  
+
   // Términos sugeridos que el usuario puede agregar fácilmente a la búsqueda
   @Input() searchKeywords: string[] = [];
-  
+
   // Conteo de resultados (en texto), por ejemplo "10 resultados encontrados"
   @Input() resultCount: string = '';
-  
+
   // Indica si se está realizando una carga (ej: buscando resultados)
   @Input() isLoading: boolean = false;
+
+  // Lista de tipos de recursos a mostrar (ej: [{type: 'all', label: 'Todos'}, ...])
+  @Input() resourceOptions: { type: string; label: string }[] = [];
+
+  // Tipo de recurso seleccionado actualmente
+  @Input() selectedResourceType: string = 'all';
 
   // Eventos para notificar cambios o acciones al componente padre
   @Output() searchInputChange = new EventEmitter<string>();
   @Output() clearSearch = new EventEmitter<void>();
   @Output() addSuggestedTerm = new EventEmitter<string>();
   @Output() triggerSearch = new EventEmitter<void>();
+  @Output() resourceTypeChange = new EventEmitter<string>();
 
   // Actualiza el valor de búsqueda y notifica al componente padre
   onInputChange(value: string): void {
@@ -57,5 +64,17 @@ export class SearchControlsComponent {
     if (event.key === 'Enter' || event.key === ' ') {
       this.onAddSuggestedTerm(term);
     }
+  }
+
+  // Cambia el tipo de recurso seleccionado
+  onResourceTypeChange(type: string): void {
+    this.resourceTypeChange.emit(type);
+  }
+
+  // Método auxiliar para saber si mostrar los botones
+  get showResourceButtons(): boolean {
+    // Ajusta la condición según tus necesidades
+    // Por ejemplo, se muestran solo si el input de búsqueda tiene más de 2 caracteres.
+    return this.resourceOptions.length > 2;
   }
 }

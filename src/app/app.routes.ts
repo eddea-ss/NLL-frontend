@@ -22,6 +22,13 @@ export const routes: Routes = [
           ),
       },
       {
+        path: 'search',
+        loadComponent: () =>
+          import('@v2/modules/general-search/general-search.component').then(
+            (m) => m.GeneralSearchComponent
+          ),
+      },
+      {
         path: 'proyecto-equipo',
         loadComponent: () =>
           import('@v2/modules/proyecto-equipo/proyecto-equipo.component').then(

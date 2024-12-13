@@ -91,11 +91,18 @@ export class ResourceService {
     return DOMPurify.sanitize(parrafos);
   }
 
-  openLink(link: string): void {
+  openLink(link_raw: string): void {
     try {
-      if (!link) {
+      if (!link_raw) {
         console.warn('No se proporcionó un link');
         return;
+      }
+
+      let link = link_raw.trim();
+
+      // Si el link no comienza con http:// o https://, entonces le agregamos https://
+      if (!/^https?:\/\//i.test(link)) {
+        link = 'https://' + link;
       }
 
       window.open(link, '_blank');

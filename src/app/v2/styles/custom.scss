@@ -1,7 +1,7 @@
 @layer components {
   // Título principal utilizado en la landing page
   .titulo-principal {
-    @apply max-w-2xl mb-5 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl;
+    @apply max-w-2xl mb-5 text-3xl font-extrabold tracking-tight leading-none md:text-4xl xl:text-5xl;
   }
   .feature-grid {
     @apply space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10;

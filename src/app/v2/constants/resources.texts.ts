@@ -1,4 +1,5 @@
-export const COURSE_TEXT: any = {
+import { ResourceText } from '@v2/models';
+export const COURSE_TEXT: ResourceText = {
   LABEL: 'Buscador de cursos',
   TIPS: [
     '¿Sabías que puedes buscar cursos por "online" o "presencial"?',
@@ -36,7 +37,7 @@ export const COURSE_TEXT: any = {
   ],
 };
 
-export const ARTICLE_TEXT: any = {
+export const ARTICLE_TEXT: ResourceText = {
   LABEL: 'Buscador de artículos',
   TIPS: [
     '¿Sabías que puedes buscar "IoT 2024" o "IoT inglés"?',
@@ -80,7 +81,7 @@ export const ARTICLE_TEXT: any = {
   ],
 };
 
-export const PROJECT_TEXT: any = {
+export const PROJECT_TEXT: ResourceText = {
   LABEL: 'Buscador de proyectos destacados',
   TIPS: [
     '¿Sabías que puedes buscar "gemelos digitales" o "sostenibilidad"?',
@@ -101,7 +102,6 @@ export const PROJECT_TEXT: any = {
   SEARCH_KEYWORDS: [
     'gemelos digitales',
     'impresión 3D',
-    'saas',
     'innovación',
     'sostenibilidad',
   ],
@@ -124,7 +124,7 @@ export const PROJECT_TEXT: any = {
   ],
 };
 
-export const SUPPLIER_TEXT: any = {
+export const SUPPLIER_TEXT: ResourceText = {
   LABEL: 'Buscador de proveedores',
   TIPS: [
     '¿Sabías que puedes buscar empresas por "Los Lagos" o "Tecnología"?',
@@ -168,7 +168,7 @@ export const SUPPLIER_TEXT: any = {
   ],
 };
 
-export const FINNANCING_TEXT: any = {
+export const FINNANCING_TEXT: ResourceText = {
   LABEL: 'Buscador de financiamiento',
   TIPS: [
     '¿Sabías que puedes buscar "innovación" o "sostenibilidad"?',
@@ -211,7 +211,7 @@ export const FINNANCING_TEXT: any = {
   ],
 };
 
-export const STARTUPS_TEXT: any = {
+export const STARTUPS_TEXT: ResourceText = {
   LABEL: 'Buscador de startup y emprendimiento',
   TIPS: [
     '¿Sabías que puedes buscar empresas por "Los Lagos" o "Tecnología"?',

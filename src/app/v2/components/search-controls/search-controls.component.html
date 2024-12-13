@@ -1,15 +1,11 @@
-<!--
-  Aquí mostramos ya sea un "tip" de búsqueda o un mensaje específico.
-  Si hay un tip y no hay mensaje, se muestra el tip.
-  Si hay un mensaje, se muestra el mensaje.
--->
+<!-- Mensajes de tip o mensaje de estado -->
 <div class="mb-3 position-relative" style="min-height: 1.5em">
-  <!-- Mostrar consejo de búsqueda si no hay mensaje -->
-  <h5 *ngIf="searchTip && !searchMessage" class="text-muted position-absolute top-0 start-0">
+  <h5
+    *ngIf="searchTip && !searchMessage"
+    class="text-muted position-absolute top-0 start-0"
+  >
     {{ searchTip }}
   </h5>
-
-  <!-- Mostrar mensaje si está definido -->
   <h5 *ngIf="searchMessage" class="text-muted position-absolute top-0 start-0">
     {{ searchMessage }}
   </h5>
@@ -20,7 +16,9 @@
   <label for="simple-search" class="sr-only">Buscar</label>
   <div class="relative w-full flex">
     <!-- Ícono de búsqueda a la izquierda -->
-    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+    <div
+      class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
+    >
       <svg
         aria-hidden="true"
         class="w-5 h-5 text-gray-500"
@@ -35,14 +33,14 @@
       </svg>
     </div>
 
-    <!-- Input enlazado con ngModel para dos vías de datos -->
+    <!-- Input de búsqueda -->
     <input
       type="text"
       [(ngModel)]="searchInput"
       (ngModelChange)="onInputChange($event)"
       id="simple-search"
       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
-      placeholder="Buscar cursos ..."
+      placeholder="Buscar recursos..."
       required
     />
 
@@ -74,14 +72,9 @@
   <button
     type="button"
     (click)="onSearch()"
-    class="p-2.5 ml-2 text-sm font-medium text-white bg-blue-700 border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
+    class="p-2.5 ml-2 text-sm font-medium text-white bg-gray-600 border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
   >
-    <svg
-      class="w-5 h-5"
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-    >
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path
         stroke-linecap="round"
         stroke-linejoin="round"
@@ -93,10 +86,23 @@
   </button>
 </div>
 
-<!-- Listado de palabras clave sugeridas que el usuario puede agregar -->
+<!-- Botones para seleccionar tipo de recurso (visibles solo si se cumplen condiciones) -->
+<div *ngIf="showResourceButtons" class="mb-4 grid sm:flex sm:space-x-4">
+  <button
+    *ngFor="let option of resourceOptions"
+    (click)="onResourceTypeChange(option.type)"
+    [class.bg-[#EAB308]]="selectedResourceType === option.type"
+    [class.text-[rgb(31,41,55)]]="selectedResourceType === option.type"
+    class="sm:m-1 font-bold text-gray-600 px-4 text-muted text-xs py-2 border border-gray-600 hover:bg-[#EAB308] hover:text-[rgb(31,41,55)] transition-colors duration-300"
+  >
+    {{ option.label }}
+  </button>
+</div>
+
+<!-- Listado de palabras clave sugeridas -->
 <div class="mb-8 grid sm:flex">
-  <span class="me-2">Buscar:</span>
-  <ng-container *ngFor="let term of searchKeywords;">
+  <span class="me-2 text-gray-600 font-bold">Buscar:</span>
+  <ng-container *ngFor="let term of searchKeywords">
     <span
       style="padding: 4px 12px"
       class="badge border border-blue-100 text-blue-600 px-2 py-1 text-xs suggested-term me-2 mb-2"
@@ -117,12 +123,17 @@
   </ng-container>
 </div>
 
-<!-- Muestra el conteo de resultados y el indicador de carga -->
+<!-- Conteo de resultados e indicador de carga -->
 <div>
   <div class="form-text text-center text-muted mt-2 mb-3">
     {{ resultCount }}
   </div>
-  <div *ngIf="isLoading" class="text-center my-4" aria-live="polite" aria-busy="true">
+  <div
+    *ngIf="isLoading"
+    class="text-center my-4"
+    aria-live="polite"
+    aria-busy="true"
+  >
     <div class="spinner-border text-primary" role="status">
       <span class="visually-hidden">Cargando...</span>
     </div>
