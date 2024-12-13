@@ -264,15 +264,18 @@ export class GeneralSearchComponent implements OnInit {
       this.resourceType !== ResourceType.COURSE &&
       this.resourceType !== ResourceType.SUPPLIER
     ) {
-      console.warn('no es curso ni proveedor');
+      return;
+    }
+
+    if (!this.modeloCaracter() && !this.modeloMadurez()) {
       return;
     }
 
     let query = this.key[this.resourceType];
-    /*if (this.modeloMadurez() && this.modeloMadurez()?.[0]?.IndustryName) {
+    if (this.modeloMadurez() && this.modeloMadurez()?.[0]?.IndustryName) {
       query =
         this.modeloMadurez()?.[0]?.IndustryName ?? this.key[this.resourceType];
-    }*/
+    }
 
     this.recursosService
       .searchResources(query, this.resourceType, 3)

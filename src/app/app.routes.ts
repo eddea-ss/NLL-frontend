@@ -22,7 +22,7 @@ export const routes: Routes = [
           ),
       },
       {
-        path: 'search',
+        path: 'buscador',
         loadComponent: () =>
           import('@v2/modules/general-search/general-search.component').then(
             (m) => m.GeneralSearchComponent

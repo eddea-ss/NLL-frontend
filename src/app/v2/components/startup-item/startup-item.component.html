@@ -26,7 +26,7 @@
 >
   <a
     style="cursor: pointer"
-    class="uppercase text-xl font-semibold text-blue-600 hover:underline"
+    class="uppercase text-xl font-semibold cards-title-color hover:underline"
   >
     {{ data?.nombreStartup }}
   </a>
@@ -34,6 +34,7 @@
   <p>
     <!-- Descripción del curso -->
     <span
+      class="cards-title-color"
       [innerHTML]="
         resourcesService.sanitizedString(
           data?.descripcionStartup | truncate : 300 : true,
@@ -46,11 +47,11 @@
   <!-- Etiquetas de los articulos -->
   <p class="mb-1 flex flex-wrap gap-1">
     @if (data?.tiempoOperando) {
-    <span class="border border-blue-100 text-blue-600 px-2 py-1 text-xs">
+    <span class="border cards-title-color px-2 py-1 text-xs">
       {{ data?.tiempoOperando }}
     </span>
     } @if (data?.tipo) {
-    <span class="border border-blue-100 text-blue-600 px-2 py-1 text-xs">
+    <span class="border cards-title-color px-2 py-1 text-xs">
       {{ data?.tipo }}
     </span>
     }

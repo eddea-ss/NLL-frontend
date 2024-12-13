@@ -1,12 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { TitleSectionComponent } from '@v2/components';
 
 @Component({
   selector: 'app-landing-page2',
   standalone: true,
-  imports: [CommonModule, FormsModule, TitleSectionComponent],
+  imports: [CommonModule, FormsModule, TitleSectionComponent, RouterLink],
   templateUrl: './landing-page2.component.html',
   styleUrl: './landing-page2.component.scss',
 })
