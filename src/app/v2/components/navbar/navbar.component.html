@@ -38,10 +38,17 @@
         <div class="relative group" *ngIf="menu !== cuentaMenu">
           <button
             class="hover:text-yellow-400 transition-colors duration-300 flex items-center focus:outline-none"
-            (click)="$event.stopPropagation()"
+            (click)="
+              menu.isDropdown ? $event.stopPropagation() : onMenuItemClick(menu)
+            "
           >
             {{ menu.label }}
-            <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
+            <svg
+              *ngIf="menu.isDropdown"
+              class="w-4 h-4 ml-1"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
               <path
                 d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0L5.25 8.27a.75.75 0 01-.02-1.06z"
               ></path>
@@ -126,10 +133,13 @@
           <!-- Botón para desplegar/ocultar submenú en móvil -->
           <button
             class="w-full text-left px-3 py-2 rounded-md text-gray-300 hover:bg-gray-700 hover:text-white transition-colors duration-300 flex items-center justify-between"
-            (click)="toggleSubmenu(menu)"
+            (click)="
+              menu.isDropdown ? $event.stopPropagation() : onMenuItemClick(menu)
+            "
           >
             {{ menu.label }}
             <svg
+              *ngIf="menu.isDropdown"
               class="w-4 h-4 ml-1 transform transition-transform duration-300"
               [ngClass]="{ 'rotate-180': menu.isOpenSignal() }"
               fill="currentColor"

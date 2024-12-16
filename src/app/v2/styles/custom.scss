@@ -109,4 +109,12 @@
   .cards-title-color {
     @apply text-[#374f71] border-gray-200;
   }
+
+  .btn-primary-yellow {
+    @apply inline-block bg-[#EAB308] text-white font-semibold py-3 px-6 rounded-md hover:bg-yellow-600 transition-colors;
+  }
+
+  .btn-primary-white {
+    @apply inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center rounded-lg   focus:ring-4  border border-yellow-500  hover:border-yellow-600 hover:bg-yellow-500;
+  }
 }

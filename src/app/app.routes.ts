@@ -10,15 +10,15 @@ export const routes: Routes = [
       {
         path: '',
         loadComponent: () =>
-          import('@v2/modules/landing-page/landing-page.component').then(
-            (m) => m.LandingPageComponent
+          import('@v2/modules/landing-page2/landing-page2.component').then(
+            (m) => m.LandingPage2Component
           ),
       },
       {
         path: 'landing',
         loadComponent: () =>
-          import('@v2/modules/landing-page2/landing-page2.component').then(
-            (m) => m.LandingPage2Component
+          import('@v2/modules/landing-page/landing-page.component').then(
+            (m) => m.LandingPageComponent
           ),
       },
       {

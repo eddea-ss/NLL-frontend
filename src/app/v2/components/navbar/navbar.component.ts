@@ -15,7 +15,9 @@ interface MenuItem {
 interface DropdownMenu {
   label: string;
   items: MenuItem[];
+  route?: string;
   isOpenSignal: ReturnType<typeof signal>;
+  isDropdown?: boolean;
 }
 
 @Component({
@@ -44,6 +46,7 @@ export class NavbarComponent {
   // Menús principales
   projectMenu: DropdownMenu = {
     label: 'Proyecto',
+    isDropdown: true,
     items: [
       { label: 'Equipo', route: '/proyecto-equipo', alwaysVisible: true },
       {
@@ -57,6 +60,7 @@ export class NavbarComponent {
 
   evaluacionesMenu: DropdownMenu = {
     label: 'Evaluaciones',
+    isDropdown: true,
     items: [
       {
         label: 'Madurez Tecnológica',
@@ -82,6 +86,7 @@ export class NavbarComponent {
 
   investigacionMenu: DropdownMenu = {
     label: 'Investigación',
+    isDropdown: true,
     items: [
       {
         label: 'Podcast i4.0',
@@ -98,40 +103,16 @@ export class NavbarComponent {
   };
 
   buscadoresMenu: DropdownMenu = {
-    label: 'Buscadores',
-    items: [
-      {
-        label: 'Proveedores',
-        route: '/buscador-proveedores',
-        alwaysVisible: true,
-      },
-      { label: 'Cursos', route: '/buscador-cursos', alwaysVisible: true },
-      {
-        label: 'Financiamiento',
-        route: '/buscador-financiamiento',
-        alwaysVisible: true,
-      },
-      {
-        label: 'Artículos de Interés',
-        route: '/buscador-articulos',
-        alwaysVisible: true,
-      },
-      {
-        label: 'Proyectos Destacados',
-        route: '/buscador-proyectos',
-        alwaysVisible: true,
-      },
-      {
-        label: 'Startup y Emprendedores',
-        route: '/buscador-startup',
-        alwaysVisible: true,
-      },
-    ],
+    isDropdown: false,
+    label: 'Buscador',
+    route: '/buscador',
+    items: [],
     isOpenSignal: signal(false),
   };
 
   cuentaMenu: DropdownMenu = {
     label: 'Cuenta',
+    isDropdown: true,
     items: [
       { label: 'Ingresa a tu cuenta', route: '/login', alwaysVisible: false },
       { label: 'Cerrar sesión', route: '', alwaysVisible: false },
@@ -229,7 +210,7 @@ export class NavbarComponent {
 
   // Navega hacia la ruta del ítem o realiza la acción correspondiente (ej: logout)
   onMenuItemClick(item: MenuItem) {
-    if (item.route) {
+    if (item?.route) {
       this.router.navigate([item.route]);
     } else if (item.label === 'Cerrar sesión') {
       this.logout();
