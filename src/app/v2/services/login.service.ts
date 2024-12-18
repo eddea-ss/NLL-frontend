@@ -150,14 +150,9 @@ export class LoginService {
    * @param error - Error ocurrido durante el login.
    */
   private handleError(error: HttpErrorResponse | Error): void {
-    this._authState.set(AuthState.Error);
-    if (error instanceof HttpErrorResponse) {
-      this._authError.set(error.error?.message || 'Error de servidor.');
-    } else if (error instanceof Error) {
-      this._authError.set(error.message);
-    } else {
-      this._authError.set('Ocurrió un error inesperado.');
-    }
+    // Ante cualquier error, simplemente cambiamos el estado a LoggedOut
+    this._authState.set(AuthState.LoggedOut);
+    this._authError.set(null); // Sin mensaje de error
   }
 
   /**

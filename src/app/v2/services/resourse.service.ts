@@ -117,14 +117,18 @@ export class ResourceService {
   }
 
   getPublicationYear(fecha_publicacion: string): number {
-    return this.convertToDate(fecha_publicacion).getFullYear();
+    try {
+      return this.convertToDate(fecha_publicacion).getFullYear();
+    } catch (error) {
+      return new Date().getFullYear();
+    }
   }
 
   // Convert date string to Date object
   convertToDate(dateString: string): Date {
     if (dateString.length !== 8) {
       console.warn(`Formato de fecha inesperado: ${dateString}`);
-      return new Date(0); // Fecha por defecto
+      return new Date(); // Fecha por defecto
     }
     const year = dateString.substring(0, 4);
     const month = dateString.substring(4, 6);
