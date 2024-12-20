@@ -1,0 +1,102 @@
+import { Component, inject, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Model, StylesManager } from 'survey-core';
+import { SurveyModule } from 'survey-angular-ui';
+import {
+  surveyJsonA,
+  surveyJsonB,
+  surveyJsonC,
+  surveyJsonD,
+  surveyJsonE,
+} from '@v2/constants';
+import { LoginService, RecordsService, SnackbarService } from '@v2/services';
+
+import 'survey-core/modern.min.css';
+import { ActivatedRoute, Router } from '@angular/router';
+
+StylesManager.applyTheme('stone');
+
+@Component({
+  selector: 'app-survey-form',
+  standalone: true,
+  imports: [CommonModule, SurveyModule],
+  templateUrl: './survey-form.component.html',
+  styleUrls: ['./survey-form.component.scss'],
+})
+export class SurveyFormComponent implements OnInit {
+  survey!: Model;
+  part!: number;
+  rutMd5!: string;
+
+  private recordsService = inject(RecordsService);
+  private loginService = inject(LoginService);
+  private routeActivate = inject(ActivatedRoute);
+  private router = inject(Router);
+  private snackbar = inject(SnackbarService);
+
+  currentUser = this.loginService.currentUser;
+
+  ngOnInit(): void {
+    this.routeActivate.paramMap.subscribe((params) => {
+      const partParam = params.get('part');
+      this.part = partParam ? parseInt(partParam, 10) : 1; // Valor por defecto 1
+      // Seleccionar la encuesta adecuada según 'part'
+      switch (this.part) {
+        case 1:
+          this.survey = new Model(surveyJsonA);
+          break;
+        case 2:
+          this.survey = new Model(surveyJsonB);
+          break;
+        case 3:
+          this.survey = new Model(surveyJsonC);
+          break;
+        case 4:
+          this.survey = new Model(surveyJsonD);
+          break;
+        case 5:
+          this.survey = new Model(surveyJsonE);
+          break;
+        default:
+          this.router.navigate(['/']);
+      }
+    });
+
+    // Obtener el 'rut' del usuario y convertirlo a MD5
+    const currentUser = this.loginService.getCurrentUser();
+    if (currentUser && currentUser.rut) {
+      const rutOriginal = currentUser.rut;
+      this.rutMd5 = this.loginService.stringToHash(rutOriginal);
+    } else {
+      this.snackbar.show('Usuario no autenticado o sin RUT.', 4000);
+      this.router.navigate(['/']);
+    }
+  }
+
+  onSubmit() {
+    if (this.survey.state === 'completed') {
+      const data = this.survey.data;
+      const part = this.part;
+      const rut = this.rutMd5;
+
+      this.recordsService.createRecord(rut, part, data).subscribe({
+        next: (response) => {
+          this.snackbar.show('Datos enviados correctamente', 4000);
+          this.router.navigate(['/evaluaciones-proveedor']);
+        },
+        error: (err) => {
+          console.error('Error al enviar datos:', err);
+          this.snackbar.show('Error al enviar datos: ' + err.message, 4000);
+        },
+      });
+    } else {
+      this.survey.completeLastPage();
+      if (this.survey.state !== 'completed') {
+        this.snackbar.show(
+          'Por favor, complete todas las preguntas requeridas antes de enviar.',
+          4000
+        );
+      }
+    }
+  }
+}

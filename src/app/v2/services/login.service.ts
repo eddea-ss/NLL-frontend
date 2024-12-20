@@ -1,5 +1,3 @@
-// src/app/services/login.service.ts
-
 import { Injectable, WritableSignal, inject, signal } from '@angular/core';
 import {
   HttpClient,
@@ -12,6 +10,7 @@ import { Router } from '@angular/router';
 import { LoginCredentials, LoginResponse, Usuario } from '@v2/models';
 import { AuthState, Role } from '@v2/enums';
 import { GoogleAnalyticsService, SnackbarService } from '@v2/services';
+import * as CryptoJS from 'crypto-js';
 
 @Injectable({
   providedIn: 'root',
@@ -22,6 +21,7 @@ export class LoginService {
   private google = inject(GoogleAnalyticsService);
   private snackbar = inject(SnackbarService);
 
+  private saltHash = 'xdxd';
   private apiUrlUsers = 'https://accesos.nuevoloslagos.org/api/usuarios';
 
   private httpOptions = {
@@ -201,5 +201,10 @@ export class LoginService {
    */
   getAuthToken(): string | null {
     return this.authToken();
+  }
+
+  stringToHash(string: string): string {
+    const rutConSalt = `${string}-${this.saltHash}`;
+    return CryptoJS.SHA256(rutConSalt).toString();
   }
 }

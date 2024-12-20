@@ -160,6 +160,13 @@ export const routes: Routes = [
             (m) => m.FormRegisterComponent
           ),
       },
+      {
+        path: 'modelo-caracterizacion/:part',
+        loadComponent: () =>
+          import('@v2/modules/survey-form/survey-form.component').then(
+            (m) => m.SurveyFormComponent
+          ),
+      },
       { path: '**', redirectTo: '', pathMatch: 'full' },
     ],
   },

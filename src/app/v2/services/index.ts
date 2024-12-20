@@ -8,4 +8,5 @@ export { StartupEntrepreneurshipService } from './startup-entrepreneurship.servi
 export { CharacterizationModelService } from './characterization-model.service';
 export { MaturityModelService } from './maturity-model.service';
 export { EntrepreneurshipTrainingService } from './entrepreneurship-training.service';
+export { RecordsService } from './records.service';
 export * from './snackbar.service';

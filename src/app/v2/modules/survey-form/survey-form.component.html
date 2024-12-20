@@ -1,0 +1,14 @@
+<div class="bg-white min-h-screen p-4 md:p-8 text-gray-800">
+  <div class="survey-container">
+    <survey [model]="survey"></survey>
+  </div>
+  <div class="mt-4" style="text-align: right">
+    <button
+      *ngIf="this.survey.state === 'completed'"
+      (click)="onSubmit()"
+      class="px-4 py-2 bg-[#EAB308] text-gray-800 font-semibold rounded hover:bg-yellow-500 transition-colors"
+    >
+      Enviar
+    </button>
+  </div>
+</div>
