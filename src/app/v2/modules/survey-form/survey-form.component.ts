@@ -36,12 +36,13 @@ export class SurveyFormComponent implements OnInit {
   currentUser = this.loginService.currentUser;
 
   ngOnInit(): void {
-    surveyStrings.pageNextText = 'Ir al Siguiente'; // Cambia "Next" a "Ir al Siguiente"
-    surveyStrings.pagePrevText = 'Volver Atrás'; // Cambia "Previous" a "Volver Atrás"
-    surveyStrings.completeText = 'Enviar Encuesta'; // Cambia "Complete" a "Enviar Encuesta" (opcional)
+    surveyStrings.pageNextText = 'Ir al Siguiente';
+    surveyStrings.pagePrevText = 'Volver Atrás';
+    surveyStrings.completeText = 'Enviar Encuesta';
+
     this.routeActivate.paramMap.subscribe((params) => {
       const partParam = params.get('part');
-      this.part = partParam ? parseInt(partParam, 10) : 1; // Valor por defecto 1
+      this.part = partParam ? parseInt(partParam, 10) : 1;
 
       switch (this.part) {
         case 1:
@@ -62,9 +63,11 @@ export class SurveyFormComponent implements OnInit {
         default:
           this.router.navigate(['/']);
       }
+
+      // Configuración de la barra de progreso
+      this.survey.progressBarType = 'pages'; // También puedes usar 'questions' o 'requiredQuestions'.
     });
 
-    // Obtener el 'rut' del usuario y convertirlo a MD5
     const currentUser = this.loginService.getCurrentUser();
     if (currentUser && currentUser.rut) {
       const rutOriginal = currentUser.rut;

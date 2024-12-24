@@ -1,5 +1,16 @@
 <div class="bg-white min-h-screen p-4 md:p-8 text-gray-800">
   <div class="survey-container">
+    <div class="progress-bar-container mb-4">
+      <div class="progress-bar bg-gray-200 rounded-full">
+        <div
+          class="progress-bar-fill bg-[#EAB308] rounded-full"
+          [style.width]="survey.getProgress() + '%'"
+        ></div>
+      </div>
+      <p class="text-right text-sm">
+        {{ survey.getProgress().toFixed(0) }}% completado
+      </p>
+    </div>
     <survey [model]="survey"></survey>
   </div>
   <div class="mt-4" style="text-align: right">
