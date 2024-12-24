@@ -1,6 +1,6 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Model, StylesManager } from 'survey-core';
+import { Model, StylesManager, settings, surveyStrings } from 'survey-core';
 import { SurveyModule } from 'survey-angular-ui';
 import {
   surveyJsonA,
@@ -14,14 +14,13 @@ import { LoginService, RecordsService, SnackbarService } from '@v2/services';
 import 'survey-core/modern.min.css';
 import { ActivatedRoute, Router } from '@angular/router';
 
-StylesManager.applyTheme('stone');
-
 @Component({
   selector: 'app-survey-form',
   standalone: true,
   imports: [CommonModule, SurveyModule],
   templateUrl: './survey-form.component.html',
   styleUrls: ['./survey-form.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class SurveyFormComponent implements OnInit {
   survey!: Model;
@@ -37,10 +36,13 @@ export class SurveyFormComponent implements OnInit {
   currentUser = this.loginService.currentUser;
 
   ngOnInit(): void {
+    surveyStrings.pageNextText = 'Ir al Siguiente'; // Cambia "Next" a "Ir al Siguiente"
+    surveyStrings.pagePrevText = 'Volver Atrás'; // Cambia "Previous" a "Volver Atrás"
+    surveyStrings.completeText = 'Enviar Encuesta'; // Cambia "Complete" a "Enviar Encuesta" (opcional)
     this.routeActivate.paramMap.subscribe((params) => {
       const partParam = params.get('part');
       this.part = partParam ? parseInt(partParam, 10) : 1; // Valor por defecto 1
-      // Seleccionar la encuesta adecuada según 'part'
+
       switch (this.part) {
         case 1:
           this.survey = new Model(surveyJsonA);
