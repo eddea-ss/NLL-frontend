@@ -22,8 +22,8 @@ interface SupplierSurvey {
 })
 export class RecordsService {
   private http = inject(HttpClient);
-  private baseUrl = 'http://localhost:3000';
-  private passKey = 'secret_pass';
+  private baseUrl = 'http://64.176.10.243:3804';
+  private passKey = '@hwUaKlqqja65K5i';
 
   private loginService = inject(LoginService);
   currentUser = this.loginService.currentUser;
