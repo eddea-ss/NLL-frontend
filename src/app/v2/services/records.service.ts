@@ -132,11 +132,11 @@ export class RecordsService {
         .pipe(catchError(this.handleError))
         .subscribe((response) => {
           const existingSurvey: SupplierSurvey = {
-            part1: response.hasOwnProperty('part1'),
-            part2: response.hasOwnProperty('part2'),
-            part3: response.hasOwnProperty('part3'),
-            part4: response.hasOwnProperty('part4'),
-            part5: response.hasOwnProperty('part5'),
+            part1: !!response?.part1,
+            part2: !!response?.part2,
+            part3: !!response?.part3,
+            part4: !!response?.part4,
+            part5: !!response?.part5,
           };
           this._supplierSurvey.set(existingSurvey);
           localStorage.setItem(
