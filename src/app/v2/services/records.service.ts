@@ -22,7 +22,7 @@ interface SupplierSurvey {
 })
 export class RecordsService {
   private http = inject(HttpClient);
-  private baseUrl = 'http://64.176.10.243:3804';
+  private baseUrl = 'https://proveedores.nuevoloslagos.org';
   private passKey = '@hwUaKlqqja65K5i';
 
   private loginService = inject(LoginService);
