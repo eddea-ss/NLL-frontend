@@ -37,7 +37,7 @@ import { RouterLink } from '@angular/router';
 })
 export class EvaluacionesProveedorComponent implements OnInit {
   private loginService = inject(LoginService);
-  private modeloCaracterService = inject(CharacterizationModelService);
+  //private modeloCaracterService = inject(CharacterizationModelService);
   private recordsService = inject(RecordsService);
 
   private title = inject(Title);
@@ -79,18 +79,12 @@ export class EvaluacionesProveedorComponent implements OnInit {
   ];
 
   // Signal del ModeloMadurezService
-  modeloCaracter = this.modeloCaracterService.modeloCaracter;
+  //modeloCaracter = this.modeloCaracterService.modeloCaracter;
 
   constructor() {
     effect(() => {
       const authState = this.authState();
       const user = this.currentUser();
-      if (
-        authState === AuthState.LoggedIn &&
-        user?.rol.nombreRol.toLocaleLowerCase() === Role.Proveedor.toLowerCase()
-      ) {
-        this.modeloCaracterService.recheckData();
-      }
       this.recordsService.recheckData();
     });
   }
@@ -107,9 +101,7 @@ export class EvaluacionesProveedorComponent implements OnInit {
     });
   }
 
-  openLink(): void {
-    this.modeloCaracterService.openLink();
-  }
+  openLink(): void {}
 
   getSurveyData(index: number): boolean {
     const key: string = 'part' + index;
