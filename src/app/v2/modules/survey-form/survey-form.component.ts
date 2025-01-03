@@ -20,7 +20,6 @@ import { ActivatedRoute, Router } from '@angular/router';
   imports: [CommonModule, SurveyModule],
   templateUrl: './survey-form.component.html',
   styleUrls: ['./survey-form.component.scss'],
-  encapsulation: ViewEncapsulation.None,
 })
 export class SurveyFormComponent implements OnInit {
   survey!: Model;
