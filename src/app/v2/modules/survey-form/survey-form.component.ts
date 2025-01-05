@@ -66,6 +66,19 @@ export class SurveyFormComponent implements OnInit {
 
       // Configuración de la barra de progreso
       this.survey.progressBarType = 'pages'; // También puedes usar 'questions' o 'requiredQuestions'.
+      this.survey.completedHtml =
+        "Gracias por completar la encuesta, haz click en el botón 'Enviar' para terminar.";
+
+      this.survey.showCompletedPage = false; // Evita mostrar la pantalla final
+
+      // Dispara automáticamente tu método onSubmit() al completar:
+      this.survey.onComplete.add(() => {
+        this.onSubmit();
+      });
+      this.survey.onCurrentPageChanged.add((sender) => {
+        // Mueve el scroll al inicio de la página
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
     });
 
     const currentUser = this.loginService.getCurrentUser();
@@ -86,7 +99,7 @@ export class SurveyFormComponent implements OnInit {
 
       this.recordsService.createRecord(rut, part, data).subscribe({
         next: (response) => {
-          this.snackbar.show('Datos enviados correctamente', 4000);
+          this.snackbar.show('Respuestas contestadas correctamente', 6000);
           this.router.navigate(['/evaluaciones-proveedor']);
         },
         error: (err) => {

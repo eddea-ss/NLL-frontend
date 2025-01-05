@@ -29,3 +29,10 @@
   height: 100%;
   transition: width 0.3s ease-in-out;
 }
+
+/* Ajusta la clase de la página completada */
+.sv-completedpage {
+  margin: 0 auto !important; /* Centra horizontalmente */
+  width: 90% !important; /* Ajusta el ancho a tu gusto */
+  max-width: 1200px; /* Y/o un valor máximo si quieres */
+}
