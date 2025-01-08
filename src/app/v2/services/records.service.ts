@@ -7,7 +7,7 @@ import {
 import { LoginService } from '@v2/services';
 import { catchError, tap } from 'rxjs/operators';
 import { of, throwError } from 'rxjs';
-import { Role } from '@v2/enums';
+import { Role, UserType } from '@v2/enums';
 
 interface SupplierSurvey {
   part1: boolean | null;
@@ -96,7 +96,7 @@ export class RecordsService {
   private initializeModeloCaracter(): void {
     if (this.loginService.isAuthenticated()) {
       const currentUser = this.loginService.getCurrentUser();
-      if (currentUser && currentUser.rol.nombreRol === Role.Proveedor) {
+      if (currentUser && currentUser.type === UserType.SUPPLIER) {
         // Intentar obtener los datos del localStorage
         const storedData = localStorage.getItem('modelo-caracter');
         if (storedData) {

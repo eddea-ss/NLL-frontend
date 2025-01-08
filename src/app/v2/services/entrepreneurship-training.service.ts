@@ -4,7 +4,7 @@ import * as CryptoJS from 'crypto-js';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { LoginService } from '@v2/services';
-import { Role } from '@v2/enums';
+import { Role, UserType } from '@v2/enums';
 
 interface SuccessResponse {
   success: true;
@@ -48,7 +48,7 @@ export class EntrepreneurshipTrainingService {
     // Verificar si el usuario está autenticado y es de rol "usuario"
     if (this.loginService.isAuthenticated()) {
       const currentUser = this.loginService.getCurrentUser();
-      if (currentUser && currentUser.rol.nombreRol === Role.Usuario) {
+      if (currentUser && currentUser.type === UserType.STARTUP) {
         // Intentar obtener los datos del localStorage
         const storedData = localStorage.getItem(this.nameKeyStorage);
         if (storedData) {
@@ -73,8 +73,8 @@ export class EntrepreneurshipTrainingService {
 
   private fetchSurveyData(): void {
     const currentUser = this.loginService.getCurrentUser();
-    if (currentUser && currentUser.rutRepresentante) {
-      const rutOriginal = currentUser.rutRepresentante;
+    if (currentUser && currentUser.rut) {
+      const rutOriginal = currentUser.rut;
       const rutMd5 = this.stringToHash(rutOriginal);
       const url = `${this.apiUrl}${rutMd5}`;
 
@@ -113,11 +113,11 @@ export class EntrepreneurshipTrainingService {
   public openLink(): void {
     try {
       const currentUser = this.currentUser();
-      if (!currentUser || !currentUser.rutRepresentante) {
+      if (!currentUser || !currentUser.rut) {
         throw new Error('RUT no disponible');
       }
 
-      const rutMd5 = this.stringToHash(currentUser.rutRepresentante);
+      const rutMd5 = this.stringToHash(currentUser.rut);
 
       const url = `https://emprendedores.nuevoloslagos.org/formacion-emprendedor.html?rut=${rutMd5}`;
       window.open(url, '_self');

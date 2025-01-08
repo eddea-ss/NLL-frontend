@@ -6,7 +6,7 @@ import {
   CharacterizationModelService,
   RecordsService,
 } from '@v2/services';
-import { AuthState, Role } from '@v2/enums';
+import { AuthState, Role, UserType } from '@v2/enums';
 import { EVALUACION_PROVEEDORES } from '@v2/constants';
 import {
   BreadcrumbsComponent,
@@ -48,6 +48,7 @@ export class EvaluacionesProveedorComponent implements OnInit {
   supplierSurvey = this.recordsService.supplierSurvey;
 
   public AuthState = AuthState;
+  public UserType = UserType;
   public Role = Role;
 
   breadcrumbs: any[] = EVALUACION_PROVEEDORES;

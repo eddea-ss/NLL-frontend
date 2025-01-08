@@ -2,12 +2,12 @@ import { Component, effect, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink, RouterModule } from '@angular/router';
 import { LoginService } from '@v2/services';
-import { AuthState, Role } from '@v2/enums';
+import { AuthState, Role, UserType } from '@v2/enums';
 
 interface MenuItem {
   label: string;
   route?: string;
-  roleCondition?: Role[];
+  roleCondition?: UserType[];
   showIfLoggedOut?: boolean;
   alwaysVisible?: boolean;
 }
@@ -65,19 +65,19 @@ export class NavbarComponent {
       {
         label: 'Madurez Tecnológica',
         route: '/evaluaciones-madurez',
-        roleCondition: [Role.Empresa],
+        roleCondition: [UserType.COMPANY],
         showIfLoggedOut: true,
       },
       {
         label: 'Proveedores',
         route: '/evaluaciones-proveedor',
-        roleCondition: [Role.Proveedor],
+        roleCondition: [UserType.SUPPLIER],
         showIfLoggedOut: true,
       },
       {
         label: 'Startup y Emprendimiento',
         route: '/evaluaciones-startup',
-        roleCondition: [Role.Usuario],
+        roleCondition: [UserType.STARTUP],
         showIfLoggedOut: true,
       },
     ],
@@ -148,8 +148,8 @@ export class NavbarComponent {
   }
 
   // Devuelve el rol actual del usuario o null si no lo hay
-  get currentRole(): Role | null {
-    return this.currentUser()?.rol?.nombreRol || null;
+  get currentRole(): UserType | null {
+    return this.currentUser()?.type || null;
   }
 
   // Abre o cierra el menú móvil

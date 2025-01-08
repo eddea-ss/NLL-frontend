@@ -7,8 +7,8 @@ import {
 import { catchError, tap } from 'rxjs/operators';
 import { throwError, Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import { LoginCredentials, LoginResponse, Usuario } from '@v2/models';
-import { AuthState, Role } from '@v2/enums';
+import { LoginCredentials, LoginResponse, User } from '@v2/models';
+import { AuthState, Role, UserType } from '@v2/enums';
 import { GoogleAnalyticsService, SnackbarService } from '@v2/services';
 import * as CryptoJS from 'crypto-js';
 
@@ -22,27 +22,26 @@ export class LoginService {
   private snackbar = inject(SnackbarService);
 
   private saltHash = 'xdxd';
-  private apiUrlUsers = 'https://accesos.nuevoloslagos.org/api/usuarios';
+  //private apiUrlUsers = 'https://accesos.nuevoloslagos.org/api/usuarios';
+  private apiUrlUsers = 'http://64.176.10.243:3020/auth';
+  private pass = 'sdaa@@gd@S221W';
 
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
+      pass: this.pass,
     }),
   };
 
   // Definición de Signals para manejar el estado de autenticación y el usuario
   private _authState: WritableSignal<AuthState> = signal(AuthState.LoggedOut);
-  private _authError: WritableSignal<string | null> = signal(null);
-  private _currentUser: WritableSignal<Usuario | null> = signal(null);
+  private _currentUser: WritableSignal<User | null> = signal(null);
   private _authToken: WritableSignal<string | null> = signal(null);
 
   // Señales públicas de solo lectura
   public authState = this._authState.asReadonly() as WritableSignal<AuthState>;
-  public authError = this._authError.asReadonly() as WritableSignal<
-    string | null
-  >;
   public currentUser =
-    this._currentUser.asReadonly() as WritableSignal<Usuario | null>;
+    this._currentUser.asReadonly() as WritableSignal<User | null>;
   public authToken = this._authToken.asReadonly() as WritableSignal<
     string | null
   >;
@@ -63,9 +62,9 @@ export class LoginService {
 
     if (token && user) {
       try {
-        const parsedUser: Usuario = JSON.parse(user);
+        const parsedUser: User = JSON.parse(user);
         // Verificar si el rol es válido
-        if (Object.values(Role).includes(parsedUser.rol.nombreRol)) {
+        if (Object.values(UserType).includes(parsedUser.type)) {
           this._authState.set(AuthState.LoggedIn);
           this._currentUser.set(parsedUser);
           this._authToken.set(token);
@@ -88,7 +87,6 @@ export class LoginService {
    */
   login(credentials: LoginCredentials): Observable<LoginResponse> {
     this._authState.set(AuthState.Loading);
-    this._authError.set(null);
 
     return this.http
       .post<LoginResponse>(
@@ -98,8 +96,8 @@ export class LoginService {
       )
       .pipe(
         tap((response: LoginResponse) => {
-          if (response.token && response.usuario) {
-            this.handleAuthentication(response.token, response.usuario);
+          if (response.token && response.user) {
+            this.handleAuthentication(response.token, response.user);
             this.google.eventEmitter('click-login-correcto', {
               label: 'Click Login Success',
             });
@@ -109,11 +107,13 @@ export class LoginService {
             this.google.eventEmitter('click-login-fallido', {
               label: 'Click Login failed',
             });
-            this.snackbar.show('Error al iniciar de sesión', 4000);
+            const message = response?.message ?? 'Error al iniciar de sesión';
+            this.snackbar.show(message, 4000);
           }
         }),
         catchError((error: HttpErrorResponse) => {
-          this.snackbar.show('Error al iniciar de sesión', 4000);
+          const message = error?.error?.message ?? 'Error al iniciar de sesión';
+          this.snackbar.show(message, 4000);
           this.handleError(error);
           return throwError(() => error);
         })
@@ -125,9 +125,9 @@ export class LoginService {
    * @param token - Token de autenticación.
    * @param usuario - Información del usuario.
    */
-  private handleAuthentication(token: string, usuario: Usuario): void {
+  private handleAuthentication(token: string, usuario: User): void {
     // Verificar si el rol es válido
-    if (!Object.values(Role).includes(usuario.rol.nombreRol)) {
+    if (!Object.values(UserType).includes(usuario.type)) {
       this.handleError(new Error('Rol de usuario inválido.'));
       return;
     }
@@ -152,7 +152,6 @@ export class LoginService {
   private handleError(error: HttpErrorResponse | Error): void {
     // Ante cualquier error, simplemente cambiamos el estado a LoggedOut
     this._authState.set(AuthState.LoggedOut);
-    this._authError.set(null); // Sin mensaje de error
   }
 
   /**
@@ -170,7 +169,6 @@ export class LoginService {
 
     // Actualizar los Signals
     this._authState.set(AuthState.LoggedOut);
-    this._authError.set(null);
     this._currentUser.set(null);
     this._authToken.set(null);
     this.snackbar.show('Sesión cerrada', 4000);
@@ -191,7 +189,7 @@ export class LoginService {
    * Método para obtener el usuario actual.
    * @returns Usuario o null si no está autenticado.
    */
-  getCurrentUser(): Usuario | null {
+  getCurrentUser(): User | null {
     return this.currentUser();
   }
 

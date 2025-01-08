@@ -5,7 +5,7 @@ import {
   EntrepreneurshipTrainingService,
   StartupEntrepreneurshipService,
 } from '@v2/services';
-import { AuthState, Role } from '@v2/enums';
+import { AuthState, Role, UserType } from '@v2/enums';
 import { BreadcrumbsComponent } from '@v2/components';
 import { EVALUACION_STARTUP } from '@v2/constants';
 import { StepRegisterComponent } from '../../components/step-register/step-register.component';
@@ -31,6 +31,7 @@ export class EvaluacionesStartupComponent implements OnInit {
   currentUser = this.loginService.currentUser;
 
   public AuthState = AuthState;
+  public UserType = UserType;
   public Role = Role;
 
   breadcrumbs: any[] = EVALUACION_STARTUP;
@@ -63,10 +64,7 @@ export class EvaluacionesStartupComponent implements OnInit {
     effect(() => {
       const authState = this.authState();
       const user = this.currentUser();
-      if (
-        authState === AuthState.LoggedIn &&
-        user?.rol.nombreRol.toLocaleLowerCase() === Role.Usuario.toLowerCase()
-      ) {
+      if (authState === AuthState.LoggedIn && user?.type === UserType.STARTUP) {
         this.formacionEmprendedoresService.recheckData();
         this.formacionEmprendedoresService.recheckData();
       }

@@ -4,7 +4,7 @@ import * as CryptoJS from 'crypto-js';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { LoginService } from '@v2/services';
-import { Role } from '@v2/enums';
+import { Role, UserType } from '@v2/enums';
 import { GoogleAnalyticsService } from './google-analytics.service';
 
 @Injectable({
@@ -34,7 +34,7 @@ export class CharacterizationModelService {
     // Verificar si el usuario está autenticado y es de rol "proveedor"
     if (this.loginService.isAuthenticated()) {
       const currentUser = this.loginService.getCurrentUser();
-      if (currentUser && currentUser.rol.nombreRol === Role.Proveedor) {
+      if (currentUser && currentUser.type === UserType.SUPPLIER) {
         // Intentar obtener los datos del localStorage
         const storedData = localStorage.getItem('modelo-caracter');
         if (storedData) {

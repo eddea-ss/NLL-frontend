@@ -10,6 +10,7 @@ import {
 } from '@angular/forms';
 import { Meta, Title } from '@angular/platform-browser';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { UserType } from '@v2/enums';
 import { RegisterService } from '@v2/services';
 
 @Component({
@@ -26,16 +27,18 @@ export class FormRegisterComponent implements OnInit {
   private title = inject(Title);
   private meta = inject(Meta);
 
+  selectedFile: File | null = null;
   formGroup!: FormGroup;
   formFields: any[] = [];
   tipoRegistro!: string;
   errorGeneral = '';
+  typeUser: UserType | undefined;
 
   formGeneral = [
     {
       type: 'email',
       label: 'Correo electrónico',
-      name: 'correo',
+      name: 'mail',
       placeholder: '********@*****.**',
       error: 'Este campo es obligatorio.',
       validator: [Validators.required, Validators.email],
@@ -62,7 +65,7 @@ export class FormRegisterComponent implements OnInit {
     {
       type: 'text',
       label: 'Nombre',
-      name: 'nombreRepresentante',
+      name: 'name',
       placeholder: '',
       error: 'Este campo es obligatorio.',
       validator: [Validators.required],
@@ -70,7 +73,7 @@ export class FormRegisterComponent implements OnInit {
     {
       type: 'text',
       label: 'Rut',
-      name: 'rutRepresentante',
+      name: 'rut',
       placeholder: 'example 11111111-1',
       error: null,
       validator: [Validators.required],
@@ -81,7 +84,7 @@ export class FormRegisterComponent implements OnInit {
     {
       type: 'text',
       label: 'Nombre de la Empresa',
-      name: 'nombreEmpresa',
+      name: 'name',
       placeholder: '',
       error: 'Este campo es obligatorio.',
       validator: [Validators.required],
@@ -97,7 +100,7 @@ export class FormRegisterComponent implements OnInit {
     {
       type: 'text',
       label: 'Nombre de Representante',
-      name: 'nombreRepresentante',
+      name: 'nameRepresentative',
       placeholder: '',
       error: null,
       validator: [Validators.required],
@@ -105,7 +108,7 @@ export class FormRegisterComponent implements OnInit {
     {
       type: 'text',
       label: 'RUT del Representante',
-      name: 'rutRepresentante',
+      name: 'rutRepresentative',
       placeholder: 'example 11111111-1',
       error: null,
       validator: [Validators.required],
@@ -114,7 +117,7 @@ export class FormRegisterComponent implements OnInit {
     {
       type: 'rating',
       label: '¿Qué tan clara es la estrategia digital de tu organización?',
-      name: 'estrategiaDigital',
+      name: 'questionStrategy',
       error: 'Este campo es obligatorio.',
       validator: [Validators.required],
     },
@@ -122,7 +125,7 @@ export class FormRegisterComponent implements OnInit {
       type: 'rating',
       label:
         '¿Qué tan complejos son los desafíos para implementar soluciones de la Industria 4.0 en tu organización?',
-      name: 'desafiosIndustria4',
+      name: 'questionSolution',
       error: 'Este campo es obligatorio.',
       validator: [Validators.required],
     },
@@ -130,7 +133,31 @@ export class FormRegisterComponent implements OnInit {
       type: 'rating',
       label:
         '¿Qué tan alta es la prioridad de la adopción de tecnologías digitales y la integración de la Industria 4.0 en tu organización?',
-      name: 'prioridadAdopcion',
+      name: 'questionAdoption',
+      error: 'Este campo es obligatorio.',
+      validator: [Validators.required],
+    },
+  ];
+
+  SECTOR_OPTIONS = [
+    { value: 'ACUICULTURA', label: 'Acuicultura' },
+    { value: 'CONSTRUCCION', label: 'Construcción' },
+    { value: 'ASTILLEROS', label: 'Astilleros' },
+    { value: 'CARNICO', label: 'Cárnico' },
+    { value: 'LACTEO', label: 'Lácteo' },
+    { value: 'MAESTRANZA', label: 'Maestranza' },
+    { value: 'TURISMO', label: 'Turismo' },
+    { value: 'GENERAL', label: 'General' },
+  ];
+
+  formSector = [
+    {
+      type: 'select',
+      label: 'Sector',
+      name: 'sector',
+      // Aqui podemos inyectar nuestras opciones
+      options: this.SECTOR_OPTIONS,
+      placeholder: 'Selecciona un sector',
       error: 'Este campo es obligatorio.',
       validator: [Validators.required],
     },
@@ -167,14 +194,25 @@ export class FormRegisterComponent implements OnInit {
       case 'registro-persona':
         this.formFields = [...this.formPersona, ...this.formGeneral];
         this.tipoRegistro = 'usuario';
+        this.typeUser = UserType.STARTUP;
         break;
       case 'registro-industria':
-        this.formFields = [...this.formIndustria4, ...this.formGeneral];
+        this.formFields = [
+          ...this.formIndustria4,
+          ...this.formSector,
+          ...this.formGeneral,
+        ];
         this.tipoRegistro = 'empresa';
+        this.typeUser = UserType.COMPANY;
         break;
       case 'registro-proveedor':
-        this.formFields = [...this.formIndustria4, ...this.formGeneral];
+        this.formFields = [
+          ...this.formIndustria4,
+          ...this.formSector,
+          ...this.formGeneral,
+        ];
         this.tipoRegistro = 'proveedor';
+        this.typeUser = UserType.SUPPLIER;
         break;
     }
     this.formGroup = this.fb.group(
@@ -208,14 +246,65 @@ export class FormRegisterComponent implements OnInit {
       this.errorGeneral = 'Las contraseñas no coinciden';
       return;
     }
+
     if (this.formGroup.valid) {
       this.errorGeneral = '';
-      this.registroService
-        .register({ ...this.formGroup.value, tipoUsuario: this.tipoRegistro })
-        .subscribe({
-          next: () => console.log('Registro exitoso'),
-          error: (err) => console.error(err),
-        });
+
+      // Asignar sector
+      const sectorValue =
+        this.typeUser === UserType.STARTUP
+          ? 'INDEFINIDO'
+          : this.formGroup.get('sector')?.value;
+
+      let formData = new FormData();
+      formData.append('mail', this.formGroup.value['mail']);
+      formData.append('password', this.formGroup.value['password']);
+      formData.append('rut', this.formGroup.value['rut']);
+      formData.append('name', this.formGroup.value['name']);
+      formData.append('role', this.typeUser || '');
+      formData.append('type', this.typeUser || '');
+      formData.append('sector', sectorValue);
+
+      if (
+        this.typeUser === UserType.COMPANY ||
+        this.typeUser === UserType.SUPPLIER
+      ) {
+        formData.append(
+          'nameRepresentative',
+          this.formGroup.value['nameRepresentative']
+        );
+        formData.append(
+          'rutRepresentative',
+          this.formGroup.value['rutRepresentative']
+        );
+        formData.append(
+          'questionStrategy',
+          this.formGroup.value['questionStrategy']?.toString() || '0'
+        );
+        formData.append(
+          'questionSolution',
+          this.formGroup.value['questionSolution']?.toString() || '0'
+        );
+        formData.append(
+          'questionAdoption',
+          this.formGroup.value['questionAdoption']?.toString() || '0'
+        );
+      }
+
+      if (this.selectedFile) {
+        formData.append('logo', this.selectedFile, this.selectedFile.name);
+      }
+
+      this.registroService.register(formData).subscribe({
+        next: () => {
+          console.log('Registro exitoso');
+          // Redirigir o mostrar mensaje de éxito
+        },
+        error: (err) => {
+          console.error(err);
+          // Manejar errores de registro
+        },
+      });
     }
   }
 
@@ -240,5 +329,12 @@ export class FormRegisterComponent implements OnInit {
 
   toggleConfirmPasswordVisibility(): void {
     this.isConfirmPasswordVisible = !this.isConfirmPasswordVisible;
+  }
+
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.selectedFile = input.files[0];
+    }
   }
 }

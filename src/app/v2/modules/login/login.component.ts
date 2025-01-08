@@ -77,7 +77,7 @@ export class LoginComponent {
 
     const { email, password } = this.loginForm.value;
 
-    this.loginService.login({ correo: email, password }).subscribe({
+    this.loginService.login({ mail: email, password }).subscribe({
       next: () => {
         // Handle successful login
         this.isLoading = false;

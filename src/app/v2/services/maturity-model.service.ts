@@ -4,8 +4,7 @@ import * as CryptoJS from 'crypto-js';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { LoginService } from '@v2/services';
-import { Usuario } from '@v2/models';
-import { Role } from '@v2/enums';
+import { Role, UserType } from '@v2/enums';
 import { GoogleAnalyticsService } from './google-analytics.service';
 
 interface SurveyItem {
@@ -88,7 +87,7 @@ export class MaturityModelService {
     // Verificar si el usuario está autenticado y es de rol "empresa"
     if (this.loginService.isAuthenticated()) {
       const currentUser = this.loginService.getCurrentUser();
-      if (currentUser && currentUser.rol.nombreRol === Role.Empresa) {
+      if (currentUser && currentUser.type === UserType.COMPANY) {
         // Intentar obtener los datos del localStorage
         const storedData = localStorage.getItem('modelo-madurez');
         if (storedData) {
@@ -115,7 +114,7 @@ export class MaturityModelService {
     // Verificar si el usuario está autenticado y es de rol "empresa"
     if (this.loginService.isAuthenticated()) {
       const currentUser = this.loginService.getCurrentUser();
-      if (currentUser && currentUser.rol.nombreRol === Role.Empresa) {
+      if (currentUser && currentUser.type === UserType.COMPANY) {
         // Intentar obtener los datos del localStorage
         const storedData = localStorage.getItem('modelo-formacion');
         if (storedData) {
