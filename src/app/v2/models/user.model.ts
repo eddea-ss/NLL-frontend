@@ -5,4 +5,5 @@ export interface User {
   name: string;
   sector: Sector;
   type: UserType;
+  url: string;
 }

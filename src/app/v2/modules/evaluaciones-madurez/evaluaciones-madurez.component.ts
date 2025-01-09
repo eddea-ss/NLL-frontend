@@ -87,6 +87,7 @@ export class EvaluacionesMadurezComponent implements AfterViewInit, OnInit {
         'Descubre qué acciones debes realizar para alcanzar la madurez tecnológica. Encuentra cursos, artículos, financiamiento, entre otros.',
     },
   ];
+  profileImageUrl: string = 'http://64.176.10.243:3020/logos/default.png';
 
   constructor() {
     effect(() => {
@@ -94,6 +95,8 @@ export class EvaluacionesMadurezComponent implements AfterViewInit, OnInit {
       const user = this.currentUser();
       if (authState === AuthState.LoggedIn && user?.type === UserType.COMPANY) {
         this.modeloMadurezService.recheckData();
+
+        this.setProfileImageUrl(user?.url);
         // Esperar 1 segundo antes de llamar a makeChart()
         setTimeout(() => {
           this.makeChart();
@@ -277,6 +280,13 @@ export class EvaluacionesMadurezComponent implements AfterViewInit, OnInit {
       return 2;
     } else {
       return 1;
+    }
+  }
+  setProfileImageUrl(userImageUrl: string | undefined | null): void {
+    if (userImageUrl) {
+      this.profileImageUrl = `http://64.176.10.243:3020/logos/${userImageUrl}`;
+    } else {
+      this.profileImageUrl = 'http://64.176.10.243:3020/logos/default.png';
     }
   }
 }

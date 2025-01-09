@@ -75,6 +75,14 @@
             class="hover:text-yellow-400 transition-colors duration-300 flex items-center focus:outline-none"
             (click)="$event.stopPropagation()"
           >
+            <img
+              [src]="profileImageUrl"
+              alt="Perfil"
+              class="w-10 h-8 rounded-full mr-1"
+              (error)="
+                profileImageUrl = 'http://64.176.10.243:3020/logos/default.png'
+              "
+            />
             {{ menu.label }}
             <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
               <path

@@ -128,12 +128,14 @@ export class NavbarComponent {
     this.cuentaMenu,
   ];
 
+  profileImageUrl: string = 'http://64.176.10.243:3020/logos/default.png';
   constructor() {
     // Efecto que se activa cuando cambia el estado de autenticación o el usuario actual
     effect(() => {
       const authStateValue = this.authState();
       const user = this.currentUser();
       // Aquí podemos agregar lógica adicional si se requiere.
+      this.setProfileImageUrl(user?.url);
     });
   }
 
@@ -216,5 +218,12 @@ export class NavbarComponent {
       this.logout();
     }
     this.closeMobileMenu();
+  }
+  setProfileImageUrl(userImageUrl: string | undefined | null): void {
+    if (userImageUrl) {
+      this.profileImageUrl = `http://64.176.10.243:3020/logos/${userImageUrl}`;
+    } else {
+      this.profileImageUrl = 'http://64.176.10.243:3020/logos/default.png';
+    }
   }
 }
