@@ -128,7 +128,8 @@ export class NavbarComponent {
     this.cuentaMenu,
   ];
 
-  profileImageUrl: string = 'http://64.176.10.243:3020/logos/default.png';
+  profileImageUrl: string =
+    'https://accesos.nuevoloslagos.org/logos/default.png';
   constructor() {
     // Efecto que se activa cuando cambia el estado de autenticación o el usuario actual
     effect(() => {
@@ -221,9 +222,10 @@ export class NavbarComponent {
   }
   setProfileImageUrl(userImageUrl: string | undefined | null): void {
     if (userImageUrl) {
-      this.profileImageUrl = `http://64.176.10.243:3020/logos/${userImageUrl}`;
+      this.profileImageUrl = `https://accesos.nuevoloslagos.org/logos/${userImageUrl}`;
     } else {
-      this.profileImageUrl = 'http://64.176.10.243:3020/logos/default.png';
+      this.profileImageUrl =
+        'https://accesos.nuevoloslagos.org/logos/default.png';
     }
   }
 }
