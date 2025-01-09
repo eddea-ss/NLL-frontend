@@ -10,19 +10,15 @@
       <strong>Empresa:</strong>
       {{ currentUser()?.name ?? "No disponible" }}
     </h1>
-    @if (modeloMadurez()) {
-    <h2 class="text-xl font-bold text-gray-700 mb-8">
-      <strong>Tipo de industria:</strong>
-      {{
-        modeloMadurez()![0].IndustryName
-          ? modeloMadurez()![0].IndustryName
-          : "No especificado"
-      }}
-    </h2>
-    }
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
       <div class="lg:col-span-2">
+        @if (modeloMadurez()) {
+        <h2 class="text-xl font-bold text-gray-700 mb-8">
+          <strong>Tipo de industria:</strong>
+          {{ currentUser()?.sector }}
+        </h2>
+        }
         <!-- Evaluation Status Section -->
         <div class="mb-8">
           <h2 class="text-2xl text-gray-600 mb-4">Completa tus Modelos</h2>
@@ -41,16 +37,16 @@
 
       <!-- Take Survey Button -->
       <div class="lg:col-span-1">
-        <!--Modelo de madurez-->
-        @if (modeloMadurez()) {
+        <!-- Modelo de madurez generall-->
         <button
-          disabled
-          (click)="openLink()"
-          class="my-1 w-full border border-blue-700 p-8 bg-white-700 flex text-blue-700"
+          [disabled]="modeloMadurez()?.puntaje_general !== null"
+          (click)="modeloMadurezService.openLinkGeneral()"
+          class="my-1 w-full gap-2 border border-blue-700 p-8 bg-white-700 flex text-blue-700"
         >
-          Modelo de Maduración Tecnológica Realizado en
-          {{ modeloMadurez()![0].DateTime }}
+          <strong>Modelo de Madurez General</strong>
+          {{ modeloMadurez()?.puntaje_general !== null ? "" : " pendiente" }}
           <svg
+            *ngIf="modeloMadurez()?.puntaje_general !== null"
             aria-hidden="true"
             class="w-5 h-5 text-blue-700"
             fill="currentColor"
@@ -64,27 +60,20 @@
             ></path>
           </svg>
         </button>
-        }@else {
-        <div class="lg:col-span-1">
-          <button
-            (click)="openLink()"
-            class="my-1 w-full border border-blue-700 p-8 bg-white-700 flex text-blue-700 hover:bg-gray-100 transition"
-          >
-            Realizar Modelo de Maduración Tecnológica
-          </button>
-        </div>
-        }
-
-        <!--Modelo de Formacion-->
-        @if (modeloFormacion() === true) {
+        <!-- Modelo de madurez sectorial-->
         <button
-          disabled
-          style="justify-content: center; gap: 12px"
-          (click)="openLinkFormacion()"
-          class="my-1 w-full border border-blue-700 p-8 bg-white-700 flex text-blue-700"
+          [disabled]="
+            modeloMadurez() && modeloMadurez()?.puntaje_sector !== null
+          "
+          (click)="modeloMadurezService.openLinkSectorial()"
+          class="my-1 w-full gap-2 border border-blue-700 p-8 bg-white-700 flex text-blue-700"
         >
-          Modelo de Formación Realizado
+          <strong
+            >Modelo de Madurez de Sector {{ currentUser()?.sector }}</strong
+          >
+          {{ modeloMadurez()?.puntaje_sector !== null ? " " : " pendiente" }}
           <svg
+            *ngIf="modeloMadurez()?.puntaje_sector !== null"
             aria-hidden="true"
             class="w-5 h-5 text-blue-700"
             fill="currentColor"
@@ -99,17 +88,61 @@
           </svg>
         </button>
 
-        }@else if (modeloFormacion() === false) {
-        <div class="lg:col-span-1">
-          <button
-            style="justify-content: center"
-            (click)="openLinkFormacion()"
-            class="my-1 w-full border border-blue-700 p-8 bg-white-700 flex text-blue-700 hover:bg-gray-100 transition"
+        <!-- Modelo de formacion-->
+        <button
+          [disabled]="
+            modeloMadurez() && modeloMadurez()?.respuestas_formacion !== null
+          "
+          (click)="modeloMadurezService.openLinkFormacion()"
+          class="my-1 w-full gap-2 border border-blue-700 p-8 bg-white-700 flex text-blue-700"
+        >
+          <strong>Encuesta de Formación</strong>
+          {{
+            modeloMadurez()?.respuestas_formacion !== null ? " " : " pendiente"
+          }}
+          <svg
+            *ngIf="modeloMadurez()?.respuestas_formacion !== null"
+            aria-hidden="true"
+            class="w-5 h-5 text-blue-700"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
           >
-            Realizar Modelo de Formación
-          </button>
-        </div>
-        }
+            <path
+              fill-rule="evenodd"
+              d="M16.707 5.293a1 1 0 010 1.414L8.414 15 5 11.586a1 1 0 011.414-1.414L8.414 12.172l7.879-7.879a1 1 0 011.414 0z"
+              clip-rule="evenodd"
+            ></path>
+          </svg>
+        </button>
+
+        <!-- Modelo de formacion-->
+        <button
+          [disabled]="
+            modeloMadurez() && modeloMadurez()?.respuestas_proveedor !== null
+          "
+          (click)="modeloMadurezService.openLinkFormacion()"
+          class="my-1 w-full gap-2 border border-blue-700 p-8 bg-white-700 flex text-blue-700"
+        >
+          <strong>Encuesta de Proveedores</strong>
+          {{
+            modeloMadurez()?.respuestas_proveedor !== null ? " " : " pendiente"
+          }}
+          <svg
+            *ngIf="modeloMadurez()?.respuestas_proveedor !== null"
+            aria-hidden="true"
+            class="w-5 h-5 text-blue-700"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M16.707 5.293a1 1 0 010 1.414L8.414 15 5 11.586a1 1 0 011.414-1.414L8.414 12.172l7.879-7.879a1 1 0 011.414 0z"
+              clip-rule="evenodd"
+            ></path>
+          </svg>
+        </button>
       </div>
     </div>
 
@@ -133,14 +166,18 @@
             <h3 class="text-xl font-bold text-gray-700">
               CAPITAL HUMANO: Grado
               {{
-                letterToNumberDescASCII(modeloMadurez()![0].GradeCapitalHumano)
+                numeroALetra(
+                  this.modeloMadurez()?.puntaje_por_categoria
+                    ?.capital_humano_y_organizacion_digital
+                )
               }}
             </h3>
             <p class="text-gray-600">
               {{
                 capitalHumanoSections[
-                  letterToNumberDescASCII(
-                    modeloMadurez()![0].GradeCapitalHumano
+                  numeroANumero(
+                    this.modeloMadurez()?.puntaje_por_categoria
+                      ?.capital_humano_y_organizacion_digital
                   )
                 ].estado
               }}
@@ -149,8 +186,9 @@
               <strong>Sugerencia: </strong>
               {{
                 capitalHumanoSections[
-                  letterToNumberDescASCII(
-                    modeloMadurez()![0].GradeCapitalHumano
+                  numeroANumero(
+                    this.modeloMadurez()?.puntaje_por_categoria
+                      ?.capital_humano_y_organizacion_digital
                   )
                 ].sugerencia
               }}
@@ -162,16 +200,18 @@
             <h3 class="text-xl font-bold text-gray-700">
               ESTRATEGIA: Grado
               {{
-                letterToNumberDescASCII(
-                  modeloMadurez()![0].GradeEstrategiaLiderazgo
+                numeroALetra(
+                  this.modeloMadurez()?.puntaje_por_categoria
+                    ?.estrategia_y_liderazgo
                 )
               }}
             </h3>
             <p class="text-gray-600">
               {{
                 estrategiaSections[
-                  letterToNumberDescASCII(
-                    modeloMadurez()![0].GradeEstrategiaLiderazgo
+                  numeroANumero(
+                    this.modeloMadurez()?.puntaje_por_categoria
+                      ?.estrategia_y_liderazgo
                   )
                 ].estado
               }}
@@ -180,8 +220,9 @@
               <strong>Sugerencia: </strong>
               {{
                 estrategiaSections[
-                  letterToNumberDescASCII(
-                    modeloMadurez()![0].GradeEstrategiaLiderazgo
+                  numeroANumero(
+                    this.modeloMadurez()?.puntaje_por_categoria
+                      ?.estrategia_y_liderazgo
                   )
                 ].sugerencia
               }}
@@ -192,16 +233,18 @@
             <h3 class="text-xl font-bold text-gray-700">
               TECNOLOGIAS: Grado
               {{
-                letterToNumberDescASCII(
-                  modeloMadurez()![0].GradeTecnologiaGestionDatos
+                numeroALetra(
+                  this.modeloMadurez()?.puntaje_por_categoria
+                    ?.tecnologia_y_gestion_de_datos
                 )
               }}
             </h3>
             <p class="text-gray-600">
               {{
                 tecnologiaSections[
-                  letterToNumberDescASCII(
-                    modeloMadurez()![0].GradeTecnologiaGestionDatos
+                  numeroANumero(
+                    this.modeloMadurez()?.puntaje_por_categoria
+                      ?.tecnologia_y_gestion_de_datos
                   )
                 ].estado
               }}
@@ -210,8 +253,9 @@
               <strong>Sugerencia: </strong>
               {{
                 tecnologiaSections[
-                  letterToNumberDescASCII(
-                    modeloMadurez()![0].GradeTecnologiaGestionDatos
+                  numeroANumero(
+                    this.modeloMadurez()?.puntaje_por_categoria
+                      ?.tecnologia_y_gestion_de_datos
                   )
                 ].sugerencia
               }}
@@ -222,16 +266,18 @@
             <h3 class="text-xl font-bold text-gray-700">
               GESTION DE INNOVACION: Grado
               {{
-                letterToNumberDescASCII(
-                  modeloMadurez()![0].GradeGestionInnovacionConocimiento
+                numeroALetra(
+                  this.modeloMadurez()?.puntaje_por_categoria
+                    ?.gestion_de_la_innovacion_y_conocimiento
                 )
               }}
             </h3>
             <p class="text-gray-600">
               {{
                 innovacionSections[
-                  letterToNumberDescASCII(
-                    modeloMadurez()![0].GradeGestionInnovacionConocimiento
+                  numeroANumero(
+                    this.modeloMadurez()?.puntaje_por_categoria
+                      ?.gestion_de_la_innovacion_y_conocimiento
                   )
                 ].estado
               }}
@@ -240,8 +286,9 @@
               <strong>Sugerencia: </strong>
               {{
                 innovacionSections[
-                  letterToNumberDescASCII(
-                    modeloMadurez()![0].GradeGestionInnovacionConocimiento
+                  numeroANumero(
+                    this.modeloMadurez()?.puntaje_por_categoria
+                      ?.gestion_de_la_innovacion_y_conocimiento
                   )
                 ].sugerencia
               }}
@@ -252,16 +299,18 @@
             <h3 class="text-xl font-bold text-gray-700">
               AUTOMATIZACION: Grado
               {{
-                letterToNumberDescASCII(
-                  modeloMadurez()![0].GradeProcesosAutomatizacion
+                numeroALetra(
+                  this.modeloMadurez()?.puntaje_por_categoria
+                    ?.procesos_y_automatizacion
                 )
               }}
             </h3>
             <p class="text-gray-600">
               {{
                 automatizacionSections[
-                  letterToNumberDescASCII(
-                    modeloMadurez()![0].GradeProcesosAutomatizacion
+                  numeroANumero(
+                    this.modeloMadurez()?.puntaje_por_categoria
+                      ?.procesos_y_automatizacion
                   )
                 ].estado
               }}
@@ -270,8 +319,9 @@
               <strong>Sugerencia: </strong>
               {{
                 automatizacionSections[
-                  letterToNumberDescASCII(
-                    modeloMadurez()![0].GradeProcesosAutomatizacion
+                  numeroANumero(
+                    this.modeloMadurez()?.puntaje_por_categoria
+                      ?.procesos_y_automatizacion
                   )
                 ].sugerencia
               }}

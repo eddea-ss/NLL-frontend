@@ -29,8 +29,9 @@ import {
 } from '@v2/constants';
 
 import {
-  CharacterizationModelService,
+  LoginService,
   MaturityModelService,
+  RecordsService,
   ResourceService,
 } from '@v2/services';
 import { ResourceType } from '@v2/enums';
@@ -63,9 +64,11 @@ import { ResourceType } from '@v2/enums';
 export class GeneralSearchComponent implements OnInit {
   private recursosService = inject(ResourceService);
   private modeloMadurezService = inject(MaturityModelService);
-  private modeloCaracterService = inject(CharacterizationModelService);
+  private modeloCaracterService = inject(RecordsService);
+  private loginService = inject(LoginService);
+  currentUser = this.loginService.currentUser;
   modeloMadurez = this.modeloMadurezService.modeloMadurez;
-  modeloCaracter = this.modeloCaracterService.modeloCaracter;
+  modeloCaracter = this.modeloCaracterService.supplierSurvey;
   public ResourceType = ResourceType;
   // Modal variables
   isModalOpen = false;
@@ -272,9 +275,8 @@ export class GeneralSearchComponent implements OnInit {
     }
 
     let query = this.key[this.resourceType];
-    if (this.modeloMadurez() && this.modeloMadurez()?.[0]?.IndustryName) {
-      query =
-        this.modeloMadurez()?.[0]?.IndustryName ?? this.key[this.resourceType];
+    if (this.currentUser() && this.currentUser()?.sector) {
+      query = this.currentUser()?.sector ?? this.key[this.resourceType];
     }
 
     this.recursosService

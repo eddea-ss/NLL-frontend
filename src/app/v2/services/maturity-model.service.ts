@@ -7,44 +7,28 @@ import { LoginService } from '@v2/services';
 import { Role, UserType } from '@v2/enums';
 import { GoogleAnalyticsService } from './google-analytics.service';
 
-interface SurveyItem {
-  SurveyID: number;
-  Rut: string; // Este será el hash MD5
-  DateTime: string;
-  IndustryName: string;
-  GradeCapitalHumano: string;
-  GradeEstrategiaLiderazgo: string;
-  GradeTecnologiaGestionDatos: string;
-  GradeGestionInnovacionConocimiento: string;
-  GradeProcesosAutomatizacion: string;
-  TotalIndustryGrade: string;
-  ResultGrade: string;
+interface MaturityScore {
+  puntaje_sector: null | number;
+  puntaje_general: null | number;
+  puntaje_por_categoria: null | Category;
+  puntaje_total: null | number;
+  respuestas_general: null | number;
+  respuestas_sector: null | number;
+  respuestas_formacion: null | number;
+  respuestas_proveedor: null | number;
 }
 
-interface SuccessResponse {
+interface Category {
+  estrategia_y_liderazgo: null | number;
+  capital_humano_y_organizacion_digital: null | number;
+  procesos_y_automatizacion: null | number;
+  gestion_de_la_innovacion_y_conocimiento: null | number;
+  tecnologia_y_gestion_de_datos: null | number;
+}
+
+interface Response {
   success: true;
-  data: SurveyItem[];
-}
-
-interface FailureResponse {
-  success: false;
-  message: string;
-}
-
-type ApiResponse = SuccessResponse | FailureResponse;
-
-export interface ProcessedSurveyItem {
-  SurveyID: number;
-  Rut: string; // RUT en formato original
-  DateTime: string;
-  IndustryName: string;
-  GradeCapitalHumano: string;
-  GradeEstrategiaLiderazgo: string;
-  GradeTecnologiaGestionDatos: string;
-  GradeGestionInnovacionConocimiento: string;
-  GradeProcesosAutomatizacion: string;
-  TotalIndustryGrade: string;
-  ResultGrade: string;
+  data: MaturityScore;
 }
 
 @Injectable({
@@ -53,9 +37,8 @@ export interface ProcessedSurveyItem {
 export class MaturityModelService {
   private saltHash = 'xdxd';
 
-  private readonly apiUrl = 'https://apimadurez.nuevoloslagos.org/api/results/';
-  private readonly apiUrlFormacion =
-    'https://apiemprendedores.nuevoloslagos.org/madurez/';
+  private readonly apiUrl =
+    'https://apimadurez.nuevoloslagos.org/resultados?rut=';
 
   private http = inject(HttpClient);
   private loginService = inject(LoginService);
@@ -64,19 +47,13 @@ export class MaturityModelService {
   currentUser = this.loginService.currentUser;
 
   // Signal para almacenar los datos del modelo de madurez
-  private _modeloMadurez: WritableSignal<ProcessedSurveyItem[] | null> =
-    signal(null);
+  private _modeloMadurez: WritableSignal<MaturityScore | null> = signal(null);
 
   // Signal de solo lectura para exponer los datos
   public modeloMadurez = this._modeloMadurez.asReadonly();
 
-  //para formacion
-  private _modeloFormacion: WritableSignal<boolean | null> = signal(null);
-  public modeloFormacion = this._modeloFormacion.asReadonly();
-
   constructor() {
     this.initializeModeloMadurez();
-    this.initializeModeloFormacion();
   }
 
   /**
@@ -92,7 +69,7 @@ export class MaturityModelService {
         const storedData = localStorage.getItem('modelo-madurez');
         if (storedData) {
           try {
-            const parsedData: ProcessedSurveyItem[] = JSON.parse(storedData);
+            const parsedData: MaturityScore = JSON.parse(storedData);
             this._modeloMadurez.set(parsedData);
           } catch (e) {
             console.error(
@@ -110,34 +87,6 @@ export class MaturityModelService {
     }
   }
 
-  private initializeModeloFormacion(): void {
-    // Verificar si el usuario está autenticado y es de rol "empresa"
-    if (this.loginService.isAuthenticated()) {
-      const currentUser = this.loginService.getCurrentUser();
-      if (currentUser && currentUser.type === UserType.COMPANY) {
-        // Intentar obtener los datos del localStorage
-        const storedData = localStorage.getItem('modelo-formacion');
-        if (storedData) {
-          try {
-            const parsedData: boolean = JSON.parse(storedData);
-            this._modeloFormacion.set(parsedData);
-          } catch (e) {
-            console.error(
-              'Error al parsear modelo-formacion desde localStorage:',
-              e
-            );
-            // Si hay error al parsear, eliminar del localStorage
-            localStorage.removeItem('modelo-formacion');
-          }
-        }
-
-        // Realizar la petición para obtener los datos actualizados
-        this.fetchSurveyData();
-        this.fetchSurveyDataFormacion();
-      }
-    }
-  }
-
   /**
    * Realiza la petición para obtener los datos del modelo de madurez.
    */
@@ -149,37 +98,16 @@ export class MaturityModelService {
       const url = `${this.apiUrl}${rutMd5}`;
 
       this.http
-        .get<ApiResponse>(url)
+        .get<MaturityScore>(url)
         .pipe(catchError(this.handleError))
         .subscribe((response) => {
-          if (response.success) {
-            const processedData = response.data.map((item) => ({
-              SurveyID: item.SurveyID,
-              Rut: rutOriginal, // Reemplazamos el hash por el RUT original
-              DateTime: item.DateTime,
-              IndustryName: item.IndustryName,
-              GradeCapitalHumano: item.GradeCapitalHumano,
-              GradeEstrategiaLiderazgo: item.GradeEstrategiaLiderazgo,
-              GradeTecnologiaGestionDatos: item.GradeTecnologiaGestionDatos,
-              GradeGestionInnovacionConocimiento:
-                item.GradeGestionInnovacionConocimiento,
-              GradeProcesosAutomatizacion: item.GradeProcesosAutomatizacion,
-              TotalIndustryGrade: item.TotalIndustryGrade,
-              ResultGrade: item.ResultGrade,
-            }));
-
-            // Obtener los datos almacenados en localStorage
-            const storedData = this._modeloMadurez();
-
-            // Comparar los datos
-            if (JSON.stringify(storedData) !== JSON.stringify(processedData)) {
-              // Si son diferentes, actualizar el Signal y el localStorage
-              this._modeloMadurez.set(processedData);
-              localStorage.setItem(
-                'modelo-madurez',
-                JSON.stringify(processedData)
-              );
-            }
+          if (response) {
+            const processedData = response;
+            this._modeloMadurez.set(processedData);
+            localStorage.setItem(
+              'modelo-madurez',
+              JSON.stringify(processedData)
+            );
           } else {
             console.warn(
               'No se encontraron resultados para el RUT especificado.'
@@ -187,39 +115,6 @@ export class MaturityModelService {
             // Opcional: Puedes limpiar el modelo si no hay datos
             this._modeloMadurez.set(null);
             localStorage.removeItem('modelo-madurez');
-          }
-        });
-    }
-  }
-
-  private fetchSurveyDataFormacion(): void {
-    const currentUser = this.loginService.getCurrentUser();
-    if (currentUser && currentUser.rut) {
-      const rutOriginal = currentUser.rut;
-      const rutMd5 = this.stringToHash(rutOriginal);
-      const url = `${this.apiUrlFormacion}${rutMd5}`;
-
-      this.http
-        .get<ApiResponse>(url)
-        .pipe(catchError(this.handleError))
-        .subscribe((response) => {
-          if (response) {
-            const storedData = this._modeloFormacion();
-
-            try {
-              this._modeloFormacion.set(response.success);
-              localStorage.setItem(
-                'modelo-formacion',
-                String(response.success)
-              );
-            } catch (err) {
-              console.warn(
-                'No se encontraron resultados para el RUT especificado.'
-              );
-              // Opcional: Puedes limpiar el modelo si no hay datos
-              this._modeloFormacion.set(null);
-              localStorage.removeItem('modelo-formacion');
-            }
           }
         });
     }
@@ -242,47 +137,64 @@ export class MaturityModelService {
    */
   public recheckData(): void {
     this.fetchSurveyData();
-    this.fetchSurveyDataFormacion();
   }
 
-  public openLink(): void {
+  openLinkProveedores() {
     try {
-      const currentUser = this.currentUser();
-      if (!currentUser || !currentUser.rut) {
-        throw new Error('RUT no disponible');
-      }
-
-      const rutMd5 = this.stringToHash(currentUser.rut);
-
-      const url = `https://modelomadurez.nuevoloslagos.org?rut=${rutMd5}`;
-      //google
-      this.google.eventEmitter('click-modelo-madurez-empresas', {
-        label: 'Click Modelo Madurez para Empresas',
-      });
-      window.open(url, '_self');
+      const rutMd5 = this.stringToHash(this.currentUser()!.rut);
+      const sector = this.currentUser()!.sector;
+      this.openLink(
+        `https://modelomadurez.nuevoloslagos.org/modelos/proveedores/?rut=${rutMd5}&sector=${sector}`
+      );
     } catch (error) {
-      console.error('Error al obtener RUT de localStorage:', error);
+      console.error('Error a redireccionar al modelo:', error);
     }
   }
 
-  openLinkFormacion(): void {
+  openLinkSectorial() {
+    try {
+      const rutMd5 = this.stringToHash(this.currentUser()!.rut);
+      const sector = this.currentUser()!.sector;
+      this.openLink(
+        `https://modelomadurez.nuevoloslagos.org/modelos/sectores/?rut=${rutMd5}&sector=${sector}`
+      );
+    } catch (error) {
+      console.error('Error a redireccionar al modelo:', error);
+    }
+  }
+
+  openLinkFormacion() {
+    try {
+      const rutMd5 = this.stringToHash(this.currentUser()!.rut);
+      const sector = this.currentUser()!.sector;
+      this.openLink(
+        `https://modelomadurez.nuevoloslagos.org/modelos/formacion/?rut=${rutMd5}&sector=${sector}`
+      );
+    } catch (error) {
+      console.error('Error a redireccionar al modelo:', error);
+    }
+  }
+
+  openLinkGeneral() {
+    try {
+      const rutMd5 = this.stringToHash(this.currentUser()!.rut);
+      this.openLink(
+        `https://modelomadurez.nuevoloslagos.org/modelos/general/?rut=${rutMd5}`
+      );
+    } catch (error) {
+      console.error('Error a redireccionar al modelo:', error);
+    }
+  }
+
+  openLink(url: string) {
     try {
       const currentUser = this.currentUser();
-      if (!currentUser || !currentUser.rut) {
-        throw new Error('RUT no disponible');
+      if (!currentUser || !currentUser.rut || !currentUser.sector) {
+        console.warn('RUT no disponible');
       }
-
-      const rutMd5 = this.stringToHash(currentUser.rut);
-
-      const url = `https://modelomadurez.nuevoloslagos.org/formacion.html?rut=${rutMd5}`;
-      //google
-      this.google.eventEmitter('click-modelo-formacion-empresas', {
-        label: 'Click Modelo Formacion para Empresas',
-      });
-
       window.open(url, '_self');
     } catch (error) {
-      console.error('Error al obtener RUT de localStorage:', error);
+      console.error('Error a redireccionar al modelo:', error);
     }
   }
 

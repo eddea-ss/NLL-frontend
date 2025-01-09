@@ -3,8 +3,8 @@ import { Component, effect, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
   LoginService,
-  CharacterizationModelService,
   MaturityModelService,
+  RecordsService,
   ResourceService,
 } from '@v2/services';
 import { AuthState, Role } from '@v2/enums';
@@ -50,7 +50,7 @@ export class SugeridosComponent implements OnInit {
   private recursosService = inject(ResourceService);
   private loginService = inject(LoginService);
   private modeloMadurezService = inject(MaturityModelService);
-  private modeloCaracterService = inject(CharacterizationModelService);
+  private modeloCaracterService = inject(RecordsService);
 
   // Observables y valores
   authState = this.loginService.authState;
@@ -62,7 +62,7 @@ export class SugeridosComponent implements OnInit {
 
   // Datos del modelo (caracterización y madurez)
   modeloMadurez = this.modeloMadurezService.modeloMadurez;
-  modeloCaracter = this.modeloCaracterService.modeloCaracter;
+  modeloCaracter = this.modeloCaracterService.supplierSurvey;
 
   // Resultados sugeridos
   sugeridos: any[] = [];
@@ -137,7 +137,7 @@ export class SugeridosComponent implements OnInit {
       ruta === 'buscador-cursos' || ruta === 'buscador-proveedores';
 
     if (isLoggedIn && isCourseOrSupplier && hasModelData) {
-      const industryName = this.modeloMadurez()?.[0]?.IndustryName;
+      const industryName = this.currentUser()?.sector;
       if (industryName) {
         searchKey = industryName;
       }

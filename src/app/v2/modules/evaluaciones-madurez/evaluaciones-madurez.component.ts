@@ -46,7 +46,7 @@ import {
 })
 export class EvaluacionesMadurezComponent implements AfterViewInit, OnInit {
   private loginService = inject(LoginService);
-  private modeloMadurezService = inject(MaturityModelService);
+  protected modeloMadurezService = inject(MaturityModelService);
   private title = inject(Title);
   private meta = inject(Meta);
 
@@ -61,7 +61,6 @@ export class EvaluacionesMadurezComponent implements AfterViewInit, OnInit {
 
   // Signal del ModeloMadurezService
   modeloMadurez = this.modeloMadurezService.modeloMadurez;
-  modeloFormacion = this.modeloMadurezService.modeloFormacion;
 
   //contenido para las secciones
   public capitalHumanoSections = capitalHumanoSections;
@@ -177,17 +176,29 @@ export class EvaluacionesMadurezComponent implements AfterViewInit, OnInit {
     try {
       const ctx = this.radarChartCanvas.nativeElement.getContext('2d');
       if (!ctx) throw new Error('Contexto de Canvas no disponible');
+      const modelo = this.modeloMadurez()?.puntaje_sector;
 
-      const modelo = this.modeloMadurez()![0];
-
-      // Convertir las letras a números según la lógica definida
-      const dataValues = [
-        this.letterToNumberDescASCII(modelo.GradeCapitalHumano),
-        this.letterToNumberDescASCII(modelo.GradeEstrategiaLiderazgo),
-        this.letterToNumberDescASCII(modelo.GradeTecnologiaGestionDatos),
-        this.letterToNumberDescASCII(modelo.GradeGestionInnovacionConocimiento),
-        this.letterToNumberDescASCII(modelo.TotalIndustryGrade),
-        this.letterToNumberDescASCII(modelo.GradeProcesosAutomatizacion),
+      let dataValues = [
+        this.numeroANumero(
+          this.modeloMadurez()?.puntaje_por_categoria
+            ?.capital_humano_y_organizacion_digital ?? 0
+        ),
+        this.numeroANumero(
+          this.modeloMadurez()?.puntaje_por_categoria?.estrategia_y_liderazgo ??
+            0
+        ),
+        this.numeroANumero(
+          this.modeloMadurez()?.puntaje_por_categoria
+            ?.tecnologia_y_gestion_de_datos ?? 0
+        ),
+        this.numeroANumero(
+          this.modeloMadurez()?.puntaje_por_categoria
+            ?.gestion_de_la_innovacion_y_conocimiento ?? 0
+        ),
+        this.numeroANumero(
+          this.modeloMadurez()?.puntaje_por_categoria
+            ?.procesos_y_automatizacion ?? 0
+        ),
       ];
 
       // Definir las etiquetas correspondientes a cada eje del radar
@@ -196,7 +207,6 @@ export class EvaluacionesMadurezComponent implements AfterViewInit, OnInit {
         'Estrategia',
         'Tecnología',
         'Gestión de Innovación',
-        'Industria',
         'Automatización',
       ];
 
@@ -230,37 +240,43 @@ export class EvaluacionesMadurezComponent implements AfterViewInit, OnInit {
     }
   }
 
-  /**
-   * Convierte una letra de la 'a' a la 'e' (mayúscula o minúscula) en su número correspondiente.
-   * 'a' o 'A' => 5
-   * 'b' o 'B' => 4
-   * 'c' o 'C' => 3
-   * 'd' o 'D' => 2
-   * 'e' o 'E' => 1
-   *
-   * @param letter - La letra a convertir.
-   * @returns El número correspondiente o 0 si la letra no es válida.
-   */
-  letterToNumberDescASCII(letter: string): number {
-    if (letter.length !== 1) return 0;
-
-    const lowerLetter = letter.toLowerCase();
-    const asciiCode = lowerLetter.charCodeAt(0);
-
-    // 'a' = 97, 'e' = 101
-    if (asciiCode >= 97 && asciiCode <= 101) {
-      // 'a' a 'e'
-      return 6 - (asciiCode - 96); // 'a' => 5, 'b' => 4, ..., 'e' =>1
+  numeroALetra(valor: number | null | undefined): string {
+    if (typeof valor !== 'number' || isNaN(valor) || valor === undefined) {
+      return 'No completado';
     }
-
-    return 0;
+    if (valor < 0 || valor > 100) {
+      return 'Valor incorrecto';
+    }
+    if (valor >= 81) {
+      return 'A';
+    } else if (valor >= 61) {
+      return 'B';
+    } else if (valor >= 41) {
+      return 'C';
+    } else if (valor >= 21) {
+      return 'D';
+    } else {
+      return 'E';
+    }
   }
 
-  openLink(): void {
-    this.modeloMadurezService.openLink();
-  }
-
-  openLinkFormacion(): void {
-    this.modeloMadurezService.openLinkFormacion();
+  numeroANumero(valor: number | null | undefined): number {
+    if (typeof valor !== 'number' || isNaN(valor) || valor === undefined) {
+      return 0;
+    }
+    if (valor < 0 || valor > 100) {
+      return 0;
+    }
+    if (valor >= 81) {
+      return 5;
+    } else if (valor >= 61) {
+      return 4;
+    } else if (valor >= 41) {
+      return 3;
+    } else if (valor >= 21) {
+      return 2;
+    } else {
+      return 1;
+    }
   }
 }

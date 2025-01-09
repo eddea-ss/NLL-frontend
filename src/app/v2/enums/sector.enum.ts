@@ -7,5 +7,4 @@ export enum Sector {
   MAESTRANZA = 'Maestranza',
   TURISMO = 'Turismo',
   GENERAL = 'General',
-  INDEFINIDO = 'Indefinido',
 }

@@ -1,11 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, effect, inject, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
-import {
-  LoginService,
-  CharacterizationModelService,
-  RecordsService,
-} from '@v2/services';
+import { LoginService, RecordsService } from '@v2/services';
 import { AuthState, Role, UserType } from '@v2/enums';
 import { EVALUACION_PROVEEDORES } from '@v2/constants';
 import {
