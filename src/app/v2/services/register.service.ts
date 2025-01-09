@@ -21,7 +21,7 @@ export class RegisterService {
   private google = inject(GoogleAnalyticsService);
 
   // Definir endpoints para cada tipo de usuario
-  private endpoint: string = 'http://64.176.10.243:3020/auth/register';
+  private endpoint: string = 'https://accesos.nuevoloslagos.org/auth/register';
   private pass = 'sdaa@@gd@S221W';
 
   private httpOptions = {

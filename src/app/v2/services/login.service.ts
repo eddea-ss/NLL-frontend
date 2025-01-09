@@ -23,7 +23,7 @@ export class LoginService {
 
   private saltHash = 'xdxd';
   //private apiUrlUsers = 'https://accesos.nuevoloslagos.org/api/usuarios';
-  private apiUrlUsers = 'http://64.176.10.243:3020/auth';
+  private apiUrlUsers = 'https://accesos.nuevoloslagos.org/auth';
   private pass = 'sdaa@@gd@S221W';
 
   private httpOptions = {

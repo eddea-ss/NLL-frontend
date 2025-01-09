@@ -87,7 +87,8 @@ export class EvaluacionesMadurezComponent implements AfterViewInit, OnInit {
         'Descubre qué acciones debes realizar para alcanzar la madurez tecnológica. Encuentra cursos, artículos, financiamiento, entre otros.',
     },
   ];
-  profileImageUrl: string = 'http://64.176.10.243:3020/logos/default.png';
+  profileImageUrl: string =
+    'https://accesos.nuevoloslagos.org/logos/default.png';
 
   constructor() {
     effect(() => {
@@ -284,9 +285,10 @@ export class EvaluacionesMadurezComponent implements AfterViewInit, OnInit {
   }
   setProfileImageUrl(userImageUrl: string | undefined | null): void {
     if (userImageUrl) {
-      this.profileImageUrl = `http://64.176.10.243:3020/logos/${userImageUrl}`;
+      this.profileImageUrl = `https://accesos.nuevoloslagos.org/logos/${userImageUrl}`;
     } else {
-      this.profileImageUrl = 'http://64.176.10.243:3020/logos/default.png';
+      this.profileImageUrl =
+        'https://accesos.nuevoloslagos.org/logos/default.png';
     }
   }
 }

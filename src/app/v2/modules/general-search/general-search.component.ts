@@ -34,7 +34,7 @@ import {
   RecordsService,
   ResourceService,
 } from '@v2/services';
-import { ResourceType } from '@v2/enums';
+import { AuthState, ResourceType } from '@v2/enums';
 
 @Component({
   selector: 'app-general-search',
@@ -69,6 +69,8 @@ export class GeneralSearchComponent implements OnInit {
   currentUser = this.loginService.currentUser;
   modeloMadurez = this.modeloMadurezService.modeloMadurez;
   modeloCaracter = this.modeloCaracterService.supplierSurvey;
+  authState = this.loginService.authState;
+
   public ResourceType = ResourceType;
   // Modal variables
   isModalOpen = false;
@@ -270,7 +272,14 @@ export class GeneralSearchComponent implements OnInit {
       return;
     }
 
-    if (!this.modeloCaracter() && !this.modeloMadurez()) {
+    if (
+      this.authState() == AuthState.LoggedOut ||
+      (this.modeloCaracter()?.part1 === false &&
+        this.modeloMadurez()?.puntaje_general === null &&
+        this.modeloMadurez()?.puntaje_sector === null &&
+        this.modeloMadurez()?.respuestas_formacion === null &&
+        this.modeloMadurez()?.respuestas_proveedor === null)
+    ) {
       return;
     }
 
