@@ -22,7 +22,6 @@ export class LoginService {
   private snackbar = inject(SnackbarService);
 
   private saltHash = 'xdxd';
-  //private apiUrlUsers = 'https://accesos.nuevoloslagos.org/api/usuarios';
   private apiUrlUsers = 'https://accesos.nuevoloslagos.org/auth';
   private pass = 'sdaa@@gd@S221W';
 

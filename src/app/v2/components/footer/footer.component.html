@@ -1,10 +1,422 @@
-<!-- Pie de página -->
+<!-- Los estilos de footer cambia segun el numero de type -->
+@if (type===0) { } @switch (type) { @case (0) {
+<!-- Diseño 0:  antiguo -->
 <footer class="bg-[#262626] text-white p-4 border-t-4 border-yellow-500">
   <div
     class="container mx-auto flex text-center justify-center flex-col md:flex-row gap-4 items-center"
   >
-    <p>&copy; NuevoLosLagos 2024. Todos los derechos reservados.</p>
+    <p>&copy; NuevoLosLagos 2025. Todos los derechos reservados.</p>
     <p class="hover:text-gray-400">Aviso legal</p>
     <p class="hover:text-gray-400">Política de privacidad</p>
   </div>
 </footer>
+} @case (1) {
+<!-- Diseño 1: Footer Clásico con Columnas -->
+<footer class="bg-gray-800 text-white py-12">
+  <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
+    <!-- Columna 1: Información general -->
+    <div>
+      <h3 class="text-xl font-bold mb-4">NuevoLosLagos</h3>
+      <p class="text-gray-400">
+        Conecta con los proveedores de la Región de los Lagos y actualízate con
+        nuestros cursos de formación.
+      </p>
+    </div>
+    <!-- Columna 2: Enlaces rápidos -->
+    <div>
+      <h4 class="text-lg font-semibold mb-4">Enlaces Rápidos</h4>
+      <ul class="space-y-2">
+        <li><a href="#" class="text-gray-400 hover:text-white">Proyecto</a></li>
+        <li>
+          <a href="#" class="text-gray-400 hover:text-white">Evaluaciones</a>
+        </li>
+        <li>
+          <a href="#" class="text-gray-400 hover:text-white">Investigación</a>
+        </li>
+        <li><a href="#" class="text-gray-400 hover:text-white">Buscador</a></li>
+      </ul>
+    </div>
+    <!-- Columna 3: Cuenta y Registro -->
+    <div>
+      <h4 class="text-lg font-semibold mb-4">Cuenta</h4>
+      <ul class="space-y-2">
+        <li>
+          <a href="#" class="text-gray-400 hover:text-white">Perfil Cuenta</a>
+        </li>
+        <li>
+          <a href="#" class="text-gray-400 hover:text-white">Registrarse</a>
+        </li>
+      </ul>
+    </div>
+    <!-- Columna 4: Contacto y Redes -->
+    <div>
+      <h4 class="text-lg font-semibold mb-4">Conéctate</h4>
+      <p class="text-gray-400 mb-4">
+        Síguenos en nuestras redes sociales para más información.
+      </p>
+      <div class="flex space-x-4">
+        <a href="#" class="text-gray-400 hover:text-white">Facebook</a>
+        <a href="#" class="text-gray-400 hover:text-white">Twitter</a>
+        <a href="#" class="text-gray-400 hover:text-white">LinkedIn</a>
+      </div>
+    </div>
+  </div>
+  <!-- Derechos y legal -->
+  <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+    <p class="text-gray-400">
+      © NuevoLosLagos 2025. Todos los derechos reservados.
+    </p>
+    <div class="mt-2">
+      <a href="#" class="text-gray-400 hover:text-white mx-2">Aviso legal</a>
+      <a href="#" class="text-gray-400 hover:text-white mx-2"
+        >Política de privacidad</a
+      >
+    </div>
+  </div>
+</footer>
+}@case (2) {
+<!-- Diseño 2: Footer con Imagen de Fondo -->
+<footer
+  class="relative bg-cover bg-center pt-16 pb-4"
+  style="background-image: url('assets/images/industry4.webp')"
+>
+  <!-- Overlay oscuro -->
+  <div class="absolute inset-0 bg-black bg-opacity-60"></div>
+  <div class="container mx-auto px-6 relative z-10 text-white">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <!-- Columna 1: Descripción -->
+      <div>
+        <h3 class="text-xl font-bold mb-4">NuevoLosLagos</h3>
+        <p class="text-gray-300">
+          Conecta e infórmate. Encuentra rápidamente proveedores confiables en
+          manufactura avanzada y potencia tus proyectos.
+        </p>
+      </div>
+      <!-- Columna 2: Beneficios -->
+      <div>
+        <h4 class="text-lg font-semibold mb-4">
+          ¿Por qué utilizar nuestro buscador?
+        </h4>
+        <ul class="space-y-4">
+          <li class="flex items-center space-x-2">
+            <span class="text-2xl">📘</span>
+            <p class="text-gray-300">
+              Formación Continua: Accede a capacitaciones en manufactura
+              avanzada.
+            </p>
+          </li>
+          <li class="flex items-center space-x-2">
+            <span class="text-2xl">🌐</span>
+            <p class="text-gray-300">
+              Conexiones de Valor: Encuentra proveedores certificados.
+            </p>
+          </li>
+          <li class="flex items-center space-x-2">
+            <span class="text-2xl">🤝</span>
+            <p class="text-gray-300">
+              Asesoría Experta: Recibe apoyo de expertos regionales.
+            </p>
+          </li>
+        </ul>
+      </div>
+      <!-- Columna 3: Registro -->
+      <div>
+        <h4 class="text-lg font-semibold mb-4">Mejora tus búsquedas</h4>
+        <p class="text-gray-300 mb-4">
+          Regístrate, completa tu evaluación y mejora tus resultados de búsqueda
+          para alcanzar la madurez tecnológica.
+        </p>
+        <a
+          href="#"
+          routerLink="/evaluaciones-madurez"
+          class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition duration-300"
+          >Evaluar Ahora</a
+        >
+      </div>
+    </div>
+    <!-- Derechos y legal -->
+    <div class="border-t border-gray-600 mt-8 pt-8 text-center">
+      <p class="text-gray-300">
+        © NuevoLosLagos 2025. Todos los derechos reservados.
+      </p>
+      <div class="mt-2">
+        <a href="#" class="text-gray-300 hover:text-white mx-2">Aviso legal</a>
+        <a href="#" class="text-gray-300 hover:text-white mx-2"
+          >Política de privacidad</a
+        >
+      </div>
+    </div>
+  </div>
+</footer>
+} @case (3) {
+<!-- Diseño 3: Footer con Podcast y Logos -->
+<footer class="bg-gray-900 text-white py-12">
+  <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
+    <!-- Columna 1: Podcast -->
+    <div>
+      <h4 class="text-lg font-semibold mb-4">Escucha nuestros Podcast</h4>
+      <p class="text-gray-400 mb-4">
+        Podcast creados con IA, acerca de la industria 4.0 y sus tecnologías.
+      </p>
+      <a
+        href="#"
+        class="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition duration-300"
+        >Ir a Escuchar</a
+      >
+    </div>
+    <!-- Columna 2: Organización -->
+    <div>
+      <h4 class="text-lg font-semibold mb-4">Organización</h4>
+      <p class="text-gray-400">Nuevo Los Lagos es una colaboración entre:</p>
+      <div class="flex space-x-4 mt-4">
+        <img
+          src="https://via.placeholder.com/50"
+          alt="Santo Tomás"
+          class="w-12 h-12"
+        />
+        <img
+          src="https://via.placeholder.com/50"
+          alt="Asimet"
+          class="w-12 h-12"
+        />
+        <img
+          src="https://via.placeholder.com/50"
+          alt="Grupo Centinela"
+          class="w-12 h-12"
+        />
+        <img
+          src="https://via.placeholder.com/50"
+          alt="Corfo"
+          class="w-12 h-12"
+        />
+      </div>
+    </div>
+    <!-- Columna 3: Enlaces legales -->
+    <div>
+      <h4 class="text-lg font-semibold mb-4">Legal</h4>
+      <ul class="space-y-2">
+        <li>
+          <a href="#" class="text-gray-400 hover:text-white">Aviso legal</a>
+        </li>
+        <li>
+          <a href="#" class="text-gray-400 hover:text-white"
+            >Política de privacidad</a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!-- Derechos -->
+  <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+    <p class="text-gray-400">
+      © NuevoLosLagos 2025. Todos los derechos reservados.
+    </p>
+  </div>
+</footer>
+} @case (4) {
+<!-- Diseño 4: Footer Minimalista -->
+<footer class="bg-gray-800 text-white py-8">
+  <div class="container mx-auto px-6 text-center">
+    <p class="text-gray-400">
+      © NuevoLosLagos 2025. Todos los derechos reservados.
+    </p>
+    <div class="mt-2">
+      <a href="#" class="text-gray-400 hover:text-white mx-2">Aviso legal</a>
+      <a href="#" class="text-gray-400 hover:text-white mx-2"
+        >Política de privacidad</a
+      >
+    </div>
+  </div>
+</footer>
+} @case (5) {
+<!-- Diseño 5: Footer Clásico con Columnas -->
+<footer class="bg-gray-800 text-white py-12">
+  <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
+    <!-- Columna 1: Información general -->
+    <div>
+      <h3 class="text-xl font-bold mb-4">NuevoLosLagos</h3>
+      <p class="text-gray-400">
+        Conecta con los proveedores de la Región de los Lagos y actualízate con
+        nuestros cursos de formación.
+      </p>
+    </div>
+    <!-- Columna 2: Enlaces rápidos -->
+    <div>
+      <h4 class="text-lg font-semibold mb-4">Enlaces Rápidos</h4>
+      <ul class="space-y-2">
+        <li><a href="#" class="text-gray-400 hover:text-white">Proyecto</a></li>
+        <li>
+          <a href="#" class="text-gray-400 hover:text-white">Evaluaciones</a>
+        </li>
+        <li>
+          <a href="#" class="text-gray-400 hover:text-white">Investigación</a>
+        </li>
+        <li><a href="#" class="text-gray-400 hover:text-white">Buscador</a></li>
+      </ul>
+    </div>
+    <!-- Columna 3: Cuenta y Registro -->
+    <div>
+      <h4 class="text-lg font-semibold mb-4">Cuenta</h4>
+      <ul class="space-y-2">
+        <li>
+          <a href="#" class="text-gray-400 hover:text-white">Perfil Cuenta</a>
+        </li>
+        <li>
+          <a href="#" class="text-gray-400 hover:text-white">Registrarse</a>
+        </li>
+      </ul>
+    </div>
+    <!-- Columna 4: Contacto y Redes -->
+    <div>
+      <h4 class="text-lg font-semibold mb-4">Conéctate</h4>
+      <p class="text-gray-400 mb-4">
+        Síguenos en nuestras redes sociales para más información.
+      </p>
+      <div class="flex space-x-4">
+        <a href="#" class="text-gray-400 hover:text-white">Facebook</a>
+        <a href="#" class="text-gray-400 hover:text-white">Twitter</a>
+        <a href="#" class="text-gray-400 hover:text-white">LinkedIn</a>
+      </div>
+    </div>
+  </div>
+  <!-- Derechos y legal -->
+  <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+    <p class="text-gray-400">
+      © NuevoLosLagos 2025. Todos los derechos reservados.
+    </p>
+    <div class="mt-2">
+      <a href="#" class="text-gray-400 hover:text-white mx-2">Aviso legal</a>
+      <a href="#" class="text-gray-400 hover:text-white mx-2"
+        >Política de privacidad</a
+      >
+    </div>
+  </div>
+</footer>
+} @case (6) {
+<!-- Diseño 6: Footer con Iconos y Descripción -->
+<footer class="bg-gray-900 text-white py-12">
+  <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
+    <!-- Columna 1: Descripción -->
+    <div>
+      <h3 class="text-xl font-bold mb-4">NuevoLosLagos</h3>
+      <p class="text-gray-400">
+        Conecta e infórmate. Encuentra rápidamente proveedores confiables en
+        manufactura avanzada y potencia tus proyectos.
+      </p>
+    </div>
+    <!-- Columna 2: Beneficios -->
+    <div>
+      <h4 class="text-lg font-semibold mb-4">
+        ¿Por qué utilizar nuestro buscador?
+      </h4>
+      <ul class="space-y-4">
+        <li class="flex items-center space-x-2">
+          <span class="text-2xl">📘</span>
+          <p class="text-gray-400">
+            Formación Continua: Accede a capacitaciones en manufactura avanzada.
+          </p>
+        </li>
+        <li class="flex items-center space-x-2">
+          <span class="text-2xl">🌐</span>
+          <p class="text-gray-400">
+            Conexiones de Valor: Encuentra proveedores certificados.
+          </p>
+        </li>
+        <li class="flex items-center space-x-2">
+          <span class="text-2xl">🤝</span>
+          <p class="text-gray-400">
+            Asesoría Experta: Recibe apoyo de expertos regionales.
+          </p>
+        </li>
+      </ul>
+    </div>
+    <!-- Columna 3: Registro -->
+    <div>
+      <h4 class="text-lg font-semibold mb-4">Mejora tus búsquedas</h4>
+      <p class="text-gray-400 mb-4">
+        Regístrate, completa tu evaluación y mejora tus resultados de búsqueda
+        para alcanzar la madurez tecnológica.
+      </p>
+      <a
+        href="#"
+        class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition duration-300"
+        >Evaluar Ahora</a
+      >
+    </div>
+  </div>
+  <!-- Derechos y legal -->
+  <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+    <p class="text-gray-400">
+      © NuevoLosLagos 2025. Todos los derechos reservados.
+    </p>
+    <div class="mt-2">
+      <a href="#" class="text-gray-400 hover:text-white mx-2">Aviso legal</a>
+      <a href="#" class="text-gray-400 hover:text-white mx-2"
+        >Política de privacidad</a
+      >
+    </div>
+  </div>
+</footer>
+} @case (7) {
+<!-- Diseño 7: Footer con Podcast y Logos -->
+<footer class="bg-gray-800 text-white py-12">
+  <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
+    <!-- Columna 1: Podcast -->
+    <div>
+      <h4 class="text-lg font-semibold mb-4">Escucha nuestros Podcast</h4>
+      <p class="text-gray-400 mb-4">
+        Podcast creados con IA, acerca de la industria 4.0 y sus tecnologías.
+      </p>
+      <a
+        href="#"
+        routerLink="/investigacion-podcasts"
+        class="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition duration-300"
+        >Ir a Escuchar</a
+      >
+    </div>
+    <!-- Columna 2: Organización -->
+    <div>
+      <h4 class="text-lg font-semibold mb-4">Organización</h4>
+      <p class="text-gray-400">Nuevo Los Lagos es una colaboración entre:</p>
+      <div class="flex space-x-4 mt-4">
+        <img
+          src="assets/logos/logo_santotomas.webp"
+          alt="Santo Tomás"
+          class="w-24 h-24"
+        />
+        <img
+          src="assets/logos/logo_asimet.webp"
+          alt="Asimet"
+          class="w-12 h-12"
+        />
+        <img
+          src="assets/logos/logo_centinela.webp"
+          alt="Grupo Centinela"
+          class="w-12 h-12"
+        />
+        <img src="assets/logos/logo_corfo.webp" alt="Corfo" class="w-12 h-12" />
+      </div>
+    </div>
+    <!-- Columna 3: Enlaces legales -->
+    <div>
+      <h4 class="text-lg font-semibold mb-4">Legal</h4>
+      <ul class="space-y-2">
+        <li>
+          <a href="#" class="text-gray-400 hover:text-white">Aviso legal</a>
+        </li>
+        <li>
+          <a href="#" class="text-gray-400 hover:text-white"
+            >Política de privacidad</a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!-- Derechos -->
+  <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+    <p class="text-gray-400">
+      © NuevoLosLagos 2025. Todos los derechos reservados.
+    </p>
+  </div>
+</footer>
+} }

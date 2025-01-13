@@ -11,7 +11,7 @@ import {
 import { Meta, Title } from '@angular/platform-browser';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { UserType } from '@v2/enums';
-import { RegisterService } from '@v2/services';
+import { RegisterService, SnackbarService } from '@v2/services';
 
 @Component({
   selector: 'app-form-register',
@@ -26,6 +26,7 @@ export class FormRegisterComponent implements OnInit {
   private registroService = inject(RegisterService);
   private title = inject(Title);
   private meta = inject(Meta);
+  private snackbar = inject(SnackbarService);
 
   selectedFile: File | null = null;
   formGroup!: FormGroup;
@@ -244,6 +245,18 @@ export class FormRegisterComponent implements OnInit {
   onSubmit(): void {
     if (!this.passwordsMatch) {
       this.errorGeneral = 'Las contraseñas no coinciden';
+      return;
+    }
+
+    if (
+      !(
+        this.hasLength &&
+        this.hasUppercase &&
+        this.hasSpecialChar &&
+        this.hasNumber
+      )
+    ) {
+      this.snackbar.show('La contraseña debe ser correcta', 4000);
       return;
     }
 

@@ -7,7 +7,7 @@ import {
   Validators,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { LoginService } from '@v2/services';
+import { LoginService, SnackbarService } from '@v2/services';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { Meta, Title } from '@angular/platform-browser';
@@ -24,6 +24,7 @@ export class LoginComponent {
   private meta = inject(Meta);
   private loginService = inject(LoginService);
   protected fb = inject(FormBuilder);
+  private snackbar = inject(SnackbarService);
 
   loginForm: FormGroup = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
@@ -68,7 +69,24 @@ export class LoginComponent {
   }
 
   onSubmit() {
+    console.log('onSubmit');
     if (this.loginForm.invalid) {
+      this.snackbar.show(
+        'Completa nombre y contraseña antes de iniciar sesión',
+        4000
+      );
+      return;
+    }
+
+    if (
+      !(
+        this.hasLength &&
+        this.hasUppercase &&
+        this.hasSpecialChar &&
+        this.hasNumber
+      )
+    ) {
+      this.snackbar.show('La contraseña debe ser correcta', 4000);
       return;
     }
 
