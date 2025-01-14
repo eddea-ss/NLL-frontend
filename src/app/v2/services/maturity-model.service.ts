@@ -4,7 +4,7 @@ import * as CryptoJS from 'crypto-js';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { LoginService } from '@v2/services';
-import { Role, UserType } from '@v2/enums';
+import { Role, Sector, UserType } from '@v2/enums';
 import { GoogleAnalyticsService } from './google-analytics.service';
 
 interface MaturityScore {
@@ -142,7 +142,7 @@ export class MaturityModelService {
   openLinkProveedores() {
     try {
       const rutMd5 = this.stringToHash(this.currentUser()!.rut);
-      const sector = this.currentUser()!.sector;
+      const sector = this.currentUser()!.sector?.toLocaleLowerCase();
       this.openLink(
         `https://modelomadurez.nuevoloslagos.org/modelos/proveedores/?rut=${rutMd5}&sector=${sector}`
       );
@@ -154,7 +154,7 @@ export class MaturityModelService {
   openLinkSectorial() {
     try {
       const rutMd5 = this.stringToHash(this.currentUser()!.rut);
-      const sector = this.currentUser()!.sector;
+      const sector = this.currentUser()!.sector?.toLocaleLowerCase();
       this.openLink(
         `https://modelomadurez.nuevoloslagos.org/modelos/sectores/?rut=${rutMd5}&sector=${sector}`
       );
@@ -166,7 +166,7 @@ export class MaturityModelService {
   openLinkFormacion() {
     try {
       const rutMd5 = this.stringToHash(this.currentUser()!.rut);
-      const sector = this.currentUser()!.sector;
+      const sector = this.currentUser()!.sector?.toLocaleLowerCase();
       this.openLink(
         `https://modelomadurez.nuevoloslagos.org/modelos/formacion/?rut=${rutMd5}&sector=${sector}`
       );

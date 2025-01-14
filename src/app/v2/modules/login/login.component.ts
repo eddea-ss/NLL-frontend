@@ -69,7 +69,6 @@ export class LoginComponent {
   }
 
   onSubmit() {
-    console.log('onSubmit');
     if (this.loginForm.invalid) {
       this.snackbar.show(
         'Completa nombre y contraseña antes de iniciar sesión',

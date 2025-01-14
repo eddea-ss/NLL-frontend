@@ -137,7 +137,7 @@ export class SugeridosComponent implements OnInit {
       ruta === 'buscador-cursos' || ruta === 'buscador-proveedores';
 
     if (isLoggedIn && isCourseOrSupplier && hasModelData) {
-      const industryName = this.currentUser()?.sector;
+      const industryName = this.currentUser()?.sector?.toLocaleLowerCase();
       if (industryName) {
         searchKey = industryName;
       }

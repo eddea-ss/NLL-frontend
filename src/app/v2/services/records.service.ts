@@ -131,7 +131,6 @@ export class RecordsService {
         })
         .pipe(catchError(this.handleError))
         .subscribe((response) => {
-          console.log(response);
           const existingSurvey: SupplierSurvey = {
             part1: !!response?.part1,
             part2: !!response?.part2,
