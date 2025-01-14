@@ -22,6 +22,13 @@ export const routes: Routes = [
           ),
       },
       {
+        path: 'landing2',
+        loadComponent: () =>
+          import('@v2/modules/landing-page3/landing-page3.component').then(
+            (m) => m.LandingPage3Component
+          ),
+      },
+      {
         path: 'buscador',
         loadComponent: () =>
           import('@v2/modules/general-search/general-search.component').then(
