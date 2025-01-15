@@ -83,8 +83,7 @@ export class SurveyFormComponent implements OnInit {
 
     const currentUser = this.loginService.getCurrentUser();
     if (currentUser && currentUser.rut) {
-      const rutOriginal = currentUser.rut;
-      this.rutMd5 = this.loginService.stringToHash(rutOriginal);
+      this.rutMd5 = currentUser.rut;
     } else {
       this.snackbar.show('Usuario no autenticado o sin RUT.', 4000);
       this.router.navigate(['/']);

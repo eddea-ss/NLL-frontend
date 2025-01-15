@@ -60,8 +60,7 @@ export class CharacterizationModelService {
   private fetchSurveyData(): void {
     const currentUser = this.loginService.getCurrentUser();
     if (currentUser && currentUser.rut) {
-      const rutOriginal = currentUser.rut;
-      const rutMd5 = this.stringToHash(rutOriginal);
+      const rutMd5 = currentUser.rut;
       const url = `${this.apiUrl}${rutMd5}`;
 
       this.http
@@ -103,7 +102,7 @@ export class CharacterizationModelService {
         throw new Error('RUT no disponible');
       }
 
-      const rutMd5 = this.stringToHash(currentUser.rut);
+      const rutMd5 = currentUser.rut;
       const url = `https://proveedores.nuevoloslagos.org/?rut=${rutMd5}`;
       //google
       this.google.eventEmitter('click-modelo-caracterizacion-emprendedores', {
@@ -113,10 +112,5 @@ export class CharacterizationModelService {
     } catch (error) {
       console.error('Error al obtener RUT de localStorage:', error);
     }
-  }
-
-  private stringToHash(string: string): string {
-    const rutConSalt = `${string}-${this.saltHash}`;
-    return CryptoJS.SHA256(rutConSalt).toString();
   }
 }

@@ -199,9 +199,4 @@ export class LoginService {
   getAuthToken(): string | null {
     return this.authToken();
   }
-
-  stringToHash(string: string): string {
-    const rutConSalt = `${string}-${this.saltHash}`;
-    return CryptoJS.SHA256(rutConSalt).toString();
-  }
 }

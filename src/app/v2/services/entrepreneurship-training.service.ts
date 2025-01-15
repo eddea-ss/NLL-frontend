@@ -74,8 +74,7 @@ export class EntrepreneurshipTrainingService {
   private fetchSurveyData(): void {
     const currentUser = this.loginService.getCurrentUser();
     if (currentUser && currentUser.rut) {
-      const rutOriginal = currentUser.rut;
-      const rutMd5 = this.stringToHash(rutOriginal);
+      const rutMd5 = currentUser.rut;
       const url = `${this.apiUrl}${rutMd5}`;
 
       this.http
@@ -117,17 +116,12 @@ export class EntrepreneurshipTrainingService {
         throw new Error('RUT no disponible');
       }
 
-      const rutMd5 = this.stringToHash(currentUser.rut);
+      const rutMd5 = currentUser.rut;
 
       const url = `https://emprendedores.nuevoloslagos.org/formacion-emprendedor.html?rut=${rutMd5}`;
       window.open(url, '_self');
     } catch (error) {
       console.error('Error al obtener RUT de localStorage:', error);
     }
-  }
-
-  private stringToHash(string: string): string {
-    const rutConSalt = `${string}-${this.saltHash}`;
-    return CryptoJS.SHA256(rutConSalt).toString();
   }
 }

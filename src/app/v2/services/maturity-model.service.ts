@@ -93,8 +93,7 @@ export class MaturityModelService {
   private fetchSurveyData(): void {
     const currentUser = this.loginService.getCurrentUser();
     if (currentUser && currentUser.rut) {
-      const rutOriginal = currentUser.rut;
-      const rutMd5 = this.stringToHash(rutOriginal);
+      const rutMd5 = currentUser.rut;
       const url = `${this.apiUrl}${rutMd5}`;
 
       this.http
@@ -141,7 +140,7 @@ export class MaturityModelService {
 
   openLinkProveedores() {
     try {
-      const rutMd5 = this.stringToHash(this.currentUser()!.rut);
+      const rutMd5 = this.currentUser()!.rut;
       const sector = this.currentUser()!.sector?.toLocaleLowerCase();
       this.openLink(
         `https://modelomadurez.nuevoloslagos.org/modelos/proveedores/?rut=${rutMd5}&sector=${sector}`
@@ -153,7 +152,7 @@ export class MaturityModelService {
 
   openLinkSectorial() {
     try {
-      const rutMd5 = this.stringToHash(this.currentUser()!.rut);
+      const rutMd5 = this.currentUser()!.rut;
       const sector = this.currentUser()!.sector?.toLocaleLowerCase();
       this.openLink(
         `https://modelomadurez.nuevoloslagos.org/modelos/sectores/?rut=${rutMd5}&sector=${sector}`
@@ -165,7 +164,7 @@ export class MaturityModelService {
 
   openLinkFormacion() {
     try {
-      const rutMd5 = this.stringToHash(this.currentUser()!.rut);
+      const rutMd5 = this.currentUser()!.rut;
       const sector = this.currentUser()!.sector?.toLocaleLowerCase();
       this.openLink(
         `https://modelomadurez.nuevoloslagos.org/modelos/formacion/?rut=${rutMd5}&sector=${sector}`
@@ -177,7 +176,7 @@ export class MaturityModelService {
 
   openLinkGeneral() {
     try {
-      const rutMd5 = this.stringToHash(this.currentUser()!.rut);
+      const rutMd5 = this.currentUser()!.rut;
       this.openLink(
         `https://modelomadurez.nuevoloslagos.org/modelos/general/?rut=${rutMd5}`
       );
@@ -196,10 +195,5 @@ export class MaturityModelService {
     } catch (error) {
       console.error('Error a redireccionar al modelo:', error);
     }
-  }
-
-  private stringToHash(string: string): string {
-    const rutConSalt = `${string}-${this.saltHash}`;
-    return CryptoJS.SHA256(rutConSalt).toString();
   }
 }

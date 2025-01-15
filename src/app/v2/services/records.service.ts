@@ -122,8 +122,7 @@ export class RecordsService {
   private fetchSurveyData(): void {
     const currentUser = this.loginService.getCurrentUser();
     if (currentUser && currentUser.rut) {
-      const rutOriginal = currentUser.rut;
-      const rutMd5 = this.loginService.stringToHash(rutOriginal);
+      const rutMd5 = currentUser.rut;
 
       this.http
         .get<any>(`${this.baseUrl}/records/${rutMd5}`, {
