@@ -19,6 +19,8 @@
     "@angular/platform-browser": "^18.2.0",
     "@angular/platform-browser-dynamic": "^18.2.0",
     "@angular/router": "^18.2.0",
+    "@types/aos": "^3.0.7",
+    "aos": "^2.3.4",
     "bootstrap": "5.3.2",
     "bootstrap-icons": "1.10.5",
     "chart.js": "^4.4.6",

@@ -32,12 +32,14 @@
       "@v2/models/*": ["app/v2/models/*"],
       "@v2/pipes/*": ["app/v2/pipes/*"],
       "@v2/modules/*": ["app/v2/modules/*"]
-    }
+    },
+    "typeRoots": ["node_modules/@types"]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true
-  }
+  },
+  "include": ["src/**/*"]
 }
