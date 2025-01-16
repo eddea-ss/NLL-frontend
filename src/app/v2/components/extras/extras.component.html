@@ -1,8 +1,156 @@
 @switch (type) {
 <!-- Tipos de componentes -->
 @case ('default') {
+<!-- solo de prueba -->
+<div>
+  <p>Extras funciona</p>
+</div>
+}
+<!--********************************************************************-->
+<!--*************************** VIDEOS *********************************-->
+<!--********************************************************************-->
+@case('video1'){
+<!-- Diseño 1: Video a la izquierda y texto a la derecha -->
+<div
+  class="flex flex-col md:flex-row items-center bg-white rounded-lg shadow-md overflow-hidden mb-8"
+>
+  <!-- Video a la izquierda -->
+  <div class="w-full md:w-1/2">
+    <video autoplay muted loop class="w-full h-full object-cover">
+      <source
+        src="https://videos.pexels.com/video-files/2406491/2406491-uhd_2560_1440_24fps.mp4"
+        type="video/mp4"
+      />
+      Tu navegador no soporta videos HTML5.
+    </video>
+  </div>
+  <!-- Texto a la derecha -->
+  <div class="w-full md:w-1/2 p-8">
+    <h2 class="text-3xl font-bold mb-4">Innovación en la Industria 4.0</h2>
+    <p class="text-gray-600 mb-6">
+      Descubre cómo la tecnología está transformando la industria. Accede a
+      recursos exclusivos y mantente actualizado.
+    </p>
+    <a
+      href="#"
+      class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition duration-300"
+      >Explorar Más</a
+    >
+  </div>
+</div>
+} @case('video2'){
+<!-- Diseño 2: Video a la derecha y texto a la izquierda -->
+<div
+  class="flex flex-col md:flex-row items-center bg-white rounded-lg shadow-md overflow-hidden mb-8"
+>
+  <!-- Texto a la izquierda -->
+  <div class="w-full md:w-1/2 p-8">
+    <h2 class="text-3xl font-bold mb-4">Tecnología del Futuro</h2>
+    <p class="text-gray-600 mb-6">
+      Aprende sobre las últimas tendencias en automatización, IoT y más. Únete a
+      nuestra comunidad hoy mismo.
+    </p>
+    <a
+      href="#"
+      class="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition duration-300"
+      >Únete Ahora</a
+    >
+  </div>
+  <!-- Video a la derecha -->
+  <div class="w-full md:w-1/2">
+    <video autoplay muted loop class="w-full h-full object-cover">
+      <source
+        src="https://videos.pexels.com/video-files/2406491/2406491-uhd_2560_1440_24fps.mp4"
+        type="video/mp4"
+      />
+      Tu navegador no soporta videos HTML5.
+    </video>
+  </div>
+</div>
+} @case('video3'){
+<!-- Diseño 3: Video en la parte superior y texto en la parte inferior -->
+<div class="bg-white rounded-lg shadow-md overflow-hidden mb-8">
+  <!-- Video en la parte superior -->
+  <div class="w-full h-64">
+    <video autoplay muted loop class="w-full h-full object-cover">
+      <source
+        src="https://videos.pexels.com/video-files/2406491/2406491-uhd_2560_1440_24fps.mp4"
+        type="video/mp4"
+      />
+      Tu navegador no soporta videos HTML5.
+    </video>
+  </div>
+  <!-- Texto en la parte inferior -->
+  <div class="p-8">
+    <h2 class="text-3xl font-bold mb-4">Transforma tu Negocio</h2>
+    <p class="text-gray-600 mb-6">
+      Implementa soluciones de Industria 4.0 y lleva tu negocio al siguiente
+      nivel. Descubre cómo podemos ayudarte.
+    </p>
+    <a
+      href="#"
+      class="bg-purple-500 text-white px-6 py-2 rounded-lg hover:bg-purple-600 transition duration-300"
+      >Saber Más</a
+    >
+  </div>
+</div>
+} @case('video4'){
+<!-- Diseño 4: Video en la parte inferior y texto en la parte superior -->
+<div class="bg-white rounded-lg shadow-md overflow-hidden mb-8">
+  <!-- Texto en la parte superior -->
+  <div class="p-8">
+    <h2 class="text-3xl font-bold mb-4">Conecta con Expertos</h2>
+    <p class="text-gray-600 mb-6">
+      Accede a una red global de proveedores y expertos en tecnología
+      industrial. Encuentra soluciones a medida.
+    </p>
+    <a
+      href="#"
+      class="bg-yellow-400 text-gray-800 px-6 py-2 rounded-lg hover:bg-yellow-500 transition duration-300"
+      >Conectar Ahora</a
+    >
+  </div>
+  <!-- Video en la parte inferior -->
+  <div class="w-full h-64">
+    <video autoplay muted loop class="w-full h-full object-cover">
+      <source
+        src="https://videos.pexels.com/video-files/2406491/2406491-uhd_2560_1440_24fps.mp4"
+        type="video/mp4"
+      />
+      Tu navegador no soporta videos HTML5.
+    </video>
+  </div>
+</div>
+} @case('video5'){
+<!-- Diseño 5: Video y texto en una cuadrícula -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+  <!-- Video en la primera columna -->
+  <div class="rounded-lg overflow-hidden">
+    <video autoplay muted loop class="w-full h-full object-cover">
+      <source
+        src="https://videos.pexels.com/video-files/2406491/2406491-uhd_2560_1440_24fps.mp4"
+        type="video/mp4"
+      />
+      Tu navegador no soporta videos HTML5.
+    </video>
+  </div>
+  <!-- Texto en la segunda columna -->
+  <div class="bg-white p-8 rounded-lg shadow-md">
+    <h2 class="text-3xl font-bold mb-4">Soluciones Inteligentes</h2>
+    <p class="text-gray-600 mb-6">
+      Implementa soluciones de automatización y análisis de datos para optimizar
+      tus procesos.
+    </p>
+    <a
+      href="#"
+      class="bg-red-500 text-white px-6 py-2 rounded-lg hover:bg-red-600 transition duration-300"
+      >Ver Soluciones</a
+    >
+  </div>
+</div>
+} @case('video6'){
 <!-- Diseño 6: Video con overlay y texto centrado -->
-<div class="relative h-96 shadow-md overflow-hidden mb-8">
+<div class="relative h-96 rounded-lg shadow-md overflow-hidden mb-8">
   <!-- Video de fondo -->
   <video
     autoplay
@@ -34,4 +182,373 @@
     >
   </div>
 </div>
-} }
+} @case('video7'){
+<!-- Diseño 7: Video pequeño con texto alrededor -->
+<div class="bg-white rounded-lg shadow-md p-8 mb-8">
+  <h2 class="text-3xl font-bold mb-4">Aprende con Nosotros</h2>
+  <p class="text-gray-600 mb-6">
+    Explora nuestros tutoriales y guías para dominar las tecnologías de la
+    Industria 4.0.
+  </p>
+  <!-- Video pequeño -->
+  <div class="w-full md:w-1/2 mx-auto mb-6">
+    <video autoplay muted loop class="w-full h-full object-cover rounded-lg">
+      <source
+        src="https://videos.pexels.com/video-files/2406491/2406491-uhd_2560_1440_24fps.mp4"
+        type="video/mp4"
+      />
+      Tu navegador no soporta videos HTML5.
+    </video>
+  </div>
+  <p class="text-gray-600 mb-6">
+    Nuestros expertos te guiarán paso a paso para que puedas implementar estas
+    tecnologías en tu negocio.
+  </p>
+  <a
+    href="#"
+    class="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition duration-300"
+    >Ver Tutoriales</a
+  >
+</div>
+} @case('video8'){
+<!-- Diseño 8: Video en un círculo con texto alrededor -->
+<div class="bg-white rounded-lg shadow-md p-8 mb-8 text-center">
+  <h2 class="text-3xl font-bold mb-4">Innovación en Movimiento</h2>
+  <!-- Video en un círculo -->
+  <div class="w-48 h-48 mx-auto mb-6 rounded-full overflow-hidden">
+    <video autoplay muted loop class="w-full h-full object-cover">
+      <source
+        src="https://videos.pexels.com/video-files/2406491/2406491-uhd_2560_1440_24fps.mp4"
+        type="video/mp4"
+      />
+      Tu navegador no soporta videos HTML5.
+    </video>
+  </div>
+  <p class="text-gray-600 mb-6">
+    Descubre cómo la tecnología está cambiando el mundo. Únete a nuestra
+    comunidad y sé parte del cambio.
+  </p>
+  <a
+    href="#"
+    class="bg-purple-500 text-white px-6 py-2 rounded-lg hover:bg-purple-600 transition duration-300"
+    >Unirse</a
+  >
+</div>
+}
+
+<!--********************************************************************-->
+<!--*************************** VARIOS *********************************-->
+<!--********************************************************************-->
+
+@case ('varios1') {
+<!-- CTA 1: Básico -->
+<div class="bg-white p-6 rounded-lg shadow-md text-center mb-8">
+  <h2 class="text-2xl font-bold mb-4">
+    Encuentra Proveedores de Industria 4.0
+  </h2>
+  <p class="text-gray-600 mb-6">
+    Descubre los mejores proveedores especializados en tecnología de la
+    Industria 4.0.
+  </p>
+  <a
+    href="#"
+    class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition duration-300"
+    >Buscar Proveedores</a
+  >
+</div>
+} @case ('varios2') {
+<!-- CTA 2: Con video de fondo -->
+<div class="relative h-96 shadow-md mb-8 overflow-hidden">
+  <!-- Video de fondo -->
+  <video
+    autoplay
+    muted
+    loop
+    class="absolute inset-0 w-full h-full object-cover"
+  >
+    <source
+      src="https://videos.pexels.com/video-files/2406491/2406491-uhd_2560_1440_24fps.mp4"
+      type="video/mp4"
+    />
+    Tu navegador no soporta videos HTML5.
+  </video>
+  <!-- Overlay oscuro para mejorar la legibilidad -->
+  <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+  <!-- Contenido del CTA -->
+  <div
+    class="relative h-full flex flex-col justify-center items-center text-center"
+  >
+    <h2 class="text-3xl font-bold text-white mb-4">Explora la Industria 4.0</h2>
+    <p class="text-gray-200 mb-6">
+      Accede a recursos exclusivos y conoce las últimas innovaciones.
+    </p>
+    <a
+      href="/buscador"
+      routerLink="/buscador"
+      class="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition duration-300"
+      >Explorar Recursos</a
+    >
+  </div>
+</div>
+} @case ('varios3') {
+<!-- CTA 3: Con ícono -->
+<div class="bg-blue-500 p-6 rounded-lg shadow-md text-center mb-8">
+  <h2 class="text-2xl font-bold text-white mb-4">Información Actualizada</h2>
+  <p class="text-gray-200 mb-6">
+    Mantente al día con las últimas noticias y tendencias de la Industria 4.0.
+  </p>
+  <a
+    href="#"
+    class="bg-white text-blue-500 px-6 py-2 rounded-lg hover:bg-gray-100 transition duration-300 flex items-center justify-center"
+  >
+    <svg
+      class="w-5 h-5 mr-2"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+      ></path>
+    </svg>
+    Ver Noticias
+  </a>
+</div>
+} @case ('varios4') {
+<!-- CTA 4: Con lista de beneficios -->
+<div class="bg-white p-6 rounded-lg shadow-md mb-8">
+  <h2 class="text-2xl font-bold mb-4">Únete a Nuestra Comunidad</h2>
+  <p class="text-gray-600 mb-6">Beneficios de unirte a nuestra plataforma:</p>
+  <ul class="list-disc list-inside text-gray-600 mb-6">
+    <li>Acceso a proveedores certificados</li>
+    <li>Noticias y actualizaciones en tiempo real</li>
+    <li>Recursos exclusivos y descargables</li>
+  </ul>
+  <a
+    href="#"
+    class="bg-purple-500 text-white px-6 py-2 hover:bg-purple-600 transition duration-300"
+    >Regístrate Ahora</a
+  >
+</div>
+} @case ('varios5') {
+<!-- CTA 5: Con testimonio -->
+<div class="bg-gray-800 p-6 rounded-lg shadow-md text-center">
+  <h2 class="text-2xl font-bold text-white mb-4">
+    Lo que dicen nuestros usuarios
+  </h2>
+  <p class="text-gray-200 mb-6">
+    "Gracias a esta plataforma, he encontrado proveedores confiables y he
+    mantenido mi negocio actualizado con las últimas tendencias de la Industria
+    4.0."
+  </p>
+  <a
+    href="#"
+    class="bg-yellow-400 text-gray-800 px-6 py-2 rounded-lg hover:bg-yellow-500 transition duration-300"
+    >Únete a la Comunidad</a
+  >
+</div>
+} @case ('varios6') {
+<!-- Hero Section -->
+<div class="bg-gradient-to-r from-blue-500 to-purple-500 text-white py-20">
+  <div class="container mx-auto text-center">
+    <h1 class="text-5xl font-bold mb-4">Bienvenido a Nuestra Plataforma</h1>
+    <p class="text-xl mb-8">
+      Descubre las últimas noticias, artículos y recursos sobre tecnología e
+      innovación.
+    </p>
+    <a
+      href="#"
+      class="bg-white text-blue-500 px-8 py-3 rounded-lg hover:bg-gray-100 transition duration-300"
+      >Explorar Ahora</a
+    >
+  </div>
+</div>
+} @case ('varios7') {
+<!-- CTAs Section -->
+<div class="container mx-auto my-12">
+  <h2 class="text-3xl font-bold text-center mb-8">Call to Action</h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <!-- CTA 1 -->
+    <div class="bg-white rounded-lg shadow-lg p-8 text-center">
+      <h3 class="text-xl font-bold mb-4">Únete a Nosotros</h3>
+      <p class="text-gray-600 mb-6">
+        Regístrate y accede a contenido exclusivo.
+      </p>
+      <a
+        href="#"
+        class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition duration-300"
+        >Registrarse</a
+      >
+    </div>
+    <!-- CTA 2 -->
+    <div class="bg-white rounded-lg shadow-lg p-8 text-center">
+      <h3 class="text-xl font-bold mb-4">Explora Noticias</h3>
+      <p class="text-gray-600 mb-6">
+        Mantente informado con las últimas novedades.
+      </p>
+      <a
+        href="#"
+        class="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition duration-300"
+        >Ver Noticias</a
+      >
+    </div>
+    <!-- CTA 3 -->
+    <div class="bg-white rounded-lg shadow-lg p-8 text-center">
+      <h3 class="text-xl font-bold mb-4">Contacto</h3>
+      <p class="text-gray-600 mb-6">¿Tienes preguntas? Contáctanos.</p>
+      <a
+        href="#"
+        class="bg-purple-500 text-white px-6 py-2 rounded-lg hover:bg-purple-600 transition duration-300"
+        >Contactar</a
+      >
+    </div>
+  </div>
+</div>
+} @case ('varios8') {
+<!-- Cards Section -->
+<div class="container mx-auto my-12">
+  <h2 class="text-3xl font-bold text-center mb-8">Artículos Destacados</h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <!-- Card 1 -->
+    <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+      <img
+        src="https://picsum.photos/800/600"
+        alt="Imagen del artículo"
+        class="w-full h-48 object-cover"
+      />
+      <div class="p-6">
+        <h3 class="text-xl font-bold mb-2">Título del Artículo 1</h3>
+        <p class="text-gray-600 mb-4">
+          Descripción breve del artículo. Puede incluir un resumen o detalles
+          clave.
+        </p>
+        <a href="#" class="text-blue-500 hover:text-blue-700 font-semibold"
+          >Leer más →</a
+        >
+      </div>
+    </div>
+    <!-- Card 2 -->
+    <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+      <img
+        src="https://picsum.photos/800/600"
+        alt="Imagen del artículo"
+        class="w-full h-48 object-cover"
+      />
+      <div class="p-6">
+        <h3 class="text-xl font-bold mb-2">Título del Artículo 2</h3>
+        <p class="text-gray-600 mb-4">
+          Descripción breve del artículo. Puede incluir un resumen o detalles
+          clave.
+        </p>
+        <a href="#" class="text-blue-500 hover:text-blue-700 font-semibold"
+          >Leer más →</a
+        >
+      </div>
+    </div>
+    <!-- Card 3 -->
+    <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+      <img
+        src="https://picsum.photos/800/600"
+        alt="Imagen del artículo"
+        class="w-full h-48 object-cover"
+      />
+      <div class="p-6">
+        <h3 class="text-xl font-bold mb-2">Título del Artículo 3</h3>
+        <p class="text-gray-600 mb-4">
+          Descripción breve del artículo. Puede incluir un resumen o detalles
+          clave.
+        </p>
+        <a href="#" class="text-blue-500 hover:text-blue-700 font-semibold"
+          >Leer más →</a
+        >
+      </div>
+    </div>
+  </div>
+</div>
+} @case ('varios9') {
+<!-- Badges Section -->
+<div class="container mx-auto my-12">
+  <h2 class="text-3xl font-bold text-center mb-8">Categorías</h2>
+  <div class="flex justify-center space-x-4">
+    <span class="bg-blue-500 text-white px-4 py-2 rounded-full"
+      >Tecnología</span
+    >
+    <span class="bg-green-500 text-white px-4 py-2 rounded-full"
+      >Innovación</span
+    >
+    <span class="bg-purple-500 text-white px-4 py-2 rounded-full"
+      >Educación</span
+    >
+    <span class="bg-orange-500 text-white px-4 py-2 rounded-full"
+      >Negocios</span
+    >
+  </div>
+</div>
+} @case ('varios10') {
+<!-- Slider Section -->
+<div class="container mx-auto my-12">
+  <h2 class="text-3xl font-bold text-center mb-8">Testimonios</h2>
+  <div class="flex overflow-x-auto space-x-8 pb-8">
+    <!-- Testimonio 1 -->
+    <div class="bg-white rounded-lg shadow-md p-8 flex-shrink-0 w-96">
+      <p class="text-gray-600 mb-4">
+        "Excelente plataforma para mantenerse actualizado en tecnología."
+      </p>
+      <p class="text-gray-800 font-semibold">- Juan Pérez</p>
+    </div>
+    <!-- Testimonio 2 -->
+    <div class="bg-white rounded-lg shadow-md p-8 flex-shrink-0 w-96">
+      <p class="text-gray-600 mb-4">
+        "Los artículos son muy informativos y fáciles de entender."
+      </p>
+      <p class="text-gray-800 font-semibold">- María Gómez</p>
+    </div>
+    <!-- Testimonio 3 -->
+    <div class="bg-white rounded-lg shadow-md p-8 flex-shrink-0 w-96">
+      <p class="text-gray-600 mb-4">
+        "Una gran fuente de conocimiento para profesionales."
+      </p>
+      <p class="text-gray-800 font-semibold">- Carlos López</p>
+    </div>
+  </div>
+</div>
+} @case ('varios11') {
+<!-- CTA 2: Con video de fondo -->
+<div style="height: 45rem" class="relative shadow-md mb-8 overflow-hidden">
+  <!-- Video de fondo -->
+  <video
+    autoplay
+    muted
+    loop
+    class="absolute inset-0 w-full h-full object-cover"
+  >
+    <source
+      src="https://videos.pexels.com/video-files/2406491/2406491-uhd_2560_1440_24fps.mp4"
+      type="video/mp4"
+    />
+    Tu navegador no soporta videos HTML5.
+  </video>
+  <!-- Overlay oscuro para mejorar la legibilidad -->
+  <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+  <!-- Contenido del CTA -->
+  <app-navbar background="transparent" zindex="true"></app-navbar>
+  <div
+    class="relative h-full flex flex-col justify-center items-center text-center"
+  >
+    <h2 class="text-3xl font-bold text-white mb-4">Explora la Industria 4.0</h2>
+    <p class="text-gray-200 mb-6">
+      Accede a recursos exclusivos y conoce las últimas innovaciones.
+    </p>
+    <a
+      href="/buscador"
+      routerLink="/buscador"
+      class="bg-gray-700 text-white shadow-[0_0_20px_10px_rgba(0,0,0,0.5)] px-6 py-2 rounded-lg hover:bg-yellow-500 transition duration-300"
+      >Explorar Recursos</a
+    >
+  </div>
+</div>
+}}

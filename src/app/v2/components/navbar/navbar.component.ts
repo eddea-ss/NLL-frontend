@@ -1,4 +1,4 @@
-import { Component, effect, inject, signal } from '@angular/core';
+import { Component, effect, inject, Input, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink, RouterModule } from '@angular/router';
 import { LoginService } from '@v2/services';
@@ -39,6 +39,9 @@ export class NavbarComponent {
   // Hacer disponibles los enums en la plantilla
   public AuthState = AuthState;
   public Role = Role;
+
+  @Input() background = '#1f2937';
+  @Input() zindex = '';
 
   // Estado del menú móvil
   isMobileMenuOpen = false;
@@ -176,6 +179,9 @@ export class NavbarComponent {
 
   // Abre o cierra un submenú específico
   toggleSubmenu(menu: DropdownMenu) {
+    const open = menu.isOpenSignal();
+    this.closeAllSubmenus();
+    menu.isOpenSignal.set(open);
     menu.isOpenSignal.set(!menu.isOpenSignal());
   }
 
