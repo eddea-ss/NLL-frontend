@@ -5,20 +5,27 @@ import { HomeComponent } from '@v2/v2.module'; // Asegúrate de que HomeComponen
 export const routes: Routes = [
   {
     path: '',
+    loadComponent: () =>
+      import('@v2/modules/landing-page3/landing-page3.component').then(
+        (m) => m.LandingPage3Component
+      ),
+  },
+  {
+    path: '',
     component: HomeComponent,
     children: [
-      {
-        path: '',
-        loadComponent: () =>
-          import('@v2/modules/landing-page2/landing-page2.component').then(
-            (m) => m.LandingPage2Component
-          ),
-      },
       {
         path: 'landing',
         loadComponent: () =>
           import('@v2/modules/landing-page/landing-page.component').then(
             (m) => m.LandingPageComponent
+          ),
+      },
+      {
+        path: 'landing2',
+        loadComponent: () =>
+          import('@v2/modules/landing-page2/landing-page2.component').then(
+            (m) => m.LandingPage2Component
           ),
       },
       {
