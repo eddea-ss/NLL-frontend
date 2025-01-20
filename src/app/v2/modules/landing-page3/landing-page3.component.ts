@@ -1,11 +1,6 @@
 import { Component, effect, inject } from '@angular/core';
-import {
-  ExtrasComponent,
-  TitleSectionComponent,
-  CarouselComponent,
-} from '@v2/components';
-import { PatrocinadoresComponent } from '../../components/patrocinadores/patrocinadores.component';
-import { FooterComponent } from '../../components/footer/footer.component';
+import { ExtrasComponent, TitleSectionComponent } from '@v2/components';
+import { PatrocinadoresComponent, FooterComponent } from '@v2/components';
 import { LoginService } from '@v2/services';
 import { AuthState, UserType } from '@v2/enums';
 
@@ -17,7 +12,6 @@ import { AuthState, UserType } from '@v2/enums';
     PatrocinadoresComponent,
     FooterComponent,
     TitleSectionComponent,
-    CarouselComponent,
   ],
   templateUrl: './landing-page3.component.html',
   styleUrl: './landing-page3.component.scss',
