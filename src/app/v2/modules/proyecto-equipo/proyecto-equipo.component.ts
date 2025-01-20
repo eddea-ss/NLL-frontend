@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { BreadcrumbsComponent, SugeridosComponent } from '@v2/components';
 import { PROYECTO_EQUIPO } from '@v2/constants';
+import { CarouselBannerComponent } from '../carousel-banner/carousel-banner.component';
 
 @Component({
   selector: 'app-proyecto-equipo',
   standalone: true,
-  imports: [SugeridosComponent, BreadcrumbsComponent],
+  imports: [SugeridosComponent, BreadcrumbsComponent, CarouselBannerComponent],
   templateUrl: './proyecto-equipo.component.html',
   styleUrl: './proyecto-equipo.component.scss',
 })
@@ -36,7 +37,7 @@ export class ProyectoEquipoComponent {
       nombre: 'Carlos Arias',
       cargo: 'Ingeniero Frontend',
       imagen: 'assets/team/carlos.webp',
-    }
+    },
   ];
 
   constructor() {

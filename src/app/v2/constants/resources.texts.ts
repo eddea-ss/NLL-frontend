@@ -27,7 +27,7 @@ export const COURSE_TEXT: ResourceText = {
     },
     {
       label: 'Buscadores',
-      url: '/buscadores',
+      url: '/',
     },
     {
       label: 'Cursos',
@@ -71,7 +71,7 @@ export const ARTICLE_TEXT: ResourceText = {
     },
     {
       label: 'Buscadores',
-      url: '/buscadores',
+      url: '/',
     },
     {
       label: 'Articulos',
@@ -114,7 +114,7 @@ export const PROJECT_TEXT: ResourceText = {
     },
     {
       label: 'Buscadores',
-      url: '/buscadores',
+      url: '/',
     },
     {
       label: 'Proyectos destacados',
@@ -158,7 +158,7 @@ export const SUPPLIER_TEXT: ResourceText = {
     },
     {
       label: 'Buscadores',
-      url: '/buscadores',
+      url: '/',
     },
     {
       label: 'Proveedores',
@@ -201,7 +201,7 @@ export const FINNANCING_TEXT: ResourceText = {
     },
     {
       label: 'Buscadores',
-      url: '/buscadores',
+      url: '/',
     },
     {
       label: 'Financiamiento',
@@ -239,7 +239,7 @@ export const STARTUPS_TEXT: ResourceText = {
     },
     {
       label: 'Buscadores',
-      url: '/buscadores',
+      url: '/',
     },
     {
       label: 'Statup y emprendimiento',

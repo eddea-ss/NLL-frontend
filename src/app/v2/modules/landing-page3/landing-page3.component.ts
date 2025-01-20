@@ -1,5 +1,9 @@
 import { Component, effect, inject } from '@angular/core';
-import { ExtrasComponent, TitleSectionComponent } from '@v2/components';
+import {
+  ExtrasComponent,
+  TitleSectionComponent,
+  CarouselComponent,
+} from '@v2/components';
 import { PatrocinadoresComponent } from '../../components/patrocinadores/patrocinadores.component';
 import { FooterComponent } from '../../components/footer/footer.component';
 import { LoginService } from '@v2/services';
@@ -13,6 +17,7 @@ import { AuthState, UserType } from '@v2/enums';
     PatrocinadoresComponent,
     FooterComponent,
     TitleSectionComponent,
+    CarouselComponent,
   ],
   templateUrl: './landing-page3.component.html',
   styleUrl: './landing-page3.component.scss',
@@ -24,6 +29,30 @@ export class LandingPage3Component {
 
   public AuthState = AuthState;
   public UserType = UserType;
+
+  slides = [
+    {
+      image: 'https://picsum.photos/id/1011/800/400',
+      title: 'Montañas imponentes',
+      content: 'Descubre la belleza de la naturaleza con nuestras excursiones.',
+      buttonText: 'Explorar',
+      buttonLink: '/excursiones',
+    },
+    {
+      image: 'https://picsum.photos/id/1012/800/400',
+      title: 'Mares cristalinos',
+      content: 'Relájate en las playas más paradisíacas del mundo.',
+      buttonText: 'Reservar ahora',
+      buttonLink: '/reservas',
+    },
+    {
+      image: 'https://picsum.photos/id/1015/800/400',
+      title: 'Aventura en selva',
+      content: 'Vive experiencias inolvidables con nuestras rutas extremas.',
+      buttonText: 'Contáctanos',
+      buttonLink: '/contacto',
+    },
+  ];
 
   titleSection = {
     title: '',

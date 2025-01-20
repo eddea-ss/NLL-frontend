@@ -3,6 +3,7 @@ export * from './footer/footer.component';
 export * from './patrocinadores/patrocinadores.component';
 export * from './sugeridos/sugeridos.component';
 export * from './extras/extras.component';
+export * from './carousel/carousel.component';
 
 //componentes de control
 export * from './breadcrumbs/breadcrumbs.component';

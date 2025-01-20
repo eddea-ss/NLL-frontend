@@ -8,6 +8,7 @@ export * from './proyecto-plataforma/proyecto-plataforma.component';
 export * from './podcasts/podcasts.component';
 export * from './informe/informe.component';
 export * from './survey-form/survey-form.component';
+export * from './carousel-banner/carousel-banner.component';
 
 //evaluaciones
 export * from './evaluaciones-madurez/evaluaciones-madurez.component';

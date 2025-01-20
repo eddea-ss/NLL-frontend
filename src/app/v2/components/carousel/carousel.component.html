@@ -1,0 +1,88 @@
+<div class="carousel-container" [ngStyle]="{ width: width, height: height }">
+  <!-- Contenedor de las diapositivas -->
+  <div
+    class="carousel-slides"
+    [style.transition]="'transform ' + transitionTime + 'ms ease-in-out'"
+    [style.transform]="'translateX(-' + currentIndex * 100 + '%)'"
+  >
+    <div class="carousel-item" *ngFor="let slide of slides">
+      @if (!slide?.type) {
+      <div class="relative w-full">
+        <img
+          class="block w-full h-auto object-cover"
+          [src]="slide.image"
+          alt="Imagen del carrusel"
+        />
+        <!-- Overlay del texto -->
+        <div
+          class="absolute inset-0 flex flex-col justify-center items-center bg-black/40 text-white p-4 md:bg-black/30 <!-- un overlay más ligero en pantallas md -->"
+        >
+          <h2 class="text-2xl md:text-3xl">
+            {{ slide.title }}
+          </h2>
+          <p class="text-base font-bold md:text-lg my-2">
+            {{ slide.content }}
+          </p>
+          <a
+            class="mt-2 px-4 font-bold py-2 bg-yellow-500 hover:bg-yellow-700 text-white rounded"
+            [href]="slide.buttonLink"
+          >
+            {{ slide.buttonText }}
+          </a>
+        </div>
+      </div>
+
+      }@else if (slide.type==='custom1') {
+      <div
+        class="w-full bg-gray-800 py-9 px-10 flex justify-center items-center gap-4"
+      >
+        <!-- Columna 1: Ícono grande -->
+        <div class="flex items-center justify-center">
+          <svg
+            aria-hidden="true"
+            class="w-20 h-20 text-gray-300"
+            fill="currentColor"
+            viewBox="0 0 64 64"
+          >
+            <path
+              d="M32 2c-1.1 0-2 .9-2 2v2H10c-3.3 0-6 2.7-6 6v14c0 3.3 2.7 6 6 6h2v4H8c-3.3 0-6 2.7-6 6v8c0 3.3 2.7 6 6 6h48c3.3 0 6-2.7 6-6v-8c0-3.3-2.7-6-6-6h-4v-4h2c3.3 0 6-2.7 6-6V12c0-3.3-2.7-6-6-6H34V4c0-1.1-.9-2-2-2zm-2 38v-6h4v6h-4zm-16 0v-6h4v6h-4zm32 0v-6h4v6h-4zm4 12c1.1 0 2 .9 2 2v4H8v-4c0-1.1.9-2 2-2h42zM10 28c-1.1 0-2-.9-2-2V12c0-1.1.9-2 2-2h44c1.1 0 2 .9 2 2v14c0 1.1-.9 2-2 2H10zm8-10a2 2 0 100 4 2 2 0 000-4zm28 0a2 2 0 100 4 2 2 0 000-4z"
+            ></path>
+          </svg>
+        </div>
+
+        <!-- Columna 2: Título (fila 1) + Botón (fila 2) -->
+        <div class="flex flex-col gap-2">
+          <h2 class="text-white text-lg font-semibold">
+            {{ slide.title }}
+          </h2>
+
+          <button
+            *ngIf="slide.buttonText"
+            (click)="openLink(slide.buttonLink ?? '')"
+            class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold px-4 py-2 rounded"
+          >
+            {{ slide.buttonText }}
+          </button>
+        </div>
+      </div>
+
+      }
+    </div>
+  </div>
+
+  <!-- Controles de navegación manual (opcional) -->
+  <button
+    *ngIf="showArrows"
+    class="carousel-control prev"
+    (click)="prevSlide()"
+  >
+    &#10094;
+  </button>
+  <button
+    *ngIf="showArrows"
+    class="carousel-control next"
+    (click)="nextSlide()"
+  >
+    &#10095;
+  </button>
+</div>

@@ -8,11 +8,17 @@ import {
 } from '@angular/platform-browser';
 import { BreadcrumbsComponent, SugeridosComponent } from '@v2/components';
 import { INVESTIGACION_PODCASTS } from '@v2/constants';
+import { CarouselBannerComponent } from '../carousel-banner/carousel-banner.component';
 
 @Component({
   selector: 'app-podcasts',
   standalone: true,
-  imports: [CommonModule, SugeridosComponent, BreadcrumbsComponent],
+  imports: [
+    CommonModule,
+    SugeridosComponent,
+    BreadcrumbsComponent,
+    CarouselBannerComponent,
+  ],
   templateUrl: './podcasts.component.html',
   styleUrl: './podcasts.component.scss',
 })

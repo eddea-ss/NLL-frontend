@@ -17,6 +17,7 @@ import {
   SupplierItemComponent,
   StartupItemComponent,
   ProjectsModalComponent,
+  CarouselComponent,
 } from '@v2/components';
 
 import {
@@ -34,7 +35,8 @@ import {
   RecordsService,
   ResourceService,
 } from '@v2/services';
-import { AuthState, ResourceType } from '@v2/enums';
+import { AuthState, ResourceType, UserType } from '@v2/enums';
+import { CarouselBannerComponent } from '../carousel-banner/carousel-banner.component';
 
 @Component({
   selector: 'app-general-search',
@@ -44,6 +46,7 @@ import { AuthState, ResourceType } from '@v2/enums';
     SearchControlsComponent,
     SugeridosComponent,
     CommonModule,
+    CarouselComponent,
     // recursos
     CourseItemComponent,
     CourseModalComponent,
@@ -57,6 +60,7 @@ import { AuthState, ResourceType } from '@v2/enums';
     SupplierModalComponent,
     StartupItemComponent,
     StartupModalComponent,
+    CarouselBannerComponent,
   ],
   templateUrl: './general-search.component.html',
   styleUrls: ['./general-search.component.scss'],
@@ -124,6 +128,38 @@ export class GeneralSearchComponent implements OnInit {
     { type: ResourceType.FINNANCING, label: 'Financiamiento' },
     { type: ResourceType.SUPPLIER, label: 'Proveedores' },
     { type: ResourceType.STARTUP, label: 'Startups' },
+  ];
+
+  slides = [
+    {
+      type: 'custom1',
+      title: 'Prueba el nuevo Asistente para la Industria 4.0',
+      buttonText: 'Ir al asistente',
+      buttonLink:
+        'https://asistente.nuevoloslagos.org' +
+        (this.authState() === AuthState.LoggedIn
+          ? '/?code=' + this.currentUser()?.rut
+          : ''),
+    },
+    {
+      image: 'assets/images/industry.webp',
+      content:
+        this.authState() === AuthState.LoggedOut
+          ? 'Ingresa a tu cuenta e impulsa tu empresa a la industria 4.0'
+          : 'Completa tu evaluación y recibe un impulso para llegar a la madurez tecnológica',
+      buttonText:
+        this.authState() === AuthState.LoggedOut
+          ? 'Ingresa a tu cuenta'
+          : 'Completa tu evaluación',
+      buttonLink:
+        this.authState() === AuthState.LoggedOut
+          ? '/login'
+          : this.currentUser()?.type === UserType.COMPANY
+          ? '/evaluaciones-madurez'
+          : this.currentUser()?.type === UserType.STARTUP
+          ? '/evaluaciones-startup'
+          : '/evaluaciones-proveedor',
+    },
   ];
 
   ngOnInit(): void {

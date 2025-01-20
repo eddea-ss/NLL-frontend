@@ -27,14 +27,17 @@ export class ResourceService {
    * @returns Un Observable que emite un arreglo de cursos.
    */
   searchResources(query: string, path: string, limit = 5): Observable<any[]> {
-    const params = new HttpParams().set('search', query).set('limit', limit);
+    const params = new HttpParams().set('search', query);
 
     return this.http
       .get<any[]>(`${this.API_BASE_URL}/${path}/search`, { params })
       .pipe(
         map((data: any) => {
-          // Aquí puedes transformar los datos si es necesario
-          return data as any[];
+          const dataRand = data as any[];
+          const shuffled = [...dataRand].sort(() => Math.random() - 0.5);
+
+          const result = shuffled.slice(0, limit);
+          return result;
         }),
         catchError(this.handleError)
       );

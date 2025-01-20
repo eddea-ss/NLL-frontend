@@ -3,11 +3,17 @@ import { Component, inject } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { BreadcrumbsComponent, SugeridosComponent } from '@v2/components';
 import { INVESTIGACION_INFORME } from '@v2/constants';
+import { CarouselBannerComponent } from '../carousel-banner/carousel-banner.component';
 
 @Component({
   selector: 'app-informe',
   standalone: true,
-  imports: [SugeridosComponent, CommonModule, BreadcrumbsComponent],
+  imports: [
+    SugeridosComponent,
+    CommonModule,
+    BreadcrumbsComponent,
+    CarouselBannerComponent,
+  ],
   templateUrl: './informe.component.html',
   styleUrl: './informe.component.scss',
 })
