@@ -1,0 +1,1 @@
+import{a}from"./chunk-JHE2ZTPV.js";import"./chunk-PT3NX5BH.js";import"./chunk-AFYS73SV.js";import"./chunk-BBJOB5GC.js";import"./chunk-QQUCLDFE.js";import"./chunk-BKSLIME4.js";export{a as ProyectoPlataformaComponent};
