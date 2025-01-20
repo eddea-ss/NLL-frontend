@@ -29,14 +29,14 @@ export class ProyectoEquipoComponent {
       imagen: 'assets/team/marcelo.webp',
     },
     {
+      nombre: 'Carlos Arias',
+      cargo: 'Ingeniero de Software - Frontend & Backend',
+      imagen: 'assets/team/carlos.webp',
+    },
+    {
       nombre: 'Alexis Pizarro',
       cargo: 'Ingeniero Backend & Database',
       imagen: 'assets/team/alexis.webp',
-    },
-    {
-      nombre: 'Carlos Arias',
-      cargo: 'Ingeniero Frontend',
-      imagen: 'assets/team/carlos.webp',
     },
   ];
 
