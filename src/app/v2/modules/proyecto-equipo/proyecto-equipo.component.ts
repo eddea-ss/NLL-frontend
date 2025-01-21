@@ -30,7 +30,7 @@ export class ProyectoEquipoComponent {
     },
     {
       nombre: 'Carlos Arias',
-      cargo: 'Ingeniero de Software - Frontend & Backend',
+      cargo: 'Ingeniero de Software - Angular & Node',
       imagen: 'assets/team/carlos.webp',
     },
     {
