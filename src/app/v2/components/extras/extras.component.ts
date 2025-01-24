@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { NavbarComponent } from '../navbar/navbar.component';
 
@@ -11,4 +11,6 @@ import { NavbarComponent } from '../navbar/navbar.component';
 })
 export class ExtrasComponent {
   @Input() type: string = 'default';
+
+  @Input() data: any[] = [];
 }

@@ -1,8 +1,13 @@
-import { Component, effect, inject } from '@angular/core';
-import { ExtrasComponent, TitleSectionComponent } from '@v2/components';
+import { Component, effect, inject, OnInit } from '@angular/core';
+import {
+  ArticleModalComponent,
+  ExtrasComponent,
+  TitleSectionComponent,
+} from '@v2/components';
 import { PatrocinadoresComponent, FooterComponent } from '@v2/components';
-import { LoginService } from '@v2/services';
+import { LoginService, ResourceService } from '@v2/services';
 import { AuthState, UserType } from '@v2/enums';
+import { TruncatePipe } from '@v2/pipes';
 
 @Component({
   selector: 'app-landing-page3',
@@ -12,41 +17,26 @@ import { AuthState, UserType } from '@v2/enums';
     PatrocinadoresComponent,
     FooterComponent,
     TitleSectionComponent,
+    ArticleModalComponent,
+    TruncatePipe,
   ],
   templateUrl: './landing-page3.component.html',
   styleUrl: './landing-page3.component.scss',
 })
-export class LandingPage3Component {
+export class LandingPage3Component implements OnInit {
   private loginService = inject(LoginService);
   authState = this.loginService.authState;
   currentUser = this.loginService.currentUser;
+  protected recursosService = inject(ResourceService);
 
   public AuthState = AuthState;
   public UserType = UserType;
 
-  slides = [
-    {
-      image: 'https://picsum.photos/id/1011/800/400',
-      title: 'Montañas imponentes',
-      content: 'Descubre la belleza de la naturaleza con nuestras excursiones.',
-      buttonText: 'Explorar',
-      buttonLink: '/excursiones',
-    },
-    {
-      image: 'https://picsum.photos/id/1012/800/400',
-      title: 'Mares cristalinos',
-      content: 'Relájate en las playas más paradisíacas del mundo.',
-      buttonText: 'Reservar ahora',
-      buttonLink: '/reservas',
-    },
-    {
-      image: 'https://picsum.photos/id/1015/800/400',
-      title: 'Aventura en selva',
-      content: 'Vive experiencias inolvidables con nuestras rutas extremas.',
-      buttonText: 'Contáctanos',
-      buttonLink: '/contacto',
-    },
-  ];
+  slides = [];
+  data: any[] = [];
+  isModalOpen = false;
+  dataModal: any | undefined;
+  currentIndex = 0;
 
   titleSection = {
     title: '',
@@ -81,5 +71,39 @@ export class LandingPage3Component {
         this.titleSection.buttonLink = '/registro';
       }
     });
+  }
+
+  ngOnInit(): void {
+    this.fetchSuggestions();
+  }
+
+  private fetchSuggestions(): void {
+    const { pathMatch, searchKey } = {
+      pathMatch: 'articles',
+      searchKey: 'articulo',
+    };
+    this.recursosService.searchResources(searchKey, pathMatch, 3).subscribe({
+      next: (data) => {
+        this.data = data;
+      },
+      error: (error) => {
+        console.error('Error al obtener los datos:', error);
+        this.data = [];
+      },
+    });
+  }
+
+  closeModal(): void {
+    this.isModalOpen = false;
+    this.dataModal = undefined;
+  }
+
+  /**
+   * Abre el modal para el elemento sugerido en el índice dado.
+   */
+  openModal(index: number): void {
+    this.currentIndex = index;
+    this.dataModal = this.data[this.currentIndex];
+    this.isModalOpen = true;
   }
 }
