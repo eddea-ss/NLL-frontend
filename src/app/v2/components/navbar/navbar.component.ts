@@ -107,7 +107,7 @@ export class NavbarComponent {
 
   buscadoresMenu: DropdownMenu = {
     isDropdown: false,
-    label: 'Herramientas',
+    label: 'Buscador',
     route: '/buscador',
     items: [],
     isOpenSignal: signal(false),

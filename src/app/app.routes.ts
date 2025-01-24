@@ -15,20 +15,6 @@ export const routes: Routes = [
     component: HomeComponent,
     children: [
       {
-        path: 'landing',
-        loadComponent: () =>
-          import('@v2/modules/landing-page/landing-page.component').then(
-            (m) => m.LandingPageComponent
-          ),
-      },
-      {
-        path: 'landing2',
-        loadComponent: () =>
-          import('@v2/modules/landing-page2/landing-page2.component').then(
-            (m) => m.LandingPage2Component
-          ),
-      },
-      {
         path: 'buscador',
         loadComponent: () =>
           import('@v2/modules/general-search/general-search.component').then(
@@ -84,54 +70,7 @@ export const routes: Routes = [
             (m) => m.InformeComponent
           ),
       },
-      {
-        path: 'buscador-cursos',
-        loadComponent: () =>
-          import('@v2/modules/resource-search/resource-search.component').then(
-            (m) => m.ResourceSearchComponent
-          ),
-        data: { resourceType: 'curses' },
-      },
-      {
-        path: 'buscador-articulos',
-        loadComponent: () =>
-          import('@v2/modules/resource-search/resource-search.component').then(
-            (m) => m.ResourceSearchComponent
-          ),
-        data: { resourceType: 'articles' },
-      },
-      {
-        path: 'buscador-proyectos',
-        loadComponent: () =>
-          import('@v2/modules/resource-search/resource-search.component').then(
-            (m) => m.ResourceSearchComponent
-          ),
-        data: { resourceType: 'projects' },
-      },
-      {
-        path: 'buscador-financiamiento',
-        loadComponent: () =>
-          import('@v2/modules/resource-search/resource-search.component').then(
-            (m) => m.ResourceSearchComponent
-          ),
-        data: { resourceType: 'financing' },
-      },
-      {
-        path: 'buscador-proveedores',
-        loadComponent: () =>
-          import('@v2/modules/resource-search/resource-search.component').then(
-            (m) => m.ResourceSearchComponent
-          ),
-        data: { resourceType: 'suppliers' },
-      },
-      {
-        path: 'buscador-startup',
-        loadComponent: () =>
-          import('@v2/modules/resource-search/resource-search.component').then(
-            (m) => m.ResourceSearchComponent
-          ),
-        data: { resourceType: 'startups' },
-      },
+
       {
         path: 'login',
         loadComponent: () =>
@@ -174,7 +113,7 @@ export const routes: Routes = [
             (m) => m.SurveyFormComponent
           ),
       },
-      { path: '**', redirectTo: '', pathMatch: 'full' },
     ],
   },
+  { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
