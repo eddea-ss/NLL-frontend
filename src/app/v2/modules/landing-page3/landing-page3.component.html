@@ -14,6 +14,46 @@
     ></path>
   </svg>
 </div>
+
+<section data-aos="fade-up" type="articulos1">
+  @if (data.length) {
+  <div class="mb-8 mx-8 sm:mx-8 lg:mx-20 xl:mx-20">
+    <h2
+      routerLink="/buscador"
+      class="text-2xl cursor-pointer font-bold mb-4 text-gray-700 transform duration-300 hover:text-blue-800"
+    >
+      Artículos Destacados →
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      @for (item of data; track $index) {
+      <div
+        style="display: grid; place-content: space-between"
+        class="bg-white rounded-lg shadow-lg p-6 transform transition-transform duration-300 hover:scale-105"
+      >
+        <h3 class="text-xl font-bold mb-2 cards-title-color">
+          {{ item?.titulo | truncate : 50 : true }}
+        </h3>
+        <div>
+          <p
+            class="text-gray-600 mb-4"
+            [innerHTML]="
+              recursosService.sanitizedString(item?.resumen)
+                | truncate : 120 : true
+            "
+          ></p>
+          <a
+            class="cards-title-color hover:text-blue-600 font-semibold"
+            (click)="openModal($index)"
+            >Leer más →</a
+          >
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+  }
+</section>
+
 <!-- Contenido dinámico del sitio -->
 <section data-aos="fade-up">
   <app-title-section
@@ -200,3 +240,8 @@
 
 <app-patrocinadores></app-patrocinadores>
 <app-footer></app-footer>
+
+@if (isModalOpen && dataModal) {
+<app-article-modal [data]="dataModal" [showNext]="false" (close)="closeModal()">
+</app-article-modal>
+}
