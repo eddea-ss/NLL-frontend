@@ -8,6 +8,7 @@ import { PatrocinadoresComponent, FooterComponent } from '@v2/components';
 import { LoginService, ResourceService } from '@v2/services';
 import { AuthState, UserType } from '@v2/enums';
 import { TruncatePipe } from '@v2/pipes';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-landing-page3',
@@ -19,6 +20,7 @@ import { TruncatePipe } from '@v2/pipes';
     TitleSectionComponent,
     ArticleModalComponent,
     TruncatePipe,
+    RouterLink,
   ],
   templateUrl: './landing-page3.component.html',
   styleUrl: './landing-page3.component.scss',
