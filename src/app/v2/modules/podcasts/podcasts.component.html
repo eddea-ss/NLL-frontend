@@ -1,110 +1,101 @@
 <!-- Migas de pan para navegación -->
 <app-breadcrumbs [breadcrumbs]="breadcrumbs"></app-breadcrumbs>
 <app-carousel-banner></app-carousel-banner>
-<!-- Contenido principal -->
-<main class="container mx-auto py-12 flex flex-col lg:flex-row">
-  <!-- Sección de búsqueda y resultados -->
-  <div class="w-full lg:w-3/4 pr8 p-8">
-    <!-- Header -->
-    <header class="mb-12">
-      <div class="mx-auto py-4">
-        <h1 class="text-gray text-3xl font-bold">
-          Bienvenidos a la sección de Podcasts de Nuevo Los Lagos
-        </h1>
-        <p class="text-gray-700 mt-2 text-lg">
-          Estamos emocionados de presentarte una forma innovadora de acceder a
-          información sobre las tecnologías de la Industria 4.0.
-        </p>
-      </div>
+
+<main class="container mx-auto py-20 px-6 flex flex-col lg:flex-row gap-12">
+  <div class="w-full lg:w-3/4 space-y-16">
+    <!-- Header minimalista y moderno -->
+    <header class="bg-[rgb(234,179,8)] p-12 text-white">
+      <h1 class="text-5xl font-bold leading-tight tracking-tight">
+        Descubre el Futuro de la Industria 4.0
+      </h1>
+      <p class="mt-6 text-xl leading-relaxed opacity-90">
+        Sumérgete en un viaje de conocimiento a través de nuestros podcasts innovadores. 
+        Donde la tecnología y el aprendizaje se encuentran para transformar tu comprensión 
+        de la revolución industrial digital.
+      </p>
     </header>
 
-    <section class="mb-12">
-      <div class="bg-white py-2">
-        <h2 class="text-2xl font-bold text-gray-800 mb-6">Introducción</h2>
-        <p class="text-gray-700 leading-relaxed text-justify">
-          Nuestros podcasts, generados por inteligencia artificial, están
-          basados en nuestras investigaciones y conversaciones con expertos en
-          áreas como automatización, inteligencia artificial, Internet de las
-          Cosas (IoT) y más. Brindamos contenido accesible y actualizado, para
-          que explores las últimas tendencias de forma sencilla y directa.
-          Disfruta del conocimiento al alcance de un clic, en el formato que
-          mejor se adapta a ti.
-        </p>
-      </div>
+    <!-- Secciones con diseño minimalista -->
+    <section class="bg-white p-12 border-l-4 border-blue-600 hover:border-l-8 transition-all">
+      <h2 class="text-3xl font-bold text-gray-900 mb-6">
+        Una Nueva Era de Aprendizaje Digital
+      </h2>
+      <p class="text-gray-700 leading-relaxed text-lg">
+        Exploramos las fronteras de la tecnología a través de podcasts generados por IA, 
+        fusionando la precisión de la inteligencia artificial con insights valiosos de expertos 
+        en la industria. Cada episodio está cuidadosamente diseñado para ofrecerte una 
+        experiencia de aprendizaje inmersiva, donde conceptos complejos se transforman en 
+        conocimiento accesible y aplicable.
+      </p>
     </section>
 
-    <section class="mb-12">
-      <div class="bg-white py-2">
-        <h2 class="text-2xl font-bold text-gray-800 mb-6">
-          ¿Por qué hemos elegido el formato de podcast generado por IA?
-        </h2>
-        <p class="text-gray-700 leading-relaxed text-justify">
-          Hemos optado por los podcasts generados por inteligencia artificial
-          porque creemos en ofrecer contenido de forma accesible y conveniente.
-          Este formato permite que nuestros usuarios accedan a información
-          relevante sobre tecnologías de la Industria 4.0, en cualquier momento
-          y lugar. Además, la inteligencia artificial garantiza la entrega
-          rápida y precisa de datos actualizados, haciéndolo una opción ideal
-          para quienes desean estar al día con las últimas tendencias sin
-          invertir demasiado tiempo.
-        </p>
-      </div>
+    <section class="bg-white p-12 border-l-4 border-blue-600 hover:border-l-8 transition-all">
+      <h2 class="text-3xl font-bold text-gray-900 mb-6">
+        Innovación en Formato Podcast
+      </h2>
+      <p class="text-gray-700 leading-relaxed text-lg">
+        Nuestra plataforma revoluciona la manera de consumir contenido educativo. 
+        Utilizamos tecnología de vanguardia en IA para crear experiencias auditivas 
+        que se adaptan a tu ritmo de vida. Accede a conocimientos especializados sobre 
+        IoT, automatización, machine learning y más, todo mientras realizas tus 
+        actividades diarias.
+      </p>
     </section>
 
-    <section class="mb-12">
-      <div class="bg-white py-2">
-        <h2 class="text-2xl font-bold text-gray-800 mb-6">
-          ¿Cómo se desarrollan nuestros podcasts?
-        </h2>
-        <p class="text-gray-700 leading-relaxed text-justify">
-          Nuestros podcasts están basados en investigaciones detalladas y en
-          entrevistas con expertos del sector. Utilizamos tecnología de
-          inteligencia artificial avanzada para procesar esta información y
-          convertirla en episodios atractivos, informativos y fáciles de seguir.
-          Esto nos permite abordar temas complejos, como la automatización y el
-          Internet de las Cosas (IoT), de manera sencilla y comprensible para
-          todos.
-        </p>
-      </div>
+    <section class="bg-white p-12 border-l-4 border-blue-600 hover:border-l-8 transition-all">
+      <h2 class="text-3xl font-bold text-gray-900 mb-6">
+        Metodología de Vanguardia
+      </h2>
+      <p class="text-gray-700 leading-relaxed text-lg">
+        Cada podcast es el resultado de un proceso meticuloso que combina investigación 
+        avanzada, entrevistas con líderes de la industria y análisis de datos en tiempo real. 
+        Nuestra IA procesa esta información para crear narrativas coherentes y atractivas 
+        que mantienen el rigor técnico mientras resultan accesibles para todos los niveles 
+        de experiencia.
+      </p>
     </section>
 
-    <!-- Sección: Lista de Podcasts -->
-    <section class="bg-gray-100 p-6 border mt-5">
-      <!-- Video seleccionado -->
-      <div class="mb-6">
+    <!-- Reproductor de video modernizado -->
+    <section class="bg-white p-12">
+      <div class="mb-12">
         <iframe
-          class="w-full h-96"
+          class="w-full aspect-video shadow-2xl"
           [src]="selectedVideoUrl"
           frameborder="0"
           allowfullscreen
         ></iframe>
       </div>
-      <!-- Carrusel de videos -->
-      <div
-        style="overflow-y: hidden"
-        class="overflow-x-auto scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-200"
-      >
-        <div class="flex space-x-4">
+      
+      <!-- Carrusel de videos minimalista -->
+      <div class="overflow-x-auto py-6">
+        <div class="flex gap-8">
           <div
             *ngFor="let video of videos"
             (click)="selectVideo(video)"
-            class="cursor-pointer flex-shrink-0 w-40 transform hover:scale-105 transition-transform duration-200"
+            class="cursor-pointer flex-shrink-0 w-56 group"
           >
-            <img
-              [src]="getThumbnailUrl(video.id)"
-              alt="{{ video.title }}"
-              class="w-full h-24 object-cover shadow-md"
-            />
-            <p class="text-sm mt-2 text-center font-medium">
-              {{ video.title }}
-            </p>
+            <div class="relative overflow-hidden">
+              <img
+                [src]="getThumbnailUrl(video.id)"
+                alt="{{ video.title }}"
+                class="w-full aspect-video object-cover transform group-hover:scale-105 transition-transform duration-500"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                <div class="absolute bottom-4 left-4 right-4">
+                  <p class="text-white text-sm font-medium">
+                    {{ video.title }}
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
   </div>
-  <!-- Sección de artículos sugeridos -->
-  <aside>
+
+  <aside class="w-full lg:w-1/4 sticky top-8 h-fit">
     <app-sugeridos></app-sugeridos>
   </aside>
 </main>

@@ -2,42 +2,40 @@
 <app-breadcrumbs [breadcrumbs]="breadcrumbs"></app-breadcrumbs>
 <app-carousel-banner></app-carousel-banner>
 <!-- Contenido principal -->
-<main class="container mx-auto py-12 flex flex-col lg:flex-row">
-  <!-- Sección de búsqueda y resultados -->
-  <div class="w-full lg:w-3/4 pr8 p-8">
-    <!-- Header -->
-    <header class="mb-12">
-      <div class="mx-auto py-4">
-        <h1 class="text-gray text-3xl font-bold">
-          Informe sobre la Industria 4.0 en la Región de Los Lagos
-        </h1>
-        <p class="text-gray-700 mt-2 text-lg">
-          Análisis del ecosistema de manufactura avanzada y sus desafíos
-        </p>
-      </div>
+<main class="container mx-auto py-16 flex flex-col lg:flex-row gap-8">
+  <div class="w-full lg:w-3/4 space-y-16">
+    <!-- Header con diseño moderno -->
+    <header class="border-l-4 border-[rgb(234,179,8)] pl-6">
+      <h1 class="text-4xl font-bold tracking-tight">
+        Industria 4.0 en Los Lagos
+      </h1>
+      <p class="text-xl text-gray-600 mt-4">
+        Transformación digital y manufactura avanzada: Un análisis del ecosistema regional
+      </p>
     </header>
-    <!-- Sección: Introducción -->
-    <section class="mb-12">
-      <div class="bg-white py-2">
-        <h2 class="text-2xl font-bold text-gray-800 mb-6">Introducción</h2>
-        <p class="text-gray-700 leading-relaxed text-justify">
-          Este informe, elaborado junto a <strong>CORFO</strong>,
-          <strong>ASIMET</strong>, la
-          <strong>Universidad Santo Tomás (Puerto Montt)</strong> y
-          <strong>Grupo Centinela</strong>, analiza el ecosistema de manufactura
-          avanzada e industria 4.0 en la Región de Los Lagos, enfocándose en las
-          oportunidades y desafíos del sector en su transformación digital. Con
-          un análisis exhaustivo, busca servir como base sólida para la toma de
-          decisiones estratégicas que impulsen el desarrollo económico
-          sostenible de la región.
+
+    <!-- Secciones con nuevo diseño -->
+    <section class="space-y-16">
+      <!-- Introducción -->
+      <div class="hover:bg-gray-50 transition-colors duration-300 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center">
+          <span class="w-8 h-[2px] bg-[rgb(234,179,8)] mr-3"></span>
+          Visión General
+        </h2>
+        <p class="text-gray-700 leading-relaxed">
+          Un estudio colaborativo entre <span class="text-[rgb(234,179,8)]">CORFO</span>, 
+          <span class="text-[rgb(234,179,8)]">ASIMET</span>, 
+          <span class="text-[rgb(234,179,8)]">Universidad Santo Tomás</span> y 
+          <span class="text-[rgb(234,179,8)]">Grupo Centinela</span> que examina el futuro 
+          de la manufactura en la región. Este análisis proporciona una hoja de ruta para 
+          la transformación digital del sector productivo.
         </p>
       </div>
-    </section>
 
-    <!-- Sección: Brechas en la Adopción de Tecnologías 4.0 -->
-    <section class="mb-12">
-      <div class="bg-white py-2">
-        <h2 class="text-2xl font-bold text-gray-800 mb-6">
+      <!-- Sección: Brechas en la Adopción de Tecnologías 4.0 -->
+      <div class="hover:bg-gray-50 transition-colors duration-300 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center">
+          <span class="w-8 h-[2px] bg-[rgb(234,179,8)] mr-3"></span>
           Brechas en la Adopción de Tecnologías 4.0
         </h2>
         <p class="text-gray-700 leading-relaxed mb-4 text-justify">
@@ -56,12 +54,11 @@
           instituciones.
         </p>
       </div>
-    </section>
 
-    <!-- Sección: Sectores Clave de la Economía Regional -->
-    <section class="mb-12">
-      <div class="bg-white py-2">
-        <h2 class="text-2xl font-bold text-gray-800 mb-6">
+      <!-- Sección: Sectores Clave de la Economía Regional -->
+      <div class="hover:bg-gray-50 transition-colors duration-300 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center">
+          <span class="w-8 h-[2px] bg-[rgb(234,179,8)] mr-3"></span>
           Sectores Clave de la Economía Regional
         </h2>
         <p class="text-gray-700 leading-relaxed mb-4 text-justify">
@@ -79,12 +76,11 @@
           oxigenación en la acuicultura.
         </p>
       </div>
-    </section>
 
-    <!-- Sección: Fuente de Información -->
-    <section class="mb-12">
-      <div class="bg-white py-2">
-        <h2 class="text-2xl font-bold text-gray-800 mb-6">
+      <!-- Sección: Fuente de Información -->
+      <div class="hover:bg-gray-50 transition-colors duration-300 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center">
+          <span class="w-8 h-[2px] bg-[rgb(234,179,8)] mr-3"></span>
           Fuente de Información
         </h2>
         <p class="text-gray-700 leading-relaxed mb-4 text-justify">
@@ -102,12 +98,11 @@
           de tecnologías avanzadas.
         </p>
       </div>
-    </section>
 
-    <!-- Sección: Objetivo del Informe -->
-    <section class="mb-12">
-      <div class="bg-white py-2">
-        <h2 class="text-2xl font-bold text-gray-800 mb-6">
+      <!-- Sección: Objetivo del Informe -->
+      <div class="hover:bg-gray-50 transition-colors duration-300 p-8">
+        <h2 class="text-2xl font-bold mb-6 flex items-center">
+          <span class="w-8 h-[2px] bg-[rgb(234,179,8)] mr-3"></span>
           Objetivo del Informe
         </h2>
         <p class="text-gray-700 leading-relaxed mb-4 text-justify">
@@ -126,32 +121,22 @@
           del ecosistema de innovación de la región.
         </p>
       </div>
-      <div class="mt-6 text-center">
-        <a
-          style="cursor: pointer"
-          (click)="
-            openLink(
-              'https://drive.google.com/file/d/1Ct-dBUZZ2nejjTZ7FNbhrLr45POtNnnN/view?usp=sharing'
-            )
-          "
-          class="btn-primary-yellow"
-        >
-          <svg
-            class="inline-block w-6 h-6 mr-2"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-          >
-            <path
-              d="M12.293 9.293a1 1 0 011.414 0L17 12.586V4a1 1 0 112 0v10a1 1 0 01-1 1h-10a1 1 0 110-2h8.586l-3.293-3.293a1 1 0 010-1.414zM3 4a1 1 0 011-1h6a1 1 0 110 2H5v12h8a1 1 0 110 2H4a1 1 0 01-1-1V4z"
-            />
+
+      <!-- Botón de descarga modernizado -->
+      <div class="mt-12 text-center">
+        <a (click)="openLink('https://drive.google.com/file/d/1Ct-dBUZZ2nejjTZ7FNbhrLr45POtNnnN/view?usp=sharing')"
+           class="inline-flex items-center px-8 py-4 bg-[rgb(234,179,8)] hover:bg-[rgb(234,179,8)]/90 
+                  transition-colors duration-300 cursor-pointer">
+          <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M12.293 9.293a1 1 0 011.414 0L17 12.586V4a1 1 0 112 0v10a1 1 0 01-1 1h-10a1 1 0 110-2h8.586l-3.293-3.293a1 1 0 010-1.414zM3 4a1 1 0 011-1h6a1 1 0 110 2H5v12h8a1 1 0 110 2H4a1 1 0 01-1-1V4z"/>
           </svg>
-          Descargar Informe Completo
+          Ver Informe Completo
         </a>
       </div>
     </section>
   </div>
-  <!-- Sección de artículos sugeridos -->
-  <aside>
+
+  <aside class="w-full lg:w-1/4 sticky top-8 h-fit">
     <app-sugeridos></app-sugeridos>
   </aside>
 </main>

@@ -1,61 +1,63 @@
 <!-- Migas de pan para navegación -->
 <app-breadcrumbs [breadcrumbs]="breadcrumbs"></app-breadcrumbs>
 <app-carousel-banner></app-carousel-banner>
-<main class="container mx-auto py-12 flex flex-col lg:flex-row">
-  <!-- Sección de búsqueda y resultados -->
-  <div class="w-full lg:w-3/4 pr8 p-8">
-    <h1 class="text-3xl font-bold mb-5">Plataforma</h1>
-    <!-- Espacio para contenido dinámico -->
-    <section class="my-8 text-justify bg-gray-100 p-3">
-      <p class="mt-4 text-lg text-gray-700">
-        El proyecto "Nuevo Los Lagos", en desarrollo, es una colaboración entre
-        la Universidad Santo Tomás, Asimet y Grupo Centinela, con financiamiento
-        de Corfo Los Lagos. Esta plataforma web busca fortalecer la
-        infraestructura industrial y profesional de la región.
+
+<!-- Contenedor principal con grid moderno -->
+<main class="container mx-auto py-16 grid grid-cols-1 lg:grid-cols-4 gap-8 px-4">
+  <div class="lg:col-span-3">
+    <!-- Encabezado principal -->
+    <h1 class="text-4xl font-bold mb-12 border-b-2 border-amber-500 pb-4">Plataforma de Innovación Industrial</h1>
+
+    <!-- Sección de introducción -->
+    <section class="mb-16">
+      <p class="text-xl leading-relaxed text-gray-800">
+        "Nuevo Los Lagos" representa una alianza estratégica entre la Universidad Santo Tomás, Asimet y Grupo Centinela, 
+        respaldada por Corfo Los Lagos. Nuestra misión es transformar el panorama industrial regional mediante tecnología 
+        e innovación.
       </p>
-      <ul class="mt-4 space-y-2 list-disc pl-6 text-gray-700">
-        <li>
-          <strong>Educación y Actualización Profesional:</strong> Ofrecerá
-          cursos especializados en manufactura avanzada.
-        </li>
-        <li>
-          <strong>Buscador de Proveedores Basado en IA:</strong> Un sistema
-          inteligente para conectar empresas con proveedores.
-        </li>
-      </ul>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+        <div class="bg-amber-500/10 p-8 hover:bg-amber-500/20 transition-all">
+          <h3 class="text-xl font-semibold mb-4">Formación Especializada</h3>
+          <p class="text-gray-700">Programas avanzados en manufactura moderna y tecnologías emergentes.</p>
+        </div>
+        <div class="bg-amber-500/10 p-8 hover:bg-amber-500/20 transition-all">
+          <h3 class="text-xl font-semibold mb-4">IA para Conexiones B2B</h3>
+          <p class="text-gray-700">Sistema inteligente de vinculación entre empresas y proveedores especializados.</p>
+        </div>
+      </div>
     </section>
-    <section class="my-8 text-justify p-3">
-      <h2 class="text-2xl font-semibold text-gray-800">Objetivos</h2>
-      <h3 class="mt-4 text-xl font-medium text-gray-800">General</h3>
-      <p class="mt-2 text-lg text-gray-700">
-        Apoyar el desarrollo y fortalecimiento del sector manufactura avanzada
-        en la Región de Los Lagos.
-      </p>
-      <h3 class="mt-4 text-xl font-medium text-gray-800">Específicos</h3>
-      <ul class="mt-2 space-y-2 list-disc pl-6 text-gray-700">
-        <li>
-          Desarrollar un bien público para mejorar la competitividad del sector.
-        </li>
-        <li>Fortalecer la educación en manufactura avanzada.</li>
-        <li>Mejorar la coordinación público-privada.</li>
-      </ul>
+
+    <!-- Sección de objetivos -->
+    <section class="mb-16">
+      <h2 class="text-3xl font-bold mb-8">Impacto Regional</h2>
+      
+      <div class="space-y-8">
+        <div class="border-l-4 border-amber-500 pl-6">
+          <h3 class="text-2xl font-semibold mb-4">Visión General</h3>
+          <p class="text-lg text-gray-800">Impulsar la transformación del sector manufacturero en Los Lagos hacia la industria 4.0</p>
+        </div>
+
+        <div class="space-y-4">
+          <h3 class="text-2xl font-semibold">Metas Específicas</h3>
+          <ul class="space-y-4 text-lg text-gray-800">
+            <li class="flex items-center gap-3">
+              <span class="text-amber-500">▪</span>
+              Implementación de soluciones tecnológicas innovadoras
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="text-amber-500">▪</span>
+              Desarrollo de talento especializado en manufactura avanzada
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="text-amber-500">▪</span>
+              Fortalecimiento del ecosistema industrial regional
+            </li>
+          </ul>
+        </div>
+      </div>
     </section>
-    <section class="my-8 text-justify bg-gray-100 p-3">
-      <h2 class="text-3xl font-semibold text-gray-800">Organización</h2>
-      <p class="mt-4 text-lg text-gray-700">
-        Los principales actores en el proyecto son:
-      </p>
-      <ul class="mt-2 space-y-2 list-disc pl-6 text-gray-700">
-        <li><strong>ASIMET:</strong> Mandante del proyecto.</li>
-        <li>
-          <strong>Universidad Santo Tomás:</strong> Beneficiario del proyecto.
-        </li>
-        <li>
-          <strong>Grupo Centinela:</strong> Co-ejecutor con experiencia en el
-          sector.
-        </li>
-      </ul>
-    </section>
+
     <img
       src="assets/image1.svg"
       alt="Desafíos y Brechas img Descripción"
@@ -80,22 +82,33 @@
     </section>
     <img
       src="assets/componentesnllgs.svg"
-      alt="Descripción manufactura avanzada img"
-      class="w-2/3"
+      alt="Descripción manufactura avanzada"
+      class="w-full object-cover mb-16"
     />
-    <section class="my-8 text-justify bg-gray-100 p-3">
-      <h2 class="text-3xl font-semibold text-gray-800">Componentes</h2>
-      <ul class="mt-2 space-y-2 list-disc pl-6 text-gray-700">
-        <li>Situación Actual Ecosistema MA e i4.0.</li>
-        <li>Modelo de Madurez MA e i4.0.</li>
-        <li>Modelo de Caracterización de Proveedores MA e i4.0.</li>
-        <li>Cursos de Formación MA e i4.0.</li>
-        <li>Vinculación Empresa-Proveedor basada en IA.</li>
-      </ul>
+    <section class="bg-amber-500/10 p-8 hover:bg-amber-500/20 transition-all">
+      <h2 class="text-3xl font-bold mb-8">Elementos del Proyecto</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-lg">
+        <div class="flex items-center gap-3">
+          <span class="text-amber-500 text-2xl">01</span>
+          <p>Diagnóstico Ecosistema MA e i4.0</p>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="text-amber-500 text-2xl">02</span>
+          <p>Evaluación de Madurez Digital</p>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="text-amber-500 text-2xl">03</span>
+          <p>Caracterización de Proveedores</p>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="text-amber-500 text-2xl">04</span>
+          <p>Programas de Capacitación</p>
+        </div>
+      </div>
     </section>
   </div>
-  <!-- Sección de artículos sugeridos -->
-  <aside>
+  <!-- Sidebar -->
+  <aside class="lg:col-span-1">
     <app-sugeridos></app-sugeridos>
   </aside>
 </main>

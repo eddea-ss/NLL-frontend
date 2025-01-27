@@ -17,35 +17,37 @@
 
 <section data-aos="fade-up" type="articulos1">
   @if (data.length) {
-  <div class="mb-8 mx-8 sm:mx-8 lg:mx-20 xl:mx-20">
+  <div class="mb-16 mx-8 sm:mx-8 lg:mx-20 xl:mx-32">
     <h2
       routerLink="/buscador"
-      class="text-2xl cursor-pointer font-bold mb-4 text-gray-700 transform duration-300 hover:text-blue-800"
+      class="text-3xl cursor-pointer font-bold mb-16 text-gray-800 transform duration-300 hover:text-blue-800 relative inline-block after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-1 after:bg-yellow-500"
     >
       Artículos Destacados →
     </h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      @for (item of data; track $index) {
-      <div
-        style="display: grid; place-content: space-between"
-        class="bg-white rounded-lg shadow-lg p-6 transform transition-transform duration-300 hover:scale-105"
-      >
-        <h3 class="text-xl font-bold mb-2 cards-title-color">
-          {{ item?.titulo | truncate : 50 : true }}
-        </h3>
-        <div>
-          <p
-            class="text-gray-600 mb-4"
-            [innerHTML]="
-              recursosService.sanitizedString(item?.resumen)
-                | truncate : 120 : true
-            "
-          ></p>
-          <a
-            class="cards-title-color hover:text-blue-600 font-semibold"
-            (click)="openModal($index)"
-            >Leer más →</a
-          >
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+      @for (item of data.slice(0, 6); track $index) {
+      <div class="article-card group">
+        <div class="article-content">
+          <div class="article-header">
+            <div class="article-number">0{{$index + 1}}</div>
+            <h3 class="text-xl font-bold text-gray-800">
+              {{ item?.titulo }}
+            </h3>
+          </div>
+          <div class="article-body">
+            <p
+              [innerHTML]="
+                recursosService.sanitizedString(item?.resumen)
+                  | truncate : 120 : true
+              "
+            ></p>
+            <a
+              class="read-more-link"
+              (click)="openModal($index)"
+            >
+              Leer más →
+            </a>
+          </div>
         </div>
       </div>
       }
