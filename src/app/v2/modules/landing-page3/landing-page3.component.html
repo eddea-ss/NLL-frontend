@@ -56,6 +56,22 @@
   }
 </section>
 
+<section class="bg-[#1f2937]">
+  <div class="relative h-96 rounded-lg shadow-md overflow-hidden mb-8">
+    <!-- Imagen de fondo -->
+    <img src="/assets/plataforma2.jpg" alt="Imagen descriptiva" class="w-full h-full object-cover">
+    <!-- Overlay oscuro -->
+    <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+    <!-- Texto superpuesto -->
+    <div class="absolute inset-0 flex flex-col justify-center items-center text-center p-8">
+        <h2 class="text-4xl font-bold text-white mb-4">Impulsa tu Negocio</h2>
+        <p class="text-gray-200 mb-6">Descubre cómo la tecnología puede revolucionar tu negocio. Accede a recursos exclusivos hoy mismo.</p>
+        <a href="/evaluaciones-madurez" class="bg-[#eab308]  px-6 py-2  hover:bg-purple-600 transition duration-300">Comenzar</a>
+    </div>
+</div></section>
+
+
+
 <!-- Contenido dinámico del sitio -->
 <section data-aos="fade-up">
   <app-title-section
@@ -123,6 +139,9 @@
         </div>
       </div>
     </div>
+
+
+    
   </section>
   <div class="custom-shape-divider-top-1736997818">
     <svg
@@ -150,6 +169,10 @@
 </div>
 <!-- Section nuevo los lagos-->
 <section>
+
+
+
+
   <div class="py-20 bg-white">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Sección de título y descripción -->
@@ -173,6 +196,7 @@
           Tomás, Asimet y Grupo Centinela.
         </p>
       </div>
+
 
 
       
@@ -243,7 +267,31 @@
   </div>
 </section>
 
+
+
+<section class="bg-white">
+    <!-- Diseño 1: Imagen a la izquierda y texto a la derecha -->
+    <div class="flex flex-col md:flex-row items-center bg-white  mb-8">
+      <!-- Imagen a la izquierda -->
+      <div class="w-full md:w-1/2">
+          <img src="assets/plataformainicio.jpg" alt="Imagen descriptiva" class="w-full h-64 md:h-full object-cover">
+      </div>
+      <!-- Texto a la derecha -->
+      <div class="w-full md:w-1/2 p-8">
+          <h2 class="text-3xl font-bold mb-4">Explora Nuevas Oportunidades</h2>
+          <p class="text-gray-600 mb-6">Nuevo Los Lagos" representa una alianza estratégica entre la Universidad Santo Tomás, Asimet y Grupo Centinela, respaldada por Corfo Los Lagos. Nuestra misión es transformar el panorama industrial regional mediante tecnología e innovación.</p>
+          <a href="/plataforma" class="bg-[#eab308] text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition duration-300">Conocer Más</a>
+      </div>
+  </div>
+</section>
+
+
+
+
+
 <app-patrocinadores></app-patrocinadores>
+
+
 <app-footer></app-footer>
 
 @if (isModalOpen && dataModal) {
