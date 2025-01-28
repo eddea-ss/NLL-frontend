@@ -19,23 +19,27 @@ export class ProyectoEquipoComponent {
       imagen: 'assets/team/jorge.webp',
     },
     {
-      nombre: 'Pablo Rogel',
-      cargo: 'Ingeniero de Proyectos',
-      imagen: 'assets/team/pablo.webp',
-    },
-    {
       nombre: 'Marcelo Soto',
       cargo: 'Consultor Expero Industria 4.0 y Manufactura Avanzada',
       imagen: 'assets/team/marcelo.webp',
     },
+
+  
+    {
+      nombre: 'Pablo Rogel',
+      cargo: 'Ingeniero de Proyectos',
+      imagen: 'assets/team/pablo.webp',
+    },
+
+  
     {
       nombre: 'Carlos Arias',
-      cargo: 'Ingeniero de Software - Angular & Node',
+      cargo: 'Ingeniero de Software - Frontend (ago 2024 - Ene 2025)',
       imagen: 'assets/team/carlos.webp',
     },
     {
       nombre: 'Alexis Pizarro',
-      cargo: 'Ingeniero Backend & Database',
+      cargo: 'Ingeniero de Software - Backend (Jul 2024 - Dic 2024)',
       imagen: 'assets/team/alexis.webp',
     },
   ];
