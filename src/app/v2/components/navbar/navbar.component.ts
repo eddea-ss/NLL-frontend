@@ -113,6 +113,14 @@ export class NavbarComponent {
     isOpenSignal: signal(false),
   };
 
+  asistenteMenu: DropdownMenu = {
+    isDropdown: false,
+    label: 'Asistente',
+    route: 'https://asistente.nuevoloslagos.org',
+    items: [],
+    isOpenSignal: signal(false),
+  };
+
   cuentaMenu: DropdownMenu = {
     label: 'Cuenta',
     isDropdown: true,
@@ -128,6 +136,7 @@ export class NavbarComponent {
     this.evaluacionesMenu,
     this.investigacionMenu,
     this.buscadoresMenu,
+    this.asistenteMenu,
     this.cuentaMenu,
   ];
 
@@ -220,12 +229,22 @@ export class NavbarComponent {
   // Navega hacia la ruta del ítem o realiza la acción correspondiente (ej: logout)
   onMenuItemClick(item: MenuItem) {
     if (item?.route) {
-      this.router.navigate([item.route]);
+      if (item.route.startsWith('http')) {
+        this.openExternalLink(item.route);
+      } else {
+        this.router.navigate([item.route]);
+      }
     } else if (item.label === 'Cerrar sesión') {
       this.logout();
     }
     this.closeMobileMenu();
   }
+
+  // Add this new method before the setProfileImageUrl method
+  openExternalLink(url: string) {
+    window.open(url, '_blank');
+  }
+
   setProfileImageUrl(userImageUrl: string | undefined | null): void {
     if (userImageUrl) {
       this.profileImageUrl = `https://accesos.nuevoloslagos.org/logos/${userImageUrl}`;

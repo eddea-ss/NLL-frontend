@@ -1,0 +1,23 @@
+header {
+  .max-w-7xl {
+    padding: 0;
+  }
+}
+
+nav {
+  .relative.group {
+    position: relative;
+    
+    .absolute {
+      right: 0;
+      left: auto;
+      margin-right: -0.5rem;
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  nav {
+    width: 100%;
+  }
+}
