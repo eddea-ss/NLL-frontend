@@ -30,6 +30,7 @@ import {
   automatizacionSections,
   industriaSections,
 } from '@v2/constants';
+import { Md5 } from 'ts-md5';
 
 @Component({
   selector: 'app-evaluaciones-madurez',
@@ -283,6 +284,19 @@ export class EvaluacionesMadurezComponent implements AfterViewInit, OnInit {
       return 1;
     }
   }
+
+  todasLasEncuestasCompletadas(): boolean {
+    const modelo = this.modeloMadurez();
+    if (!modelo) return false;
+    
+    return (
+      modelo.puntaje_general !== null &&
+      modelo.puntaje_sector !== null &&
+      modelo.respuestas_formacion !== null &&
+      modelo.respuestas_proveedor !== null
+    );
+  }
+
   setProfileImageUrl(userImageUrl: string | undefined | null): void {
     if (userImageUrl) {
       this.profileImageUrl = `https://accesos.nuevoloslagos.org/logos/${userImageUrl}`;
@@ -290,5 +304,11 @@ export class EvaluacionesMadurezComponent implements AfterViewInit, OnInit {
       this.profileImageUrl =
         'https://accesos.nuevoloslagos.org/logos/default.png';
     }
+  }
+
+  getRutMd5(): string {
+    const rut = this.currentUser()?.rut;
+    if (!rut) return '';
+    return Md5.hashStr(rut);
   }
 }

@@ -26,24 +26,51 @@
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
       <div class="lg:col-span-2">
         @if (modeloMadurez()) {
-        <h2 class="text-xl font-bold text-gray-700 mb-8">
+        <h2 class="text-xl font-bold text-gray-700 mb-4">
           <strong>Tipo de industria:</strong>
           {{ currentUser()?.sector }}
         </h2>
         }
         <!-- Evaluation Status Section -->
-        <div class="mb-8">
-          <h2 class="text-2xl text-gray-600 mb-4">Completa tus Modelos</h2>
-          <p class="text-gray-500 mb-6">
-            Actualmente, tu Modelo de Maduración tecnológica para la Industria
-            4.0 aún no ha sido completado. Te invitamos a evaluar el nivel de
-            madurez tecnológica de tu empresa y a conocer las acciones
-            necesarias para alcanzar la madurez tecnológica. Para completar el
-            modelo y acceder a todas sus funcionalidades.
-          </p>
-          <p class="text-gray-500 mb-6">
-            Por favor, haz clic en el botón a continuación:
-          </p>
+        <div class="mb-8 bg-gray-50 p-6 rounded-lg shadow-sm">
+          <h2 class="text-2xl font-bold text-gray-800 mb-4">Estado de Evaluación</h2>
+          
+          @if (todasLasEncuestasCompletadas()) {
+            <div class="bg-green-50 border-l-4 border-green-500 p-4 mb-4">
+              <div class="flex">
+                <div class="flex-shrink-0">
+                  <svg class="h-5 w-5 text-green-400" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                  </svg>
+                </div>
+                <div class="ml-3">
+                  <p class="text-sm leading-5 text-green-700">
+                    ¡Felicitaciones! Has completado todas las evaluaciones de madurez tecnológica. Ahora puedes revisar tus resultados y recomendaciones detalladas más abajo.
+                  </p>
+                </div>
+              </div>
+            </div>
+          } @else {
+            <div class="space-y-4">
+              <p class="text-gray-600">
+                Tu evaluación del Modelo de Maduración Tecnológica para la Industria 4.0 está en proceso. Complete las encuestas pendientes para obtener una evaluación completa de la madurez tecnológica de tu empresa.
+              </p>
+              <div class="bg-blue-50 border-l-4 border-blue-500 p-4">
+                <div class="flex">
+                  <div class="flex-shrink-0">
+                    <svg class="h-5 w-5 text-blue-400" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <p class="text-sm leading-5 text-blue-700">
+                      Seleccione las encuestas pendientes en el panel derecho para completar su evaluación.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          }
         </div>
       </div>
 
@@ -53,107 +80,59 @@
         <button
           [disabled]="modeloMadurez()?.puntaje_general !== null"
           (click)="modeloMadurezService.openLinkGeneral()"
-          class="my-1 w-full gap-2 border border-blue-700 p-8 bg-white-700 flex text-blue-700"
+          class="my-1 w-full gap-2 border border-blue-700 p-8 flex text-blue-700"
+          [ngClass]="{'bg-blue-50': modeloMadurez()?.puntaje_general !== null, 'bg-white': modeloMadurez()?.puntaje_general === null}"
         >
-          <strong>Modelo de Madurez General</strong>
-          {{ modeloMadurez()?.puntaje_general !== null ? "" : " pendiente" }}
-          <svg
-            *ngIf="modeloMadurez()?.puntaje_general !== null"
-            aria-hidden="true"
-            class="w-5 h-5 text-blue-700"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M16.707 5.293a1 1 0 010 1.414L8.414 15 5 11.586a1 1 0 011.414-1.414L8.414 12.172l7.879-7.879a1 1 0 011.414 0z"
-              clip-rule="evenodd"
-            ></path>
-          </svg>
+          <div class="flex flex-col">
+            <strong>Modelo de Madurez General</strong>
+            <span class="text-sm mt-1">
+              {{ modeloMadurez()?.puntaje_general !== null ? "Completado" : "Pendiente de completar" }}
+            </span>
+          </div>
         </button>
         <!-- Modelo de madurez sectorial-->
         <button
-          [disabled]="
-            modeloMadurez() && modeloMadurez()?.puntaje_sector !== null
-          "
+          [disabled]="modeloMadurez() && modeloMadurez()?.puntaje_sector !== null"
           (click)="modeloMadurezService.openLinkSectorial()"
-          class="my-1 w-full gap-2 border border-blue-700 p-8 bg-white-700 flex text-blue-700"
+          class="my-1 w-full gap-2 border border-blue-700 p-8 flex text-blue-700"
+          [ngClass]="{'bg-blue-50': modeloMadurez()?.puntaje_sector !== null, 'bg-white': modeloMadurez()?.puntaje_sector === null}"
         >
-          <strong
-            >Modelo de Madurez de Sector {{ currentUser()?.sector }}</strong
-          >
-          {{ modeloMadurez()?.puntaje_sector !== null ? " " : " pendiente" }}
-          <svg
-            *ngIf="modeloMadurez()?.puntaje_sector !== null"
-            aria-hidden="true"
-            class="w-5 h-5 text-blue-700"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M16.707 5.293a1 1 0 010 1.414L8.414 15 5 11.586a1 1 0 011.414-1.414L8.414 12.172l7.879-7.879a1 1 0 011.414 0z"
-              clip-rule="evenodd"
-            ></path>
-          </svg>
+          <div class="flex flex-col">
+            <strong>Modelo de Madurez de Sector {{ currentUser()?.sector }}</strong>
+            <span class="text-sm mt-1">
+              {{ modeloMadurez()?.puntaje_sector !== null ? "Completado" : "Pendiente de completar" }}
+            </span>
+          </div>
         </button>
 
         <!-- Modelo de formacion-->
         <button
-          [disabled]="
-            modeloMadurez() && modeloMadurez()?.respuestas_formacion !== null
-          "
+          [disabled]="modeloMadurez() && modeloMadurez()?.respuestas_formacion !== null"
           (click)="modeloMadurezService.openLinkFormacion()"
-          class="my-1 w-full gap-2 border border-blue-700 p-8 bg-white-700 flex text-blue-700"
+          class="my-1 w-full gap-2 border border-blue-700 p-8 flex text-blue-700"
+          [ngClass]="{'bg-blue-50': modeloMadurez()?.respuestas_formacion !== null, 'bg-white': modeloMadurez()?.respuestas_formacion === null}"
         >
-          <strong>Encuesta de Formación</strong>
-          {{
-            modeloMadurez()?.respuestas_formacion !== null ? " " : " pendiente"
-          }}
-          <svg
-            *ngIf="modeloMadurez()?.respuestas_formacion !== null"
-            aria-hidden="true"
-            class="w-5 h-5 text-blue-700"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M16.707 5.293a1 1 0 010 1.414L8.414 15 5 11.586a1 1 0 011.414-1.414L8.414 12.172l7.879-7.879a1 1 0 011.414 0z"
-              clip-rule="evenodd"
-            ></path>
-          </svg>
+          <div class="flex flex-col">
+            <strong>Encuesta de Formación</strong>
+            <span class="text-sm mt-1">
+              {{ modeloMadurez()?.respuestas_formacion !== null ? "Completado" : "Pendiente de completar" }}
+            </span>
+          </div>
         </button>
 
-        <!-- Modelo de formacion-->
+        <!-- Modelo de proveedor-->
         <button
-          [disabled]="
-            modeloMadurez() && modeloMadurez()?.respuestas_proveedor !== null
-          "
-          (click)="modeloMadurezService.openLinkFormacion()"
-          class="my-1 w-full gap-2 border border-blue-700 p-8 bg-white-700 flex text-blue-700"
+          [disabled]="modeloMadurez() && modeloMadurez()?.respuestas_proveedor !== null"
+          (click)="modeloMadurezService.openLinkProveedores()"
+          class="my-1 w-full gap-2 border border-blue-700 p-8 flex text-blue-700"
+          [ngClass]="{'bg-blue-50': modeloMadurez()?.respuestas_proveedor !== null, 'bg-white': modeloMadurez()?.respuestas_proveedor === null}"
         >
-          <strong>Encuesta de Proveedores</strong>
-          {{
-            modeloMadurez()?.respuestas_proveedor !== null ? " " : " pendiente"
-          }}
-          <svg
-            *ngIf="modeloMadurez()?.respuestas_proveedor !== null"
-            aria-hidden="true"
-            class="w-5 h-5 text-blue-700"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M16.707 5.293a1 1 0 010 1.414L8.414 15 5 11.586a1 1 0 011.414-1.414L8.414 12.172l7.879-7.879a1 1 0 011.414 0z"
-              clip-rule="evenodd"
-            ></path>
-          </svg>
+          <div class="flex flex-col">
+            <strong>Encuesta de Proveedores</strong>
+            <span class="text-sm mt-1">
+              {{ modeloMadurez()?.respuestas_proveedor !== null ? "Completado" : "Pendiente de completar" }}
+            </span>
+          </div>
         </button>
       </div>
     </div>
@@ -165,26 +144,45 @@
         <h2 class="text-2xl text-gray-600">Resultado madurez</h2>
       </div>
 
+      <!-- New scale explanation -->
+      <div class="bg-gray-100 p-4 mb-6 rounded-md">
+        <p class="text-gray-700 flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-700" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+          </svg>
+          <span>Escala de evaluación: <strong>1</strong> (nivel básico) a <strong>5</strong> (nivel avanzado). Los cuadros coloreados indican el nivel alcanzado en cada categoría.</span>
+        </p>
+      </div>
+
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <!-- Radar Chart -->
-        <!-- Gráfico Radar -->
         <div class="w-full">
           <canvas #radarChartCanvas></canvas>
+          <div class="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+            <p class="text-gray-700 mb-3">Si deseas más recomendaciones específicas para tu empresa, visita nuestro asistente virtual:</p>
+            <a [href]="'https://asistente.nuevoloslagos.org/?code=' + getRutMd5()" 
+               target="_blank"
+               class="inline-flex items-center px-4 py-2 bg-blue-700 text-white rounded-md hover:bg-blue-800 transition-colors">
+              <span>Ir al Asistente Virtual</span>
+              <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+              </svg>
+            </a>
+          </div>
         </div>
 
-        <!-- Capital Humano Sections -->
+
+        <!-- Categories Section with improved design -->
         <div class="space-y-6">
-          <div class="space-y-2">
-            <h3 class="text-xl font-bold text-gray-700">
-              CAPITAL HUMANO: Grado
-              {{
-                numeroALetra(
-                  this.modeloMadurez()?.puntaje_por_categoria
-                    ?.capital_humano_y_organizacion_digital
-                )
-              }}
+          <!-- Capital Humano -->
+          <div class="p-4 border border-gray-200 rounded-md hover:shadow-md transition-shadow">
+            <h3 class="text-xl font-bold text-gray-700 mb-3">
+              CAPITAL HUMANO
+              <span class="inline-flex items-center ml-2">
+                <ng-container *ngTemplateOutlet="gradeBoxes; context: {grade: numeroALetra(this.modeloMadurez()?.puntaje_por_categoria?.capital_humano_y_organizacion_digital)}"></ng-container>
+              </span>
             </h3>
-            <p class="text-gray-600">
+            <p class="text-gray-600 mb-2">
               {{
                 capitalHumanoSections[
                   numeroANumero(
@@ -195,7 +193,7 @@
               }}
             </p>
             <p class="text-gray-600">
-              <strong>Sugerencia: </strong>
+              <strong class="text-blue-700">Sugerencia: </strong>
               {{
                 capitalHumanoSections[
                   numeroANumero(
@@ -207,18 +205,15 @@
             </p>
           </div>
 
-          <!--Estrategia-->
-          <div class="space-y-2">
-            <h3 class="text-xl font-bold text-gray-700">
-              ESTRATEGIA: Grado
-              {{
-                numeroALetra(
-                  this.modeloMadurez()?.puntaje_por_categoria
-                    ?.estrategia_y_liderazgo
-                )
-              }}
+          <!-- Estrategia -->
+          <div class="p-4 border border-gray-200 rounded-md hover:shadow-md transition-shadow">
+            <h3 class="text-xl font-bold text-gray-700 mb-3">
+              ESTRATEGIA
+              <span class="inline-flex items-center ml-2">
+                <ng-container *ngTemplateOutlet="gradeBoxes; context: {grade: numeroALetra(this.modeloMadurez()?.puntaje_por_categoria?.estrategia_y_liderazgo)}"></ng-container>
+              </span>
             </h3>
-            <p class="text-gray-600">
+            <p class="text-gray-600 mb-2">
               {{
                 estrategiaSections[
                   numeroANumero(
@@ -229,7 +224,7 @@
               }}
             </p>
             <p class="text-gray-600">
-              <strong>Sugerencia: </strong>
+              <strong class="text-blue-700">Sugerencia: </strong>
               {{
                 estrategiaSections[
                   numeroANumero(
@@ -240,18 +235,16 @@
               }}
             </p>
           </div>
-          <!-- TECNOLOGIA Sections -->
-          <div class="space-y-2">
-            <h3 class="text-xl font-bold text-gray-700">
-              TECNOLOGIAS: Grado
-              {{
-                numeroALetra(
-                  this.modeloMadurez()?.puntaje_por_categoria
-                    ?.tecnologia_y_gestion_de_datos
-                )
-              }}
+
+          <!-- Tecnologías -->
+          <div class="p-4 border border-gray-200 rounded-md hover:shadow-md transition-shadow">
+            <h3 class="text-xl font-bold text-gray-700 mb-3">
+              TECNOLOGÍAS
+              <span class="inline-flex items-center ml-2">
+                <ng-container *ngTemplateOutlet="gradeBoxes; context: {grade: numeroALetra(this.modeloMadurez()?.puntaje_por_categoria?.tecnologia_y_gestion_de_datos)}"></ng-container>
+              </span>
             </h3>
-            <p class="text-gray-600">
+            <p class="text-gray-600 mb-2">
               {{
                 tecnologiaSections[
                   numeroANumero(
@@ -262,7 +255,7 @@
               }}
             </p>
             <p class="text-gray-600">
-              <strong>Sugerencia: </strong>
+              <strong class="text-blue-700">Sugerencia: </strong>
               {{
                 tecnologiaSections[
                   numeroANumero(
@@ -273,18 +266,16 @@
               }}
             </p>
           </div>
-          <!-- innovacion Sections -->
-          <div class="space-y-2">
-            <h3 class="text-xl font-bold text-gray-700">
-              GESTION DE INNOVACION: Grado
-              {{
-                numeroALetra(
-                  this.modeloMadurez()?.puntaje_por_categoria
-                    ?.gestion_de_la_innovacion_y_conocimiento
-                )
-              }}
+
+          <!-- Gestión de Innovación -->
+          <div class="p-4 border border-gray-200 rounded-md hover:shadow-md transition-shadow">
+            <h3 class="text-xl font-bold text-gray-700 mb-3">
+              GESTIÓN DE INNOVACIÓN
+              <span class="inline-flex items-center ml-2">
+                <ng-container *ngTemplateOutlet="gradeBoxes; context: {grade: numeroALetra(this.modeloMadurez()?.puntaje_por_categoria?.gestion_de_la_innovacion_y_conocimiento)}"></ng-container>
+              </span>
             </h3>
-            <p class="text-gray-600">
+            <p class="text-gray-600 mb-2">
               {{
                 innovacionSections[
                   numeroANumero(
@@ -295,7 +286,7 @@
               }}
             </p>
             <p class="text-gray-600">
-              <strong>Sugerencia: </strong>
+              <strong class="text-blue-700">Sugerencia: </strong>
               {{
                 innovacionSections[
                   numeroANumero(
@@ -306,18 +297,16 @@
               }}
             </p>
           </div>
-          <!-- automatizaacion Sections -->
-          <div class="space-y-2">
-            <h3 class="text-xl font-bold text-gray-700">
-              AUTOMATIZACION: Grado
-              {{
-                numeroALetra(
-                  this.modeloMadurez()?.puntaje_por_categoria
-                    ?.procesos_y_automatizacion
-                )
-              }}
+
+          <!-- Automatización -->
+          <div class="p-4 border border-gray-200 rounded-md hover:shadow-md transition-shadow">
+            <h3 class="text-xl font-bold text-gray-700 mb-3">
+              AUTOMATIZACIÓN
+              <span class="inline-flex items-center ml-2">
+                <ng-container *ngTemplateOutlet="gradeBoxes; context: {grade: numeroALetra(this.modeloMadurez()?.puntaje_por_categoria?.procesos_y_automatizacion)}"></ng-container>
+              </span>
             </h3>
-            <p class="text-gray-600">
+            <p class="text-gray-600 mb-2">
               {{
                 automatizacionSections[
                   numeroANumero(
@@ -328,7 +317,7 @@
               }}
             </p>
             <p class="text-gray-600">
-              <strong>Sugerencia: </strong>
+              <strong class="text-blue-700">Sugerencia: </strong>
               {{
                 automatizacionSections[
                   numeroANumero(
@@ -365,3 +354,31 @@
   </section>
   }
 </div>
+
+<!-- Improved template for grade boxes -->
+<ng-template #gradeBoxes let-grade="grade">
+  <div class="flex items-center">
+    <div class="flex items-center space-x-1">
+      <span class="w-6 h-6 border border-gray-400 rounded-sm flex items-center justify-center" 
+            [ngClass]="{'bg-blue-700 text-white font-bold': ['A','B','C','D','E'].includes(grade), 'bg-white': !['A','B','C','D','E'].includes(grade)}">
+        <span *ngIf="grade === 'E'">1</span>
+      </span>
+      <span class="w-6 h-6 border border-gray-400 rounded-sm flex items-center justify-center" 
+            [ngClass]="{'bg-blue-700 text-white font-bold': ['A','B','C','D'].includes(grade), 'bg-white': !['A','B','C','D'].includes(grade)}">
+        <span *ngIf="grade === 'D'">2</span>
+      </span>
+      <span class="w-6 h-6 border border-gray-400 rounded-sm flex items-center justify-center" 
+            [ngClass]="{'bg-blue-700 text-white font-bold': ['A','B','C'].includes(grade), 'bg-white': !['A','B','C'].includes(grade)}">
+        <span *ngIf="grade === 'C'">3</span>
+      </span>
+      <span class="w-6 h-6 border border-gray-400 rounded-sm flex items-center justify-center" 
+            [ngClass]="{'bg-blue-700 text-white font-bold': ['A','B'].includes(grade), 'bg-white': !['A','B'].includes(grade)}">
+        <span *ngIf="grade === 'B'">4</span>
+      </span>
+      <span class="w-6 h-6 border border-gray-400 rounded-sm flex items-center justify-center" 
+            [ngClass]="{'bg-blue-700 text-white font-bold': grade === 'A', 'bg-white': grade !== 'A'}">
+        <span *ngIf="grade === 'A'">5</span>
+      </span>
+    </div>
+  </div>
+</ng-template>

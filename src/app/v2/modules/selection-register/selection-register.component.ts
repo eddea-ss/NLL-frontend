@@ -16,11 +16,11 @@ export class SelectionRegisterComponent implements OnInit {
 
   @Input() cards = [
     {
-      title: 'Proveedores',
+      title: 'Proveedores Tecnológicos',
       icon: 'dinero',
       link: '/registro-proveedor',
       buttonLabel: 'Registrarse',
-      description: `Accede a nuestra plataforma como proveedor y conecta con empresas
+      description: `Accede a nuestra plataforma como proveedor tecnológico y conecta con empresas
               de la Industria 4.0 para ofrecer tus productos o servicios
               especializados. Únete a una red de colaboración y aprovecha
               oportunidades de negocio en crecimiento.`,
