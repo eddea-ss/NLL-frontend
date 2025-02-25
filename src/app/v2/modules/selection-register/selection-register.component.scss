@@ -1,0 +1,59 @@
+:host {
+  display: block;
+  
+  .registro-card {
+    @apply relative cursor-pointer overflow-hidden bg-white px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 transition-all duration-300 hover:shadow-2xl sm:mx-auto sm:rounded-xl sm:px-10;
+    transform: translateY(0);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    &:hover {
+      transform: translateY(-8px);
+      .registro-card-bg {
+        transform: scale(12);
+      }
+    }
+  }
+
+  .registro-card-bg {
+    @apply absolute top-10 left-10 z-0 h-20 w-20 rounded-full bg-gray-900 transition-all duration-500;
+    transform: scale(1);
+  }
+
+  .registro-card-content {
+    @apply relative z-10 mx-auto max-w-md;
+  }
+
+  .registro-card-icon {
+    @apply grid h-20 w-20 place-items-center rounded-full bg-gray-900 transition-all duration-300;
+    
+    svg {
+      transition: transform 0.3s ease;
+    }
+  }
+
+  .registro-card-text {
+    @apply space-y-6 pt-5 text-base leading-7 text-gray-600 transition-all duration-300;
+    
+    h3 {
+      @apply text-gray-900 transition-colors duration-300;
+      .registro-card:hover & {
+        @apply text-white;
+      }
+    }
+    
+    p {
+      @apply transition-colors duration-300;
+      .registro-card:hover & {
+        @apply text-gray-100;
+      }
+    }
+  }
+
+  .registro-card-link {
+    @apply inline-flex items-center text-base font-semibold text-yellow-500 transition-all duration-300;
+    
+    .registro-card:hover & {
+      @apply text-white;
+    }
+  }
+}
