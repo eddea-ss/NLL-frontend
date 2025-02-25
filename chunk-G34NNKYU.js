@@ -1,1 +1,0 @@
-import{a}from"./chunk-UGJEJYGR.js";import"./chunk-JROCBRAQ.js";import"./chunk-QMCSIVNR.js";import"./chunk-MBXY33KE.js";import"./chunk-SBTY2MRA.js";import"./chunk-JAORLPYH.js";export{a as ProyectoEquipoComponent};
