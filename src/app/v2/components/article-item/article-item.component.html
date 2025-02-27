@@ -11,6 +11,9 @@
     @if (data?.fecha_publicacion) {
       <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">{{ resourceService.getPublicationYear(data?.fecha_publicacion) }}</span>
     }
+    @if (data?.recomendado) {
+      <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Recomendado</span>
+    }
   </div>
   
   <!-- Resumen con estilo mejorado -->
@@ -61,6 +64,9 @@
     }
     @if (data.articulo_paper.toLowerCase() === 'articulo') {
       <span class="bg-indigo-50 text-indigo-600 px-2 py-1 text-xs rounded-md">Artículo</span>
+    }
+    @if (data.recomendado) {
+      <span class="bg-green-50 text-green-600 px-2 py-1 text-xs rounded-md">Recomendado</span>
     }
   </div>
   

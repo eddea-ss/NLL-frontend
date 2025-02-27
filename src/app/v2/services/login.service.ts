@@ -135,11 +135,25 @@ export class LoginService {
     localStorage.setItem('authToken', token);
     // guarda el sector del usario en el localstorage
     
-
-
     localStorage.setItem('user', JSON.stringify(usuario));
 
-    localStorage.setItem('sector', JSON.stringify(usuario.sector).toLowerCase());
+    let sectorText = `${usuario.sector},cultivo peces,producción salmón,sistemas recirculación,sanidad acuícola,alimentación peces,calidad agua,bioseguridad,genética acuícola,procesamiento pescado,certificación acuícola`;
+
+    if (usuario.sector.toLowerCase() === 'astilleros') {
+      sectorText = `${usuario.sector},construcción naval,ingeniería marina,soldadura naval,sistemas propulsión,diseño embarcaciones,mantenimiento barcos,pintura naval,equipamiento marino,electrónica naval,seguridad marítima`;
+    } else if (usuario.sector.toLowerCase() === 'carnico') {
+      sectorText = `${usuario.sector},procesamiento carnes,control calidad,cadena frío,cortes cárnicos,empaquetado vacío,trazabilidad,seguridad alimentaria,maduración carnes,inspección sanitaria,logística frigorífica`;
+    } else if (usuario.sector.toLowerCase() === 'construccion') {
+      sectorText = `${usuario.sector},gestión proyectos,estructuras,hormigón armado,instalaciones eléctricas,planos construcción,seguridad obra,materiales construcción,acabados,supervisión obra,certificación construcción`;
+    } else if (usuario.sector.toLowerCase() === 'lacteo') {
+      sectorText = `${usuario.sector},procesamiento leche,control calidad,pasteurización,elaboración quesos,derivados lácteos,cadena frío,fermentación,envase aséptico,cultivos lácteos,normativa sanitaria`;
+    } else if (usuario.sector.toLowerCase() === 'maestranza') {
+      sectorText = `${usuario.sector},torneado,fresado,soldadura industrial,mantenimiento equipos,mecanizado cnc,fabricación piezas,control dimensional,tratamientos térmicos,rectificado,diseño mecánico`;
+    } else if (usuario.sector.toLowerCase() === 'turismo') {
+      sectorText = `${usuario.sector},servicio cliente,gestión hotelera,planificación eventos,marketing turístico,guía turístico,gastronomía local,reservas,idiomas,turismo sustentable,administración turística`;
+    }
+
+    localStorage.setItem('sector', sectorText.toLowerCase());
 
     // Actualizar los Signals
     this._authState.set(AuthState.LoggedIn);

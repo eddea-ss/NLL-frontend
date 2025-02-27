@@ -1,9 +1,20 @@
 @if (simplified) {
-<article class="bg-gray-100 p-4 border">
-  <h3 class="text-xl cards-title-color font-bold mb-2">{{ data?.titulo }}</h3>
-  <!-- Descripción del curso -->
+<article class="p-4 rounded-lg transition-all duration-300">
+  <h3 class="text-xl font-bold mb-2 text-gray-800">{{ data?.titulo }}</h3>
+  
+  <!-- Etiquetas con estilo mejorado -->
+  <div class="mb-2 flex flex-wrap gap-1">
+    @if (data?.aplicabilidad_regional_) {
+      <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">{{ data?.aplicabilidad_regional_ }}</span>
+    }
+    @if (data?.recomendado) {
+      <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Recomendado</span>
+    }
+  </div>
+
+  <!-- Descripción del proyecto -->
   <span
-    class="cards-title-color"
+    class="text-gray-600 text-sm leading-relaxed"
     [innerHTML]="
       resourcesService.sanitizedString(
         data.resumen_de_la_solucion_ | truncate : 120 : true
@@ -18,56 +29,82 @@
     (click)="onOpenModal()"
     (keypress.enter)="onOpenModal()"
     (keypress.space)="onOpenModal()"
-    class="font-bold py-2 text-blue-500 transition duration-300 ease-in-out transform hover:scale-105"
+    class="inline-flex items-center text-indigo-600 hover:text-indigo-800 transition-colors duration-300 font-medium"
   >
     Ver Más
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+    </svg>
   </a>
 </article>
 }@else {
 <article
-  class="group"
+  class="group p-5 border border-gray-100 rounded-lg hover:shadow-md transition-all duration-300"
   (click)="onOpenModal()"
   (keypress.enter)="onOpenModal()"
   (keypress.space)="onOpenModal()"
+  tabindex="0"
+  role="button"
 >
   <a
     style="cursor: pointer"
-    class="text-xl font-semibold cards-title-color hover:underline"
+    class="text-xl font-semibold text-gray-800 hover:text-indigo-600 transition-colors duration-300 block mb-2"
   >
     {{ data.titulo }}
   </a>
 
+  @if (data?.recomendado) {
+  <p class="text-md text-gray-700 pb-2 flex items-center">
+    <span class="text-yellow-500 mr-1">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+      </svg>
+    </span>
+    <strong class="text-yellow-600">Te recomendamos</strong>
+  </p>
+  }
+
   <!-- Etiquetas de los articulos -->
-  <p class="mb-1 flex flex-wrap gap-1">
-    @if(data.origen_){
-    <span class="border cards-title-color px-2 py-1 text-xs">
+  <div class="mb-3 flex flex-wrap gap-2">
+    @if(data.origen_) {
+    <span class="bg-blue-50 text-blue-600 px-2 py-1 text-xs rounded-md">
       Origen: {{ data.origen_ }}
     </span>
-    } @if (data.localidad) {
-    <span class="border cards-title-color px-2 py-1 text-xs">
+    }
+    @if (data.localidad) {
+    <span class="bg-indigo-50 text-indigo-600 px-2 py-1 text-xs rounded-md">
       Localidad: {{ data.localidad }}
     </span>
-    } @if (data.aplicabilidad_regional_) {
-    <span class="border cards-title-color px-2 py-1 text-xs">
+    }
+    @if (data.aplicabilidad_regional_) {
+    <span class="bg-amber-50 text-amber-600 px-2 py-1 text-xs rounded-md">
       Aplicabilidad Regional: {{ data.aplicabilidad_regional_ }}
     </span>
     }
-  </p>
-  <!-- Descripción del curso -->
-  <span
-    class="cards-title-color"
+  </div>
+
+  <!-- Descripción del proyecto -->
+  <div class="text-gray-600 mb-3 text-sm leading-relaxed"
     [innerHTML]="
       resourcesService.sanitizedString(
         data.resumen_de_la_solucion_ | truncate : 400 : true
       )
-    "
-  >
-  </span>
-  <p style="margin-top: 0px">
-    <small style="color: gray" class="text-secondary"
-      >Sitio web: {{ resourcesService.getDomain(data.link) }}
+    ">
+  </div>
+
+  <!-- Información adicional con estilo mejorado -->
+  <p class="flex items-center mt-4 pt-2 border-t border-gray-100">
+    <!-- Info de enlace web -->
+    <small class="text-gray-500">
+      {{ resourcesService.getDomain(data.link) }}
     </small>
+    
+    <!-- Icono de flecha que indica interactividad -->
+    <span class="ml-auto text-indigo-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+      </svg>
+    </span>
   </p>
 </article>
-
 }

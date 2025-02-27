@@ -1,6 +1,11 @@
 @if(simplified){
 <article class="bg-gray-100 p-4 border">
   <h3 class="text-xl font-bold mb-2">{{ data?.nombreEmpresa }}</h3>
+  @if (data?.recomendado) {
+  <p class="text-md cards-title-color">
+    <span style="color: #eab308">&#9733;</span> <strong>Te recomendamos</strong>
+  </p>
+  }
   <p style="text-align: left; font-size: 0.9rem">
     <th class="px-2">Tecnologías Ofrecidas:</th>
     <td class="px-2">{{ data?.tecnologiasOfrecidas }}</td>
