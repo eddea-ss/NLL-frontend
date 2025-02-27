@@ -2,151 +2,165 @@
 <app-breadcrumbs [breadcrumbs]="breadcrumbs"></app-breadcrumbs>
 
 <!-- Contenido principal -->
-<main class="container mx-auto py-16 flex flex-col lg:flex-row gap-8">
-  <div class="w-full lg:w-3/4 space-y-16">
-    <!-- Header con diseño moderno -->
-    <header class="border-l-4 border-[rgb(234,179,8)] pl-6">
-      <h1 class="text-4xl font-bold tracking-tight">
-        Industria 4.0 en Los Lagos
-      </h1>
-      <p class="text-xl text-gray-600 mt-4">
-        Transformación digital y manufactura avanzada: Un análisis del ecosistema regional
-      </p>
-    </header>
-<img
-    src="assets/informe1.jpg"
-    alt="Desafíos y Brechas img Descripción"
-  
-  />
-    <!-- Secciones con nuevo diseño -->
-    <section class="space-y-16">
-      <!-- Introducción -->
-      <div class="hover:bg-gray-50 transition-colors duration-300 p-8">
-        <h2 class="text-2xl font-bold mb-6 flex items-center">
-          <span class="w-8 h-[2px] bg-[rgb(234,179,8)] mr-3"></span>
-          Visión General
-        </h2>
-        <p class="text-gray-700 leading-relaxed">
-          Un estudio colaborativo entre <span class="text-[rgb(234,179,8)]">CORFO</span>, 
-          <span class="text-[rgb(234,179,8)]">ASIMET</span>, 
-          <span class="text-[rgb(234,179,8)]">Universidad Santo Tomás</span> y 
-          <span class="text-[rgb(234,179,8)]">Grupo Centinela</span> que examina el futuro 
-          de la manufactura en la región. Este análisis proporciona una hoja de ruta para 
-          la transformación digital del sector productivo.
+<main class="container mx-auto py-16 px-4 lg:px-0">
+  <div class="flex flex-col lg:flex-row gap-12">
+    <div class="w-full lg:w-3/4 space-y-20">
+      <!-- Header con diseño mejorado -->
+      <header class="relative border-l-4 border-[rgb(234,179,8)] pl-8 py-4">
+        <div class="absolute -left-3 top-0 w-6 h-6 bg-[rgb(234,179,8)] rounded-full"></div>
+        <h1 class="text-5xl font-bold tracking-tight text-gray-900">
+          Industria 4.0 en Los Lagos
+        </h1>
+        <p class="text-2xl text-gray-600 mt-6 leading-relaxed">
+          Transformación digital y manufactura avanzada: Un análisis profundo del ecosistema regional y sus oportunidades de crecimiento
         </p>
+      </header>
+
+      <!-- Imagen principal con sombra y bordes redondeados -->
+      <div class="overflow-hidden rounded-2xl shadow-xl">
+        <img
+          src="assets/informe1.jpg"
+          alt="Panorama de la Industria 4.0 en Los Lagos"
+          class="w-full h-auto object-cover transform hover:scale-105 transition-transform duration-500"
+        />
       </div>
 
-      <!-- Sección: Brechas en la Adopción de Tecnologías 4.0 -->
-      <div class="hover:bg-gray-50 transition-colors duration-300 p-8">
-        <h2 class="text-2xl font-bold mb-6 flex items-center">
-          <span class="w-8 h-[2px] bg-[rgb(234,179,8)] mr-3"></span>
-          Brechas en la Adopción de Tecnologías 4.0
-        </h2>
-        <p class="text-gray-700 leading-relaxed mb-4 text-justify">
-          <strong
-            >Uno de los puntos clave es la identificación de las brechas que
-            frenan la adopción de tecnologías 4.0 en la región.</strong
-          >
-          Los principales obstáculos incluyen la falta de financiamiento, la
-          escasez de personal capacitado, la incertidumbre económica y la
-          adaptación a la innovación tecnológica.
-        </p>
-        <p class="text-gray-700 leading-relaxed text-justify">
-          Para superar estos desafíos, el informe subraya la necesidad de
-          fortalecer las políticas de apoyo financiero y formación tecnológica,
-          además de fomentar una cultura de colaboración entre empresas e
-          instituciones.
-        </p>
-      </div>
+      <!-- Secciones con diseño mejorado -->
+      <section class="space-y-20">
+        <!-- Introducción -->
+        <div class="hover:bg-gray-50 transition-all duration-300 p-10 rounded-2xl shadow-sm">
+          <h2 class="text-3xl font-bold mb-8 flex items-center group">
+            <span class="w-12 h-[3px] bg-[rgb(234,179,8)] mr-4 group-hover:w-16 transition-all"></span>
+            Visión General
+          </h2>
+          <p class="text-gray-700 text-lg leading-relaxed">
+            Un estudio colaborativo pionero entre 
+            <span class="font-semibold text-[rgb(234,179,8)] hover:underline cursor-pointer">CORFO</span>, 
+            <span class="font-semibold text-[rgb(234,179,8)] hover:underline cursor-pointer">ASIMET</span>, 
+            <span class="font-semibold text-[rgb(234,179,8)] hover:underline cursor-pointer">Universidad Santo Tomás</span> y 
+            <span class="font-semibold text-[rgb(234,179,8)] hover:underline cursor-pointer">Grupo Centinela</span> 
+            que revela el panorama actual y futuro de la manufactura en la región. Este análisis exhaustivo proporciona una 
+            hoja de ruta estratégica para impulsar la transformación digital del sector productivo.
+          </p>
+        </div>
 
-      <!-- Sección: Sectores Clave de la Economía Regional -->
-      <div class="hover:bg-gray-50 transition-colors duration-300 p-8">
-        <h2 class="text-2xl font-bold mb-6 flex items-center">
-          <span class="w-8 h-[2px] bg-[rgb(234,179,8)] mr-3"></span>
-          Sectores Clave de la Economía Regional
-        </h2>
-        <p class="text-gray-700 leading-relaxed mb-4 text-justify">
-          <strong
-            >El informe también detalla cinco sectores clave de la economía
-            regional: acuicultura, construcción, silvoagropecuario, manufactura
-            y turismo.</strong
-          >
-          Para cada uno, se describen sus características, desafíos y
-          oportunidades frente a la adopción de tecnologías 4.0.
-        </p>
-        <p class="text-gray-700 leading-relaxed text-justify">
-          Se incluyen ejemplos de innovaciones como robots de ordeño, drones
-          para la cosecha de manzanas y sistemas de nanoburbujas para
-          oxigenación en la acuicultura.
-        </p>
-      </div>
+        <!-- Sección: Brechas en la Adopción de Tecnologías 4.0 -->
+        <div class="hover:bg-gray-50 transition-all duration-300 p-10 rounded-2xl shadow-sm">
+          <h2 class="text-3xl font-bold mb-8 flex items-center group">
+            <span class="w-12 h-[3px] bg-[rgb(234,179,8)] mr-4 group-hover:w-16 transition-all"></span>
+            Brechas y Desafíos Tecnológicos
+          </h2>
+          <div class="space-y-6">
+            <p class="text-gray-700 text-lg leading-relaxed">
+              <strong class="text-gray-900">La investigación revela importantes brechas que actualmente limitan 
+              la adopción de tecnologías 4.0 en nuestra región.</strong> Los desafíos principales identificados incluyen:
+            </p>
+            <ul class="list-none space-y-4 pl-6">
+              <li class="flex items-center text-gray-700">
+                <span class="w-2 h-2 bg-[rgb(234,179,8)] rounded-full mr-4"></span>
+                Limitaciones en el acceso a financiamiento específico para transformación digital
+              </li>
+              <li class="flex items-center text-gray-700">
+                <span class="w-2 h-2 bg-[rgb(234,179,8)] rounded-full mr-4"></span>
+                Escasez de talento especializado en tecnologías emergentes
+              </li>
+              <li class="flex items-center text-gray-700">
+                <span class="w-2 h-2 bg-[rgb(234,179,8)] rounded-full mr-4"></span>
+                Incertidumbre económica y resistencia al cambio
+              </li>
+              <li class="flex items-center text-gray-700">
+                <span class="w-2 h-2 bg-[rgb(234,179,8)] rounded-full mr-4"></span>
+                Desafíos en la adaptación a nuevas tecnologías
+              </li>
+            </ul>
+          </div>
+        </div>
 
-      <img
-    src="assets/informe2.jpg"
-    alt="Desafíos y Brechas img Descripción"
-  
-  />
+        <!-- Imagen secundaria con efecto -->
+        <div class="overflow-hidden rounded-2xl shadow-xl my-16">
+          <img
+            src="assets/informe2.jpg"
+            alt="Innovación y Desarrollo Regional"
+            class="w-full h-auto object-cover transform hover:scale-105 transition-transform duration-500"
+          />
+        </div>
 
-      <!-- Sección: Fuente de Información -->
-      <div class="hover:bg-gray-50 transition-colors duration-300 p-8">
-        <h2 class="text-2xl font-bold mb-6 flex items-center">
-          <span class="w-8 h-[2px] bg-[rgb(234,179,8)] mr-3"></span>
-          Fuente de Información
-        </h2>
-        <p class="text-gray-700 leading-relaxed mb-4 text-justify">
-          <strong
-            >La información del informe proviene de encuestas a empresas de
-            distintos sectores, incluyendo la manufactura y el acuícola.</strong
-          >
-          Estas encuestas ofrecen una visión clara del conocimiento, la adopción
-          de tecnologías, y las barreras y oportunidades que enfrentan las
-          empresas en su camino hacia la transformación digital.
-        </p>
-        <p class="text-gray-700 leading-relaxed text-justify">
-          Los resultados son una herramienta valiosa para entender las
-          necesidades del sector y diseñar estrategias que impulsen la adopción
-          de tecnologías avanzadas.
-        </p>
-      </div>
+        <!-- Sección: Sectores Clave -->
+        <div class="hover:bg-gray-50 transition-all duration-300 p-10 rounded-2xl shadow-sm">
+          <h2 class="text-3xl font-bold mb-8 flex items-center group">
+            <span class="w-12 h-[3px] bg-[rgb(234,179,8)] mr-4 group-hover:w-16 transition-all"></span>
+            Sectores Estratégicos Priorizados
+          </h2>
+          <p class="text-gray-700 text-lg mb-8">
+            La región de Los Lagos cuenta con diversos sectores industriales clave que están listos para la transformación digital:
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            <div class="p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-all">
+              <h3 class="text-xl font-semibold mb-4 text-[rgb(234,179,8)]">Acuicultura</h3>
+              <p class="text-gray-700">Innovación en sistemas de monitoreo y automatización para la producción acuícola sostenible</p>
+            </div>
+            <div class="p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-all">
+              <h3 class="text-xl font-semibold mb-4 text-[rgb(234,179,8)]">Astilleros</h3>
+              <p class="text-gray-700">Modernización de procesos de construcción y reparación naval con tecnologías avanzadas</p>
+            </div>
+            <div class="p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-all">
+              <h3 class="text-xl font-semibold mb-4 text-[rgb(234,179,8)]">Cárnico</h3>
+              <p class="text-gray-700">Optimización de la cadena de producción cárnica mediante sistemas inteligentes</p>
+            </div>
+            <div class="p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-all">
+              <h3 class="text-xl font-semibold mb-4 text-[rgb(234,179,8)]">Construcción</h3>
+              <p class="text-gray-700">Implementación de tecnologías BIM y automatización en procesos constructivos</p>
+            </div>
+            <div class="p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-all">
+              <h3 class="text-xl font-semibold mb-4 text-[rgb(234,179,8)]">Lácteo</h3>
+              <p class="text-gray-700">Digitalización de procesos productivos y control de calidad en la industria láctea</p>
+            </div>
+            <div class="p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-all">
+              <h3 class="text-xl font-semibold mb-4 text-[rgb(234,179,8)]">Maestranza</h3>
+              <p class="text-gray-700">Integración de manufactura avanzada y sistemas de control numérico</p>
+            </div>
+            <div class="p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-all">
+              <h3 class="text-xl font-semibold mb-4 text-[rgb(234,179,8)]">Turismo</h3>
+              <p class="text-gray-700">Desarrollo de experiencias digitales y gestión inteligente del turismo regional</p>
+            </div>
+          </div>
+          <p class="text-gray-600 italic text-center">
+            Y otros sectores emergentes que están adoptando tecnologías 4.0 para mejorar su competitividad.
+          </p>
+        </div>
 
-      <!-- Sección: Objetivo del Informe -->
-      <div class="hover:bg-gray-50 transition-colors duration-300 p-8">
-        <h2 class="text-2xl font-bold mb-6 flex items-center">
-          <span class="w-8 h-[2px] bg-[rgb(234,179,8)] mr-3"></span>
-          Objetivo del Informe
-        </h2>
-        <p class="text-gray-700 leading-relaxed mb-4 text-justify">
-          <strong
-            >El informe pretende aportar una visión clara sobre el estado de la
-            manufactura avanzada e industria 4.0 en la Región de Los
-            Lagos.</strong
-          >
-          Su objetivo es proporcionar información relevante para la toma de
-          decisiones estratégicas que promuevan un desarrollo económico
-          sostenible.
-        </p>
-        <p class="text-gray-700 leading-relaxed text-justify">
-          El informe completo está disponible para su consulta, y se espera que
-          sea un recurso útil para empresas, instituciones públicas y actores
-          del ecosistema de innovación de la región.
-        </p>
-      </div>
+        <!-- Imagen secundaria con efecto -->
+        <div class="overflow-hidden rounded-2xl shadow-xl my-16">
+          <img
+            src="assets/informe2.jpg"
+            alt="Innovación y Desarrollo Regional"
+            class="w-full h-auto object-cover transform hover:scale-105 transition-transform duration-500"
+          />
+        </div>
 
-      <!-- Botón de descarga modernizado -->
-      <div class="mt-12 text-center">
-        <a (click)="openLink('https://drive.google.com/file/d/1Ct-dBUZZ2nejjTZ7FNbhrLr45POtNnnN/view?usp=sharing')"
-           class="inline-flex items-center px-8 py-4 bg-[rgb(234,179,8)] hover:bg-[rgb(234,179,8)]/90 
-                  transition-colors duration-300 cursor-pointer">
-          <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M12.293 9.293a1 1 0 011.414 0L17 12.586V4a1 1 0 112 0v10a1 1 0 01-1 1h-10a1 1 0 110-2h8.586l-3.293-3.293a1 1 0 010-1.414zM3 4a1 1 0 011-1h6a1 1 0 110 2H5v12h8a1 1 0 110 2H4a1 1 0 01-1-1V4z"/>
-          </svg>
-          Ver Informe Completo
-        </a>
-      </div>
-    </section>
+        <!-- Sección: Conclusiones y Descarga -->
+        <div class="bg-gray-50 p-10 rounded-2xl shadow-lg">
+          <h2 class="text-3xl font-bold mb-8 text-center">Descubre el Futuro de la Industria Regional</h2>
+          <p class="text-lg text-gray-700 text-center mb-8">
+            Accede al informe completo y descubre las oportunidades que la Industria 4.0 
+            ofrece para el desarrollo de la Región de Los Lagos.
+          </p>
+          <div class="text-center">
+            <a (click)="openLink('https://drive.google.com/file/d/1Ct-dBUZZ2nejjTZ7FNbhrLr45POtNnnN/view?usp=sharing')"
+               class="inline-flex items-center px-8 py-4 bg-[rgb(234,179,8)] hover:bg-[rgb(234,179,8)]/90 
+                      transition-all duration-300 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+              <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M12.293 9.293a1 1 0 011.414 0L17 12.586V4a1 1 0 112 0v10a1 1 0 01-1 1h-10a1 1 0 110-2h8.586l-3.293-3.293a1 1 0 010-1.414zM3 4a1 1 0 011-1h6a1 1 0 110 2H5v12h8a1 1 0 110 2H4a1 1 0 01-1-1V4z"/>
+              </svg>
+              Descargar Informe Completo
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <aside class="w-full lg:w-1/4 sticky top-8 h-fit">
+      <app-sugeridos></app-sugeridos>
+    </aside>
   </div>
-
-  <aside class="w-full lg:w-1/4 sticky top-8 h-fit">
-    <app-sugeridos></app-sugeridos>
-  </aside>
 </main>
