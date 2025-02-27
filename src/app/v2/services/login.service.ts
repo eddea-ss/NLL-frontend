@@ -133,7 +133,13 @@ export class LoginService {
 
     // Guardar el token y el usuario en localStorage
     localStorage.setItem('authToken', token);
+    // guarda el sector del usario en el localstorage
+    
+
+
     localStorage.setItem('user', JSON.stringify(usuario));
+
+    localStorage.setItem('sector', JSON.stringify(usuario.sector).toLowerCase());
 
     // Actualizar los Signals
     this._authState.set(AuthState.LoggedIn);
