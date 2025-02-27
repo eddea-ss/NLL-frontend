@@ -1,27 +1,33 @@
-<!-- Mensajes de tip o mensaje de estado -->
-<div class="mb-3 position-relative" style="min-height: 1.5em">
-  <h5
+<!-- Contenedor de mensajes mejorado -->
+<div class="message-container">
+  <div
     *ngIf="searchTip && !searchMessage"
-    class="text-muted position-absolute top-0 start-0"
+    class="typing-message"
+    [class.visible]="isTypingVisible"
+    [class.typing]="isTypingVisible"
   >
     {{ searchTip }}
-  </h5>
-  <h5 *ngIf="searchMessage" class="text-muted position-absolute top-0 start-0">
+  </div>
+  <div
+    *ngIf="searchMessage"
+    class="typing-message"
+    [class.visible]="isTypingVisible"
+  >
     {{ searchMessage }}
-  </h5>
+  </div>
 </div>
 
-<!-- Campo de texto para la búsqueda con icono de lupa -->
-<div class="flex items-center mb-3">
+<!-- Campo de texto para la búsqueda con diseño mejorado -->
+<div class="flex items-center mb-5">
   <label for="simple-search" class="sr-only">Buscar</label>
   <div class="relative w-full flex">
-    <!-- Ícono de búsqueda a la izquierda -->
+    <!-- Ícono de búsqueda a la izquierda con animación hover -->
     <div
-      class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
+      class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none transition-opacity duration-200"
     >
       <svg
         aria-hidden="true"
-        class="w-5 h-5 text-gray-500"
+        class="w-5 h-5 text-yellow-500"
         fill="currentColor"
         viewBox="0 0 20 20"
       >
@@ -32,30 +38,30 @@
         ></path>
       </svg>
     </div>
-
-    <!-- Input de búsqueda -->
+    
+    <!-- Input de búsqueda con diseño mejorado -->
     <input
       type="text"
       [(ngModel)]="searchInput"
       (ngModelChange)="onInputChange($event)"
       id="simple-search"
-      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
+      class="bg-white border border-gray-300 text-gray-800 text-base rounded-lg shadow-sm focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 block w-full pl-10 p-3 transition-all duration-200"
+      [class.pr-10]="searchInput.trim().length > 0"
       placeholder="Buscar recursos..."
       required
     />
-
-    <!-- Botón para limpiar la búsqueda, visible solo si hay texto -->
+    
+    <!-- Botón para limpiar la búsqueda -->
     <div
       *ngIf="searchInput.trim().length > 0"
-      style="width: 32px; padding-left: 0px; cursor: pointer"
-      class="absolute inset-y-0 right-0 flex items-center pl-3"
+      class="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer opacity-70 hover:opacity-100 transition-opacity duration-200"
       (click)="onClearSearch()"
       id="clearButton"
       aria-label="Limpiar búsqueda"
     >
       <svg
         aria-hidden="true"
-        class="w-5 h-5 text-gray-500"
+        class="w-5 h-5 text-gray-500 hover:text-red-500 transition-colors duration-200"
         fill="currentColor"
         viewBox="0 0 20 20"
       >
@@ -67,12 +73,12 @@
       </svg>
     </div>
   </div>
-
-  <!-- Botón para iniciar la búsqueda -->
+  
+  <!-- Botón de búsqueda -->
   <button
     type="button"
     (click)="onSearch()"
-    class="p-2.5 ml-2 text-sm font-medium text-white bg-gray-600 border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
+    class="p-3 ml-2 text-sm font-medium text-gray-800 bg-yellow-500 rounded-lg border-0 hover:bg-yellow-600 hover:shadow-md focus:ring-4 focus:ring-yellow-300 focus:outline-none transition-all duration-200 ease-in-out flex items-center justify-center min-w-[44px]"
   >
     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path
@@ -86,56 +92,63 @@
   </button>
 </div>
 
-<!-- Botones para seleccionar tipo de recurso (visibles solo si se cumplen condiciones) -->
-<div *ngIf="showResourceButtons" class="mb-4 grid sm:flex sm:space-x-4">
+<!-- Botones de tipo de recurso -->
+<div *ngIf="showResourceButtons" class="mb-6 flex flex-wrap gap-2">
   <button
     *ngFor="let option of resourceOptions"
     (click)="onResourceTypeChange(option.type)"
-    [class.bg-[#EAB308]]="selectedResourceType === option.type"
-    [class.text-[rgb(31,41,55)]]="selectedResourceType === option.type"
-    class="sm:m-1 font-bold text-gray-600 px-4 text-muted text-xs py-2 border border-gray-600 hover:bg-[#EAB308] hover:text-[rgb(31,41,55)] transition-colors duration-300"
+    [class.bg-yellow-500]="selectedResourceType === option.type"
+    [class.text-gray-800]="selectedResourceType === option.type"
+    [class.shadow-md]="selectedResourceType === option.type"
+    [class.border-yellow-600]="selectedResourceType === option.type"
+    class="font-medium rounded-full px-4 py-2 text-sm border border-gray-300 hover:bg-yellow-500 hover:text-gray-800 hover:shadow-md transition-all duration-200 ease-in-out"
   >
     {{ option.label }}
   </button>
 </div>
 
-<!-- Listado de palabras clave sugeridas -->
-<div class="mb-8 grid sm:flex mx-1">
-  <span class="me-2 text-gray-600 font-bold">Buscar:</span>
-  <ng-container *ngFor="let term of searchKeywords">
-    <span
-      style="padding: 4px 12px"
-      class="badge cards-title-color border px-2 py-1 text-xs suggested-term me-2 mb-2"
-      (click)="onAddSuggestedTerm(term)"
-      (keypress)="handleKeyPress($event, term)"
-      tabindex="0"
-      role="button"
-      [attr.aria-label]="'Buscar ' + (term === 'ingles' ? 'En Inglés' : term)"
-    >
-      {{
-        term === "ingles"
-          ? "En Inglés"
-          : term === "de pago"
-          ? "De Pago"
-          : (term | titlecase)
-      }}
-    </span>
-  </ng-container>
+<!-- Palabras clave sugeridas -->
+<div class="mb-8 flex flex-wrap items-center gap-2">
+  <span class="text-gray-700 font-medium">Buscar:</span>
+  <div class="flex flex-wrap gap-2">
+    <ng-container *ngFor="let term of searchKeywords">
+      <span
+        class="bg-gray-100 text-gray-700 hover:bg-yellow-100 hover:text-gray-900 px-3 py-1.5 rounded-full text-sm font-medium cursor-pointer transition-all duration-200 suggested-term hover:shadow-sm"
+        (click)="onAddSuggestedTerm(term)"
+        (keypress)="handleKeyPress($event, term)"
+        tabindex="0"
+        role="button"
+        [attr.aria-label]="'Buscar ' + (term === 'ingles' ? 'En Inglés' : term)"
+      >
+        {{
+          term === "ingles"
+            ? "En Inglés"
+            : term === "de pago"
+            ? "De Pago"
+            : (term | titlecase)
+        }}
+      </span>
+    </ng-container>
+  </div>
 </div>
 
-<!-- Conteo de resultados e indicador de carga -->
+<!-- Contador de resultados y loader -->
 <div>
-  <div class="form-text text-center text-muted">
+  <div 
+    class="result-count text-gray-600 text-center font-medium mb-4 transition-opacity duration-300"
+    [class.opacity-75]="!resultCount"
+  >
     {{ resultCount }}
   </div>
+  
+  <!-- Spinner de carga personalizado -->
   <div
     *ngIf="isLoading"
-    class="text-center my-4"
+    class="flex justify-center items-center my-6"
     aria-live="polite"
     aria-busy="true"
   >
-    <div class="spinner-border text-primary" role="status">
-      <span class="visually-hidden">Cargando...</span>
-    </div>
+    <div class="loading-spinner"></div>
+    <span class="sr-only">Cargando...</span>
   </div>
 </div>
