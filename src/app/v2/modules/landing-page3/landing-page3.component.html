@@ -15,60 +15,107 @@
   </svg>
 </div>
 
-<section data-aos="fade-up" type="articulos1">
+<section data-aos="fade-up" class="py-16 bg-gray-50" type="articulos1">
   @if (data.length) {
   <div class="mb-16 mx-8 sm:mx-8 lg:mx-20 xl:mx-32">
     <h2
       routerLink="/buscador"
-      class="text-3xl cursor-pointer font-bold mb-16 text-gray-800 transform duration-300 hover:text-blue-800 relative inline-block after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-1 after:bg-yellow-500"
+      class="text-3xl cursor-pointer font-bold mb-12 text-gray-800 transform duration-300 hover:text-blue-800 relative inline-block after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-1/3 after:h-0.5 after:bg-yellow-500"
     >
-      Artículos Destacados →
+      Artículos Destacados
     </h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       @for (item of data.slice(0, 6); track $index) {
-      <div class="article-card group">
-        <div class="article-content">
-          <div class="article-header">
-            <div class="article-number">0{{$index + 1}}</div>
-            <h3 class="text-xl font-bold text-gray-800">
-              {{ item?.titulo }}
-            </h3>
+      <div class="article-card group bg-white border border-gray-100 hover:border-yellow-300 rounded-lg overflow-hidden transition-all duration-300 flex flex-col">
+        <!-- Línea decorativa superior -->
+        <div class="h-1 bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-400"></div>
+        
+        <div class="article-content p-6 flex flex-col flex-grow">
+          <!-- Categoría y número sutil -->
+          <div class="flex justify-between items-center mb-3">
+            <span class="text-xs font-medium text-gray-500 tracking-wider uppercase">Industria 4.0</span>
+            <span class="text-xs text-gray-400 font-light">0{{$index + 1}}</span>
           </div>
-          <div class="article-body">
-            <p
-              [innerHTML]="
-                recursosService.sanitizedString(item?.resumen)
-                  | truncate : 120 : true
-              "
-            ></p>
-            <a
-              class="read-more-link"
+          
+          <!-- Título con altura mínima fija -->
+          <h3 class="text-lg font-medium text-gray-800 mb-3 line-clamp-2 min-h-[3rem] group-hover:text-blue-700 transition-colors duration-200">
+            {{ item?.titulo }}
+          </h3>
+          
+          <!-- Contenido con altura mínima fija -->
+          <div 
+            class="text-sm text-gray-600 mb-4 line-clamp-3 min-h-[4.5rem]"
+            [innerHTML]="
+              recursosService.sanitizedString(item?.resumen)
+                | truncate : 120 : true
+            "
+          ></div>
+          
+          <!-- Footer con acción -->
+          <div class="mt-auto pt-4 border-t border-gray-100 flex justify-end">
+            <button
+              class="text-sm text-gray-600 hover:text-blue-700 font-normal flex items-center gap-2 transition-colors duration-200 group"
               (click)="openModal($index)"
             >
-              Leer más →
-            </a>
+              <span>Leer artículo</span>
+              <span class="w-5 h-5 rounded-full bg-gray-100 group-hover:bg-blue-50 flex items-center justify-center transition-colors duration-200">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                </svg>
+              </span>
+            </button>
           </div>
         </div>
       </div>
       }
     </div>
+    
+    <!-- Botón minimalista -->
+    <div class="text-center mt-12">
+      <a routerLink="/buscador" class="inline-flex items-center gap-2 text-gray-800 hover:text-blue-800 font-medium py-2 px-4 border-b border-transparent hover:border-yellow-500 transition-all duration-200">
+        <span>Ver todos los artículos</span>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+        </svg>
+      </a>
+    </div>
   </div>
   }
 </section>
-
-<section class="bg-[#1f2937]">
-  <div class="relative h-96 rounded-lg shadow-md overflow-hidden mb-8">
-    <!-- Imagen de fondo -->
-    <img src="/assets/plataforma2.jpg" alt="Imagen descriptiva" class="w-full h-full object-cover">
-    <!-- Overlay oscuro -->
-    <div class="absolute inset-0 bg-black bg-opacity-50"></div>
-    <!-- Texto superpuesto -->
-    <div class="absolute inset-0 flex flex-col justify-center items-center text-center p-8">
-        <h2 class="text-4xl font-bold text-white mb-4">Impulsa tu Negocio</h2>
-        <p class="text-gray-200 mb-6">Descubre cómo la tecnología puede revolucionar tu negocio. Accede a recursos exclusivos hoy mismo.</p>
-        <a href="/evaluaciones-madurez" class="bg-[#eab308]  px-6 py-2  hover:bg-purple-600 transition duration-300">Comenzar</a>
+<section class="py-16">
+  <div class="relative h-[500px] overflow-hidden">
+    <!-- Imagen de fondo con parallax sutil -->
+    <img 
+      src="/assets/plataforma2.jpg" 
+      alt="Tecnología e innovación industrial" 
+      class="w-full h-full object-cover transform scale-110 hover:scale-105 transition-transform duration-3000"
+    >
+    <!-- Overlay con gradiente -->
+    <div class="absolute inset-0 bg-gradient-to-r from-black to-transparent opacity-70"></div>
+    
+    <!-- Contenido centrado con animación sutil -->
+    <div class="absolute inset-0 flex flex-col justify-center max-w-4xl mx-auto px-8 sm:px-16">
+      <div data-aos="fade-right" class="space-y-6 max-w-2xl">
+        <h2 class="text-4xl md:text-5xl font-bold text-white leading-tight">
+          Impulsa tu Negocio con <span class="text-[#eab308]">Tecnología 4.0</span>
+        </h2>
+        <p class="text-xl text-gray-200 leading-relaxed">
+          Descubre cómo la transformación digital y las tecnologías emergentes pueden 
+          revolucionar tu empresa y abrir nuevas oportunidades de crecimiento.
+        </p>
+        <div class="pt-4">
+          <a 
+            href="/evaluaciones-madurez" 
+            class="inline-block bg-[#eab308] text-gray-900 font-medium px-8 py-3 rounded-md hover:bg-yellow-400 transform hover:-translate-y-1 transition-all duration-300 shadow-lg hover:shadow-xl"
+          >
+            Iniciar Evaluación de Madurez
+          </a>
+        </div>
+      </div>
     </div>
-</div></section>
+  </div>
+</section>
 
 
 
@@ -168,105 +215,6 @@
   </div>
 </div>
 <!-- Section nuevo los lagos-->
-<section>
-
-
-
-
-  <div class="py-20 bg-white">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <!-- Sección de título y descripción -->
-      <div data-aos="zoom-in-down" class="lg:text-center">
-        <h2
-          class="font-heading mb-4 bg-yellow-500 inline-block px-4 py-2 rounded-lg md:w-64 md:mx-auto text-xs font-semibold tracking-widest text-black uppercase title-font"
-        >
-          ¿ Qué es Nuevo los lagos ?
-        </h2>
-        <p
-          class="font-heading mt-2 text-2xl leading-8 font-semibold tracking-tight text-gray-900 sm:text-3xl"
-          style="letter-spacing: 0.025em"
-        >
-          Plataforma para fortalecer la industria regional
-        </p>
-        <p
-          class="mt-4 max-w-2xl text-lg text-gray-500 lg:mx-auto"
-          style="margin-left: auto; margin-right: auto"
-        >
-          Iniciativa web desarrollada por Corfo Los Lagos, Universidad Santo
-          Tomás, Asimet y Grupo Centinela.
-        </p>
-      </div>
-
-
-
-      
-      <!-- Grid de características -->
-      <div data-aos="zoom-in" class="mt-10">
-        <dl class="feature-grid">
-          <div class="feature-item">
-            <div class="feature-item-title">
-              <p class="feature-item-heading">Buscador Proveedores</p>
-            </div>
-            <div class="feature-item-description">
-              Herramienta para conectar empresas y proveedores de la industria
-              en la región de Los Lagos.
-            </div>
-          </div>
-          <div class="feature-item">
-            <div class="feature-item-title">
-              <p class="feature-item-heading">Buscador de Cursos I 4.0</p>
-            </div>
-            <div class="feature-item-description">
-              Plataforma para busqueda de cursos especializados en Industria 4.0
-              para el desarrollo de profesionales.
-            </div>
-          </div>
-          <div class="feature-item">
-            <div class="feature-item-title">
-              <p class="feature-item-heading">Artículos de interés</p>
-            </div>
-            <div class="feature-item-description">
-              Compendio de artículos relevantes sobre Industria 4.0, enfocados
-              en ofrecer información útil a las empresas.
-            </div>
-          </div>
-          <div class="feature-item">
-            <div class="feature-item-title">
-              <p class="feature-item-heading">Proyectos destacados</p>
-            </div>
-            <div class="feature-item-description">
-              Selección de proyectos sobresalientes en Industria 4.0, con
-              información relevante para el sector empresarial.
-            </div>
-          </div>
-          <div class="feature-item">
-            <div class="feature-item-title">
-              <p class="feature-item-heading">
-                Investigaciones sobre la Industria Regional
-              </p>
-            </div>
-            <div class="feature-item-description">
-              Acceso a investigaciones y estudios que analizan el impacto y
-              desarrollo de la industria en la región de Los Lagos.
-            </div>
-          </div>
-          <div class="feature-item">
-            <div class="feature-item-title">
-              <p class="feature-item-heading">
-                Contenido Exclusivo en Industria 4.0
-              </p>
-            </div>
-            <div class="feature-item-description">
-              Recursos especializados y contenido exclusivo sobre tendencias,
-              innovaciones y mejores prácticas en Industria 4.0.
-            </div>
-          </div>
-        </dl>
-      </div>
-    </div>
-  </div>
-</section>
-
 
 
 <section class="bg-white">

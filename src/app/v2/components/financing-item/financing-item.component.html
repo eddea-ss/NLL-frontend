@@ -1,62 +1,102 @@
 @if (simplified) {
-<article class="bg-gray-100 p-4 border">
-  <h3 class="text-xl font-bold mb-2">{{ data?.titulo }}</h3>
-  <span
-    style="font-size: 0.9rem"
-    [innerHTML]="data.descripcion | truncate : 130 : true"
-  >
-  </span>
-  <p style="height: 12px"></p>
-  <a
-    style="cursor: pointer"
-    (click)="onOpenModal()"
-    (keypress.enter)="onOpenModal()"
-    (keypress.space)="onOpenModal()"
-    class="font-bold py-2 text-blue-500 transition duration-300 ease-in-out transform hover:scale-105"
-  >
-    Ver Más
-  </a>
+<article class="p-4 rounded-lg transition-all duration-300">
+  <!-- Título con estilo mejorado -->
+  <h3 class="text-xl font-bold mb-2 text-gray-800 group-hover:text-green-600">{{ data?.titulo }}</h3>
+  
+  <!-- Etiquetas con estilo mejorado -->
+  <div class="mb-2 flex flex-wrap gap-1">
+    @if (data?.porcentaje_cobertura) {
+      <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">{{ data?.porcentaje_cobertura }}% cobertura</span>
+    }
+    @if (data?.institucion) {
+      <span class="bg-green-50 text-green-700 text-xs px-2 py-1 rounded-full">{{ data?.institucion }}</span>
+    }
+  </div>
+  
+  <!-- Descripción con estilo mejorado -->
+  <div class="text-gray-600 mb-4 text-sm leading-relaxed"
+    [innerHTML]="data.descripcion | truncate : 120 : true">
+  </div>
+  
+  <!-- Botón 'Ver Más' con estilo mejorado -->
+  <div class="mt-3 flex justify-end">
+    <a
+      style="cursor: pointer"
+      (click)="onOpenModal()"
+      (keypress.enter)="onOpenModal()"
+      (keypress.space)="onOpenModal()"
+      class="inline-flex items-center text-green-600 hover:text-green-800 transition-colors duration-300 font-medium"
+    >
+      Ver Más
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+      </svg>
+    </a>
+  </div>
 </article>
 }@else {
 <div
-  class="group"
+  class="group p-5 border border-gray-100 rounded-lg hover:shadow-md transition-all duration-300"
   (click)="onOpenModal()"
   (keypress.enter)="onOpenModal()"
   (keypress.space)="onOpenModal()"
+  tabindex="0"
+  role="button"
 >
+  <!-- Título con efecto hover -->
   <a
     style="cursor: pointer"
-    class="text-xl font-semibold cards-title-color hover:underline"
+    class="text-xl font-semibold text-gray-800 hover:text-green-600 transition-colors duration-300 block mb-2"
   >
     {{ data.titulo }}
   </a>
-
-  <!-- Etiquetas de los articulos -->
-  <p class="mb-1 flex flex-wrap gap-1">
+  
+  <!-- Etiquetas con estilo mejorado -->
+  <div class="mb-3 flex flex-wrap gap-2">
     @if (data.tipo_financiamiento.toLowerCase() === 'público') {
-    <span class="border cards-title-color px-2 py-1 text-xs">
-      Financiamiento: Público
-    </span>
+      <span class="bg-green-50 text-green-600 px-2 py-1 text-xs rounded-md">Financiamiento: Público</span>
     }
-    <span class="border cards-title-color px-2 py-1 text-xs">
-      Institución: {{ data.institucion }}
-    </span>
-    <span class="border cards-title-color px-2 py-1 text-xs">
-      Categoría: {{ data.categoria }}
-    </span>
-  </p>
-  <!-- Descripción del curso -->
-  <span
-    class="cards-title-color"
-    [innerHTML]="
-      resourcesService.sanitizedString(data.descripcion | truncate : 400 : true)
-    "
-  >
-  </span>
-  <p style="margin-top: 0px">
-    <small style="color: gray" class="text-secondary"
-      >Sitio web: {{ resourcesService.getDomain(data.link) }}
+    @if (data.tipo_financiamiento.toLowerCase() === 'privado') {
+      <span class="bg-blue-50 text-blue-600 px-2 py-1 text-xs rounded-md">Financiamiento: Privado</span>
+    }
+    @if (data.institucion) {
+      <span class="bg-gray-50 text-gray-700 px-2 py-1 text-xs rounded-md">Institución: {{ data.institucion }}</span>
+    }
+    @if (data.categoria) {
+      <span class="bg-amber-50 text-amber-700 px-2 py-1 text-xs rounded-md">Categoría: {{ data.categoria }}</span>
+    }
+    @if (data.porcentaje_cobertura) {
+      <span class="bg-emerald-50 text-emerald-700 px-2 py-1 text-xs rounded-md flex items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-14a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V4z" clip-rule="evenodd" />
+        </svg>
+        {{ data.porcentaje_cobertura }}% cobertura
+      </span>
+    }
+  </div>
+  
+  <!-- Descripción con estilo mejorado -->
+  <div class="text-gray-600 mb-3 text-sm leading-relaxed"
+    [innerHTML]="resourcesService.sanitizedString(data.descripcion | truncate : 400 : true)">
+  </div>
+  
+  <!-- Información adicional con estilo mejorado -->
+  <p class="flex items-center mt-4 pt-2 border-t border-gray-100">
+    <!-- Icono de enlace web -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+    </svg>
+    <!-- Sitio web -->
+    <small class="text-gray-500">
+      {{ resourcesService.getDomain(data.link) }}
     </small>
+    
+    <!-- Icono de flecha que indica interactividad -->
+    <span class="ml-auto text-green-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+      </svg>
+    </span>
   </p>
 </div>
 
