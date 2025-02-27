@@ -521,14 +521,19 @@
   }
   <!--sección sin login - Modernizada-->
   @if (authState() === AuthState.LoggedOut) {
-  <section class="relative overflow-hidden bg-gradient-to-b from-blue-50 to-white py-16">
-    <div class="absolute top-0 left-0 w-full h-48 bg-gradient-to-r from-blue-100/40 to-blue-200/40"></div>
+  <!-- Hero Section -->
+  <section class="relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-blue-50 py-20">
+    <div class="absolute top-0 left-0 w-full h-64 bg-gradient-to-r from-blue-100/40 to-blue-200/40"></div>
+    <!-- Animated circles background -->
+    <div class="absolute inset-0">
+      <div class="absolute bottom-0 right-0 w-64 h-64 bg-blue-100 rounded-full -mr-32 -mb-32 opacity-20 animate-pulse"></div>
+      <div class="absolute top-32 left-10 w-32 h-32 bg-green-100 rounded-full opacity-20 animate-bounce"></div>
+      <div class="absolute top-48 right-48 w-24 h-24 bg-purple-100 rounded-full opacity-20 animate-pulse"></div>
+    </div>
     <div class="relative z-10">
       <app-title-section
         [title]="'Evaluación de Nivel de Madurez Tecnológica'"
-        [description]="
-          'Evalúa el nivel de madurez tecnológica de tu empresa y descubre qué acciones implementar para impulsar tu transformación digital hacia la Industria 4.0'
-        "
+        [description]="'Evalúa el nivel de madurez tecnológica de tu empresa y descubre qué acciones implementar para impulsar tu transformación digital hacia la Industria 4.0'"
         [buttonText]="'Registrarse como Empresa'"
         [buttonLink]="'/registro-industria'"
         [imageSrc]="'assets/hero.webp'"
@@ -536,51 +541,66 @@
       >
       </app-title-section>
     </div>
-    
-    <div class="absolute bottom-0 right-0 w-64 h-64 bg-blue-100 rounded-full -mr-32 -mb-32 opacity-20"></div>
-    <div class="absolute bottom-16 left-10 w-32 h-32 bg-green-100 rounded-full opacity-20"></div>
   </section>
-  
-  <section class="py-12 bg-white">
+
+  <!-- Process Section -->
+  <section class="py-16 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold text-gray-800 mb-4">¿Cómo funciona?</h2>
-        <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+      <div class="text-center mb-16">
+        <span class="text-blue-600 font-semibold text-sm uppercase tracking-wider">Proceso de Evaluación</span>
+        <h2 class="text-4xl font-bold text-gray-900 mt-2 mb-4">¿Cómo funciona?</h2>
+        <div class="w-24 h-1 bg-blue-600 mx-auto rounded-full"></div>
+        <p class="text-xl text-gray-600 mt-6 max-w-3xl mx-auto">
           El proceso de evaluación de madurez tecnológica es simple y te proporcionará información valiosa para tu empresa.
         </p>
       </div>
-      <app-step-register [steps]="steps"></app-step-register>
       
-      <!-- Beneficios adicionales -->
-      <div class="mt-16 grid md:grid-cols-3 gap-8">
-        <div class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300">
-          <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold text-gray-800 mb-2">Diagnóstico Personalizado</h3>
-          <p class="text-gray-600">Recibirás un análisis detallado del estado actual de madurez tecnológica de tu empresa y recomendaciones personalizadas.</p>
+      <!-- Custom styled step register component -->
+      <div class="relative">
+        <div class="absolute top-0 left-1/2 -ml-0.5 w-1 h-full bg-gradient-to-b from-blue-500 to-blue-100"></div>
+        <app-step-register [steps]="steps" class="relative z-10"></app-step-register>
+      </div>
+
+      <!-- Benefits Section with Cards -->
+      <div class="mt-24">
+        <div class="text-center mb-12">
+          <span class="text-blue-600 font-semibold text-sm uppercase tracking-wider">Beneficios</span>
+          <h3 class="text-3xl font-bold text-gray-900 mt-2">¿Qué obtendrás?</h3>
         </div>
         
-        <div class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300">
-          <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-4">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-            </svg>
+        <div class="grid md:grid-cols-3 gap-8">
+          <!-- Diagnóstico Card -->
+          <div class="group bg-white p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+            <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mb-6 transform group-hover:rotate-6 transition-transform duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Diagnóstico Personalizado</h3>
+            <p class="text-gray-600 leading-relaxed">Recibirás un análisis detallado del estado actual de madurez tecnológica de tu empresa y recomendaciones personalizadas para cada área evaluada.</p>
           </div>
-          <h3 class="text-xl font-semibold text-gray-800 mb-2">Plan de Mejora</h3>
-          <p class="text-gray-600">Obtén un plan de acción concreto para mejorar las áreas que necesitan mayor desarrollo tecnológico.</p>
-        </div>
-        
-        <div class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300">
-          <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-            </svg>
+
+          <!-- Plan de Mejora Card -->
+          <div class="group bg-white p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+            <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center mb-6 transform group-hover:rotate-6 transition-transform duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Plan de Mejora</h3>
+            <p class="text-gray-600 leading-relaxed">Obtén un plan de acción concreto y priorizado para mejorar las áreas que necesitan mayor desarrollo tecnológico en tu empresa.</p>
           </div>
-          <h3 class="text-xl font-semibold text-gray-800 mb-2">Conexión con Expertos</h3>
-          <p class="text-gray-600">Accede a una red de proveedores especializados y expertos que pueden ayudarte en tu transformación digital.</p>
+
+          <!-- Conexión Expertos Card -->
+          <div class="group bg-white p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+            <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6 transform group-hover:rotate-6 transition-transform duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Conexión con Expertos</h3>
+            <p class="text-gray-600 leading-relaxed">Accede a una red exclusiva de proveedores especializados y expertos que pueden ayudarte en tu proceso de transformación digital.</p>
+          </div>
         </div>
       </div>
     </div>
