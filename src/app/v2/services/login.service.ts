@@ -137,20 +137,22 @@ export class LoginService {
     
     localStorage.setItem('user', JSON.stringify(usuario));
 
-    let sectorText = `${usuario.sector},cultivo peces,producción salmón,sistemas recirculación,sanidad acuícola,alimentación peces,calidad agua,bioseguridad,genética acuícola,procesamiento pescado,certificación acuícola`;
+    let sectorText = `${usuario.sector},ninguno`;
 
-    if (usuario.sector.toLowerCase() === 'astilleros') {
-      sectorText = `${usuario.sector},construcción naval,ingeniería marina,soldadura naval,sistemas propulsión,diseño embarcaciones,mantenimiento barcos,pintura naval,equipamiento marino,electrónica naval,seguridad marítima`;
+    if (usuario.sector.toLowerCase() === 'acuicultura') {
+      sectorText = `${usuario.sector},pez, cultivo peces,producción salmón,sistemas recirculación,sanidad acuícola,alimentación peces,calidad agua, salmón, salmones, choritos, mejillones,bioseguridad,genética acuícola,procesamiento pescado,certificación acuícola`;
+    } else if (usuario.sector.toLowerCase() === 'astilleros') {
+      sectorText = `${usuario.sector},construcción naval,ingeniería marina,soldadura naval,sistemas propulsión,diseño embarcaciones,mantenimiento barcos,pintura naval,equipamiento marino,electrónica naval,seguridad marítima,reparación naval,arquitectura naval,certificación marítima,normativa naval,control calidad naval`;
     } else if (usuario.sector.toLowerCase() === 'carnico') {
-      sectorText = `${usuario.sector},procesamiento carnes,control calidad,cadena frío,cortes cárnicos,empaquetado vacío,trazabilidad,seguridad alimentaria,maduración carnes,inspección sanitaria,logística frigorífica`;
+      sectorText = `${usuario.sector},procesamiento carnes,control calidad,cadena frío,cortes cárnicos,empaquetado vacío,trazabilidad,seguridad alimentaria,maduración carnes,inspección sanitaria,logística frigorífica,bienestar animal,certificación cárnica,procesamiento embutidos,control temperatura,higiene industrial`;
     } else if (usuario.sector.toLowerCase() === 'construccion') {
-      sectorText = `${usuario.sector},gestión proyectos,estructuras,hormigón armado,instalaciones eléctricas,planos construcción,seguridad obra,materiales construcción,acabados,supervisión obra,certificación construcción`;
+      sectorText = `${usuario.sector},gestión proyectos,estructuras,hormigón armado,instalaciones eléctricas,planos construcción,seguridad obra,materiales construcción,acabados,supervisión obra,certificación construcción,sostenibilidad,eficiencia energética,gestión residuos,normativa construcción,control costos`;
     } else if (usuario.sector.toLowerCase() === 'lacteo') {
-      sectorText = `${usuario.sector},procesamiento leche,control calidad,pasteurización,elaboración quesos,derivados lácteos,cadena frío,fermentación,envase aséptico,cultivos lácteos,normativa sanitaria`;
+      sectorText = `${usuario.sector},procesamiento leche,control calidad,pasteurización,elaboración quesos,derivados lácteos,cadena frío,fermentación,envase aséptico,cultivos lácteos,normativa sanitaria,control bacteriológico,certificación láctea,innovación productos,control temperatura,trazabilidad láctea`;
     } else if (usuario.sector.toLowerCase() === 'maestranza') {
-      sectorText = `${usuario.sector},torneado,fresado,soldadura industrial,mantenimiento equipos,mecanizado cnc,fabricación piezas,control dimensional,tratamientos térmicos,rectificado,diseño mecánico`;
+      sectorText = `${usuario.sector},torneado,fresado,soldadura industrial,mantenimiento equipos,mecanizado cnc,fabricación piezas,control dimensional,tratamientos térmicos,rectificado,diseño mecánico,automatización,control numérico,metalurgia,calibración equipos,seguridad industrial`;
     } else if (usuario.sector.toLowerCase() === 'turismo') {
-      sectorText = `${usuario.sector},servicio cliente,gestión hotelera,planificación eventos,marketing turístico,guía turístico,gastronomía local,reservas,idiomas,turismo sustentable,administración turística`;
+      sectorText = `${usuario.sector},servicio cliente,gestión hotelera,planificación eventos,marketing turístico,guía turístico,gastronomía local,reservas,idiomas,turismo sustentable,administración turística,ecoturismo,experiencia cliente,gestión destinos,turismo cultural,hospitalidad`;
     }
 
     localStorage.setItem('sector', sectorText.toLowerCase());
@@ -185,6 +187,7 @@ export class LoginService {
     localStorage.removeItem('modelo-caracter');
     localStorage.removeItem('formacion-emprendedor');
     localStorage.removeItem('startup-emprendedor');
+    localStorage.removeItem('sector');
 
     // Actualizar los Signals
     this._authState.set(AuthState.LoggedOut);

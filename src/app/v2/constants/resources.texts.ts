@@ -1,4 +1,16 @@
 import { ResourceText } from '@v2/models';
+
+const getUserSector = () => {
+  const userStr = localStorage.getItem('user');
+  if (!userStr) return [];
+  try {
+    const user = JSON.parse(userStr);
+    return user?.sector ? [user.sector] : [];
+  } catch {
+    return [];
+  }
+};
+
 export const COURSE_TEXT: ResourceText = {
   LABEL: 'Buscador de cursos',
   TIPS: [
@@ -17,7 +29,10 @@ export const COURSE_TEXT: ResourceText = {
     '¡Que tengas un excelente descubrimiento de cursos!',
   ],
 
-  SEARCH_KEYWORDS: ['online', 'presencial', 'gratuito', 'de pago', 'ingles'],
+  SEARCH_KEYWORDS: [
+    ...getUserSector(),
+    'online', 'presencial', 'gratuito', 'de pago', 'ingles'
+  ],
 
   BREADCRUMBS: [
     {
@@ -56,7 +71,7 @@ export const ARTICLE_TEXT: ResourceText = {
   ],
 
   SEARCH_KEYWORDS: [
-    'acuicultura',
+    ...getUserSector(),
     'iot',
     'gemelos digitales',
     'inteligencia artificial',
@@ -100,6 +115,7 @@ export const PROJECT_TEXT: ResourceText = {
   ],
 
   SEARCH_KEYWORDS: [
+    ...getUserSector(),
     'gemelos digitales',
     'impresión 3D',
     'innovación',
@@ -143,6 +159,7 @@ export const SUPPLIER_TEXT: ResourceText = {
   ],
 
   SEARCH_KEYWORDS: [
+    ...getUserSector(),
     'Los Lagos',
     'Robótica',
     'Alimentos',
@@ -187,6 +204,7 @@ export const FINNANCING_TEXT: ResourceText = {
   ],
 
   SEARCH_KEYWORDS: [
+    ...getUserSector(),
     'innovación',
     'sostenibilidad',
     'empresas lideradas por mujeres',
@@ -229,7 +247,13 @@ export const STARTUPS_TEXT: ResourceText = {
     '¡Que la innovación te acompañe!',
   ],
 
-  SEARCH_KEYWORDS: ['Los Lagos', 'Turismo', 'Industrial', 'Más de 3 años'],
+  SEARCH_KEYWORDS: [
+    ...getUserSector(),
+    'Los Lagos', 
+    'Turismo', 
+    'Industrial', 
+    'Más de 3 años'
+  ],
 
   BREADCRUMBS: [
     {
