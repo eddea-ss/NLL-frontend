@@ -31,6 +31,8 @@ import {
   industriaSections,
 } from '@v2/constants';
 import { Md5 } from 'ts-md5';
+import { ConsejosSectorService } from './consejos-sector.service';
+import { Consejo } from './consejos-sector';
 
 @Component({
   selector: 'app-evaluaciones-madurez',
@@ -50,6 +52,7 @@ export class EvaluacionesMadurezComponent implements AfterViewInit, OnInit {
   protected modeloMadurezService = inject(MaturityModelService);
   private title = inject(Title);
   private meta = inject(Meta);
+  private consejosSectorService = inject(ConsejosSectorService);
 
   authState = this.loginService.authState;
   currentUser = this.loginService.currentUser;
@@ -310,5 +313,25 @@ export class EvaluacionesMadurezComponent implements AfterViewInit, OnInit {
     const rut = this.currentUser()?.rut;
     if (!rut) return '';
     return Md5.hashStr(rut);
+  }
+
+  /**
+   * Obtener consejos específicos para el sector de la empresa según su puntaje
+   * @returns Array de consejos aplicables al sector y puntaje
+   */
+  obtenerConsejosSector(): Consejo[] {
+    const modelo = this.modeloMadurez();
+    const sector = this.currentUser()?.sector || 'Otro';
+    
+    // Si no hay modelo o puntaje sectorial, retornar array vacío
+    if (!modelo || modelo.puntaje_sector === null) {
+      return [];
+    }
+    
+    // Obtener consejos específicos para el sector y puntaje
+    return this.consejosSectorService.obtenerConsejosPorSectorYPuntaje(
+      sector,
+      modelo.puntaje_sector
+    );
   }
 }
