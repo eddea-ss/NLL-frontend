@@ -216,21 +216,32 @@
 </div>
 <!-- Section nuevo los lagos-->
 
-
-<section class="bg-white">
-    <!-- Diseño 1: Imagen a la izquierda y texto a la derecha -->
-    <div class="flex flex-col md:flex-row items-center bg-white  mb-8">
-      <!-- Imagen a la izquierda -->
-      <div class="w-full md:w-1/2">
-          <img src="assets/plataformainicio.jpg" alt="Imagen descriptiva" class="w-full h-64 md:h-full object-cover">
+<section class="bg-white py-16">
+    <!-- Diseño mejorado con sombras y efectos de transición -->
+    <div class="container mx-auto flex flex-col md:flex-row items-center bg-white  duration-300">
+      <!-- Imagen a la izquierda con overlay y efecto al pasar el cursor -->
+      <div class="w-full md:w-1/2 relative overflow-hidden">
+          <img 
+            src="assets/plataformainicio.jpg" 
+            alt="Ecosistema de innovación industrial" 
+            class="w-full h-80 md:h-[500px] object-cover transition-transform duration-700 hover:scale-105"
+          >
+          <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-60"></div>
       </div>
-      <!-- Texto a la derecha -->
-      <div class="w-full md:w-1/2 p-8">
-          <h2 class="text-3xl font-bold mb-4">Explora Nuevas Oportunidades</h2>
-          <p class="text-gray-600 mb-6">Nuevo Los Lagos" representa una alianza estratégica entre la Universidad Santo Tomás, Asimet y Grupo Centinela, respaldada por Corfo Los Lagos. Nuestra misión es transformar el panorama industrial regional mediante tecnología e innovación.</p>
-          <a href="/plataforma" class="bg-[#eab308] text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition duration-300">Conocer Más</a>
+      <!-- Texto a la derecha con mejor espaciado y tipografía -->
+      <div class="w-full md:w-1/2 p-10 md:p-12 space-y-6">
+          <h2 class="text-4xl font-bold mb-4 text-gray-800 leading-tight">Transformando la Industria Regional</h2>
+          <p class="text-gray-700 text-lg leading-relaxed mb-8">
+            "Nuevo Los Lagos" es una alianza estratégica innovadora entre la Universidad Santo Tomás, Asimet y Grupo Centinela, con el respaldo de Corfo Los Lagos. Nuestra visión es revolucionar el ecosistema industrial regional mediante la implementación de tecnologías avanzadas, formación especializada y soluciones de innovación sostenible.
+          </p>
+          <a 
+            href="/plataforma" 
+            class="inline-block bg-[#eab308] text-white px-8 py-3 rounded-lg hover:bg-[#d9a208] hover:shadow-lg transition-all duration-300 font-medium text-lg"
+          >
+            Descubrir Plataforma
+          </a>
       </div>
-  </div>
+    </div>
 </section>
 
 

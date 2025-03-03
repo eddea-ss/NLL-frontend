@@ -4,7 +4,7 @@
 <main class="container mx-auto py-20 px-6 flex flex-col lg:flex-row gap-12">
   <div class="w-full lg:w-3/4 space-y-16">
     <!-- Header con diseño mejorado -->
-    <header class="bg-gradient-to-r from-yellow-500 to-yellow-600 p-12 text-white rounded-xl shadow-lg transform hover:scale-[1.02] transition-transform duration-300">
+    <header class="bg-[#EAB308] p-12  ">
       <h1 class="text-5xl font-bold leading-tight tracking-tight">
         Innovación en Audio: Podcasts de Industria 4.0
       </h1>
@@ -16,7 +16,7 @@
     </header>
 
     <!-- Carrusel de episodios destacados -->
-    <section class="bg-white rounded-xl shadow-lg overflow-hidden">
+    <section class="bg-white   overflow-hidden">
       <h2 class="text-2xl font-bold p-6 border-b border-gray-100">Episodios Destacados</h2>
       <app-carousel
         [slides]="episodiosDestacados"
@@ -29,7 +29,7 @@
     </section>
 
     <!-- Secciones con diseño mejorado -->
-    <section class="bg-white p-12 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border-l-4 border-blue-600">
+    <section class="bg-white p-12    duration-300 border-l-4 border-blue-600">
       <h2 class="text-3xl font-bold text-gray-900 mb-6">
         Aprendizaje Inmersivo
       </h2>
@@ -45,16 +45,16 @@
       <img
         src="assets/podcast1.jpg"
         alt="Estudio de podcast moderno"
-        class="rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 w-full h-64 object-cover"
+        class="   duration-300 w-full h-64 object-cover"
       />
       <img
         src="assets/podcast2.jpg"
         alt="Tecnología de grabación avanzada"
-        class="rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 w-full h-64 object-cover"
+        class="   duration-300 w-full h-64 object-cover"
       />
     </div>
 
-    <section class="bg-white p-12 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border-l-4 border-blue-600">
+    <section class="bg-white p-12    duration-300 border-l-4 border-blue-600">
       <h2 class="text-3xl font-bold text-gray-900 mb-6">
         Experiencia Multiplataforma
       </h2>
@@ -66,12 +66,12 @@
     </section>
 
     <!-- Reproductor de episodios recientes -->
-    <section class="bg-white rounded-xl shadow-lg overflow-hidden">
+    <section class="bg-white   overflow-hidden">
       <h2 class="text-2xl font-bold p-6 border-b border-gray-100">Episodios Recientes</h2>
       <div class="p-6">
         <div class="mb-12">
           <iframe
-            class="w-full aspect-video rounded-lg shadow-lg"
+            class="w-full aspect-video rounded-lg "
             [src]="selectedVideoUrl"
             frameborder="0"
             allowfullscreen>
