@@ -413,5 +413,103 @@ export const CONSEJOS_SECTOR: ConsejosSector = {
         }
       ]
     }
+  ],
+  // Consejos para el sector de CARNICO
+  'CARNICO': [
+    {
+      rango: '0-20',
+      min: 0,
+      max: 20,
+      consejos: [
+        {
+          titulo: 'Digitalización básica de procesos cárnicos',
+          descripcion: 'Iniciar con la digitalización de registros de producción y controles de higiene, utilizando herramientas simples para llevar el seguimiento de lotes y tiempos de procesado.'
+        },
+        {
+          titulo: 'Capacitación en normas de calidad digital',
+          descripcion: 'Formar al personal en el uso de herramientas digitales para mejorar la trazabilidad y garantizar el cumplimiento de normas sanitarias y de seguridad.'
+        },
+        {
+          titulo: 'Mantenimiento de registros digitales',
+          descripcion: 'Establecer un sistema digital para registrar y analizar datos críticos del proceso cárnico, facilitando auditorías y control de calidad.'
+        }
+      ]
+    },
+    {
+      rango: '20-40',
+      min: 20,
+      max: 40,
+      consejos: [
+        {
+          titulo: 'Implementar sensores de temperatura y humedad',
+          descripcion: 'Usar dispositivos IoT para monitorear condiciones en salas de refrigeración y almacenamiento, asegurando la calidad y seguridad del producto.'
+        },
+        {
+          titulo: 'Automatización parcial de procesos',
+          descripcion: 'Incorporar herramientas digitales que automaticen tareas repetitivas, optimizando tiempos de procesamiento y reduciendo errores humanos.'
+        },
+        {
+          titulo: 'Digitalización de inventarios',
+          descripcion: 'Utilizar sistemas básicos para el control y seguimiento de inventario, mejorando la gestión de stock y reduciendo pérdidas por caducidad.'
+        }
+      ]
+    },
+    {
+      rango: '40-60',
+      min: 40,
+      max: 60,
+      consejos: [
+        {
+          titulo: 'Integración de sistemas de trazabilidad',
+          descripcion: 'Conectar diferentes sistemas para crear una cadena digital de trazabilidad que garantice la calidad y autenticidad del producto.'
+        },
+        {
+          titulo: 'Optimización de procesos con RFID',
+          descripcion: 'Implementar tecnología RFID para el seguimiento en tiempo real de productos cárnicos, facilitando la logística y el control de inventarios.'
+        },
+        {
+          titulo: 'Desarrollo de sistemas MES',
+          descripcion: 'Adoptar un sistema de ejecución de manufactura que integre la planificación, producción y control de calidad en un único flujo digital.'
+        }
+      ]
+    },
+    {
+      rango: '60-80',
+      min: 60,
+      max: 80,
+      consejos: [
+        {
+          titulo: 'Gemelos digitales para procesos cárnicos',
+          descripcion: 'Crear réplicas virtuales de la línea de producción para optimizar procesos, simular escenarios y mejorar la eficiencia operativa.'
+        },
+        {
+          titulo: 'Analítica avanzada para control de calidad',
+          descripcion: 'Utilizar herramientas de análisis de datos para predecir desviaciones en la calidad del producto y realizar intervenciones preventivas.'
+        },
+        {
+          titulo: 'Automatización de controles sanitarios',
+          descripcion: 'Incorporar sistemas automatizados que realicen controles de higiene y sanitización, garantizando el cumplimiento de estándares y normativas.'
+        }
+      ]
+    },
+    {
+      rango: '80-100',
+      min: 80,
+      max: 100,
+      consejos: [
+        {
+          titulo: 'Automatización avanzada de envasado',
+          descripcion: 'Implementar líneas de producción automatizadas para el envasado y embalaje, asegurando la consistencia y optimización de tiempos.'
+        },
+        {
+          titulo: 'Inteligencia artificial para control de calidad',
+          descripcion: 'Utilizar algoritmos de IA que analicen datos en tiempo real para detectar anomalías y predecir demandas, optimizando procesos de producción.'
+        },
+        {
+          titulo: 'Plataforma integrada de gestión cárnica',
+          descripcion: 'Adoptar una plataforma digital que centralice la información de producción, inventario y calidad para mejorar la toma de decisiones estratégicas.'
+        }
+      ]
+    }
   ]
 }; 
