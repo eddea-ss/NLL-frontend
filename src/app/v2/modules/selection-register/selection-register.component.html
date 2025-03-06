@@ -1,51 +1,81 @@
-<section class="bg-gray-50">
-  <div class="section-container">
-    <div class="mb-12 text-center">
-      <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Elige tu tipo de cuenta</h2>
-      <p class="mt-4 text-lg text-gray-600">Selecciona el perfil que mejor se adapte a tus necesidades</p>
-    </div>
-    <div class="grid gap-8 lg:grid-cols-3">
-      @for (card of cards; track $index) {
-      <div class="registro-card group">
-        <span class="registro-card-bg"></span>
-        <div class="registro-card-content">
-          <span class="registro-card-icon group-hover:rotate-6">
-            @switch (card.icon) { 
-              @case ('dinero') {
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-10 w-10 text-white transition-all" aria-label="Icono de Dinero">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 12h.01M18 12h.01M9 15h6M9 9h6" />
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 12h18M3 12c0-4.418 3.582-8 8-8v0c4.418 0 8 3.582 8 8h-16z" />
-                </svg>
-              }
-              @case ('empresas') {
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-10 w-10 text-white transition-all" aria-label="Icono de Empresas">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 21V8l7-5 7 5v13H3z" />
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M13 13h4v8h-4z" />
-                </svg>
-              }
-              @case ('startups') {
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-10 w-10 text-white transition-all" aria-label="Icono de Startups">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 14c3.333 0 6 2.667 6 6H6c0-3.333 2.667-6 6-6z" />
-                  <circle cx="12" cy="8" r="4" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-              }
-            }
-          </span>
-          <div class="registro-card-text">
-            <h3 class="text-xl font-semibold">{{ card.title }}</h3>
-            <p class="mt-4">{{ card.description }}</p>
-          </div>
-          <div class="mt-8">
-            <a [routerLink]="card.link" class="registro-card-link inline-flex items-center">
-              {{ card.buttonLabel }}
-              <svg class="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+<div class="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 flex">
+  <!-- Left side - Selection Cards -->
+  <div class="w-full lg:w-1/2 flex items-center justify-center p-8">
+    <div class="w-full max-w-2xl">
+      <div class="text-center mb-8">
+        <h2 class="text-3xl font-bold text-blue-900">Elige tu tipo de cuenta</h2>
+        <p class="mt-2 text-gray-600">Selecciona el perfil que mejor se adapte a tus necesidades</p>
+      </div>
+
+      <div class="grid gap-6">
+        @for (card of cards; track $index) {
+        <div 
+          [routerLink]="card.route"
+          class="group relative overflow-hidden rounded-2xl bg-white p-6 shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer"
+        >
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0">
+              <span class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 group-hover:bg-blue-100 transition-colors">
+                @switch (card.icon) { 
+                  @case ('dinero') {
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  }
+                  @case ('empresa') {
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                    </svg>
+                  }
+                  @case ('proveedor') {
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                    </svg>
+                  }
+                }
+              </span>
+            </div>
+            <div class="flex-1 min-w-0">
+              <h3 class="text-lg font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
+                {{ card.title }}
+              </h3>
+              <p class="mt-1 text-sm text-gray-500">
+                {{ card.description }}
+              </p>
+            </div>
+            <div class="flex-shrink-0">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 group-hover:text-blue-600 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
               </svg>
-            </a>
+            </div>
           </div>
         </div>
+        }
       </div>
-      }
+
+      <div class="mt-8 text-center">
+        <p class="text-sm text-gray-500">
+          ¿Ya tienes una cuenta?
+          <a routerLink="/login" class="font-medium text-blue-600 hover:text-blue-500">
+            Inicia sesión
+          </a>
+        </p>
+      </div>
     </div>
   </div>
-</section>
+
+  <!-- Right side - Image -->
+  <div class="hidden lg:block lg:w-1/2 relative overflow-hidden">
+    <img 
+      src="assets/images/login.jpg" 
+      alt="Register Selection Background" 
+      class="absolute inset-0 w-full h-full object-cover"
+    />
+    <div class="absolute inset-0 bg-gradient-to-r from-blue-900/80 to-blue-900/40 flex items-center justify-center">
+      <div class="text-center p-8">
+        <h2 class="text-3xl font-bold text-white mb-4">Únete a Nuevo Los Lagos</h2>
+        <p class="text-lg text-gray-200">Plataforma de innovación y desarrollo industrial</p>
+      </div>
+    </div>
+  </div>
+</div>

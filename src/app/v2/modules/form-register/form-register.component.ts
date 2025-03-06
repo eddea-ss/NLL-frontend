@@ -35,6 +35,12 @@ export class FormRegisterComponent implements OnInit {
   errorGeneral = '';
   typeUser: UserType | undefined;
 
+  // Variables para controlar los pasos del formulario
+  currentStep: number = 1;
+  totalSteps: number = 2;
+  step1Fields: any[] = [];
+  step2Fields: any[] = [];
+
   formGeneral = [
     {
       type: 'email',
@@ -216,6 +222,10 @@ export class FormRegisterComponent implements OnInit {
         this.typeUser = UserType.SUPPLIER;
         break;
     }
+
+    // Dividir los campos entre los dos pasos
+    this.distributeFieldsBetweenSteps();
+
     this.formGroup = this.fb.group(
       this.formFields.reduce((acc, field) => {
         acc[field.name] = ['', field.validator];
@@ -235,6 +245,65 @@ export class FormRegisterComponent implements OnInit {
     this.formGroup
       .get('password_confirm')
       ?.valueChanges.subscribe(() => this.checkPasswordsMatch());
+  }
+
+  // Método para distribuir los campos entre los dos pasos
+  private distributeFieldsBetweenSteps(): void {
+    if (this.typeUser === UserType.STARTUP) {
+      // Para personas/startups: datos personales en paso 1, credenciales en paso 2
+      this.step1Fields = [...this.formPersona];
+      this.step2Fields = [...this.formGeneral];
+    } else {
+      // Para empresas/proveedores: datos empresa en paso 1, resto en paso 2
+      const firstHalf = Math.ceil(this.formIndustria4.length / 2);
+      this.step1Fields = [
+        ...this.formIndustria4.slice(0, firstHalf),
+        ...this.formSector
+      ];
+      this.step2Fields = [
+        ...this.formIndustria4.slice(firstHalf),
+        ...this.formGeneral
+      ];
+    }
+  }
+
+  // Método para avanzar al siguiente paso
+  nextStep(): void {
+    // Verificar que los campos del paso actual sean válidos
+    const currentFields = this.currentStep === 1 ? this.step1Fields : this.step2Fields;
+    const isCurrentStepValid = currentFields.every(field => 
+      this.formGroup.get(field.name)?.valid || !this.formGroup.get(field.name)?.touched
+    );
+
+    if (isCurrentStepValid) {
+      // Si estamos en el último paso, enviar el formulario
+      if (this.currentStep >= this.totalSteps) {
+        this.onSubmit();
+      } else {
+        // Avanzar al siguiente paso
+        this.currentStep++;
+      }
+    } else {
+      // Marcar todos los campos como tocados para mostrar errores
+      currentFields.forEach(field => {
+        this.formGroup.get(field.name)?.markAsTouched();
+      });
+
+      this.snackbar.show('Por favor completa todos los campos requeridos', 4000);
+    }
+  }
+
+  // Método para regresar al paso anterior
+  previousStep(): void {
+    if (this.currentStep > 1) {
+      this.currentStep--;
+    }
+  }
+
+  // Verifica si un campo pertenece al paso actual
+  isFieldInCurrentStep(fieldName: string): boolean {
+    const currentFields = this.currentStep === 1 ? this.step1Fields : this.step2Fields;
+    return currentFields.some(field => field.name === fieldName);
   }
 
   // Method to update the value of the control when a star is selected

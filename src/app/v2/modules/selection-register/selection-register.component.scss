@@ -1,8 +1,15 @@
 :host {
   display: block;
+  min-height: 100vh;
   
   .registro-card {
-    @apply relative cursor-pointer overflow-hidden bg-white px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 transition-all duration-300 hover:shadow-2xl sm:mx-auto sm:rounded-xl sm:px-10;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    background-color: white;
+    padding: 2.5rem 1.5rem 2rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    border-radius: 0.75rem;
     transform: translateY(0);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     
@@ -15,16 +22,34 @@
   }
 
   .registro-card-bg {
-    @apply absolute top-10 left-10 z-0 h-20 w-20 rounded-full bg-gray-900 transition-all duration-500;
+    position: absolute;
+    top: 2.5rem;
+    left: 2.5rem;
+    z-index: 0;
+    height: 5rem;
+    width: 5rem;
+    border-radius: 9999px;
+    background-color: #1f2937;
     transform: scale(1);
+    transition: all 0.5s;
   }
 
   .registro-card-content {
-    @apply relative z-10 mx-auto max-w-md;
+    position: relative;
+    z-index: 10;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 28rem;
   }
 
   .registro-card-icon {
-    @apply grid h-20 w-20 place-items-center rounded-full bg-gray-900 transition-all duration-300;
+    display: grid;
+    height: 5rem;
+    width: 5rem;
+    place-items: center;
+    border-radius: 9999px;
+    background-color: #1f2937;
+    transition: all 0.3s;
     
     svg {
       transition: transform 0.3s ease;
@@ -32,28 +57,89 @@
   }
 
   .registro-card-text {
-    @apply space-y-6 pt-5 text-base leading-7 text-gray-600 transition-all duration-300;
+    padding-top: 1.25rem;
+    font-size: 1rem;
+    line-height: 1.75rem;
+    color: #4b5563;
+    transition: all 0.3s;
     
     h3 {
-      @apply text-gray-900 transition-colors duration-300;
+      color: #1f2937;
+      transition: color 0.3s;
       .registro-card:hover & {
-        @apply text-white;
+        color: white;
       }
     }
     
     p {
-      @apply transition-colors duration-300;
+      transition: color 0.3s;
       .registro-card:hover & {
-        @apply text-gray-100;
+        color: #f3f4f6;
       }
     }
   }
 
   .registro-card-link {
-    @apply inline-flex items-center text-base font-semibold text-yellow-500 transition-all duration-300;
+    display: inline-flex;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #f59e0b;
+    transition: all 0.3s;
     
     .registro-card:hover & {
-      @apply text-white;
+      color: white;
     }
+  }
+}
+
+:host ::ng-deep {
+  .group {
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+
+  // Efecto de degradado en hover
+  .bg-gradient-to-br {
+    background-size: 200% 200%;
+    animation: gradient 15s ease infinite;
+  }
+
+  @keyframes gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  // Animaciones suaves para las tarjetas
+  .card-enter {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .card-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 300ms, transform 300ms;
+  }
+}
+
+// Mejoras responsive
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr;
   }
 }

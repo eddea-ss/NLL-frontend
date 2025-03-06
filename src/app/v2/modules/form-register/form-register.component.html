@@ -1,313 +1,246 @@
 <!-- form-register.component.html -->
+<div class="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 flex">
+  <!-- Left side - Register Form -->
+  <div class="w-full lg:w-1/2 flex items-center justify-center p-8">
+    <div class="w-full max-w-2xl">
+      <div class="text-center mb-8">
+        <h1 class="text-3xl font-bold text-blue-900 tracking-tight">
+          {{
+            tipoRegistro === "proveedor"
+              ? "Registro de Proveedor"
+              : tipoRegistro === "empresa"
+              ? "Registro de Industria 4.0"
+              : "Registro de Startup"
+          }}
+        </h1>
+        <p class="mt-2 text-sm text-gray-600">
+          {{
+            tipoRegistro === "proveedor"
+              ? "Únete como proveedor y conecta con empresas de la Industria 4.0"
+              : tipoRegistro === "empresa"
+              ? "Únete como empresa y aumenta tu competitividad"
+              : "Únete como Startup y explora oportunidades"
+          }}
+        </p>
+      </div>
 
-<div
-  style="padding: 0px; align-content: center; min-height: 100vh"
-  class="max-w-screen-lg mx-auto"
->
-  <div class="grid grid-cols-1 md:grid-cols-12">
-    <div class="bg-gray-900 md:col-span-4 p-10 text-white">
-      <h1 class="mt-4 text-sm leading-7 font-regular uppercase">
-        Registro |
-        {{
-          tipoRegistro === "proveedor"
-            ? "Proveedor"
-            : tipoRegistro === "empresa"
-            ? "Industria 4.0"
-            : "Startup - Emprendedor"
-        }}
-      </h1>
-      <h3
-        class="text-3xl sm:text-4xl leading-normal font-extrabold tracking-tight"
-      >
-        NuevoLosLagos
-      </h3>
-      <p style="margin-top: 24px" class="mt-4 leading-7 text-gray-200">
-        {{
-          tipoRegistro === "proveedor"
-            ? "Accede a nuestra plataforma como proveedor y conecta con empresas de la Industria 4.0 para ofrecer tus productos o servicios especializados. Únete a una red de colaboración y aprovecha oportunidades de negocio en crecimiento."
-            : tipoRegistro === "empresa"
-            ? "Únete como empresa de la región de Los Lagos para aumentar tu visibilidad y competitividad en la Industria 4.0. Accede a recursos exclusivos, oportunidades de financiamiento y contacto directo con proveedores e innovadores."
-            : "Regístrate como Startup o Emprendedor, y explora oportunidades de desarrollo, empleo y formación en el ecosistema de la Industria 4.0. Conecta con empresas, accede a cursos en línea y mantente actualizado sobre las últimas tendencias del sector"
-        }}
-      </p>
-    </div>
-    <form
-      class="md:col-span-8 p-10"
-      style="overflow-y: auto; height: auto; max-height: 95vh"
-      [formGroup]="formGroup"
-      (ngSubmit)="onSubmit()"
-    >
-      <div *ngFor="let field of formFields" class="flex flex-wrap -mx-3 mb-6">
-        <div class="w-full px-3">
-          <label
-            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            [for]="field.name"
+      <!-- Progress indicator -->
+      <div class="mb-8">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-sm font-medium text-blue-900">Paso {{ currentStep }} de {{ totalSteps }}</span>
+          <span class="text-sm text-gray-500">{{ currentStep === 1 ? 'Información básica' : 'Credenciales' }}</span>
+        </div>
+        <div class="w-full bg-gray-200 rounded-full h-2.5">
+          <div 
+            class="bg-blue-600 h-2.5 rounded-full transition-all duration-300 ease-in-out"
+            [style.width]="(currentStep / totalSteps * 100) + '%'"
+          ></div>
+        </div>
+      </div>
+
+      <form class="space-y-6" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+        <!-- Contenedor de campos con animación de transición -->
+        <div class="relative">
+          <div
+            class="space-y-4 transition-all duration-300"
+            [class.opacity-0]="!isFieldInCurrentStep(field.name)"
+            [class.hidden]="!isFieldInCurrentStep(field.name)"
+            *ngFor="let field of formFields"
           >
-            {{ field.label }}
-          </label>
-          <ng-container [ngSwitch]="field.type">
-            <!-- Text Input -->
-            <input
-              *ngSwitchCase="'text'"
-              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              [formControlName]="field.name"
-              [id]="field.name"
-              [placeholder]="field.placeholder"
-            />
-            <!-- Email Input -->
-            <input
-              *ngSwitchCase="'email'"
-              type="email"
-              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              [formControlName]="field.name"
-              [id]="field.name"
-              [placeholder]="field.placeholder"
-            />
-            <!-- Password Input with Validation Badges and Toggle Button -->
-            <div *ngSwitchCase="'password'">
-              <div class="relative">
-                <input
-                  [type]="
-                    field.name === 'password'
-                      ? isPasswordVisible
-                        ? 'text'
-                        : 'password'
-                      : isConfirmPasswordVisible
-                      ? 'text'
-                      : 'password'
-                  "
-                  class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                  [formControlName]="field.name"
-                  [id]="field.name"
-                  [placeholder]="field.placeholder"
-                />
-                <button
-                  type="button"
-                  class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
-                  (click)="
-                    field.name === 'password'
-                      ? togglePasswordVisibility()
-                      : toggleConfirmPasswordVisibility()
-                  "
-                >
-                  <svg
-                    [ngClass]="
-                      (field.name === 'password' && isPasswordVisible) ||
-                      (field.name === 'password_confirm' &&
-                        isConfirmPasswordVisible)
-                        ? 'text-gray-700'
-                        : 'text-gray-500'
-                    "
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-5 w-5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
+            <label 
+              class="block text-sm font-medium text-gray-700"
+              [for]="field.name"
+            >
+              {{ field.label }}
+            </label>
+            
+            <ng-container [ngSwitch]="field.type">
+              <!-- Input de texto -->
+              <input
+                *ngSwitchCase="'text'"
+                class="appearance-none block w-full px-4 py-3 border border-gray-200 rounded-xl transition-all duration-200 
+                       focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:outline-none
+                       placeholder-gray-400 bg-gray-50/50"
+                [formControlName]="field.name"
+                [id]="field.name"
+                [placeholder]="field.placeholder"
+              />
+              
+              <!-- Input de email -->
+              <input
+                *ngSwitchCase="'email'"
+                type="email"
+                class="appearance-none block w-full px-4 py-3 border border-gray-200 rounded-xl transition-all duration-200 
+                       focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:outline-none
+                       placeholder-gray-400 bg-gray-50/50"
+                [formControlName]="field.name"
+                [id]="field.name"
+                [placeholder]="field.placeholder"
+              />
+              
+              <!-- Input de contraseña -->
+              <div *ngSwitchCase="'password'" class="space-y-2">
+                <div class="relative">
+                  <input
+                    [type]="field.name === 'password' ? (isPasswordVisible ? 'text' : 'password') : (isConfirmPasswordVisible ? 'text' : 'password')"
+                    class="appearance-none block w-full px-4 py-3 pr-10 border border-gray-200 rounded-xl transition-all duration-200 
+                           focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:outline-none
+                           placeholder-gray-400 bg-gray-50/50"
+                    [formControlName]="field.name"
+                    [id]="field.name"
+                    [placeholder]="'••••••••'"
+                  />
+                  <button
+                    type="button"
+                    class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
+                    (click)="field.name === 'password' ? togglePasswordVisibility() : toggleConfirmPasswordVisibility()"
                   >
-                    <path
-                      *ngIf="
-                        (field.name === 'password' && isPasswordVisible) ||
-                        (field.name === 'password_confirm' &&
-                          isConfirmPasswordVisible)
-                      "
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                    />
-                    <path
-                      *ngIf="
-                        (field.name === 'password' && isPasswordVisible) ||
-                        (field.name === 'password_confirm' &&
-                          isConfirmPasswordVisible)
-                      "
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                    />
-                    <path
-                      *ngIf="
-                        (field.name === 'password' && !isPasswordVisible) ||
-                        (field.name === 'password_confirm' &&
-                          !isConfirmPasswordVisible)
-                      "
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M13.875 18.825A10.05 10.05 0 0112 19c-4.477 0-8.268-2.943-9.542-7a9.977 9.977 0 014.058-5.642M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                    />
-                    <path
-                      *ngIf="
-                        (field.name === 'password' && !isPasswordVisible) ||
-                        (field.name === 'password_confirm' &&
-                          !isConfirmPasswordVisible)
-                      "
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M3 3l18 18"
-                    />
-                  </svg>
-                </button>
-              </div>
-              <!-- Password validation badges for the 'password' field only -->
-              <div
-                *ngIf="field.name === 'password'"
-                class="mt-4 grid grid-cols-2 gap-4"
-              >
-                <div class="flex items-center text-sm">
-                  <span
-                    class="w-4 h-4 inline-block rounded-full mr-2"
-                    [ngClass]="hasLength ? 'bg-green-500' : 'bg-gray-300'"
-                  ></span>
-                  Al menos 8 caracteres
+                    <svg
+                      [ngClass]="field.name === 'password' ? (isPasswordVisible ? 'text-blue-600' : '') : (isConfirmPasswordVisible ? 'text-blue-600' : '')"
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-5 w-5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        *ngIf="field.name === 'password' ? isPasswordVisible : isConfirmPasswordVisible"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                      />
+                      <path
+                        *ngIf="field.name === 'password' ? !isPasswordVisible : !isConfirmPasswordVisible"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"
+                      />
+                    </svg>
+                  </button>
                 </div>
-                <div class="flex items-center text-sm">
-                  <span
-                    class="w-4 h-4 inline-block rounded-full mr-2"
-                    [ngClass]="hasUppercase ? 'bg-green-500' : 'bg-gray-300'"
-                  ></span>
-                  Una letra mayúscula
-                </div>
-                <div class="flex items-center text-sm">
-                  <span
-                    class="w-4 h-4 inline-block rounded-full mr-2"
-                    [ngClass]="hasSpecialChar ? 'bg-green-500' : 'bg-gray-300'"
-                  ></span>
-                  Un carácter especial
-                </div>
-                <div class="flex items-center text-sm">
-                  <span
-                    class="w-4 h-4 inline-block rounded-full mr-2"
-                    [ngClass]="hasNumber ? 'bg-green-500' : 'bg-gray-300'"
-                  ></span>
-                  Un número
+
+                <!-- Validación de contraseña -->
+                <div *ngIf="field.name === 'password'" class="grid grid-cols-2 gap-2 text-xs">
+                  <div class="flex items-center">
+                    <span class="w-2 h-2 rounded-full mr-2" [ngClass]="hasLength ? 'bg-green-400' : 'bg-gray-200'"></span>
+                    8+ caracteres
+                  </div>
+                  <div class="flex items-center">
+                    <span class="w-2 h-2 rounded-full mr-2" [ngClass]="hasUppercase ? 'bg-green-400' : 'bg-gray-200'"></span>
+                    Mayúscula
+                  </div>
+                  <div class="flex items-center">
+                    <span class="w-2 h-2 rounded-full mr-2" [ngClass]="hasNumber ? 'bg-green-400' : 'bg-gray-200'"></span>
+                    Número
+                  </div>
+                  <div class="flex items-center">
+                    <span class="w-2 h-2 rounded-full mr-2" [ngClass]="hasSpecialChar ? 'bg-green-400' : 'bg-gray-200'"></span>
+                    Carácter especial
+                  </div>
                 </div>
               </div>
-            </div>
-            <!-- Select Input -->
-            <div *ngSwitchCase="'select'">
+              
+              <!-- Select -->
               <select
-                class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                *ngSwitchCase="'select'"
+                class="appearance-none block w-full px-4 py-3 border border-gray-200 rounded-xl transition-all duration-200 
+                       focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:outline-none
+                       placeholder-gray-400 bg-gray-50/50"
                 [formControlName]="field.name"
                 [id]="field.name"
               >
-                <option value="" disabled selected>
-                  {{ field.placeholder }}
-                </option>
-                <option
-                  *ngFor="let option of field.options"
-                  [value]="option.value"
-                >
+                <option value="" disabled selected>{{ field.placeholder }}</option>
+                <option *ngFor="let option of field.options" [value]="option.value">
                   {{ option.label }}
                 </option>
               </select>
-            </div>
-            <!-- Rating Input -->
-            <div *ngSwitchCase="'rating'" class="mb-3">
-              <div style="gap: 12px" class="flex items-center">
-                <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
-                  <svg
-                    (click)="rate(field.name, star)"
-                    [ngClass]="{
-                      'text-yellow-500':
-                        formGroup.get(field.name)?.value >= star,
-                      'text-gray-300': formGroup.get(field.name)?.value < star
-                    }"
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-6 w-6 cursor-pointer"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      d="M12 .587l3.668 7.568L24 9.748l-6 5.848 1.42 8.304L12 18.897l-7.42 4.003L6 15.596 0 9.748l8.332-1.593L12 .587z"
-                    />
-                  </svg>
-                </ng-container>
+              
+              <!-- Rating -->
+              <div *ngSwitchCase="'rating'" class="space-y-2">
+                <div class="flex items-center space-x-1">
+                  <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
+                    <svg
+                      (click)="rate(field.name, star)"
+                      [ngClass]="{
+                        'text-yellow-400': formGroup.get(field.name)?.value >= star,
+                        'text-gray-200': formGroup.get(field.name)?.value < star
+                      }"
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-6 w-6 cursor-pointer hover:text-yellow-300 transition-colors"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M12 .587l3.668 7.568L24 9.748l-6 5.848 1.42 8.304L12 18.897l-7.42 4.003L6 15.596 0 9.748l8.332-1.593L12 .587z"/>
+                    </svg>
+                  </ng-container>
+                </div>
               </div>
-              <div
-                *ngIf="
-                  formGroup.get(field.name)?.invalid &&
-                  formGroup.get(field.name)?.touched
-                "
-                class="text-red-500 text-xs italic"
-              >
-                {{ field.error }}
-              </div>
+            </ng-container>
+            
+            <!-- Mensajes de error -->
+            <div
+              *ngIf="formGroup.get(field.name)?.invalid && formGroup.get(field.name)?.touched"
+              class="mt-1 text-sm text-red-500"
+            >
+              {{ field.error }}
             </div>
-          </ng-container>
-          <!-- Passwords match validation badge -->
-          <div
-            *ngIf="field.name === 'password_confirm'"
-            class="mt-4 flex items-center text-sm"
-          >
-            <span
-              class="w-4 h-4 inline-block rounded-full mr-2"
-              [ngClass]="passwordsMatch ? 'bg-green-500' : 'bg-gray-300'"
-            ></span>
-            Las contraseñas coinciden
-          </div>
-
-          <!-- Error message for password mismatch -->
-          <div
-            *ngIf="field.name === 'password_confirm' && errorGeneral"
-            class="text-red-500 text-xs italic"
-          >
-            {{ errorGeneral }}
-          </div>
-          <div
-            *ngIf="
-              formGroup.get(field.name)?.invalid &&
-              formGroup.get(field.name)?.touched
-            "
-            class="text-red-500 text-xs italic"
-          >
-            {{ field.error }}
           </div>
         </div>
-      </div>
-      <!-- Añade este bloque donde consideres apropiado dentro del formulario -->
-      <div class="flex flex-wrap -mx-3 mb-6">
-        <div class="w-full px-3">
-          <label
-            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            for="logo"
-          >
-            Logo de la Empresa o Perfil (Opcional)
-          </label>
-          <input
-            type="file"
-            accept="image/*"
-            (change)="onFileSelected($event)"
-            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            id="logo"
-          />
-          <small class="text-gray-600"
-            >Formato aceptado: JPG, PNG. Tamaño máximo: 200KB.</small
-          >
+        
+        <!-- Error general -->
+        <div *ngIf="errorGeneral" class="text-sm text-red-500 mt-4">
+          {{ errorGeneral }}
         </div>
-      </div>
+        
+        <!-- Botones de navegación -->
+        <div class="flex justify-between pt-6">
+          <button
+            type="button"
+            *ngIf="currentStep > 1"
+            (click)="previousStep()"
+            class="px-6 py-2 border border-gray-200 text-gray-700 rounded-xl hover:bg-gray-50 transition-all duration-200"
+          >
+            Anterior
+          </button>
+          
+          <div class="flex space-x-3 ml-auto">
+            <button
+              type="button"
+              routerLink="/registro"
+              class="px-6 py-2 border border-gray-200 text-gray-700 rounded-xl hover:bg-gray-50 transition-all duration-200"
+            >
+              Cancelar
+            </button>
+            
+            <button
+              type="button"
+              (click)="nextStep()"
+              class="px-6 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl 
+                     hover:from-blue-500 hover:to-blue-600 focus:outline-none focus:ring-2 
+                     focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200"
+            >
+              {{ currentStep === totalSteps ? 'Registrar' : 'Siguiente' }}
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
 
-      <div class="flex justify-between w-full px-3">
-        <button
-          type="button"
-          routerLink="/registro"
-          href="/registro"
-          style="gap: 6px; padding: 8px 16px"
-          class="border border-blue-100 text-blue bg-blue-white hover:bg-white-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center"
-        >
-          Volver
-        </button>
-        <button
-          style="margin-left: auto; cursor: pointer"
-          class="text-center bg-gray-800 text-white py-2 px-4 rounded-lg hover:bg-yellow-600 transition duration-300"
-          type="submit"
-          [disabled]="formGroup.invalid"
-        >
-          Registrar
-        </button>
+  <!-- Right side - Image -->
+  <div class="hidden lg:block lg:w-1/2 relative overflow-hidden">
+    <img 
+      src="assets/images/login.jpg" 
+      alt="Register Background" 
+      class="absolute inset-0 w-full h-full object-cover"
+    />
+    <div class="absolute inset-0 bg-gradient-to-r from-blue-900/80 to-blue-900/40 flex items-center justify-center">
+      <div class="text-center p-8">
+        <h2 class="text-3xl font-bold text-white mb-4">Únete a Nuevo Los Lagos</h2>
+        <p class="text-lg text-gray-200">Plataforma de innovación y desarrollo industrial</p>
       </div>
-    </form>
+    </div>
   </div>
 </div>
