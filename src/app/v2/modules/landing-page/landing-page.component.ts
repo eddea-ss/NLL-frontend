@@ -18,6 +18,7 @@ import { TitleSectionComponent } from '@v2/components';
     TitleSectionComponent,
   ],
   templateUrl: './landing-page.component.html',
+  styleUrls: ['./landing-page.component.scss']
 })
 export class LandingPageComponent implements OnInit {
   private title = inject(Title);
@@ -55,7 +56,6 @@ export class LandingPageComponent implements OnInit {
   ngOnInit(): void {
     // Establecer el título de la página
     this.title.setTitle('Plataforma Nuevo Los Lagos | Impulso Industrial');
-
 
     // Agregar meta etiquetas
     this.meta.updateTag({
