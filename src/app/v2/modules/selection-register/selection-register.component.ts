@@ -18,23 +18,25 @@ export class SelectionRegisterComponent implements OnInit {
 
   cards = [
     {
-      title: 'Startup - Emprendedor',
-      description: 'Ideal para emprendedores y startups que buscan oportunidades en el ecosistema de la Industria 4.0',
-      icon: 'dinero',
-      route: '/registro-persona',
-    },
-    {
       title: 'Empresa',
-      description: 'Para empresas que buscan aumentar su competitividad y adoptar tecnologías de la Industria 4.0',
+      description: 'Para empresas que buscan proveedores o aumentar su competitividad y adoptar tecnologías de la Industria 4.0',
       icon: 'empresa',
       route: '/registro-industria',
     },
+     
     {
-      title: 'Proveedor',
+      title: 'Proveedor Tecnológico',
       description: 'Para proveedores de soluciones y servicios especializados en la Industria 4.0',
       icon: 'proveedor',
       route: '/registro-proveedor',
     },
+    {
+      title: 'Startup - Emprendedor',
+      description: 'Ideal para emprendedores y startups que buscan oportunidades en el ecosistema de la Industria 4.0',
+      icon: 'dinero',
+      route: '/registro-persona',
+    }
+  
   ];
 
   ngOnInit(): void {
