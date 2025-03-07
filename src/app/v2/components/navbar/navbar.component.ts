@@ -1,4 +1,4 @@
-import { Component, effect, inject, Input, signal } from '@angular/core';
+import { Component, effect, inject, Input, signal, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink, RouterModule } from '@angular/router';
 import { LoginService } from '@v2/services';
@@ -45,6 +45,7 @@ export class NavbarComponent {
 
   // Estado del menú móvil
   isMobileMenuOpen = false;
+  isMobileView = false;
 
   // Menús principales
   projectMenu: DropdownMenu = {
@@ -142,6 +143,16 @@ export class NavbarComponent {
 
   profileImageUrl: string =
     'https://accesos.nuevoloslagos.org/logos/default.png';
+
+  // Detector de cambio de tamaño de pantalla
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.checkScreenSize();
+    if (window.innerWidth >= 1024 && this.isMobileMenuOpen) {
+      this.closeMobileMenu();
+    }
+  }
+
   constructor() {
     // Efecto que se activa cuando cambia el estado de autenticación o el usuario actual
     effect(() => {
@@ -150,6 +161,14 @@ export class NavbarComponent {
       // Aquí podemos agregar lógica adicional si se requiere.
       this.setProfileImageUrl(user?.url);
     });
+
+    // Verificar el tamaño de la pantalla al inicializar
+    this.checkScreenSize();
+  }
+
+  // Verifica el tamaño de la pantalla para determinar si estamos en vista móvil
+  checkScreenSize() {
+    this.isMobileView = window.innerWidth < 1024;
   }
 
   // Retorna true si el usuario está logueado
@@ -188,10 +207,16 @@ export class NavbarComponent {
 
   // Abre o cierra un submenú específico
   toggleSubmenu(menu: DropdownMenu) {
-    const open = menu.isOpenSignal();
-    this.closeAllSubmenus();
-    menu.isOpenSignal.set(open);
-    menu.isOpenSignal.set(!menu.isOpenSignal());
+    // En móvil, cierra todos los otros submenús antes de abrir el nuevo
+    if (this.isMobileView) {
+      this.mainMenus.forEach((m) => {
+        if (m !== menu) {
+          m.isOpenSignal.set(false);
+        }
+      });
+    }
+
+    menu.isOpenSignal.update(value => !value);
   }
 
   // Cierra sesión y redirige a la página inicial

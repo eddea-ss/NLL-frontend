@@ -4,6 +4,7 @@ header {
   }
 }
 
+// Estilos para navegación escritorio
 nav {
   .relative.group {
     position: relative;
@@ -16,8 +17,84 @@ nav {
   }
 }
 
+// Estilos específicos para el menú móvil
+div[class*="lg:hidden"] {
+  transform-origin: top;
+  &.h-0 {
+    height: 0 !important;
+    min-height: 0 !important;
+    max-height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    overflow: hidden !important;
+    
+    nav {
+      display: none !important;
+    }
+  }
+  
+  &[style*="position: absolute"] {
+    position: absolute !important;
+    visibility: hidden !important;
+  }
+  
+  // Corrige la transición para que sea suave
+  &.opacity-100 {
+    transition: all 0.3s ease-in-out;
+  }
+  
+  &.opacity-0 {
+    transition: all 0.3s ease-in-out, height 0s 0.3s;
+  }
+}
+
+// Media queries para responsividad
 @media (max-width: 1024px) {
   nav {
     width: 100%;
+  }
+  
+  // Optimizaciones para el menú móvil
+  header {
+    .container {
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+    }
+  }
+  
+  // Reducir espacio vertical en elementos del menú móvil
+  button, a {
+    &[class*="py-"] {
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+    }
+  }
+}
+
+// Mejoras específicas para móviles más pequeños
+@media (max-width: 640px) {
+  header {
+    .container {
+      padding-left: 0.75rem;
+      padding-right: 0.75rem;
+    }
+  }
+  
+  // Reducir tamaño de iconos y espaciado
+  svg {
+    width: 1rem;
+    height: 1rem;
+  }
+  
+  // Ajustar espaciado vertical para menú móvil
+  div[class*="space-y-"] {
+    margin-top: 0;
+    margin-bottom: 0;
+    
+    > * {
+      margin-top: 0.25rem;
+      margin-bottom: 0.25rem;
+    }
   }
 }
