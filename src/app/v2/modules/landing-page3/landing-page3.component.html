@@ -1,242 +1,270 @@
 <app-extras type="varios11"></app-extras>
-<!-- Por ejemplo, en app.component.html -->
 
-<div class="custom-shape-divider-bottom-1737000036" style="margin-top: -60px">
-  <svg
-    data-name="Layer 1"
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 1200 120"
-    preserveAspectRatio="none"
-  >
-    <path
-      d="M649.97 0L599.91 54.12 550.03 0 0 0 0 120 1200 120 1200 0 649.97 0z"
-      class="shape-fill"
-    ></path>
-  </svg>
-</div>
 
-<section data-aos="fade-up" class="py-16 bg-gray-50" type="articulos1">
-  @if (data.length) {
-  <div class="mb-16 mx-8 sm:mx-8 lg:mx-20 xl:mx-32">
-    <h2
-      routerLink="/buscador"
-      class="text-3xl cursor-pointer font-bold mb-12 text-gray-800 transform duration-300 hover:text-blue-800 relative inline-block after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-1/3 after:h-0.5 after:bg-yellow-500"
-    >
-      Artículos Destacados
-    </h2>
+
+<!-- Sección de Contenido Destacado con diseño moderno y elegante -->
+<section class="py-32 bg-gradient-to-b from-white to-gray-50">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-3xl mx-auto text-center mb-20">
+      <h2 class="text-5xl font-bold mb-6 text-gray-900 tracking-tight">
+        Contenido Destacado
+      </h2>
+      <div class="w-24 h-1 bg-[#eab308] mx-auto"></div>
+    </div>
     
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      @for (item of data.slice(0, 6); track $index) {
-      <div class="article-card group bg-white border border-gray-100 hover:border-yellow-300 rounded-lg overflow-hidden transition-all duration-300 flex flex-col">
-        <!-- Línea decorativa superior -->
-        <div class="h-1 bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-400"></div>
-        
-        <div class="article-content p-6 flex flex-col flex-grow">
-          <!-- Categoría y número sutil -->
-          <div class="flex justify-between items-center mb-3">
-            <span class="text-xs font-medium text-gray-500 tracking-wider uppercase">Industria 4.0</span>
-            <span class="text-xs text-gray-400 font-light">0{{$index + 1}}</span>
+    <!-- Pestañas con diseño elegante -->
+    <div class="flex justify-center mb-16">
+      <nav class="flex space-x-2 p-2 bg-white rounded-lg shadow-sm">
+        @for (tab of tabs; track tab.id) {
+        <button
+          (click)="setActiveTab(tab.id)"
+          class="px-8 py-3 text-sm font-medium rounded-md transition-all duration-200"
+          [class.bg-[#eab308]]="activeTab === tab.id"
+          [class.text-white]="activeTab === tab.id"
+          [class.bg-transparent]="activeTab !== tab.id"
+          [class.text-gray-600]="activeTab !== tab.id"
+          [class.hover:bg-gray-50]="activeTab !== tab.id"
+        >
+          {{ tab.label }}
+        </button>
+        }
+      </nav>
+    </div>
+    
+    <!-- Grid de contenido con diseño elegante -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      @for (item of getActiveContent(); track $index) {
+      <div class="group bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300">
+        <div class="p-8 h-full flex flex-col relative overflow-hidden">
+          <!-- Decoración visual -->
+          <div class="absolute top-0 right-0 w-32 h-32 bg-[#eab308]/5 rounded-bl-full -mr-16 -mt-16"></div>
+          
+          <!-- Header -->
+          <div class="flex justify-between items-center mb-6 relative">
+            <span class="text-xs font-medium text-[#eab308] tracking-wider uppercase">
+              @switch (activeTab) {
+                @case ('articles') {
+                  {{ item.articulo_paper }}
+                }
+                @case ('courses') {
+                  {{ item.modalidad }}
+                }
+                @case ('projects') {
+                  {{ item.tipo_proyecto }}
+                }
+                @case ('financing') {
+                  {{ item.tipo_financiamiento }}
+                }
+              }
+            </span>
+            <span class="text-2xl font-light text-gray-200">0{{$index + 1}}</span>
           </div>
           
-          <!-- Título con altura mínima fija -->
-          <h3 class="text-lg font-medium text-gray-800 mb-3 line-clamp-2 min-h-[3rem] group-hover:text-blue-700 transition-colors duration-200">
+          <!-- Título -->
+          <h3 class="text-xl font-semibold text-gray-900 mb-4 line-clamp-2 group-hover:text-[#eab308] transition-colors duration-200">
             {{ item?.titulo }}
           </h3>
           
-          <!-- Contenido con altura mínima fija -->
+          <!-- Etiquetas con diseño elegante -->
+          <div class="flex flex-wrap gap-2 mb-6">
+            @if (activeTab === 'articles') {
+              @if (item?.idioma?.toLowerCase() === 'ingles') {
+              <span class="bg-blue-50 text-blue-700 px-4 py-1.5 rounded-full text-xs font-medium">En Inglés</span>
+              }
+              @if (item?.articulo_paper?.toLowerCase() === 'paper') {
+              <span class="bg-purple-50 text-purple-700 px-4 py-1.5 rounded-full text-xs font-medium">Paper</span>
+              }
+              @if (item?.articulo_paper?.toLowerCase() === 'articulo') {
+              <span class="bg-indigo-50 text-indigo-700 px-4 py-1.5 rounded-full text-xs font-medium">Artículo</span>
+              }
+            }
+            @if (activeTab === 'courses') {
+              @if (item?.tipo?.toLowerCase() === 'gratuito') {
+              <span class="bg-green-50 text-green-700 px-4 py-1.5 rounded-full text-xs font-medium">Gratuito</span>
+              }
+              @if (item?.tipo?.toLowerCase() === 'de pago') {
+              <span class="bg-amber-50 text-amber-700 px-4 py-1.5 rounded-full text-xs font-medium">De Pago</span>
+              }
+              @if (item?.idioma?.toLowerCase() === 'ingles') {
+              <span class="bg-blue-50 text-blue-700 px-4 py-1.5 rounded-full text-xs font-medium">En Inglés</span>
+              }
+            }
+            @if (activeTab === 'projects') {
+              @if (item?.estado) {
+              <span class="bg-green-50 text-green-700 px-4 py-1.5 rounded-full text-xs font-medium">{{ item.estado }}</span>
+              }
+              @if (item?.sector) {
+              <span class="bg-blue-50 text-blue-700 px-4 py-1.5 rounded-full text-xs font-medium">{{ item.sector }}</span>
+              }
+            }
+            @if (activeTab === 'financing') {
+              @if (item?.monto) {
+              <span class="bg-green-50 text-green-700 px-4 py-1.5 rounded-full text-xs font-medium">{{ item.monto }}</span>
+              }
+              @if (item?.plazo) {
+              <span class="bg-blue-50 text-blue-700 px-4 py-1.5 rounded-full text-xs font-medium">{{ item.plazo }}</span>
+              }
+            }
+          </div>
+          
+          <!-- Contenido -->
           <div 
-            class="text-sm text-gray-600 mb-4 line-clamp-3 min-h-[4.5rem]"
-            [innerHTML]="
-              recursosService.sanitizedString(item?.resumen)
-                | truncate : 120 : true
-            "
+            class="text-base text-gray-600 mb-6 line-clamp-3 flex-grow leading-relaxed"
+            [innerHTML]="recursosService.sanitizedString(item?.descripcion || item?.resumen) | truncate : 120 : true"
           ></div>
           
-          <!-- Footer con acción -->
-          <div class="mt-auto pt-4 border-t border-gray-100 flex justify-end">
+          <!-- Footer con diseño elegante -->
+          <div class="flex justify-between items-center pt-6 border-t border-gray-100 mt-auto">
+            <span class="text-sm font-medium text-gray-500">
+              @switch (activeTab) {
+                @case ('articles') {
+                  {{ recursosService.getDomain(item.link) }}
+                }
+                @case ('courses') {
+                  {{ item.entidad }}
+                }
+                @case ('projects') {
+                  {{ item.empresa }}
+                }
+                @case ('financing') {
+                  {{ item.entidad }}
+                }
+              }
+            </span>
             <button
-              class="text-sm text-gray-600 hover:text-blue-700 font-normal flex items-center gap-2 transition-colors duration-200 group"
-              (click)="openModal($index)"
+              class="group/btn flex items-center gap-2 px-6 py-2 text-sm font-medium text-[#eab308] hover:bg-[#eab308]/10 rounded-lg transition-all duration-200"
+              (click)="openModal($index, activeTab)"
             >
-              <span>Leer artículo</span>
-              <span class="w-5 h-5 rounded-full bg-gray-100 group-hover:bg-blue-50 flex items-center justify-center transition-colors duration-200">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
-                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                </svg>
+              <span>
+                @switch (activeTab) {
+                  @case ('articles') {
+                    Leer artículo
+                  }
+                  @case ('courses') {
+                    Ver curso
+                  }
+                  @case ('projects') {
+                    Ver proyecto
+                  }
+                  @case ('financing') {
+                    Ver financiamiento
+                  }
+                }
               </span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform group-hover/btn:translate-x-1 transition-transform" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+              </svg>
             </button>
           </div>
         </div>
       </div>
       }
     </div>
-    
-    <!-- Botón minimalista -->
-    <div class="text-center mt-12">
-      <a routerLink="/buscador" class="inline-flex items-center gap-2 text-gray-800 hover:text-blue-800 font-medium py-2 px-4 border-b border-transparent hover:border-yellow-500 transition-all duration-200">
-        <span>Ver todos los artículos</span>
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-          <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-        </svg>
-      </a>
-    </div>
+
   </div>
-  }
 </section>
-<section class="py-16">
-  <div class="relative h-[500px] overflow-hidden">
-    <!-- Imagen de fondo con parallax sutil -->
+
+<!-- Banner  -->
+<section class="relative overflow-hidden">
+  <div class="h-[600px] w-full">
     <img 
       src="/assets/plataforma2.jpg" 
       alt="Tecnología e innovación industrial" 
-      class="w-full h-full object-cover transform scale-110 hover:scale-105 transition-transform duration-3000"
+      class="w-full h-full object-cover transform scale-105 transition-transform duration-1000"
     >
-    <!-- Overlay con gradiente -->
-    <div class="absolute inset-0 bg-gradient-to-r from-black to-transparent opacity-70"></div>
+    <div class="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-transparent"></div>
     
-    <!-- Contenido centrado con animación sutil -->
-    <div class="absolute inset-0 flex flex-col justify-center max-w-4xl mx-auto px-8 sm:px-16">
-      <div data-aos="fade-right" class="space-y-6 max-w-2xl">
-        <h2 class="text-4xl md:text-5xl font-bold text-white leading-tight">
-          Impulsa tu Negocio con <span class="text-[#eab308]">Tecnología 4.0</span>
-        </h2>
-        <p class="text-xl text-gray-200 leading-relaxed">
-          Descubre cómo la transformación digital y las tecnologías emergentes pueden 
-          revolucionar tu empresa y abrir nuevas oportunidades de crecimiento.
-        </p>
-        <div class="pt-4">
-          <a 
-            href="/evaluaciones-madurez" 
-            class="inline-block bg-[#eab308] text-gray-900 font-medium px-8 py-3 rounded-md hover:bg-yellow-400 transform hover:-translate-y-1 transition-all duration-300 shadow-lg hover:shadow-xl"
-          >
-            Iniciar Evaluación de Madurez
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-
-<!-- Contenido dinámico del sitio -->
-<section data-aos="fade-up">
-  <app-title-section
-    [title]="titleSection.title"
-    [description]="titleSection.description"
-    [buttonText]="titleSection.buttonText"
-    [buttonLink]="titleSection.buttonLink"
-    [imageSrc]="titleSection.imageSrc"
-    [imageAlt]="titleSection.imageAlt"
-  >
-  </app-title-section>
-</section>
-
-<div data-aos="fade-right">
-  <div class="custom-shape-divider-bottom-1736997902">
-    <svg
-      data-name="Layer 1"
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 1200 120"
-      preserveAspectRatio="none"
-    >
-      <path
-        d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z"
-        opacity=".25"
-        class="shape-fill"
-      ></path>
-      <path
-        d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z"
-        opacity=".5"
-        class="shape-fill"
-      ></path>
-      <path
-        d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z"
-        class="shape-fill"
-      ></path>
-    </svg>
-  </div>
-  <!-- Section podcasts-->
-  <section class="bg-yellow-500 py-10">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col gap-12 lg:flex-row items-center">
-        <div class="lg:w-1/2">
-          <h1 class="text-3xl font-bold leading-tight mb-4">
-            Escucha nuestros Podcast
-          </h1>
-          <p class="text-xl mb-8">
-            Podcast creados con IA, acerca de la industria 4.0 y sus
-            tecnologías.
+    <div class="absolute inset-0 flex items-center">
+      <div class="max-w-4xl mx-auto px-8 sm:px-16">
+        <div class="space-y-8">
+          <h2 class="text-5xl font-bold text-white leading-tight max-w-2xl">
+            Encuentra la innovación en <span class="text-[#eab308]">Nuevo Los Lagos</span>
+          </h2>
+          <p class="text-xl text-gray-200 leading-relaxed max-w-xl">
+            Descubre cómo la transformación digital y las tecnologías emergentes pueden 
+            revolucionar tu empresa y abrir nuevas oportunidades de crecimiento.
           </p>
-          <a
-            routerLink="/investigacion-podcasts"
-            href="/investigacion-podcasts"
-            class="bg-gray-800 text-white py-3 px-6 rounded-lg shadow-lg hover:shadow-xl transition duration-200"
-            >Ir a Escuchar
-          </a>
-        </div>
-        <div class="lg:w-1/4 lg:flex lg:justify-end hidden">
-          <img
-            src="assets/podcast.webp"
-            alt="Podcast"
-            width="auto"
-            height="auto"
-            loading="eager"
-          />
+          <div class="pt-4">
+            <a 
+              href="/evaluaciones-madurez" 
+              class="inline-block bg-[#eab308] text-gray-900 font-medium px-12 py-4 hover:bg-yellow-400 transform hover:-translate-y-1 transition-all duration-300 shadow-xl hover:shadow-2xl"
+            >
+              Iniciar Evaluación de Madurez
+            </a>
+          </div>
         </div>
       </div>
     </div>
-
-
-    
-  </section>
-  <div class="custom-shape-divider-top-1736997818">
-    <svg
-      data-name="Layer 1"
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 1200 120"
-      preserveAspectRatio="none"
-    >
-      <path
-        d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z"
-        opacity=".25"
-        class="shape-fill"
-      ></path>
-      <path
-        d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z"
-        opacity=".5"
-        class="shape-fill"
-      ></path>
-      <path
-        d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z"
-        class="shape-fill"
-      ></path>
-    </svg>
   </div>
-</div>
-<!-- Section nuevo los lagos-->
+</section>
 
-<section class="bg-white py-16">
-    <!-- Diseño mejorado con sombras y efectos de transición -->
-    <div class="container mx-auto flex flex-col md:flex-row items-center bg-white  duration-300">
-      <!-- Imagen a la izquierda con overlay y efecto al pasar el cursor -->
+<!-- Banner Impulsa tu Negocio -->
+<section class="relative bg-white">
+  <div class="absolute inset-0 bg-gradient-to-b from-gray-50 to-white h-[70vh]"></div>
+  <div class="relative">
+    <app-title-section
+      [title]="titleSection.title"
+      [description]="titleSection.description"
+      [buttonText]="titleSection.buttonText"
+      [buttonLink]="titleSection.buttonLink"
+      [imageSrc]="titleSection.imageSrc"
+      [imageAlt]="titleSection.imageAlt"
+    >
+    </app-title-section>
+  </div>
+</section>
+
+<!-- Section podcasts con diseño moderno -->
+<section class="relative py-20 bg-[#eab308] overflow-hidden">
+  <div class="absolute inset-0 bg-gradient-to-r from-black/10 to-transparent"></div>
+  <div class="relative max-w-6xl mx-auto px-8">
+    <div class="flex flex-col lg:flex-row items-center gap-16">
+      <div class="lg:w-1/2 space-y-8">
+        <h2 class="text-4xl font-bold text-white">
+          Escucha nuestros Podcast
+        </h2>
+        <p class="text-xl text-white/90">
+          Podcast creados con IA, acerca de la industria 4.0 y sus
+          tecnologías.
+        </p>
+        <a
+          routerLink="/investigacion-podcasts"
+          href="/investigacion-podcasts"
+          class="inline-block bg-black/90 text-white px-12 py-4 hover:bg-black transition-colors duration-200"
+        >
+          Ir a Escuchar
+        </a>
+      </div>
+      <div class="lg:w-1/3 hidden lg:block">
+        <img
+          src="assets/podcast.webp"
+          alt="Podcast"
+          class="w-full h-auto transform hover:scale-105 transition-transform duration-700"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Section nuevo los lagos con diseño elegante -->
+<section class="py-24 bg-white">
+    <div class="container mx-auto flex flex-col md:flex-row items-center">
       <div class="w-full md:w-1/2 relative overflow-hidden">
           <img 
             src="assets/plataformainicio.jpg" 
             alt="Ecosistema de innovación industrial" 
-            class="w-full h-80 md:h-[500px] object-cover transition-transform duration-700 hover:scale-105"
+            class="w-full h-[600px] object-cover transform hover:scale-105 transition-transform duration-1000"
           >
-          <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-60"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
       </div>
-      <!-- Texto a la derecha con mejor espaciado y tipografía -->
-      <div class="w-full md:w-1/2 p-10 md:p-12 space-y-6">
-          <h2 class="text-4xl font-bold mb-4 text-gray-800 leading-tight">Transformando la Industria Regional</h2>
-          <p class="text-gray-700 text-lg leading-relaxed mb-8">
+      <div class="w-full md:w-1/2 p-16 space-y-8">
+          <h2 class="text-4xl font-bold text-gray-900">Transformando la Industria Regional</h2>
+          <p class="text-xl leading-relaxed text-gray-600">
             "Nuevo Los Lagos" es una alianza estratégica innovadora entre la Universidad Santo Tomás, Asimet y Grupo Centinela, con el respaldo de Corfo Los Lagos. Nuestra visión es revolucionar el ecosistema industrial regional mediante la implementación de tecnologías avanzadas, formación especializada y soluciones de innovación sostenible.
           </p>
           <a 
             href="/plataforma" 
-            class="inline-block bg-[#eab308] text-white px-8 py-3 rounded-lg hover:bg-[#d9a208] hover:shadow-lg transition-all duration-300 font-medium text-lg"
+            class="inline-block bg-[#eab308] text-white px-12 py-4 hover:bg-yellow-400 transition-all duration-300"
           >
             Descubrir Plataforma
           </a>
@@ -246,14 +274,27 @@
 
 
 
-
-
 <app-patrocinadores></app-patrocinadores>
-
-
 <app-footer></app-footer>
 
+<!-- Modales -->
 @if (isModalOpen && dataModal) {
-<app-article-modal [data]="dataModal" [showNext]="false" (close)="closeModal()">
-</app-article-modal>
+  @switch (modalType) {
+    @case ('articles') {
+      <app-article-modal [data]="dataModal" [showNext]="true" (close)="closeModal()" (next)="showNextItem()">
+      </app-article-modal>
+    }
+    @case ('courses') {
+      <app-course-modal [data]="dataModal" [showNext]="true" (close)="closeModal()" (next)="showNextItem()">
+      </app-course-modal>
+    }
+    @case ('projects') {
+      <app-projects-modal [data]="dataModal" [showNext]="true" (close)="closeModal()" (next)="showNextItem()">
+      </app-projects-modal>
+    }
+    @case ('financing') {
+      <app-financing-modal [data]="dataModal" [showNext]="true" (close)="closeModal()" (next)="showNextItem()">
+      </app-financing-modal>
+    }
+  }
 }
