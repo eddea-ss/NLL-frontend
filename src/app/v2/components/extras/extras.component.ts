@@ -23,8 +23,8 @@ export class ExtrasComponent implements OnInit {
 
   // Obtener un video aleatorio de la carpeta
   private setRandomVideo(): void {
-    // Generar un número aleatorio entre 0 y 5 (inclusive)
-    const randomNumber = Math.floor(Math.random() * 6);
+    // Generar un número aleatorio entre 0 y 4 (inclusive)
+    const randomNumber = Math.floor(Math.random() * 5);
     // Construir la URL del video
     this.videoUrl = `assets/videos/video-intro${randomNumber}.mp4`;
   }
