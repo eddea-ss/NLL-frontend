@@ -1,66 +1,85 @@
 <!-- breadcrumbs.component.html -->
-<div class="py-4 ">
+<div class="py-4">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-    <nav class="flex" aria-label="Breadcrumb">
-      <ol class="inline-flex items-center flex-wrap space-x-1 sm:space-x-2">
-        <li
-          *ngFor="let breadcrumb of breadcrumbs; let last = last; let first = first"
-          class="inline-flex items-center"
-          [class.text-gray-900]="last"
-        >
-          <!-- Enlace de la miga de pan -->
-          <ng-container *ngIf="!last; else lastBreadcrumb">
-            <a
-              [routerLink]="breadcrumb.url"
-              class="inline-flex items-center text-sm font-medium text-gray-600 hover:text-blue-600 transition-colors duration-300"
-              [attr.aria-current]="last ? 'page' : null"
-            >
-              <!-- Icono de Inicio (solo para la primera miga de pan) -->
-              <ng-container *ngIf="breadcrumb.icon && first">
-                <svg
-                  class="w-4 h-4 mr-1.5"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path [attr.d]="breadcrumb.icon"></path>
-                </svg>
-              </ng-container>
-              <span class="truncate max-w-[120px] sm:max-w-xs">{{ breadcrumb.label }}</span>
-            </a>
-            <!-- Separador -->
-            <svg
-              class="w-3 h-3 text-gray-400 mx-1.5 sm:mx-2.5 flex-shrink-0"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                clip-rule="evenodd"
-              ></path>
-            </svg>
-          </ng-container>
-          <!-- Última miga de pan (actual) -->
-          <ng-template #lastBreadcrumb>
-            <span
-              class="text-sm font-bold text-gray-900 inline-flex items-center"
-              aria-current="page"
-            >
-              <!-- Icono de Inicio (solo para la primera miga de pan) -->
-              <ng-container *ngIf="breadcrumb.icon && first">
-                <svg
-                  class="w-4 h-4 mr-1.5"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path [attr.d]="breadcrumb.icon"></path>
-                </svg>
-              </ng-container>
-              <span class="truncate max-w-[150px] sm:max-w-xs">{{ breadcrumb.label }}</span>
-            </span>
-          </ng-template>
-        </li>
-      </ol>
-    </nav>
+    <div class="flex flex-col sm:flex-row justify-between items-center">
+      <!-- Breadcrumbs -->
+      <nav class="flex mb-4 sm:mb-0" aria-label="Breadcrumb">
+        <ol class="inline-flex items-center flex-wrap space-x-1 sm:space-x-2">
+          <li
+            *ngFor="let breadcrumb of breadcrumbs; let last = last; let first = first"
+            class="inline-flex items-center"
+            [class.text-gray-900]="last"
+          >
+            <!-- Enlace de la miga de pan -->
+            <ng-container *ngIf="!last; else lastBreadcrumb">
+              <a
+                [routerLink]="breadcrumb.url"
+                class="inline-flex items-center text-sm font-medium text-gray-600 hover:text-blue-600 transition-colors duration-300"
+                [attr.aria-current]="last ? 'page' : null"
+              >
+                <!-- Icono de Inicio (solo para la primera miga de pan) -->
+                <ng-container *ngIf="breadcrumb.icon && first">
+                  <svg
+                    class="w-4 h-4 mr-1.5"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path [attr.d]="breadcrumb.icon"></path>
+                  </svg>
+                </ng-container>
+                <span class="truncate max-w-[120px] sm:max-w-xs">{{ breadcrumb.label }}</span>
+              </a>
+              <!-- Separador -->
+              <svg
+                class="w-3 h-3 text-gray-400 mx-1.5 sm:mx-2.5 flex-shrink-0"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                  clip-rule="evenodd"
+                ></path>
+              </svg>
+            </ng-container>
+            <!-- Última miga de pan (actual) -->
+            <ng-template #lastBreadcrumb>
+              <span
+                class="text-sm font-bold text-gray-900 inline-flex items-center"
+                aria-current="page"
+              >
+                <!-- Icono de Inicio (solo para la primera miga de pan) -->
+                <ng-container *ngIf="breadcrumb.icon && first">
+                  <svg
+                    class="w-4 h-4 mr-1.5"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path [attr.d]="breadcrumb.icon"></path>
+                  </svg>
+                </ng-container>
+                <span class="truncate max-w-[150px] sm:max-w-xs">{{ breadcrumb.label }}</span>
+              </span>
+            </ng-template>
+          </li>
+        </ol>
+      </nav>
+
+      <!-- Indicadores Económicos -->
+      <div class="flex items-center space-x-4 text-sm text-gray-600">
+        <div class="flex items-center">
+          <span class="font-medium">Indicadores {{ currentDate }}: </span>
+        </div>
+        <div *ngIf="usdValue" class="flex items-center">
+          <span class="font-medium">USD:</span>
+          <span class="ml-1">${{ usdValue | number:'1.0-0' }}</span>
+        </div>
+        <div *ngIf="ufValue" class="flex items-center">
+          <span class="font-medium">UF:</span>
+          <span class="ml-1">${{ ufValue | number:'1.0-2' }}</span>
+        </div>
+      
+      </div>
+    </div>
   </div>
 </div>
