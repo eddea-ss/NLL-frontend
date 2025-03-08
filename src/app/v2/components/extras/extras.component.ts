@@ -9,8 +9,23 @@ import { NavbarComponent } from '../navbar/navbar.component';
   templateUrl: './extras.component.html',
   styleUrl: './extras.component.scss',
 })
-export class ExtrasComponent {
+export class ExtrasComponent implements OnInit {
   @Input() type: string = 'default';
-
   @Input() data: any[] = [];
+
+  // Almacenar la URL del video actual
+  videoUrl: string = '';
+
+  ngOnInit() {
+    // Obtener video aleatorio al iniciar el componente
+    this.setRandomVideo();
+  }
+
+  // Obtener un video aleatorio de la carpeta
+  private setRandomVideo(): void {
+    // Generar un número aleatorio entre 0 y 5 (inclusive)
+    const randomNumber = Math.floor(Math.random() * 6);
+    // Construir la URL del video
+    this.videoUrl = `assets/videos/video-intro${randomNumber}.mp4`;
+  }
 }

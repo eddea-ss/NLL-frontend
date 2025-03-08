@@ -521,7 +521,7 @@
 <div class="relative shadow-md mb-8 overflow-hidden bg-gray-900 h-screen">
   <!-- Video de fondo -->
   <video autoplay muted loop class="absolute inset-0 w-full h-full object-cover">
-    <source src="assets/videos/video-intro.mp4" type="video/mp4" />
+    <source [src]="videoUrl" type="video/mp4" />
     Tu navegador no soporta videos HTML5.
   </video>
   <!-- Overlay oscuro para mejorar la legibilidad -->
