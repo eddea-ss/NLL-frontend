@@ -12,6 +12,7 @@ import { LoginService, ResourceService } from '@v2/services';
 import { AuthState, UserType } from '@v2/enums';
 import { TruncatePipe } from '@v2/pipes';
 import { RouterLink, Router } from '@angular/router';
+import { DatePipe, CurrencyPipe } from '@angular/common';
 
 type ContentType = 'articles' | 'courses' | 'projects' | 'financing';
 
@@ -29,6 +30,8 @@ type ContentType = 'articles' | 'courses' | 'projects' | 'financing';
     FinancingModalComponent,
     TruncatePipe,
     RouterLink,
+    DatePipe,
+    CurrencyPipe,
   ],
   templateUrl: './landing-page3.component.html',
   styleUrl: './landing-page3.component.scss',

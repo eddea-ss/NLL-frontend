@@ -108,10 +108,55 @@
           </div>
           
           <!-- Contenido -->
-          <div 
-            class="text-base text-gray-600 mb-6 line-clamp-3 flex-grow leading-relaxed"
-            [innerHTML]="recursosService.sanitizedString(item?.descripcion || item?.resumen) | truncate : 120 : true"
-          ></div>
+          <div class="space-y-4 flex-grow">
+            <!-- Descripción principal -->
+            <div 
+              class="text-base text-gray-600 leading-relaxed prose prose-sm max-w-none line-clamp-3"
+              [innerHTML]="(recursosService.sanitizedString(item?.resumen_de_la_solucion_ || item?.descripcion || item?.resumen, true) | truncate:150) + '...'"
+            ></div>
+            
+            <!-- Información adicional específica por tipo -->
+            <div class="space-y-2">
+              @if (activeTab === 'courses') {
+                @if (item?.duracion) {
+                <p class="text-sm text-gray-500 flex items-center gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span>Duración: {{ item.duracion }}</span>
+                </p>
+                }
+                @if (item?.nivel) {
+                <p class="text-sm text-gray-500 flex items-center gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                  </svg>
+                  <span>Nivel: {{ item.nivel }}</span>
+                </p>
+                }
+              }
+              @if (activeTab === 'projects') {
+                @if (item?.fecha_inicio) {
+                <p class="text-sm text-gray-500 flex items-center gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                  <span>Inicio: {{ item.fecha_inicio | date:'dd/MM/yyyy' }}</span>
+                </p>
+                }
+              }
+              @if (activeTab === 'financing') {
+                @if (item?.monto_maximo) {
+                <p class="text-sm text-gray-500 flex items-center gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span>Monto máximo: {{ item.monto_maximo | currency:'CLP':'symbol':'1.0-0' }}</span>
+                </p>
+                }
+              }
+            </div>
+          </div>
           
           <!-- Footer con diseño elegante -->
           <div class="flex justify-between items-center pt-6 border-t border-gray-100 mt-auto">
