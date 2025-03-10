@@ -74,6 +74,9 @@ export class LandingPage3Component implements OnInit {
     { id: 'financing', label: 'Financiamiento', route: '/buscador/financiamiento' },
   ];
 
+  // Nueva propiedad para almacenar la ruta activa
+  currentTabRoute = '/buscador/articulos';
+  
   constructor() {
     effect(() => {
       const authState = this.authState();
@@ -102,6 +105,7 @@ export class LandingPage3Component implements OnInit {
 
   ngOnInit(): void {
     this.fetchAllContent();
+    this.updateCurrentTabRoute();
   }
 
   private fetchAllContent(): void {
@@ -177,6 +181,16 @@ export class LandingPage3Component implements OnInit {
 
   setActiveTab(tab: ContentType): void {
     this.activeTab = tab;
+    this.updateCurrentTabRoute();
+  }
+
+  updateCurrentTabRoute(): void {
+    const activeTabObj = this.tabs.find(tab => tab.id === this.activeTab);
+    if (activeTabObj) {
+      this.currentTabRoute = activeTabObj.route;
+    } else {
+      this.currentTabRoute = '#';
+    }
   }
 
   getActiveContent(): any[] {

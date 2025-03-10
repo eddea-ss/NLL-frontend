@@ -1,9 +1,9 @@
 <!-- Migas de pan para navegación -->
 <app-breadcrumbs [breadcrumbs]="breadcrumbs"></app-breadcrumbs>
-
-<!-- Contenedor principal con grid moderno -->
-<main class="container mx-auto py-16 grid grid-cols-1 lg:grid-cols-4 gap-10 px-6">
-  <div class="lg:col-span-3">
+<!-- Contenido principal -->
+<main class="container mx-auto py-16 flex flex-col lg:flex-row">
+  <!-- Sección de contenido principal -->
+  <div class="w-full lg:w-3/4 pr-8 p-8">
     <!-- Encabezado principal -->
     <h1 class="text-4xl font-bold mb-12 border-b-2 border-amber-500 pb-4">Plataforma de Innovación Industrial</h1>
   
@@ -33,7 +33,6 @@
         </div>
       </div>
     </section>
-
     <!-- Sección de objetivos -->
     <section class="mb-16">
       <h2 class="text-3xl font-bold mb-8 text-gray-800">Impacto Regional</h2>
@@ -43,7 +42,6 @@
           <h3 class="text-2xl font-semibold mb-4">Visión General</h3>
           <p class="text-lg text-gray-800">Catalizar la transformación del sector manufacturero en la región de Los Lagos hacia un modelo de industria 4.0 competitivo a nivel global</p>
         </div>
-
         <div class="space-y-4 bg-gray-50 p-6 rounded-xl">
           <h3 class="text-2xl font-semibold">Metas Estratégicas</h3>
           <ul class="space-y-4 text-lg text-gray-800">
@@ -63,13 +61,11 @@
         </div>
       </div>
     </section>
-
     <img
       src="assets/plataforma1.jpg"
       alt="Transformación Industrial Regional"
       class="w-full object-cover rounded-xl shadow-md mb-12"
     />
-
     <section class="my-12 bg-gray-100 p-8 rounded-xl shadow-sm">
       <h2 class="text-3xl font-semibold text-gray-800 mb-6">Desafíos y Brechas</h2>
       
@@ -96,13 +92,11 @@
         </div>
       </div>
     </section>
-
     <img
       src="assets/plataforma2.jpg"
       alt="Manufactura Avanzada en Los Lagos"
       class="w-full object-cover rounded-xl shadow-md mb-16"
     />
-
     <section class="bg-amber-500/10 p-8 rounded-xl shadow-sm hover:shadow-md transition-all">
       <h2 class="text-3xl font-bold mb-8">Componentes Estratégicos</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-lg">
@@ -127,7 +121,7 @@
   </div>
   
   <!-- Sidebar -->
-  <aside class="lg:col-span-1">
+  <aside>
     <app-sugeridos></app-sugeridos>
   </aside>
 </main>

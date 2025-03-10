@@ -4,10 +4,10 @@
   y la ruta es cursos o proveedores, se muestra el título "Según tu Modelo..."
   De lo contrario, "Últimas publicaciones".
 -->
-<div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow duration-300">
+<div class="bg-white ">
   <!-- Header con estilo mejorado -->
-  <h2 class="py-4 px-8 text-2xl font-bold border-b border-gray-100 bg-gradient-to-r from-gray-50 to-white flex items-center">
-    <span class="mr-2 text-yellow-500">
+  <h2 class="py-4 px-8 text-2xl font-bold   flex items-center">
+    <span class="mr-2 text-[#fbcc2c]">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
       </svg>
@@ -19,7 +19,7 @@
   </h2>
 
   <!-- Contenedor de sugerencias con estilos mejorados -->
-  <div class="space-y-6 py-6 px-8 animate-fade-in bg-gray-50" style="min-height: 50vh; max-width: 500px">
+  <div class="space-y-6 py-6 px-8 animate-fade-in " style="min-height: 50vh; max-width: 500px">
     <!-- Si no hay sugerencias, muestra mensaje con estilo -->
     <div class="flex justify-center items-center h-32" *ngIf="!sugeridos.length">
       <h2 class="text-gray-400 flex items-center">
@@ -35,7 +35,7 @@
       <!-- Cursos: tienen 'modalidad' y 'duracion' -->
       <ng-container *ngIf="item?.modalidad && item?.duracion">
         <app-course-item 
-          class="block bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-blue-500" 
+          class="block bg-white  shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-blue-500" 
           [simplified]="true" 
           [data]="item" 
           (openModal)="openModal(i)">
@@ -45,7 +45,7 @@
       <!-- Proveedores: tienen 'nombreEmpresa' y (rut_md5 o correoElectronicoEmpresa) -->
       <ng-container *ngIf="item?.nombreEmpresa && (item?.rut_md5 || item?.correoElectronicoEmpresa)">
         <app-supplier-item 
-          class="block bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-yellow-500" 
+          class="block bg-white  shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-[#fbcc2c]" 
           [simplified]="true" 
           [data]="item" 
           (openModal)="openModal(i)">
@@ -55,7 +55,7 @@
       <!-- Financiamiento: tienen 'porcentaje_cobertura' -->
       <ng-container *ngIf="item?.porcentaje_cobertura">
         <app-financing-item 
-          class="block bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-green-500" 
+          class="block bg-white  shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-[#fbcc2c]" 
           [simplified]="true" 
           [data]="item" 
           (openModal)="openModal(i)">
@@ -65,7 +65,7 @@
       <!-- Artículos: tienen 'articulo_paper' -->
       <ng-container *ngIf="item?.articulo_paper">
         <app-article-item 
-          class="block bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-purple-500" 
+          class="block bg-white  shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-[#0c243c]" 
           [simplified]="true" 
           [data]="item" 
           (openModal)="openModal(i)">
@@ -75,7 +75,7 @@
       <!-- Proyectos: tienen 'localidad' -->
       <ng-container *ngIf="item?.localidad">
         <app-projects-item 
-          class="block bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-indigo-500" 
+          class="block bg-white  shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-[#0c243c]" 
           [simplified]="true" 
           [data]="item" 
           (openModal)="openModal(i)">
@@ -85,7 +85,7 @@
       <!-- Startups: tienen 'descripcionStartup' -->
       <ng-container *ngIf="item?.descripcionStartup">
         <app-startup-item 
-          class="block bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-amber-500" 
+          class="block bg-white  shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-amber-500" 
           [simplified]="true" 
           [data]="item" 
           (openModal)="openModal(i)">
