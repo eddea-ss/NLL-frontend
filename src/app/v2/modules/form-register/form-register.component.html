@@ -30,9 +30,9 @@
           <span class="text-sm font-medium text-blue-900">Paso {{ currentStep }} de {{ totalSteps }}</span>
           <span class="text-sm text-gray-500">{{ currentStep === 1 ? 'Información básica' : 'Credenciales' }}</span>
         </div>
-        <div class="w-full bg-gray-200 rounded-full h-2.5">
+        <div class="w-full bg-gray-200  h-2.5">
           <div 
-            class="bg-blue-600 h-2.5 rounded-full transition-all duration-300 ease-in-out"
+            class="bg-blue-600 h-2.5  transition-all duration-300 ease-in-out"
             [style.width]="(currentStep / totalSteps * 100) + '%'"
           ></div>
         </div>
@@ -58,7 +58,7 @@
               <!-- Input de texto -->
               <input
                 *ngSwitchCase="'text'"
-                class="appearance-none block w-full px-4 py-3 border border-gray-200 rounded-xl transition-all duration-200 
+                class="appearance-none block w-full px-4 py-3 border border-gray-200  transition-all duration-200 
                        focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:outline-none
                        placeholder-gray-400 bg-gray-50/50"
                 [formControlName]="field.name"
@@ -70,7 +70,7 @@
               <input
                 *ngSwitchCase="'email'"
                 type="email"
-                class="appearance-none block w-full px-4 py-3 border border-gray-200 rounded-xl transition-all duration-200 
+                class="appearance-none block w-full px-4 py-3 border border-gray-200  transition-all duration-200 
                        focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:outline-none
                        placeholder-gray-400 bg-gray-50/50"
                 [formControlName]="field.name"
@@ -83,7 +83,7 @@
                 <div class="relative">
                   <input
                     [type]="field.name === 'password' ? (isPasswordVisible ? 'text' : 'password') : (isConfirmPasswordVisible ? 'text' : 'password')"
-                    class="appearance-none block w-full px-4 py-3 pr-10 border border-gray-200 rounded-xl transition-all duration-200 
+                    class="appearance-none block w-full px-4 py-3 pr-10 border border-gray-200  transition-all duration-200 
                            focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:outline-none
                            placeholder-gray-400 bg-gray-50/50"
                     [formControlName]="field.name"
@@ -124,19 +124,19 @@
                 <!-- Validación de contraseña -->
                 <div *ngIf="field.name === 'password'" class="grid grid-cols-2 gap-2 text-xs">
                   <div class="flex items-center">
-                    <span class="w-2 h-2 rounded-full mr-2" [ngClass]="hasLength ? 'bg-green-400' : 'bg-gray-200'"></span>
+                    <span class="w-2 h-2  mr-2" [ngClass]="hasLength ? 'bg-green-400' : 'bg-gray-200'"></span>
                     8+ caracteres
                   </div>
                   <div class="flex items-center">
-                    <span class="w-2 h-2 rounded-full mr-2" [ngClass]="hasUppercase ? 'bg-green-400' : 'bg-gray-200'"></span>
+                    <span class="w-2 h-2  mr-2" [ngClass]="hasUppercase ? 'bg-green-400' : 'bg-gray-200'"></span>
                     Mayúscula
                   </div>
                   <div class="flex items-center">
-                    <span class="w-2 h-2 rounded-full mr-2" [ngClass]="hasNumber ? 'bg-green-400' : 'bg-gray-200'"></span>
+                    <span class="w-2 h-2  mr-2" [ngClass]="hasNumber ? 'bg-green-400' : 'bg-gray-200'"></span>
                     Número
                   </div>
                   <div class="flex items-center">
-                    <span class="w-2 h-2 rounded-full mr-2" [ngClass]="hasSpecialChar ? 'bg-green-400' : 'bg-gray-200'"></span>
+                    <span class="w-2 h-2  mr-2" [ngClass]="hasSpecialChar ? 'bg-green-400' : 'bg-gray-200'"></span>
                     Carácter especial
                   </div>
                 </div>
@@ -145,7 +145,7 @@
               <!-- Select -->
               <select
                 *ngSwitchCase="'select'"
-                class="appearance-none block w-full px-4 py-3 border border-gray-200 rounded-xl transition-all duration-200 
+                class="appearance-none block w-full px-4 py-3 border border-gray-200  transition-all duration-200 
                        focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:outline-none
                        placeholder-gray-400 bg-gray-50/50"
                 [formControlName]="field.name"
@@ -200,7 +200,7 @@
             type="button"
             *ngIf="currentStep > 1"
             (click)="previousStep()"
-            class="px-6 py-2 border border-gray-200 text-gray-700 rounded-xl hover:bg-gray-50 transition-all duration-200"
+            class="px-6 py-2 border border-gray-200 text-gray-700  hover:bg-gray-50 transition-all duration-200"
           >
             Anterior
           </button>
@@ -209,7 +209,7 @@
             <button
               type="button"
               routerLink="/registro"
-              class="px-6 py-2 border border-gray-200 text-gray-700 rounded-xl hover:bg-gray-50 transition-all duration-200"
+              class="px-6 py-2 border border-gray-200 text-gray-700  hover:bg-gray-50 transition-all duration-200"
             >
               Cancelar
             </button>
@@ -217,7 +217,7 @@
             <button
               type="button"
               (click)="nextStep()"
-              class="px-6 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl 
+              class="px-6 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white  
                      hover:from-blue-500 hover:to-blue-600 focus:outline-none focus:ring-2 
                      focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200"
             >

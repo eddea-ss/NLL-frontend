@@ -1,6 +1,6 @@
 <div
   *ngIf="message"
-  class="fixed gap-4 border border-blue bottom-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-6 py-4 rounded shadow-lg flex items-center space-x-2 transition-opacity duration-300"
+  class="fixed gap-4 border border-blue bottom-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-6 py-4  shadow-lg flex items-center space-x-2 transition-opacity duration-300"
   [ngClass]="{ 'opacity-100': show, 'opacity-0': !show }"
 >
   <span style="font-weight: bold" class="text-white">{{ message.text }}</span>

@@ -24,7 +24,7 @@
             {{ slide.content }}
           </p>
           <a
-            class="mt-2 px-4 font-bold py-2 bg-yellow-500 hover:bg-yellow-700 text-white rounded"
+            class="mt-2 px-4 font-bold py-2 bg-[#fbcc2c] hover:bg-yellow-700 text-white "
             [href]="slide.buttonLink"
           >
             {{ slide.buttonText }}
@@ -59,7 +59,7 @@
           <button
             *ngIf="slide.buttonText"
             (click)="openLink(slide.buttonLink ?? '')"
-            class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold px-4 py-2 rounded"
+            class="bg-[#fbcc2c] hover:bg-yellow-700 text-white font-bold px-4 py-2 "
           >
             {{ slide.buttonText }}
           </button>

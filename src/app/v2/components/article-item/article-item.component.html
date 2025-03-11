@@ -1,18 +1,18 @@
 @if (simplified) {
-<article class="p-4 rounded-lg transition-all duration-300">
+<article class="p-4  transition-all duration-300">
   <!-- Título con estilo mejorado -->
   <h3 class="text-xl font-bold mb-2 text-gray-800 group-hover:text-purple-600">{{ data?.titulo }}</h3>
   
   <!-- Etiquetas con estilo mejorado -->
   <div class="mb-2 flex flex-wrap gap-1">
     @if (data?.articulo_paper) {
-      <span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded-full">{{ data?.articulo_paper }}</span>
+      <span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 ">{{ data?.articulo_paper }}</span>
     }
     @if (data?.fecha_publicacion) {
-      <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">{{ resourceService.getPublicationYear(data?.fecha_publicacion) }}</span>
+      <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 ">{{ resourceService.getPublicationYear(data?.fecha_publicacion) }}</span>
     }
     @if (data?.recomendado) {
-      <span class="bg-yellow-500  text-xs px-2 py-1">Recomendado</span>
+      <span class="bg-[#fbcc2c]  text-xs px-2 py-1">Recomendado</span>
     }
   </div>
   
@@ -39,7 +39,7 @@
 </article>
 } @else {
 <article
-  class="group p-5 border border-gray-100 rounded-lg hover:shadow-md transition-all duration-300"
+  class="group p-5 border border-gray-100  hover:shadow-md transition-all duration-300"
   (click)="onOpenModal()"
   (keypress.enter)="onOpenModal()"
   (keypress.space)="onOpenModal()"
@@ -57,16 +57,16 @@
   <!-- Etiquetas con estilo mejorado -->
   <div class="mb-3 flex flex-wrap gap-2">
     @if (data.recomendado) {
-      <span class="bg-green-50 text-orange-600 px-2 py-1  rounded-md">Recomendado</span>
+      <span class="bg-green-50 text-orange-600 px-2 py-1  ">Recomendado</span>
     }
     @if (data.idioma.toLowerCase() === 'ingles') {
-      <span class="bg-blue-50 text-blue-600 px-2 py-1 text-xs rounded-md">En Inglés</span>
+      <span class="bg-blue-50 text-blue-600 px-2 py-1 text-xs ">En Inglés</span>
     }
     @if (data.articulo_paper.toLowerCase() === 'paper') {
-      <span class="bg-purple-50 text-purple-600 px-2 py-1 text-xs rounded-md">Paper</span>
+      <span class="bg-purple-50 text-purple-600 px-2 py-1 text-xs ">Paper</span>
     }
     @if (data.articulo_paper.toLowerCase() === 'articulo') {
-      <span class="bg-indigo-50 text-indigo-600 px-2 py-1 text-xs rounded-md">Artículo</span>
+      <span class="bg-indigo-50 text-indigo-600 px-2 py-1 text-xs ">Artículo</span>
     }
  
   </div>

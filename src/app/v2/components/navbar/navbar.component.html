@@ -7,7 +7,7 @@
     <a
       routerLink="/"
       [ngStyle]="{ 'z-index': zindex === 'true' ? 1 : 0 }"
-      class="flex items-center font-black text-2l tracking-wider bg-yellow-500 text-gray-800 px-6 py-3 rounded-sm shadow-md hover:shadow-lg transition-all duration-300 transform hover:translate-y-[-2px]"
+      class="flex items-center font-black text-2l tracking-wider bg-[#fbcc2c] text-gray-800 px-6 py-3  shadow-md hover:shadow-lg transition-all duration-300 transform hover:translate-y-[-2px]"
       (click)="closeMobileMenu()"
     >
       NuevoLosLagos
@@ -15,7 +15,7 @@
 
     <!-- Botón hamburguesa para menú móvil -->
     <button
-      class="block lg:hidden focus:outline-none p-2 rounded-full hover:bg-gray-700 transition-colors duration-200"
+      class="block lg:hidden focus:outline-none p-2  hover:bg-gray-700 transition-colors duration-200"
       (click)="toggleMobileMenu()"
       [ngStyle]="{ 'z-index': zindex === 'true' ? 1 : 0 }"
       aria-label="Toggle navigation menu"
@@ -61,9 +61,9 @@
           </button>
           <div
             [ngStyle]="{ 'background-color': background }"
-            class="absolute left-0 top-full w-56 text-white rounded-md shadow-xl opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 z-10"
+            class="absolute left-0 top-full w-56 text-white  shadow-xl opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 z-10"
           >
-            <div class="py-2 rounded-md backdrop-blur-sm bg-opacity-95" [ngStyle]="{ 'background-color': background }">
+            <div class="py-2  backdrop-blur-sm bg-opacity-95" [ngStyle]="{ 'background-color': background }">
               <ng-container *ngFor="let item of menu.items">
                 <a
                   *ngIf="shouldShowMenuItem(item)"
@@ -83,7 +83,7 @@
             class="py-2 px-1 hover:text-yellow-400 font-medium transition-colors duration-300 flex items-center focus:outline-none border-b-2 border-transparent hover:border-yellow-400"
             (click)="$event.stopPropagation()"
           >
-            <div class="w-10 h-10 overflow-hidden rounded-full mr-2 border-2 border-yellow-400">
+            <div class="w-10 h-10 overflow-hidden  mr-2 border-2 border-yellow-400">
               <img
                 [src]="profileImageUrl"
                 alt="Perfil"
@@ -107,9 +107,9 @@
           </button>
           <div
             [ngStyle]="{ 'background-color': background }"
-            class="absolute right-0 top-full w-56 text-white rounded-md shadow-xl opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 z-10"
+            class="absolute right-0 top-full w-56 text-white  shadow-xl opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 z-10"
           >
-            <div class="py-2 rounded-md backdrop-blur-sm bg-opacity-95" [ngStyle]="{ 'background-color': background }">
+            <div class="py-2  backdrop-blur-sm bg-opacity-95" [ngStyle]="{ 'background-color': background }">
               <!-- Opciones si no está logueado -->
               <a
                 *ngIf="isLoggedOut"
@@ -148,7 +148,7 @@
         *ngIf="isLoggedOut"
         routerLink="/registro"
         [ngStyle]="{ 'z-index': zindex === 'true' ? 1 : 0 }"
-        class="hidden md:inline-flex items-center bg-yellow-500 text-gray-800 font-bold py-2 px-5 rounded shadow-md hover:bg-yellow-600 hover:shadow-lg transition-all duration-300 transform hover:scale-105"
+        class="hidden md:inline-flex items-center bg-[#fbcc2c] text-gray-800 font-bold py-2 px-5  shadow-md hover:bg-yellow-600 hover:shadow-lg transition-all duration-300 transform hover:scale-105"
       >
         <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path>
@@ -176,7 +176,7 @@
         <div class="mb-1">
           <!-- Botón para desplegar/ocultar submenú en móvil -->
           <button
-            class="w-full text-left px-3 py-2 rounded-lg text-white hover:bg-gray-700 hover:text-yellow-400 transition-colors duration-300 flex items-center justify-between"
+            class="w-full text-left px-3 py-2  text-white hover:bg-gray-700 hover:text-yellow-400 transition-colors duration-300 flex items-center justify-between"
             (click)="
               menu.isDropdown ? toggleSubmenu(menu) : onMenuItemClick(menu)
             "
@@ -208,7 +208,7 @@
               <ng-container *ngFor="let item of menu.items">
                 <a
                   *ngIf="shouldShowMenuItem(item)"
-                  class="block px-3 py-2 rounded-md hover:bg-gray-700 hover:text-yellow-400 transition-colors duration-200 my-0.5"
+                  class="block px-3 py-2  hover:bg-gray-700 hover:text-yellow-400 transition-colors duration-200 my-0.5"
                   (click)="onMenuItemClick(item)"
                 >
                   {{ item.label }}
@@ -220,7 +220,7 @@
             <ng-container *ngIf="menu === cuentaMenu">
               <a
                 *ngIf="isLoggedOut"
-                class="flex items-center px-3 py-2 rounded-md hover:bg-gray-700 hover:text-yellow-400 transition-colors duration-200 my-0.5"
+                class="flex items-center px-3 py-2  hover:bg-gray-700 hover:text-yellow-400 transition-colors duration-200 my-0.5"
                 (click)="
                   onMenuItemClick({
                     label: 'Ingresa a tu cuenta',
@@ -235,7 +235,7 @@
               </a>
               <a
                 *ngIf="isLoggedIn"
-                class="flex items-center px-3 py-2 rounded-md hover:bg-gray-700 hover:text-yellow-400 transition-colors duration-200 my-0.5"
+                class="flex items-center px-3 py-2  hover:bg-gray-700 hover:text-yellow-400 transition-colors duration-200 my-0.5"
                 (click)="onMenuItemClick({ label: 'Cerrar sesión' })"
               >
                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -252,7 +252,7 @@
       <a
         *ngIf="isLoggedOut"
         routerLink="/registro"
-        class="flex items-center justify-center w-full text-center bg-yellow-500 hover:bg-yellow-600 text-gray-800 font-bold py-2 px-3 mt-2 rounded-md shadow-md transition-all duration-300 transform hover:translate-y-[-2px]"
+        class="flex items-center justify-center w-full text-center bg-[#fbcc2c] hover:bg-yellow-600 text-gray-800 font-bold py-2 px-3 mt-2  shadow-md transition-all duration-300 transform hover:translate-y-[-2px]"
         (click)="closeMobileMenu()"
       >
         <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">

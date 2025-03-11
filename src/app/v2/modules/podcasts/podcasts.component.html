@@ -5,7 +5,7 @@
   <div class="w-full lg:w-3/4 pr-8 p-8">
     <!-- Header con diseño mejorado -->
 
-      <h1 class="text-4xl font-bold mb-12 border-b-2 border-amber-500 pb-4">Podcast Industria 4.0</h1>
+      <h1 class="text-4xl font-bold mb-12 border-b-2 border-[#fbcc2c] pb-4">Podcast Industria 4.0</h1>
 
       <p class="mt-6 text-xl leading-relaxed opacity-90">
         Sumérgete en conversaciones profundas sobre tecnología, innovación y transformación digital. 
@@ -70,7 +70,7 @@
       <div class="p-6">
         <div class="mb-12">
           <iframe
-            class="w-full aspect-video rounded-lg "
+            class="w-full aspect-video  "
             [src]="selectedVideoUrl"
             frameborder="0"
             allowfullscreen>
@@ -83,7 +83,7 @@
             *ngFor="let video of displayedVideos"
             (click)="selectVideo(video)"
             class="cursor-pointer group">
-            <div class="relative overflow-hidden rounded-lg">
+            <div class="relative overflow-hidden ">
               <img
                 [src]="getThumbnailUrl(video.id)"
                 alt="{{ video.title }}"
@@ -104,7 +104,7 @@
         <div class="flex justify-center mt-8">
           <button 
             (click)="toggleVideosDisplay()"
-            class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-300 flex items-center gap-2">
+            class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6  transition-colors duration-300 flex items-center gap-2">
             {{ showAllVideos ? 'Mostrar menos' : 'Mostrar todos' }}
             <svg 
               [class.rotate-180]="showAllVideos"

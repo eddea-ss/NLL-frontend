@@ -6,19 +6,19 @@
   UserType.COMPANY) {
   <section class="max-w-7xl mx-auto px-4 py-8">
     <!-- Company Header - Modernizado -->
-    <div class="bg-blue-50 rounded-xl p-6 shadow mb-10">
+    <div class="bg-blue-50  p-6 shadow mb-10">
       <div class="flex items-center">
         <div class="relative">
           <img
             [src]="profileImageUrl"
             alt="Perfil"
-            class="w-16 h-16 object-cover rounded-full border-4 border-white shadow-md"
+            class="w-16 h-16 object-cover  border-4 border-white shadow-md"
             (error)="
               profileImageUrl =
                 'https://accesos.nuevoloslagos.org/logos/default.png'
             "
           />
-          <div class="absolute -bottom-1 -right-1 bg-green-500 w-4 h-4 rounded-full border-2 border-white"></div>
+          <div class="absolute -bottom-1 -right-1 bg-green-500 w-4 h-4  border-2 border-white"></div>
         </div>
         <div class="ml-5">
           <h1 class="text-3xl font-bold text-gray-800">
@@ -46,7 +46,7 @@
         </h2>
         }
         <!-- Evaluation Status Section -->
-        <div class="mb-8 bg-gray-50 p-6 rounded-lg shadow-sm">
+        <div class="mb-8 bg-gray-50 p-6  shadow-sm">
           <h2 class="text-2xl font-bold text-gray-800 mb-4">Estado de Evaluación</h2>
           
           @if (todasLasEncuestasCompletadas()) {
@@ -66,7 +66,7 @@
             </div>
           } @else {
             <div class="space-y-4">
-              <div class="p-4 bg-yellow-50 border-l-4 border-yellow-400 rounded-md">
+              <div class="p-4 bg-yellow-50 border-l-4 border-yellow-400 ">
                 <!-- Mostrar mensaje de evaluación en proceso -->
                 <p class="text-gray-700 font-semibold mb-2">Tu evaluación está en proceso</p>
                 <ul class="list-disc ml-5 space-y-1 text-gray-600">
@@ -83,7 +83,7 @@
 
       <!-- Take Survey Button - Modernizado -->
       <div class="lg:col-span-1">
-        <div class="bg-white rounded-xl shadow-sm p-5 border border-gray-100">
+        <div class="bg-white  shadow-sm p-5 border border-gray-100">
           <h3 class="font-bold text-xl mb-4 text-gray-800 flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
@@ -95,11 +95,11 @@
           <button
             [disabled]="modeloMadurez()?.puntaje_general !== null"
             (click)="modeloMadurezService.openLinkGeneral()"
-            class="w-full mb-3 rounded-lg overflow-hidden transition-all duration-300 border border-blue-600 bg-white text-blue-700"
+            class="w-full mb-3  overflow-hidden transition-all duration-300 border border-blue-600 bg-white text-blue-700"
             [ngClass]="{'opacity-75 cursor-not-allowed': modeloMadurez()?.puntaje_general !== null}"
           >
             <div class="flex items-center p-4">
-              <div class="rounded-full bg-white p-2 mr-3 shadow-sm">
+              <div class=" bg-white p-2 mr-3 shadow-sm">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                 </svg>
@@ -113,7 +113,7 @@
                     </svg>
                     <span class="text-gray-600">Completado</span>
                   } @else {
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-amber-500 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-[#fbcc2c] mr-1" viewBox="0 0 20 20" fill="currentColor">
                       <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
                     </svg>
                     <span class="text-blue-700">Pendiente de completar</span>
@@ -134,11 +134,11 @@
           <button
             [disabled]="modeloMadurez() && modeloMadurez()?.puntaje_sector !== null"
             (click)="modeloMadurezService.openLinkSectorial()"
-            class="w-full mb-3 rounded-lg overflow-hidden transition-all duration-300 border border-blue-600 bg-white text-blue-700"
+            class="w-full mb-3  overflow-hidden transition-all duration-300 border border-blue-600 bg-white text-blue-700"
             [ngClass]="{'opacity-75 cursor-not-allowed': modeloMadurez()?.puntaje_sector !== null}"
           >
             <div class="flex items-center p-4">
-              <div class="rounded-full bg-white p-2 mr-3 shadow-sm">
+              <div class=" bg-white p-2 mr-3 shadow-sm">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                 </svg>
@@ -152,7 +152,7 @@
                     </svg>
                     <span class="text-gray-600">Completado</span>
                   } @else {
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-amber-500 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-[#fbcc2c] mr-1" viewBox="0 0 20 20" fill="currentColor">
                       <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
                     </svg>
                     <span class="text-blue-700">Pendiente de completar</span>
@@ -173,11 +173,11 @@
           <button
             [disabled]="modeloMadurez() && modeloMadurez()?.respuestas_formacion !== null"
             (click)="modeloMadurezService.openLinkFormacion()"
-            class="w-full mb-3 rounded-lg overflow-hidden transition-all duration-300 border border-blue-600 bg-white text-blue-700"
+            class="w-full mb-3  overflow-hidden transition-all duration-300 border border-blue-600 bg-white text-blue-700"
             [ngClass]="{'opacity-75 cursor-not-allowed': modeloMadurez()?.respuestas_formacion !== null}"
           >
             <div class="flex items-center p-4">
-              <div class="rounded-full bg-white p-2 mr-3 shadow-sm">
+              <div class=" bg-white p-2 mr-3 shadow-sm">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path d="M12 14l9-5-9-5-9 5 9 5z" />
                   <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
@@ -193,7 +193,7 @@
                     </svg>
                     <span class="text-gray-600">Completado</span>
                   } @else {
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-amber-500 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-[#fbcc2c] mr-1" viewBox="0 0 20 20" fill="currentColor">
                       <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
                     </svg>
                     <span class="text-blue-700">Pendiente de completar</span>
@@ -214,11 +214,11 @@
           <button
             [disabled]="modeloMadurez() && modeloMadurez()?.respuestas_proveedor !== null"
             (click)="modeloMadurezService.openLinkProveedores()"
-            class="w-full mb-3 rounded-lg overflow-hidden transition-all duration-300 border border-blue-600 bg-white text-blue-700"
+            class="w-full mb-3  overflow-hidden transition-all duration-300 border border-blue-600 bg-white text-blue-700"
             [ngClass]="{'opacity-75 cursor-not-allowed': modeloMadurez()?.respuestas_proveedor !== null}"
           >
             <div class="flex items-center p-4">
-              <div class="rounded-full bg-white p-2 mr-3 shadow-sm">
+              <div class=" bg-white p-2 mr-3 shadow-sm">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                 </svg>
@@ -232,7 +232,7 @@
                     </svg>
                     <span class="text-gray-600">Completado</span>
                   } @else {
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-amber-500 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-[#fbcc2c] mr-1" viewBox="0 0 20 20" fill="currentColor">
                       <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
                     </svg>
                     <span class="text-blue-700">Pendiente de completar</span>
@@ -260,7 +260,7 @@
       
       @if (modeloMadurez()?.puntaje_general !== null && modeloMadurez()?.puntaje_sector !== null) {
       <!-- Resumen de Resultados -->
-      <div class="bg-white p-6 mb-8 rounded-lg shadow-sm border border-gray-100">
+      <div class="bg-white p-6 mb-8  shadow-sm border border-gray-100">
         <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
@@ -270,7 +270,7 @@
         
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           <!-- Puntaje General -->
-          <div class=" rounded-lg p-5 border border-blue-200 shadow-sm">
+          <div class="  p-5 border border-blue-200 shadow-sm">
             <div class="flex items-center justify-between mb-3">
               <h4 class="text-lg font-semibold text-gray-800">Puntaje General</h4>
               <span class="text-2xl font-bold text-blue-700">{{ modeloMadurez()?.puntaje_general | number:'1.1-1' }}</span>
@@ -281,7 +281,7 @@
           </div>
           
           <!-- Puntaje Sectorial -->
-          <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-5 border border-green-200 shadow-sm">
+          <div class="bg-gradient-to-br from-green-50 to-green-100  p-5 border border-green-200 shadow-sm">
             <div class="flex items-center justify-between mb-3">
               <h4 class="text-lg font-semibold text-gray-800">Puntaje Sectorial</h4>
               <span class="text-2xl font-bold text-green-700">{{ modeloMadurez()?.puntaje_sector | number:'1.1-1' }}</span>
@@ -292,7 +292,7 @@
           </div>
           
           <!-- Puntaje Total -->
-          <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg p-5 border border-purple-200 shadow-sm">
+          <div class="bg-gradient-to-br from-purple-50 to-purple-100  p-5 border border-purple-200 shadow-sm">
             <div class="flex items-center justify-between mb-3">
               <h4 class="text-lg font-semibold text-gray-800">Puntaje Total</h4>
               <span class="text-2xl font-bold text-purple-700">{{ modeloMadurez()?.puntaje_total | number:'1.1-1' }}</span>
@@ -315,9 +315,9 @@
       </div>
 
 
-      <div class="bg-white p-5 mb-8 rounded-lg shadow-sm border border-gray-100">
+      <div class="bg-white p-5 mb-8  shadow-sm border border-gray-100">
         <div class="flex items-start">
-          <div class="flex-shrink-0 bg-blue-100 rounded-full p-2">
+          <div class="flex-shrink-0 bg-blue-100  p-2">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-700" viewBox="0 0 20 20" fill="currentColor">
               <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
             </svg>
@@ -334,7 +334,7 @@
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <!-- Radar Chart -->
-        <div class="w-full bg-white rounded-xl shadow-sm p-6">
+        <div class="w-full bg-white  shadow-sm p-6">
           <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z" />
@@ -342,10 +342,10 @@
             </svg>
             Visualización de Resultados
           </h3>
-          <div class="border border-gray-100 rounded-lg p-3">
+          <div class="border border-gray-100  p-3">
             <canvas #radarChartCanvas></canvas>
           </div>
-          <div class="mt-6 p-4 bg-blue-50 border border-blue-100 rounded-lg">
+          <div class="mt-6 p-4 bg-blue-50 border border-blue-100 ">
             <div class="flex items-start">
               <div class="flex-shrink-0">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -356,7 +356,7 @@
                 <p class="text-gray-700 mb-3">Para obtener recomendaciones específicas para tu empresa basadas en estos resultados, visita nuestro asistente virtual:</p>
                 <a [href]="'https://asistente.nuevoloslagos.org/?code=' + getRutMd5()" 
                    target="_blank"
-                   class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors shadow-sm">
+                   class="inline-flex items-center px-4 py-2 bg-blue-600 text-white  hover:bg-blue-700 transition-colors shadow-sm">
                   <span class="font-medium">Ir al Asistente Virtual</span>
                   <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
@@ -378,7 +378,7 @@
           </h3>
           <div class="space-y-4">
             <!-- Capital Humano -->
-            <div class="bg-white p-5 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300">
+            <div class="bg-white p-5  shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300">
               <div class="flex justify-between items-center mb-3">
                 <h4 class="text-lg font-bold text-gray-800">CAPITAL HUMANO</h4>
                 <span class="inline-flex items-center">
@@ -411,7 +411,7 @@
             </div>
 
             <!-- Estrategia -->
-            <div class="bg-white p-5 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300">
+            <div class="bg-white p-5  shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300">
               <div class="flex justify-between items-center mb-3">
                 <h4 class="text-lg font-bold text-gray-800">ESTRATEGIA</h4>
                 <span class="inline-flex items-center">
@@ -444,7 +444,7 @@
             </div>
 
             <!-- Tecnologías -->
-            <div class="bg-white p-5 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300">
+            <div class="bg-white p-5  shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300">
               <div class="flex justify-between items-center mb-3">
                 <h4 class="text-lg font-bold text-gray-800">TECNOLOGÍAS</h4>
                 <span class="inline-flex items-center">
@@ -477,14 +477,14 @@
             </div>
 
             <!-- Gestión de Innovación -->
-            <div class="bg-white p-5 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300">
+            <div class="bg-white p-5  shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300">
               <div class="flex justify-between items-center mb-3">
                 <h4 class="text-lg font-bold text-gray-800">GESTIÓN DE INNOVACIÓN</h4>
                 <span class="inline-flex items-center">
                   <ng-container *ngTemplateOutlet="gradeBoxes; context: {grade: numeroALetra(this.modeloMadurez()?.puntaje_por_categoria?.gestion_de_la_innovacion_y_conocimiento)}"></ng-container>
                 </span>
               </div>
-              <div class="pl-3 border-l-4 border-amber-500">
+              <div class="pl-3 border-l-4 border-[#fbcc2c]">
                 <p class="text-gray-700 font-medium mb-2">
                   {{
                     innovacionSections[
@@ -510,7 +510,7 @@
             </div>
 
             <!-- Automatización -->
-            <div class="bg-white p-5 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300">
+            <div class="bg-white p-5  shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300">
               <div class="flex justify-between items-center mb-3">
                 <h4 class="text-lg font-bold text-gray-800">AUTOMATIZACIÓN</h4>
                 <span class="inline-flex items-center">
@@ -556,7 +556,7 @@
 
 
       <!-- Consejos específicos por sector -->
-      <div class="bg-white p-6 mb-8 rounded-lg shadow-sm border border-gray-100">
+      <div class="bg-white p-6 mb-8  shadow-sm border border-gray-100">
         <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
@@ -564,7 +564,7 @@
           Consejos para Implementar Tecnologías de Industria 4.0 en sector:  {{ currentUser()?.sector }}
         </h3>
         
-        <div class="mb-4 p-4 bg-blue-50 rounded-lg border border-blue-100">
+        <div class="mb-4 p-4 bg-blue-50  border border-blue-100">
           <p class="text-gray-700">
             Basado en tu puntaje sectorial de <span class="font-bold text-blue-700">{{ modeloMadurez()?.puntaje_sector | number:'1.1-1' }}</span> 
             en el sector <span class="font-bold text-blue-700">{{ currentUser()?.sector }}</span>, 
@@ -574,7 +574,7 @@
         
         <div class="space-y-6">
           @for (consejo of obtenerConsejosSector(); track $index) {
-            <div class="bg-gradient-to-r from-gray-50 to-white p-5 rounded-lg border-l-4 border-blue-500 shadow-sm">
+            <div class="bg-gradient-to-r from-gray-50 to-white p-5  border-l-4 border-blue-500 shadow-sm">
               <h4 class="text-lg font-bold text-gray-800 mb-2">{{ consejo.titulo }}</h4>
               <p class="text-gray-600">{{ consejo.descripcion }}</p>
             </div>
@@ -612,7 +612,7 @@
       <div class="text-center mb-16">
         <span class="text-blue-600 font-semibold text-sm uppercase tracking-wider">Proceso de Evaluación</span>
         <h2 class="text-4xl font-bold text-gray-900 mt-2 mb-4">¿Cómo funciona?</h2>
-        <div class="w-24 h-1 bg-blue-600 mx-auto rounded-full"></div>
+        <div class="w-24 h-1 bg-blue-600 mx-auto "></div>
         <p class="text-xl text-gray-600 mt-6 max-w-3xl mx-auto">
           El proceso de evaluación de madurez tecnológica es simple y te proporcionará información valiosa para tu empresa.
         </p>
@@ -633,8 +633,8 @@
         
         <div class="grid md:grid-cols-3 gap-8">
           <!-- Diagnóstico Card -->
-          <div class="bg-white p-8 rounded-2xl border border-gray-200 shadow transition-all duration-300 hover:shadow-md">
-            <div class="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center mb-6">
+          <div class="bg-white p-8  border border-gray-200 shadow transition-all duration-300 hover:shadow-md">
+            <div class="w-16 h-16 bg-blue-600  flex items-center justify-center mb-6">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
               </svg>
@@ -644,8 +644,8 @@
           </div>
 
           <!-- Plan de Mejora Card -->
-          <div class="bg-white p-8 rounded-2xl border border-gray-200 shadow transition-all duration-300 hover:shadow-md">
-            <div class="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center mb-6">
+          <div class="bg-white p-8  border border-gray-200 shadow transition-all duration-300 hover:shadow-md">
+            <div class="w-16 h-16 bg-blue-600  flex items-center justify-center mb-6">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
               </svg>
@@ -655,8 +655,8 @@
           </div>
 
           <!-- Conexión Expertos Card -->
-          <div class="bg-white p-8 rounded-2xl border border-gray-200 shadow transition-all duration-300 hover:shadow-md">
-            <div class="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center mb-6">
+          <div class="bg-white p-8  border border-gray-200 shadow transition-all duration-300 hover:shadow-md">
+            <div class="w-16 h-16 bg-blue-600  flex items-center justify-center mb-6">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
               </svg>
@@ -675,23 +675,23 @@
 <ng-template #gradeBoxes let-grade="grade">
   <div class="flex items-center">
     <div class="flex items-center space-x-1">
-      <span class="w-6 h-6 border border-gray-400 rounded-sm flex items-center justify-center" 
+      <span class="w-6 h-6 border border-gray-400  flex items-center justify-center" 
             [ngClass]="{'bg-blue-700 text-white font-bold': ['A','B','C','D','E'].includes(grade), 'bg-white': !['A','B','C','D','E'].includes(grade)}">
         <span *ngIf="grade === 'E'">1</span>
       </span>
-      <span class="w-6 h-6 border border-gray-400 rounded-sm flex items-center justify-center" 
+      <span class="w-6 h-6 border border-gray-400  flex items-center justify-center" 
             [ngClass]="{'bg-blue-700 text-white font-bold': ['A','B','C','D'].includes(grade), 'bg-white': !['A','B','C','D'].includes(grade)}">
         <span *ngIf="grade === 'D'">2</span>
       </span>
-      <span class="w-6 h-6 border border-gray-400 rounded-sm flex items-center justify-center" 
+      <span class="w-6 h-6 border border-gray-400  flex items-center justify-center" 
             [ngClass]="{'bg-blue-700 text-white font-bold': ['A','B','C'].includes(grade), 'bg-white': !['A','B','C'].includes(grade)}">
         <span *ngIf="grade === 'C'">3</span>
       </span>
-      <span class="w-6 h-6 border border-gray-400 rounded-sm flex items-center justify-center" 
+      <span class="w-6 h-6 border border-gray-400  flex items-center justify-center" 
             [ngClass]="{'bg-blue-700 text-white font-bold': ['A','B'].includes(grade), 'bg-white': !['A','B'].includes(grade)}">
         <span *ngIf="grade === 'B'">4</span>
       </span>
-      <span class="w-6 h-6 border border-gray-400 rounded-sm flex items-center justify-center" 
+      <span class="w-6 h-6 border border-gray-400  flex items-center justify-center" 
             [ngClass]="{'bg-blue-700 text-white font-bold': grade === 'A', 'bg-white': grade !== 'A'}">
         <span *ngIf="grade === 'A'">5</span>
       </span>

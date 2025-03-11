@@ -11,11 +11,11 @@
         @for (card of cards; track $index) {
         <div 
           [routerLink]="card.route"
-          class="group relative overflow-hidden rounded-2xl bg-white p-6 shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer"
+          class="group relative overflow-hidden  bg-white p-6 shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer"
         >
           <div class="flex items-start space-x-4">
             <div class="flex-shrink-0">
-              <span class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 group-hover:bg-blue-100 transition-colors">
+              <span class="inline-flex h-12 w-12 items-center justify-center  bg-blue-50 group-hover:bg-blue-100 transition-colors">
                 @switch (card.icon) { 
                   @case ('dinero') {
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">

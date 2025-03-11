@@ -14,11 +14,11 @@
     
     <!-- Pestañas con diseño elegante -->
     <div class="flex justify-center mb-16">
-      <nav class="flex space-x-2 p-2 bg-white rounded-lg shadow-sm">
+      <nav class="flex space-x-2 p-2 bg-white  shadow-sm">
         @for (tab of tabs; track tab.id) {
         <button
           (click)="setActiveTab(tab.id)"
-          class="px-8 py-3 text-sm font-medium rounded-md transition-all duration-200"
+          class="px-8 py-3 text-sm font-medium  transition-all duration-200"
           [class.bg-[#eab308]]="activeTab === tab.id"
           [class.text-white]="activeTab === tab.id"
           [class.bg-transparent]="activeTab !== tab.id"
@@ -34,10 +34,10 @@
     <!-- Grid de contenido con diseño elegante -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       @for (item of getActiveContent(); track $index) {
-      <div class="group bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300">
+      <div class="group bg-white  shadow-sm hover:shadow-xl transition-all duration-300">
         <div class="p-8 h-full flex flex-col relative overflow-hidden">
           <!-- Decoración visual -->
-          <div class="absolute top-0 right-0 w-32 h-32 bg-[#eab308]/5 rounded-bl-full -mr-16 -mt-16"></div>
+          <div class="absolute top-0 right-0 w-32 h-32 bg-[#eab308]/5 l-full -mr-16 -mt-16"></div>
           
           <!-- Header -->
           <div class="flex justify-between items-center mb-6 relative">
@@ -69,40 +69,40 @@
           <div class="flex flex-wrap gap-2 mb-6">
             @if (activeTab === 'articles') {
               @if (item?.idioma?.toLowerCase() === 'ingles') {
-              <span class="bg-blue-50 text-blue-700 px-4 py-1.5 rounded-full text-xs font-medium">En Inglés</span>
+              <span class="bg-blue-50 text-blue-700 px-4 py-1.5  text-xs font-medium">En Inglés</span>
               }
               @if (item?.articulo_paper?.toLowerCase() === 'paper') {
-              <span class="bg-purple-50 text-purple-700 px-4 py-1.5 rounded-full text-xs font-medium">Paper</span>
+              <span class="bg-purple-50 text-purple-700 px-4 py-1.5  text-xs font-medium">Paper</span>
               }
               @if (item?.articulo_paper?.toLowerCase() === 'articulo') {
-              <span class="bg-indigo-50 text-indigo-700 px-4 py-1.5 rounded-full text-xs font-medium">Artículo</span>
+              <span class="bg-indigo-50 text-indigo-700 px-4 py-1.5  text-xs font-medium">Artículo</span>
               }
             }
             @if (activeTab === 'courses') {
               @if (item?.tipo?.toLowerCase() === 'gratuito') {
-              <span class="bg-green-50 text-green-700 px-4 py-1.5 rounded-full text-xs font-medium">Gratuito</span>
+              <span class="bg-green-50 text-green-700 px-4 py-1.5  text-xs font-medium">Gratuito</span>
               }
               @if (item?.tipo?.toLowerCase() === 'de pago') {
-              <span class="bg-amber-50 text-amber-700 px-4 py-1.5 rounded-full text-xs font-medium">De Pago</span>
+              <span class="bg-amber-50 text-amber-700 px-4 py-1.5  text-xs font-medium">De Pago</span>
               }
               @if (item?.idioma?.toLowerCase() === 'ingles') {
-              <span class="bg-blue-50 text-blue-700 px-4 py-1.5 rounded-full text-xs font-medium">En Inglés</span>
+              <span class="bg-blue-50 text-blue-700 px-4 py-1.5  text-xs font-medium">En Inglés</span>
               }
             }
             @if (activeTab === 'projects') {
               @if (item?.estado) {
-              <span class="bg-green-50 text-green-700 px-4 py-1.5 rounded-full text-xs font-medium">{{ item.estado }}</span>
+              <span class="bg-green-50 text-green-700 px-4 py-1.5  text-xs font-medium">{{ item.estado }}</span>
               }
               @if (item?.sector) {
-              <span class="bg-blue-50 text-blue-700 px-4 py-1.5 rounded-full text-xs font-medium">{{ item.sector }}</span>
+              <span class="bg-blue-50 text-blue-700 px-4 py-1.5  text-xs font-medium">{{ item.sector }}</span>
               }
             }
             @if (activeTab === 'financing') {
               @if (item?.monto) {
-              <span class="bg-green-50 text-green-700 px-4 py-1.5 rounded-full text-xs font-medium">{{ item.monto }}</span>
+              <span class="bg-green-50 text-green-700 px-4 py-1.5  text-xs font-medium">{{ item.monto }}</span>
               }
               @if (item?.plazo) {
-              <span class="bg-blue-50 text-blue-700 px-4 py-1.5 rounded-full text-xs font-medium">{{ item.plazo }}</span>
+              <span class="bg-blue-50 text-blue-700 px-4 py-1.5  text-xs font-medium">{{ item.plazo }}</span>
               }
             }
           </div>
@@ -177,7 +177,7 @@
               }
             </span>
             <button
-              class="group/btn flex items-center gap-2 px-6 py-2 text-sm font-medium text-[#eab308] hover:bg-[#eab308]/10 rounded-lg transition-all duration-200"
+              class="group/btn flex items-center gap-2 px-6 py-2 text-sm font-medium text-[#eab308] hover:bg-[#eab308]/10  transition-all duration-200"
               (click)="openModal($index, activeTab)"
             >
               <span>
