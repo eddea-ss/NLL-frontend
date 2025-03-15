@@ -1,12 +1,12 @@
 <!-- Migas de pan para navegación -->
 <app-breadcrumbs [breadcrumbs]="breadcrumbs"></app-breadcrumbs>
-<div>
+<div class="bg-white min-h-screen">
   <!--Login como empresa y modelo completado-->
   @if (authState()===AuthState.LoggedIn && currentUser()?.type ===
   UserType.SUPPLIER) {
   <section class="max-w-7xl mx-auto px-4 py-8">
     <!-- Company Header -->
-    <h1 class="text-4xl font-bold text-gray-700 mb-8">
+    <h1 class="text-4xl font-bold text-indigo-900 mb-8 border-b border-indigo-200 pb-3">
       <strong>Empresa:</strong>
       {{ currentUser()?.name ?? "No disponible" }}
     </h1>
@@ -14,16 +14,16 @@
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
       <div class="lg:col-span-2">
         <!-- Evaluation Status Section -->
-        <div class="mb-8">
-          <h2 class="text-2xl text-gray-600 mb-4">Completa tus Modelos</h2>
-          <p class="text-gray-500 mb-6">
+        <div class="mb-8 bg-white p-6 border border-indigo-100">
+          <h2 class="text-2xl text-indigo-800 mb-4 font-semibold">Completa tus Modelos</h2>
+          <p class="text-gray-700 mb-6">
             Actualmente, tu Modelo de Maduración tecnológica para la Industria
             4.0 aún no ha sido completado. Te invitamos a evaluar el nivel de
             madurez tecnológica de tu empresa y a conocer las acciones
             necesarias para alcanzar la madurez tecnológica. Para completar el
             modelo y acceder a todas sus funcionalidades.
           </p>
-          <p class="text-gray-500 mb-6">
+          <p class="text-gray-700 mb-6">
             Por favor, haz clic en el botón a continuación:
           </p>
         </div>
@@ -36,13 +36,13 @@
           @if (getSurveyData(i+1)) {
           <button
             disabled
-            class="my-1 w-full border border-blue-700 p-8 bg-white-700 flex text-blue-700"
+            class="my-1 w-full border border-indigo-800 p-8 bg-indigo-50 flex justify-between items-center text-indigo-800"
           >
             {{ titlesSurvey[i] }}
             <svg
-              style="width: 50px"
+              style="width: 30px"
               aria-hidden="true"
-              class="w-5 h-5 text-blue-700"
+              class="w-5 h-5 text-emerald-600"
               fill="currentColor"
               viewBox="0 0 20 20"
               xmlns="http://www.w3.org/2000/svg"
@@ -58,9 +58,12 @@
           <div class="lg:col-span-1">
             <button
               routerLink="/modelo-caracterizacion/{{ i + 1 }}"
-              class="my-1 w-full border border-blue-700 p-8 bg-white-700 flex text-blue-700 hover:bg-gray-100 transition"
+              class="my-1 w-full border border-indigo-800 p-8 bg-gradient-to-r from-indigo-50 to-indigo-100 flex justify-between items-center text-indigo-800 hover:bg-gradient-to-r hover:from-indigo-100 hover:to-indigo-200 transition-all duration-300"
             >
               {{ titlesSurvey[i] }}
+              <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
             </button>
           </div>
           }
@@ -79,13 +82,293 @@
       "
       [buttonText]="'Registrate como proveedor.'"
       [buttonLink]="'/registro-proveedor'"
-      [imageSrc]="'assets/hero.webp'"
+      [imageSrc]="'assets/factory.svg'"
       [imageAlt]="'mockup'"
     >
     </app-title-section>
   </section>
-  <section>
-    <app-step-register [steps]="steps"></app-step-register>
+  <section class="py-12">
+
+<div class="max-w-7xl mx-auto px-4 py-12">
+    <h2 class="text-3xl font-bold text-center mb-12 text-indigo-900">Empresas Destacadas</h2>
+    <p class="text-center text-gray-700 mb-8 max-w-3xl mx-auto">
+      Descubre algunas de las empresas que ya forman parte de nuestra red de proveedores. Estas empresas han completado su perfil y están conectando con nuevas oportunidades de negocio.
+    </p>
+    
+    <!-- Loading State -->
+    <div *ngIf="loadingFeaturedCompanies" class="flex justify-center items-center py-12">
+      <div class="animate-spin  h-12 w-12 border-t-2 border-b-2 border-indigo-900"></div>
+    </div>
+    
+    <!-- Error State -->
+    <div *ngIf="errorFeaturedCompanies" class="bg-red-50 border border-red-200 text-red-800  p-4 text-center mx-auto max-w-2xl">
+      <p>{{ errorFeaturedCompanies }}</p>
+      <button (click)="loadFeaturedCompanies()" class="mt-2 text-indigo-600 hover:text-indigo-800">
+        Intentar nuevamente
+      </button>
+    </div>
+    
+    <!-- Empty State -->
+    <div *ngIf="!loadingFeaturedCompanies && featuredCompanies.length === 0 && !errorFeaturedCompanies" class="text-center py-8">
+      <p class="text-gray-500">No hay empresas destacadas disponibles en este momento.</p>
+    </div>
+    
+    <!-- Company Cards Grid -->
+    <div *ngIf="!loadingFeaturedCompanies && featuredCompanies.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <!-- Dynamic Company Card -->
+      <div *ngFor="let company of featuredCompanies" 
+           class="bg-white shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg hover:transform hover:scale-102 border border-indigo-100 cursor-pointer flex flex-col h-full"
+           (click)="openCompanyModal(company)">
+        <div class="h-32 bg-gradient-to-r" [ngStyle]="{'background': company.headerGradient || 'from-indigo-800 to-indigo-900'}" class="relative">
+          <div *ngIf="company.verified" class="absolute bottom-0 right-0 w-24 h-24 bg-amber-500 flex items-end justify-start p-4">
+            <span class="text-indigo-900 font-bold text-xs">VERIFICADA</span>
+          </div>
+        </div>
+        <div class="p-5 flex flex-col flex-grow">
+          <div class="mb-4">
+            <h3 class="font-bold text-indigo-900 text-lg line-clamp-2 mt-2">{{ company.name }}</h3>
+            <p class="text-indigo-600 text-sm">{{ company.industry }}</p>
+          </div>
+          <p class="text-gray-700 text-sm mb-4 flex-grow">{{ company.description }}</p>
+          <div class="flex flex-wrap gap-2 mb-4">
+            <span *ngFor="let tag of company.tags.slice(0, 3)" class="bg-indigo-100 text-indigo-800 text-xs px-2 py-1 ">{{ tag }}</span>
+            <span *ngIf="company.tags.length > 3" class="bg-indigo-100 text-indigo-800 text-xs px-2 py-1 ">+{{ company.tags.length - 3 }}</span>
+          </div>
+          
+          <!-- Company Contact Info -->
+          <div class="border-t border-gray-100 pt-3 mb-3">
+            <div class="flex justify-between items-center">
+              <div class="flex items-center">
+                <svg class="w-4 h-4 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+                </svg>
+                <span class="text-gray-600 text-xs ml-1">{{ company.location }}</span>
+              </div>
+              <a *ngIf="company.website" [href]="company.website" target="_blank" class="text-indigo-600 text-xs hover:text-indigo-800 flex items-center" (click)="$event.stopPropagation()">
+                <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
+                </svg>
+                Sitio web
+              </a>
+            </div>
+          </div>
+          
+          <div class="flex justify-end items-center">
+            <a class="inline-flex items-center text-indigo-600 text-sm font-medium hover:text-indigo-800">
+              Ver perfil
+              <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- View All Companies Button -->
+   
+  </div>
+
+  <!-- Nueva sección: Por qué registrarse como proveedor -->
+  <div class="max-w-7xl mx-auto px-4 py-16 bg-white">
+    <div class="flex flex-col lg:flex-row items-center gap-12">
+      <div class="lg:w-3/5">
+        <h2 class="text-3xl font-bold text-indigo-900 mb-6">¿Por qué registrarse como proveedor?</h2>
+        
+        <p class="text-gray-700 mb-8">
+          Unirse a nuestra red de proveedores te abre las puertas a nuevas oportunidades de negocio y te conecta con empresas que buscan exactamente lo que ofreces.
+        </p>
+        
+        <div class="space-y-6">
+          <div class="flex items-start">
+            <div class="flex-shrink-0 h-12 w-12 flex items-center justify-center rounded-full bg-amber-100 text-amber-600">
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
+              </svg>
+            </div>
+            <div class="ml-4">
+              <h3 class="text-xl font-semibold text-indigo-800">Visibilidad regional</h3>
+              <p class="mt-2 text-gray-600">Destaca tu empresa en tu región y sé encontrado por clientes potenciales que buscan proveedores locales.</p>
+            </div>
+          </div>
+          
+          <div class="flex items-start">
+            <div class="flex-shrink-0 h-12 w-12 flex items-center justify-center rounded-full bg-amber-100 text-amber-600">
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path>
+              </svg>
+            </div>
+            <div class="ml-4">
+              <h3 class="text-xl font-semibold text-indigo-800">Networking estratégico</h3>
+              <p class="mt-2 text-gray-600">Conecta con otras empresas del sector y establece relaciones comerciales duraderas.</p>
+            </div>
+          </div>
+          
+          <div class="flex items-start">
+            <div class="flex-shrink-0 h-12 w-12 flex items-center justify-center rounded-full bg-amber-100 text-amber-600">
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+                <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z"></path>
+              </svg>
+            </div>
+            <div class="ml-4">
+              <h3 class="text-xl font-semibold text-indigo-800">Oportunidades de negocio</h3>
+              <p class="mt-2 text-gray-600">Accede a nuevas oportunidades comerciales y expande tu cartera de clientes.</p>
+            </div>
+          </div>
+          
+          <div class="flex items-start">
+            <div class="flex-shrink-0 h-12 w-12 flex items-center justify-center rounded-full bg-amber-100 text-amber-600">
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+            </div>
+            <div class="ml-4">
+              <h3 class="text-xl font-semibold text-indigo-800">Validación de calidad</h3>
+              <p class="mt-2 text-gray-600">Obtén una verificación que certifique la calidad de tus servicios y aumente la confianza de tus clientes.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="mt-10">
+          <a href="/registro-proveedor" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-900 hover:bg-indigo-800 transition-all duration-300">
+            Registrarme ahora
+            <svg class="ml-2 -mr-1 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+      
+      <div class="lg:w-2/5">
+        <img src="assets/register.svg" alt="Beneficios para proveedores" class="w-full h-auto ">
+      </div>
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 py-12">
+    <h2 class="text-3xl font-bold text-center mb-12 text-indigo-900">Tu Camino al Éxito como Proveedor</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <!-- Tarjeta 1 -->
+      <div class="bg-white overflow-hidden transition-transform duration-300 hover:transform hover:scale-105 border border-indigo-100">
+        <div class="bg-amber-500 h-2"></div>
+        <div class="p-6">
+          <div class="w-20 h-20 bg-indigo-900 text-white flex items-center justify-center mb-6 mx-auto">
+            <span class="text-2xl font-bold">1</span>
+          </div>
+          <h3 class="text-2xl font-bold text-center text-indigo-900 mb-4">Registro</h3>
+          <p class="text-center text-gray-700 mb-4">Crea tu cuenta como proveedor en nuestra plataforma para comenzar tu viaje.</p>
+          <ul class="text-gray-700 space-y-2 mb-6">
+            <li class="flex items-center">
+              <svg class="w-5 h-5 mr-2 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+              Proceso simple y rápido
+            </li>
+            <li class="flex items-center">
+              <svg class="w-5 h-5 mr-2 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+              Datos básicos de contacto
+            </li>
+            <li class="flex items-center">
+              <svg class="w-5 h-5 mr-2 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+              Verificación segura
+            </li>
+          </ul>
+          <div class="text-center">
+            <a href="/registro-proveedor" class="inline-block px-6 py-3 bg-indigo-900 text-white hover:bg-indigo-800 transition-all duration-300">Comenzar</a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Tarjeta 2 -->
+      <div class="bg-white overflow-hidden transition-transform duration-300 hover:transform hover:scale-105 border border-indigo-100">
+        <div class="bg-amber-500 h-2"></div>
+        <div class="p-6">
+          <div class="w-20 h-20 bg-indigo-900 text-white flex items-center justify-center mb-6 mx-auto">
+            <span class="text-2xl font-bold">2</span>
+          </div>
+          <h3 class="text-2xl font-bold text-center text-indigo-900 mb-4">Perfil Completo</h3>
+          <p class="text-center text-gray-700 mb-4">Completa la información detallada de tu empresa para destacar tus servicios.</p>
+          <ul class="text-gray-700 space-y-2 mb-6">
+            <li class="flex items-center">
+              <svg class="w-5 h-5 mr-2 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+              Descripción de servicios
+            </li>
+            <li class="flex items-center">
+              <svg class="w-5 h-5 mr-2 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+              Capacidades técnicas
+            </li>
+            <li class="flex items-center">
+              <svg class="w-5 h-5 mr-2 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+              Experiencia y certificaciones
+            </li>
+          </ul>
+          <div class="text-center">
+          
+          </div>
+        </div>
+      </div>
+      
+      <!-- Tarjeta 3 -->
+      <div class="bg-white overflow-hidden transition-transform duration-300 hover:transform hover:scale-105 border border-indigo-100">
+        <div class="bg-amber-500 h-2"></div>
+        <div class="p-6">
+          <div class="w-20 h-20 bg-indigo-900 text-white flex items-center justify-center mb-6 mx-auto">
+            <span class="text-2xl font-bold">3</span>
+          </div>
+          <h3 class="text-2xl font-bold text-center text-indigo-900 mb-4">Conecta y Crece</h3>
+          <p class="text-center text-gray-700 mb-4">Accede a nuevas oportunidades de negocio conectándote con clientes potenciales.</p>
+          <ul class="text-gray-700 space-y-2 mb-6">
+            <li class="flex items-center">
+              <svg class="w-5 h-5 mr-2 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+              Visibilidad regional
+            </li>
+            <li class="flex items-center">
+              <svg class="w-5 h-5 mr-2 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+              Oportunidades de negocio
+            </li>
+            <li class="flex items-center">
+              <svg class="w-5 h-5 mr-2 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+              Networking estratégico
+            </li>
+          </ul>
+          <div class="text-center">
+           
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>  
+
+  <!-- Empresas Destacadas Section -->
+  
+    
   </section>
   }
 </div>
+
+<!-- Company Profile Modal -->
+<app-supplier-modal 
+  *ngIf="isModalOpen && selectedCompany" 
+  [data]="selectedCompany" 
+  [showNext]="false"
+  (close)="closeModal()">
+</app-supplier-modal>
+
