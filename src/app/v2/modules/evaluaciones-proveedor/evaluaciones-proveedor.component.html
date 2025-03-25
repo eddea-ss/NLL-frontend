@@ -13,20 +13,20 @@
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
       <div class="lg:col-span-2">
-        <!-- Evaluation Status Section -->
-        <div class="mb-8 bg-white p-6 border border-indigo-100">
-          <h2 class="text-2xl text-indigo-800 mb-4 font-semibold">Completa tus Modelos</h2>
-          <p class="text-gray-700 mb-6">
-            Actualmente, tu Modelo de Maduración tecnológica para la Industria
-            4.0 aún no ha sido completado. Te invitamos a evaluar el nivel de
-            madurez tecnológica de tu empresa y a conocer las acciones
-            necesarias para alcanzar la madurez tecnológica. Para completar el
-            modelo y acceder a todas sus funcionalidades.
-          </p>
-          <p class="text-gray-700 mb-6">
-            Por favor, haz clic en el botón a continuación:
-          </p>
-        </div>
+      <!-- Evaluation Status Section -->
+      <div class="mb-8 bg-gray-50 p-6 border border-indigo-100">
+        <h2 class="text-2xl text-gray-900 mb-4 font-semibold">Completa tus Modelos</h2>
+        <p class="text-gray-900 mb-6">
+        Actualmente, tu Modelo de Maduración tecnológica para la Industria
+        4.0 aún no ha sido completado. Te invitamos a evaluar el nivel de
+        madurez tecnológica de tu empresa y a conocer las acciones
+        necesarias para alcanzar la madurez tecnológica. Para completar el
+        modelo y acceder a todas sus funcionalidades.
+        </p>
+        <p class="text-gray-900 mb-6">
+        Por favor, haz clic en el botón a continuación:
+        </p>
+      </div>
       </div>
 
       <!-- Take Survey Button -->
@@ -35,36 +35,36 @@
         <ng-container *ngFor="let item of titlesSurvey; let i = index">
           @if (getSurveyData(i+1)) {
           <button
-            disabled
-            class="my-1 w-full border border-indigo-800 p-8 bg-indigo-50 flex justify-between items-center text-indigo-800"
+        disabled
+        class="my-1 w-full border border-amber-200 p-8 bg-amber-50 flex justify-between items-center text-gray-900"
           >
-            {{ titlesSurvey[i] }}
-            <svg
-              style="width: 30px"
-              aria-hidden="true"
-              class="w-5 h-5 text-emerald-600"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M16.707 5.293a1 1 0 010 1.414L8.414 15 5 11.586a1 1 0 011.414-1.414L8.414 12.172l7.879-7.879a1 1 0 011.414 0z"
-                clip-rule="evenodd"
-              ></path>
-            </svg>
+        {{ titlesSurvey[i] }}
+        <svg
+          style="width: 30px"
+          aria-hidden="true"
+          class="w-5 h-5 text-emerald-600"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M16.707 5.293a1 1 0 010 1.414L8.414 15 5 11.586a1 1 0 011.414-1.414L8.414 12.172l7.879-7.879a1 1 0 011.414 0z"
+            clip-rule="evenodd"
+          ></path>
+        </svg>
           </button>
           }@else {
           <div class="lg:col-span-1">
-            <button
-              routerLink="/modelo-caracterizacion/{{ i + 1 }}"
-              class="my-1 w-full border border-indigo-800 p-8 bg-gradient-to-r from-indigo-50 to-indigo-100 flex justify-between items-center text-indigo-800 hover:bg-gradient-to-r hover:from-indigo-100 hover:to-indigo-200 transition-all duration-300"
-            >
-              {{ titlesSurvey[i] }}
-              <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-              </svg>
-            </button>
+        <button
+          routerLink="/modelo-caracterizacion/{{ i + 1 }}"
+          class="my-1 w-full border border-amber-200 p-8 bg-gradient-to-r from-amber-50 to-amber-100 flex justify-between items-center text-gray-900 hover:bg-gradient-to-r hover:from-amber-100 hover:to-amber-200 transition-all duration-300"
+        >
+          {{ titlesSurvey[i] }}
+          <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+          </svg>
+        </button>
           </div>
           }
         </ng-container>

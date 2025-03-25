@@ -2,20 +2,21 @@
 <app-breadcrumbs [breadcrumbs]="breadcrumbs"></app-breadcrumbs>
 
 <!-- Contenido principal -->
-<main class="container mx-auto py-16 flex flex-col lg:flex-row">
+<main class="container mx-auto py-16 flex flex-col lg:flex-row bg-gray-50">
   <div class="w-full lg:w-3/4 pr-8 p-8">
-    <!-- Header con diseño mejorado -->
-   
-      <div class="absolute -left-3 top-0 w-6 h-6 bg-[rgb(234,179,8)] "></div>
-      <h1 class="text-4xl font-bold mb-12 border-b-2 border-[#fbcc2c] pb-4">hola como estas cristian</h1>
-
-      <p class="text-2xl text-gray-600 mt-6 leading-relaxed">
-        Transformación digital y manufactura avanzada: Un análisis profundo  oportunidades de crecimiento
+    <!-- Header -->
+    <div class="relative mb-12">
+      <div class="absolute -left-3 top-0 w-6 h-6 bg-[#FBCC2C]"></div>
+      <h1 class="text-4xl font-bold mb-12 border-b-2 border-[#FBCC2C] pb-4 text-[#1F2937]">
+        Transformación Digital y Manufactura Avanzada
+      </h1>
+      <p class="text-2xl text-[#1F2937]/80 mt-6 leading-relaxed">
+        Un análisis profundo del ecosistema regional y sus oportunidades de crecimiento
       </p>
+    </div>
 
-
-    <!-- Imagen principal con sombra y bordes redondeados -->
-    <div class="overflow-hidden  shadow-xl">
+    <!-- Imagen principal -->
+    <div class="overflow-hidden shadow-xl mb-16 rounded-lg">
       <img
         src="assets/informe1.jpg"
         alt="Panorama de la Industria 4.0 en Los Lagos"
@@ -23,50 +24,55 @@
       />
     </div>
 
-    <!-- Secciones con diseño mejorado -->
     <section class="space-y-20">
       <!-- Introducción -->
-      <div class="hover:bg-gray-50 transition-all duration-300 p-10  shadow-sm">
-        <h2 class="text-3xl font-bold mb-8 flex items-center group">
-          <span class="w-12 h-[3px] bg-[rgb(234,179,8)] mr-4 group-hover:w-16 transition-all"></span>
+      <div class="hover:bg-white transition-all duration-300 p-10 rounded-lg shadow-sm border border-[#FBCC2C]/20">
+        <h2 class="text-3xl font-bold mb-8 flex items-center group text-[#1F2937]">
+          <span class="w-12 h-[3px] bg-[#FBCC2C] mr-4 group-hover:w-16 transition-all"></span>
           Visión General
         </h2>
-        <p class="text-gray-700 text-lg leading-relaxed">
+        <p class="text-[#1F2937]/80 text-lg leading-relaxed">
           Un estudio colaborativo pionero entre 
-          <span class="font-semibold text-[rgb(234,179,8)] hover:underline cursor-pointer">CORFO</span>, 
-          <span class="font-semibold text-[rgb(234,179,8)] hover:underline cursor-pointer">ASIMET</span>, 
-          <span class="font-semibold text-[rgb(234,179,8)] hover:underline cursor-pointer">Universidad Santo Tomás</span> y 
-          <span class="font-semibold text-[rgb(234,179,8)] hover:underline cursor-pointer">Grupo Centinela</span> 
+          <span class="font-semibold text-[#FBCC2C] hover:text-[#1F2937] transition-colors cursor-pointer">CORFO</span>, 
+          <span class="font-semibold text-[#FBCC2C] hover:text-[#1F2937] transition-colors cursor-pointer">ASIMET</span>, 
+          <span class="font-semibold text-[#FBCC2C] hover:text-[#1F2937] transition-colors cursor-pointer">Universidad Santo Tomás</span> y 
+          <span class="font-semibold text-[#FBCC2C] hover:text-[#1F2937] transition-colors cursor-pointer">Grupo Centinela</span> 
           que revela el panorama actual y futuro de la manufactura en la región. Este análisis exhaustivo proporciona una 
-          hoja de ruta estratégica para impulsar la transformación digital del sector productivo.
+          hoja de ruta estratégica para impulsar la transformación digital del sector productivo. El informe destaca 
+          las principales tendencias tecnológicas, identifica las oportunidades de crecimiento y propone soluciones 
+          innovadoras para superar los desafíos actuales. Además, se presentan casos de éxito y mejores prácticas 
+          implementadas por empresas líderes en la región, ofreciendo una visión integral de cómo la adopción de 
+          tecnologías 4.0 puede mejorar la competitividad y sostenibilidad de la industria local. La colaboración 
+          entre estas instituciones ha permitido una investigación profunda y detallada, asegurando que las 
+          recomendaciones sean prácticas y aplicables a las necesidades específicas de la región de Los Lagos.
         </p>
       </div>
 
-      <!-- Sección: Brechas en la Adopción de Tecnologías 4.0 -->
-      <div class="hover:bg-gray-50 transition-all duration-300 p-10  shadow-sm">
-        <h2 class="text-3xl font-bold mb-8 flex items-center group">
-          <span class="w-12 h-[3px] bg-[rgb(234,179,8)] mr-4 group-hover:w-16 transition-all"></span>
+      <!-- Brechas y Desafíos -->
+      <div class="hover:bg-white transition-all duration-300 p-10 rounded-lg shadow-sm border border-[#FBCC2C]/20">
+        <h2 class="text-3xl font-bold mb-8 flex items-center group text-[#1F2937]">
+          <span class="w-12 h-[3px] bg-[#FBCC2C] mr-4 group-hover:w-16 transition-all"></span>
           Brechas y Desafíos Tecnológicos
         </h2>
         <div class="space-y-6">
-          <p class="text-gray-700 text-lg leading-relaxed">
-            <strong class="text-gray-900">La investigación revela importantes brechas que actualmente limitan 
+          <p class="text-[#1F2937]/80 text-lg leading-relaxed">
+            <strong class="text-[#1F2937]">La investigación revela importantes brechas que actualmente limitan 
             la adopción de tecnologías 4.0 en nuestra región.</strong> Los desafíos principales identificados incluyen:
           </p>
           <ul class="list-none space-y-4 pl-6">
-            <li class="flex items-center text-gray-700">
-              <span class="w-2 h-2 bg-[rgb(234,179,8)]  mr-4"></span>
+            <li class="flex items-center text-[#1F2937]/80 hover:text-[#1F2937] transition-colors">
+              <span class="w-2 h-2 bg-[#FBCC2C] mr-4 rounded-full"></span>
               Limitaciones en el acceso a financiamiento específico para transformación digital
             </li>
-            <li class="flex items-center text-gray-700">
+            <li class="flex items-center text-[#1F2937]/80 hover:text-[#1F2937] transition-colors">
               <span class="w-2 h-2 bg-[rgb(234,179,8)]  mr-4"></span>
               Escasez de talento especializado en tecnologías emergentes
             </li>
-            <li class="flex items-center text-gray-700">
+            <li class="flex items-center text-[#1F2937]/80 hover:text-[#1F2937] transition-colors">
               <span class="w-2 h-2 bg-[rgb(234,179,8)]  mr-4"></span>
               Incertidumbre económica y resistencia al cambio
             </li>
-            <li class="flex items-center text-gray-700">
+            <li class="flex items-center text-[#1F2937]/80 hover:text-[#1F2937] transition-colors">
               <span class="w-2 h-2 bg-[rgb(234,179,8)]  mr-4"></span>
               Desafíos en la adaptación a nuevas tecnologías
             </li>
@@ -83,43 +89,43 @@
         />
       </div>
 
-      <!-- Sección: Sectores Clave -->
-      <div class="hover:bg-gray-50 transition-all duration-300 p-10  shadow-sm">
-        <h2 class="text-3xl font-bold mb-8 flex items-center group">
-          <span class="w-12 h-[3px] bg-[rgb(234,179,8)] mr-4 group-hover:w-16 transition-all"></span>
+      <!-- Sectores Estratégicos -->
+      <div class="hover:bg-white transition-all duration-300 p-10 rounded-lg shadow-sm border border-[#FBCC2C]/20">
+        <h2 class="text-3xl font-bold mb-8 flex items-center group text-[#1F2937]">
+          <span class="w-12 h-[3px] bg-[#FBCC2C] mr-4 group-hover:w-16 transition-all"></span>
           Sectores Estratégicos Priorizados
         </h2>
         <p class="text-gray-700 text-lg mb-8">
           La región de Los Lagos cuenta con diversos sectores industriales clave que están listos para la transformación digital:
         </p>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-          <div class="p-6 bg-white  shadow-sm hover:shadow-md transition-all">
-            <h3 class="text-xl font-semibold mb-4 text-[rgb(234,179,8)]">Acuicultura</h3>
-            <p class="text-gray-700">Innovación en sistemas de monitoreo y automatización para la producción acuícola sostenible</p>
+          <div class="p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-all border border-[#FBCC2C]/10">
+            <h3 class="text-xl font-semibold mb-4 text-[#FBCC2C] hover:text-[#1F2937] transition-colors">Acuicultura</h3>
+            <p class="text-[#1F2937]/70">Innovación en sistemas de monitoreo y automatización para la producción acuícola sostenible</p>
           </div>
-          <div class="p-6 bg-white  shadow-sm hover:shadow-md transition-all">
-            <h3 class="text-xl font-semibold mb-4 text-[rgb(234,179,8)]">Astilleros</h3>
-            <p class="text-gray-700">Modernización de procesos de construcción y reparación naval con tecnologías avanzadas</p>
+          <div class="p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-all border border-[#FBCC2C]/10">
+            <h3 class="text-xl font-semibold mb-4 text-[#FBCC2C] hover:text-[#1F2937] transition-colors">Astilleros</h3>
+            <p class="text-[#1F2937]/70">Modernización de procesos de construcción y reparación naval con tecnologías avanzadas</p>
           </div>
-          <div class="p-6 bg-white  shadow-sm hover:shadow-md transition-all">
-            <h3 class="text-xl font-semibold mb-4 text-[rgb(234,179,8)]">Cárnico</h3>
-            <p class="text-gray-700">Optimización de la cadena de producción cárnica mediante sistemas inteligentes</p>
+          <div class="p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-all border border-[#FBCC2C]/10">
+            <h3 class="text-xl font-semibold mb-4 text-[#FBCC2C] hover:text-[#1F2937] transition-colors">Cárnico</h3>
+            <p class="text-[#1F2937]/70">Optimización de la cadena de producción cárnica mediante sistemas inteligentes</p>
           </div>
-          <div class="p-6 bg-white  shadow-sm hover:shadow-md transition-all">
-            <h3 class="text-xl font-semibold mb-4 text-[rgb(234,179,8)]">Construcción</h3>
-            <p class="text-gray-700">Implementación de tecnologías BIM y automatización en procesos constructivos</p>
+          <div class="p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-all border border-[#FBCC2C]/10">
+            <h3 class="text-xl font-semibold mb-4 text-[#FBCC2C] hover:text-[#1F2937] transition-colors">Construcción</h3>
+            <p class="text-[#1F2937]/70">Implementación de tecnologías BIM y automatización en procesos constructivos</p>
           </div>
-          <div class="p-6 bg-white  shadow-sm hover:shadow-md transition-all">
-            <h3 class="text-xl font-semibold mb-4 text-[rgb(234,179,8)]">Lácteo</h3>
-            <p class="text-gray-700">Digitalización de procesos productivos y control de calidad en la industria láctea</p>
+          <div class="p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-all border border-[#FBCC2C]/10">
+            <h3 class="text-xl font-semibold mb-4 text-[#FBCC2C] hover:text-[#1F2937] transition-colors">Lácteo</h3>
+            <p class="text-[#1F2937]/70">Digitalización de procesos productivos y control de calidad en la industria láctea</p>
           </div>
-          <div class="p-6 bg-white  shadow-sm hover:shadow-md transition-all">
-            <h3 class="text-xl font-semibold mb-4 text-[rgb(234,179,8)]">Maestranza</h3>
-            <p class="text-gray-700">Integración de manufactura avanzada y sistemas de control numérico</p>
+          <div class="p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-all border border-[#FBCC2C]/10">
+            <h3 class="text-xl font-semibold mb-4 text-[#FBCC2C] hover:text-[#1F2937] transition-colors">Maestranza</h3>
+            <p class="text-[#1F2937]/70">Integración de manufactura avanzada y sistemas de control numérico</p>
           </div>
-          <div class="p-6 bg-white  shadow-sm hover:shadow-md transition-all">
-            <h3 class="text-xl font-semibold mb-4 text-[rgb(234,179,8)]">Turismo</h3>
-            <p class="text-gray-700">Desarrollo de experiencias digitales y gestión inteligente del turismo regional</p>
+          <div class="p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-all border border-[#FBCC2C]/10">
+            <h3 class="text-xl font-semibold mb-4 text-[#FBCC2C] hover:text-[#1F2937] transition-colors">Turismo</h3>
+            <p class="text-[#1F2937]/70">Desarrollo de experiencias digitales y gestión inteligente del turismo regional</p>
           </div>
         </div>
         <p class="text-gray-600 italic text-center">
@@ -136,28 +142,30 @@
         />
       </div>
 
-      <!-- Sección: Conclusiones y Descarga -->
-      <div class="bg-gray-50 p-10  shadow-lg">
-        <h2 class="text-3xl font-bold mb-8 text-center">Descubre el Futuro de la Industria Regional</h2>
-        <p class="text-lg text-gray-700 text-center mb-8">
+      <!-- Conclusiones y Descarga -->
+      <div class="bg-white p-10 rounded-lg shadow-lg border border-[#FBCC2C]/20">
+        <h2 class="text-3xl font-bold mb-8 text-center text-[#1F2937]">
+          Descubre el Futuro de la Industria Regional
+        </h2>
+        <p class="text-lg text-[#1F2937]/80 text-center mb-8">
           Accede al informe completo y descubre las oportunidades que la Industria 4.0 
           ofrece para el desarrollo de la Región de Los Lagos.
         </p>
         <div class="text-center">
-            <a href="https://gestor.nuevoloslagos.org/informe.pdf" 
+          <a href="https://gestor.nuevoloslagos.org/informe.pdf" 
              download="Informe-Industria40-LosLagos.pdf"
-             class="inline-flex items-center px-8 py-4 bg-[rgb(234,179,8)] hover:bg-[rgb(234,179,8)]/90 
-                transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+             class="inline-flex items-center px-8 py-4 bg-[#FBCC2C] text-[#1F2937] hover:bg-[#1F2937] hover:text-white
+                    transition-all duration-300 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1">
             <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M12.293 9.293a1 1 0 011.414 0L17 12.586V4a1 1 0 112 0v10a1 1 0 01-1 1h-10a1 1 0 110-2h8.586l-3.293-3.293a1 1 0 010-1.414zM3 4a1 1 0 011-1h6a1 1 0 110 2H5v12h8a1 1 0 110 2H4a1 1 0 01-1-1V4z"/>
+              <path d="M12.293 9.293a1 1 0 011.414 0L17 12.586V4a1 1 0 112 0v10a1 1 0 01-1 1h-10a 1 1 0 110-2h8.586l-3.293-3.293a1 1 0 010-1.414zM3 4a1 1 0 011-1h6a1 1 0 110 2H5v12h8a1 1 0 110 2H4a1 1 0 01-1-1V4z"/>
             </svg>
             Descargar Informe Completo
-            </a>
+          </a>
         </div>
       </div>
     </section>
   </div>
-  <aside>
+  <aside class="w-full lg:w-1/4">
     <app-sugeridos></app-sugeridos>
   </aside>
 </main>
