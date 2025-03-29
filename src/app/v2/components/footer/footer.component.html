@@ -2,13 +2,10 @@
 @if (type===0) { } @switch (type) { @case (0) {
 <!-- Diseño 0: Minimalista elegante -->
 <footer class="bg-[#262626] text-white p-6 border-t-2 border-[#fbcc2c]">
-  <div
-    class="container mx-auto flex text-center justify-between flex-col md:flex-row gap-6 items-center"
-  >
+  <div class="container mx-auto flex text-center justify-between flex-col md:flex-row gap-6 items-center">
     <p class="text-sm tracking-wider">&copy; NuevoLosLagos 2025. Todos los derechos reservados.</p>
     <div class="flex gap-6">
-      <p class="hover:text-[#fbcc2c] transition duration-300 text-sm uppercase tracking-wider">Aviso legal</p>
-      <p class="hover:text-[#fbcc2c] transition duration-300 text-sm uppercase tracking-wider">Política de privacidad</p>
+      <a routerLink="/aviso-legal" class="hover:text-[#fbcc2c] transition duration-300 text-sm uppercase tracking-wider">Aviso legal</a>
     </div>
   </div>
 </footer>
@@ -69,8 +66,7 @@
       © NuevoLosLagos 2025. Todos los derechos reservados.
     </p>
     <div class="mt-4">
-      <a href="#" class="text-gray-400 hover:text-[#fbcc2c] transition duration-300 mx-4 text-sm uppercase tracking-wider">Aviso legal</a>
-      <a href="#" class="text-gray-400 hover:text-[#fbcc2c] transition duration-300 mx-4 text-sm uppercase tracking-wider">Política de privacidad</a>
+      <a routerLink="/aviso-legal" class="text-gray-400 hover:text-[#fbcc2c] transition duration-300 mx-4 text-sm uppercase tracking-wider">Aviso legal</a>
     </div>
   </div>
 </footer>
@@ -135,8 +131,7 @@
         © NuevoLosLagos 2025. Todos los derechos reservados.
       </p>
       <div class="mt-4">
-        <a href="#" class="text-gray-400 hover:text-[#fbcc2c] transition duration-300 mx-4 text-sm uppercase tracking-wider">Aviso legal</a>
-        <a href="#" class="text-gray-400 hover:text-[#fbcc2c] transition duration-300 mx-4 text-sm uppercase tracking-wider">Política de privacidad</a>
+        <a routerLink="/aviso-legal" class="text-gray-400 hover:text-[#fbcc2c] transition duration-300 mx-4 text-sm uppercase tracking-wider">Aviso legal</a>
       </div>
     </div>
   </div>
@@ -197,10 +192,7 @@
       <h4 class="text-lg font-semibold mb-6 border-b border-[#fbcc2c] pb-2 inline-block">Legal</h4>
       <ul class="space-y-3">
         <li>
-          <a href="#" class="text-gray-300 hover:text-[#fbcc2c] transition duration-300 block">Aviso legal</a>
-        </li>
-        <li>
-          <a href="#" class="text-gray-300 hover:text-[#fbcc2c] transition duration-300 block">Política de privacidad</a>
+          <a routerLink="/aviso-legal" class="text-gray-300 hover:text-[#fbcc2c] transition duration-300 block">Aviso legal</a>
         </li>
         <li>
           <a href="#" class="text-gray-300 hover:text-[#fbcc2c] transition duration-300 block">Términos y condiciones</a>
@@ -209,20 +201,6 @@
           <a href="#" class="text-gray-300 hover:text-[#fbcc2c] transition duration-300 block">Contacto</a>
         </li>
       </ul>
-      <div class="mt-8">
-        <h5 class="text-md font-semibold mb-4">Síguenos</h5>
-        <div class="flex space-x-4">
-          <a href="#" class="text-gray-300 hover:text-[#fbcc2c] transition duration-300 text-xl">
-            <span>Facebook</span>
-          </a>
-          <a href="#" class="text-gray-300 hover:text-[#fbcc2c] transition duration-300 text-xl">
-            <span>Twitter</span>
-          </a>
-          <a href="#" class="text-gray-300 hover:text-[#fbcc2c] transition duration-300 text-xl">
-            <span>LinkedIn</span>
-          </a>
-        </div>
-      </div>
     </div>
   </div>
   <!-- Derechos -->
@@ -240,8 +218,7 @@
       © NuevoLosLagos 2025. Todos los derechos reservados.
     </p>
     <div class="mt-4 flex justify-center space-x-8">
-      <a href="#" class="text-gray-300 hover:text-[#fbcc2c] transition duration-300 text-sm uppercase tracking-wider">Aviso legal</a>
-      <a href="#" class="text-gray-300 hover:text-[#fbcc2c] transition duration-300 text-sm uppercase tracking-wider">Política de privacidad</a>
+      <a routerLink="/aviso-legal" class="text-gray-300 hover:text-[#fbcc2c] transition duration-300 text-sm uppercase tracking-wider">Aviso legal</a>
     </div>
   </div>
 </footer>
@@ -302,10 +279,7 @@
       © NuevoLosLagos 2025. Todos los derechos reservados.
     </p>
     <div class="mt-2">
-      <a href="#" class="text-gray-400 hover:text-white mx-2">Aviso legal</a>
-      <a href="#" class="text-gray-400 hover:text-white mx-2"
-        >Política de privacidad</a
-      >
+      <a routerLink="/aviso-legal" class="text-gray-400 hover:text-white mx-2">Aviso legal</a>
     </div>
   </div>
 </footer>
@@ -367,10 +341,7 @@
       © NuevoLosLagos 2025. Todos los derechos reservados.
     </p>
     <div class="mt-2">
-      <a href="#" class="text-gray-400 hover:text-white mx-2">Aviso legal</a>
-      <a href="#" class="text-gray-400 hover:text-white mx-2"
-        >Política de privacidad</a
-      >
+      <a routerLink="/aviso-legal" class="text-gray-400 hover:text-white mx-2">Aviso legal</a>
     </div>
   </div>
 </footer>
@@ -419,12 +390,7 @@
       <h4 class="text-lg font-semibold mb-4">Legal</h4>
       <ul class="space-y-2">
         <li>
-          <a href="#" class="text-gray-400 hover:text-white">Aviso legal</a>
-        </li>
-        <li>
-          <a href="#" class="text-gray-400 hover:text-white"
-            >Política de privacidad</a
-          >
+          <a routerLink="/aviso-legal" class="text-gray-400 hover:text-white">Aviso legal</a>
         </li>
       </ul>
     </div>

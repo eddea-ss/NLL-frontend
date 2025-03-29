@@ -1,6 +1,6 @@
 // src/app/app.routes.ts
 import { Routes } from '@angular/router';
-import { HomeComponent } from '@v2/v2.module'; // Asegúrate de que HomeComponent sea standalone o mantenlo como está
+import { HomeComponent } from '@v2/v2.module';
 
 export const routes: Routes = [
   {
@@ -111,6 +111,13 @@ export const routes: Routes = [
         loadComponent: () =>
           import('@v2/modules/survey-form/survey-form.component').then(
             (m) => m.SurveyFormComponent
+          ),
+      },
+      {
+        path: 'aviso-legal',
+        loadComponent: () =>
+          import('@v2/modules/aviso-legal/aviso-legal.component').then(
+            (m) => m.AvisoLegalComponent
           ),
       },
     ],

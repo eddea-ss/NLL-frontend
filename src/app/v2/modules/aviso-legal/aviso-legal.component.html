@@ -1,0 +1,93 @@
+<!-- Migas de pan para navegación -->
+<app-breadcrumbs [breadcrumbs]="breadcrumbs"></app-breadcrumbs>
+
+<!-- Contenido principal -->
+<main class="container mx-auto py-16 flex flex-col lg:flex-row">
+  <!-- Sección de contenido principal -->
+  <div class="w-full lg:w-3/4 pr-8 p-8">
+    <h1 class="text-4xl font-bold mb-12 border-b-2 border-[#fbcc2c] pb-4">Aviso Legal</h1>
+
+    <!-- Información General -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold mb-6 text-gray-800">Información General</h2>
+      <p class="text-gray-700 mb-6">
+        El presente aviso legal regula el uso del sitio web www.nuevoloslagos.org (en adelante, el "Sitio Web"), 
+        propiedad de CORFO Los Lagos, Universidad Santo Tomás, ASIMET y Grupo Centinela 
+        (en adelante, "Nuevo Los Lagos").
+      </p>
+    </section>
+
+    <!-- Términos y Condiciones de Uso -->
+    <section class="mb-12 bg-white p-8 shadow-sm">
+      <h2 class="text-2xl font-bold mb-6 text-gray-800">Términos y Condiciones de Uso</h2>
+      <div class="space-y-4">
+        <p class="text-gray-700">
+          El acceso y uso del Sitio Web implica la aceptación expresa y sin reservas de todos 
+          los términos del presente Aviso Legal. Se ruega leer atentamente el presente Aviso Legal 
+          en cada una de las ocasiones en que se proponga utilizar el Sitio Web.
+        </p>
+        <h3 class="text-xl font-semibold mt-6 mb-4 text-gray-800">Uso del sitio web</h3>
+        <ul class="list-disc pl-6 space-y-2 text-gray-700">
+          <li>El usuario se compromete a utilizar el Sitio Web de conformidad con la ley y el presente Aviso Legal.</li>
+          <li>Se prohíbe expresamente la utilización del Sitio Web con fines lesivos de bienes o intereses de Nuevo Los Lagos o de terceros.</li>
+          <li>Queda prohibido realizar actividades publicitarias o de explotación comercial del Sitio Web.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Propiedad Intelectual -->
+    <section class="mb-12 bg-white p-8 shadow-sm">
+      <h2 class="text-2xl font-bold mb-6 text-gray-800">Propiedad Intelectual e Industrial</h2>
+      <p class="text-gray-700 mb-4">
+        Todos los contenidos del Sitio Web, incluyendo sin limitación textos, gráficos, imágenes, 
+        su diseño y los derechos de propiedad intelectual que pudieran corresponder a dichos 
+        contenidos, son propiedad de Nuevo Los Lagos o de sus licenciantes.
+      </p>
+      <p class="text-gray-700">
+        Queda prohibida la reproducción, transformación, distribución, comunicación pública y, en general, 
+        cualquier otra forma de explotación de los elementos referidos en el apartado anterior.
+      </p>
+    </section>
+
+    <!-- Protección de Datos -->
+    <section class="mb-12 bg-white p-8 shadow-sm">
+      <h2 class="text-2xl font-bold mb-6 text-gray-800">Protección de Datos Personales</h2>
+      <p class="text-gray-700 mb-4">
+        En cumplimiento de la Ley 19.628 sobre Protección de la Vida Privada, informamos que los datos 
+        personales que nos facilite serán incorporados a nuestros sistemas de información con la 
+        finalidad de gestionar y administrar los servicios solicitados.
+      </p>
+      <p class="text-gray-700">
+        El usuario podrá ejercer sus derechos de acceso, rectificación, cancelación y oposición 
+        mediante correo electrónico dirigido a contacto&#64;nuevoloslagos.org
+      </p>
+    </section>
+
+    <!-- Legislación Aplicable -->
+    <section class="mb-12 bg-white p-8 shadow-sm">
+      <h2 class="text-2xl font-bold mb-6 text-gray-800">Legislación y Jurisdicción Aplicable</h2>
+      <p class="text-gray-700">
+        El presente Aviso Legal se rige por la legislación chilena. Para la resolución de cualquier 
+        controversia que pudiera derivarse del acceso o uso del Sitio Web, las partes se someten 
+        a la jurisdicción de los tribunales de justicia de la República de Chile.
+      </p>
+    </section>
+
+    <!-- Modificaciones -->
+    <section class="bg-gray-50 p-8 shadow-sm">
+      <h2 class="text-2xl font-bold mb-6 text-gray-800">Modificaciones</h2>
+      <p class="text-gray-700">
+        Nuevo Los Lagos se reserva el derecho de efectuar modificaciones en el presente Aviso Legal 
+        en cualquier momento. Se recomienda consultar periódicamente el presente Aviso Legal.
+      </p>
+      <p class="text-gray-600 mt-4 text-sm">
+        Última actualización: Marzo 2024
+      </p>
+    </section>
+  </div>
+
+  <!-- Sidebar con contenido sugerido -->
+  <aside>
+    <app-sugeridos></app-sugeridos>
+  </aside>
+</main>
