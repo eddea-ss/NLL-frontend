@@ -11,10 +11,10 @@
       {{ currentUser()?.name ?? "No disponible" }}
     </h1>
 
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <div class= "grid grid-cols-1 lg:grid-cols-3 gap-8" >
       <div class="lg:col-span-2">
       <!-- Evaluation Status Section -->
-      <div class="mb-8 bg-gray-50 p-6 border border-indigo-100">
+      <div class="mb-8 bg-gray-50 p-6 border border-indigo-100" >
         <h2 class="text-2xl text-gray-900 mb-4 font-semibold">Completa tus Modelos</h2>
         <p class="text-gray-900 mb-6">
         Actualmente, tu Modelo de Maduración tecnológica para la Industria
@@ -74,7 +74,7 @@
   }
   <!--sin login-->
   @if (authState() === AuthState.LoggedOut) {
-  <section class="relative overflow-hidden">
+  <section class="relative overflow-hidden" style="font-family: Helvetica, Arial, sans-serif">
     <app-title-section
       [title]="'Modelo de Caracterización de Proveedores'"
       [description]="
@@ -89,7 +89,7 @@
   </section>
   <section class="py-12">
 
-<div class="max-w-7xl mx-auto px-4 py-12">
+<div class="max-w-7xl mx-auto px-4 py-12" style="font-family: Helvetica, Arial, sans-serif">
     <h2 class="text-3xl font-bold text-center mb-12 text-indigo-900">Empresas Destacadas</h2>
     <p class="text-center text-gray-700 mb-8 max-w-3xl mx-auto">
       Descubre algunas de las empresas que ya forman parte de nuestra red de proveedores. Estas empresas han completado su perfil y están conectando con nuevas oportunidades de negocio.
@@ -172,7 +172,7 @@
   <!-- Nueva sección: Por qué registrarse como proveedor -->
   <div class="max-w-7xl mx-auto px-4 py-16 bg-white">
     <div class="flex flex-col lg:flex-row items-center gap-12">
-      <div class="lg:w-3/5">
+      <div class="lg:w-3/5" style="font-family: Helvetica, Arial, sans-serif">
         <h2 class="text-3xl font-bold text-indigo-900 mb-6">¿Por qué registrarse como proveedor?</h2>
         
         <p class="text-gray-700 mb-8">
@@ -229,7 +229,7 @@
     </div>
   </div>
 
-  <div class="max-w-7xl mx-auto px-4 py-12">
+  <div class="max-w-7xl mx-auto px-4 py-12" >
     <h2 class="text-3xl font-bold text-center mb-12 text-indigo-900">Tu Camino al Éxito como Proveedor</h2>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
       <!-- Tarjeta 1 -->
