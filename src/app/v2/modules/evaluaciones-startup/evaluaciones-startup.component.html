@@ -136,20 +136,20 @@
   }
   <!--sin login-->
   @if (authState() === AuthState.LoggedOut) {
-  <section class="relative overflow-hidden bg-white-50">
+  <section class="relative overflow-hidden bg-white-50" style="font-family: Helvetica, Arial, sans-serif;">
     <app-title-section
       [title]="'Modelo de Formación para emprendedores'"
       [description]="
-        'Completa tu modelo de Formación para emprendedores o startup y te ayudaremos a crecer en la region de los Lagos.'
+        'Completa tu modelo de Formación para emprendedores o startup y te ayudaremos a crecer en la region de los Lagos. Haz click en el boton a continuación y comienza ahora'
       "
-      [buttonText]="'Haz clic en el botón a continuación y comienza ahora.'"
+      [buttonText]="'Registra ahora tu Emprendimiento.'"
       [buttonLink]="'/registro-persona'"
-      [imageSrc]="'assets/hero.webp'"
+      [imageSrc]="'assets/hero.jpg'"
       [imageAlt]="'mockup'"
     >
     </app-title-section>
   </section>
-  <section>
+  <section style="font-family: Helvetica, Arial, sans-serif;">
     <app-step-register [steps]="steps"></app-step-register>
   </section>
   }
