@@ -4,9 +4,9 @@
   y la ruta es cursos o proveedores, se muestra el título "Según tu Modelo..."
   De lo contrario, "Últimas publicaciones".
 -->
-<div class="bg-white ">
+<div class="bg-white" style="font-family: Helvetica, Arial, sans-serif;">
   <!-- Header con estilo mejorado -->
-  <h2 class="py-4 px-8 text-2xl font-bold   flex items-center">
+  <h2 class="py-4 px-8 text-2xl font-bold flex items-center" style="font-family: Helvetica, Arial, sans-serif;">
     <span class="mr-2 text-[#fbcc2c]">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
@@ -19,10 +19,10 @@
   </h2>
 
   <!-- Contenedor de sugerencias con estilos mejorados -->
-  <div class="space-y-6 py-6 px-8 animate-fade-in " style="min-height: 50vh; max-width: 500px">
+  <div class="space-y-6 py-6 px-8 animate-fade-in" style="min-height: 50vh; max-width: 500px; font-family: Helvetica, Arial, sans-serif;">
     <!-- Si no hay sugerencias, muestra mensaje con estilo -->
     <div class="flex justify-center items-center h-32" *ngIf="!sugeridos.length">
-      <h2 class="text-gray-400 flex items-center">
+      <h2 class="text-gray-400 flex items-center" style="font-family: Helvetica, Arial, sans-serif;">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
@@ -35,7 +35,8 @@
       <!-- Cursos: tienen 'modalidad' y 'duracion' -->
       <ng-container *ngIf="item?.modalidad && item?.duracion">
         <app-course-item 
-          class="block bg-white  shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-blue-500" 
+          class="block bg-white shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-blue-500" 
+          style="font-family: Helvetica, Arial, sans-serif;"
           [simplified]="true" 
           [data]="item" 
           (openModal)="openModal(i)">
@@ -45,7 +46,8 @@
       <!-- Proveedores: tienen 'nombreEmpresa' y (rut_md5 o correoElectronicoEmpresa) -->
       <ng-container *ngIf="item?.nombreEmpresa && (item?.rut_md5 || item?.correoElectronicoEmpresa)">
         <app-supplier-item 
-          class="block bg-white  shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-[#fbcc2c]" 
+          class="block bg-white shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-[#fbcc2c]" 
+          style="font-family: Helvetica, Arial, sans-serif;"
           [simplified]="true" 
           [data]="item" 
           (openModal)="openModal(i)">
@@ -55,7 +57,8 @@
       <!-- Financiamiento: tienen 'porcentaje_cobertura' -->
       <ng-container *ngIf="item?.porcentaje_cobertura">
         <app-financing-item 
-          class="block bg-white  shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-[#fbcc2c]" 
+          class="block bg-white shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-[#fbcc2c]" 
+          style="font-family: Helvetica, Arial, sans-serif;"
           [simplified]="true" 
           [data]="item" 
           (openModal)="openModal(i)">
@@ -65,7 +68,8 @@
       <!-- Artículos: tienen 'articulo_paper' -->
       <ng-container *ngIf="item?.articulo_paper">
         <app-article-item 
-          class="block bg-white  shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-[#0c243c]" 
+          class="block bg-white shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-[#0c243c]" 
+          style="font-family: Helvetica, Arial, sans-serif;"
           [simplified]="true" 
           [data]="item" 
           (openModal)="openModal(i)">
@@ -75,7 +79,8 @@
       <!-- Proyectos: tienen 'localidad' -->
       <ng-container *ngIf="item?.localidad">
         <app-projects-item 
-          class="block bg-white  shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-[#0c243c]" 
+          class="block bg-white shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-[#0c243c]" 
+          style="font-family: Helvetica, Arial, sans-serif;"
           [simplified]="true" 
           [data]="item" 
           (openModal)="openModal(i)">
@@ -85,7 +90,8 @@
       <!-- Startups: tienen 'descripcionStartup' -->
       <ng-container *ngIf="item?.descripcionStartup">
         <app-startup-item 
-          class="block bg-white  shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-[#fbcc2c]" 
+          class="block bg-white shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-[#fbcc2c]" 
+          style="font-family: Helvetica, Arial, sans-serif;"
           [simplified]="true" 
           [data]="item" 
           (openModal)="openModal(i)">
@@ -101,6 +107,7 @@
   <!-- Curso modal -->
   <app-course-modal 
     *ngIf="dataModal?.modalidad && dataModal?.duracion"
+    style="font-family: Helvetica, Arial, sans-serif;"
     [data]="dataModal"
     [showNext]="false"
     (close)="closeModal()">
@@ -109,6 +116,7 @@
   <!-- Proveedor modal -->
   <app-supplier-modal
     *ngIf="dataModal?.nombreEmpresa && (dataModal?.rut_md5 || dataModal?.correoElectronicoEmpresa)"
+    style="font-family: Helvetica, Arial, sans-serif;"
     [data]="dataModal"
     [showNext]="false"
     (close)="closeModal()">
@@ -117,6 +125,7 @@
   <!-- Financiamiento modal -->
   <app-financing-modal
     *ngIf="dataModal?.porcentaje_cobertura"
+    style="font-family: Helvetica, Arial, sans-serif;"
     [data]="dataModal"
     [showNext]="false"
     (close)="closeModal()">
@@ -125,6 +134,7 @@
   <!-- Artículo modal -->
   <app-article-modal
     *ngIf="dataModal?.articulo_paper"
+    style="font-family: Helvetica, Arial, sans-serif;"
     [data]="dataModal"
     [showNext]="false"
     (close)="closeModal()">
@@ -133,6 +143,7 @@
   <!-- Proyecto modal -->
   <app-projects-modal
     *ngIf="dataModal?.localidad"
+    style="font-family: Helvetica, Arial, sans-serif;"
     [data]="dataModal"
     [showNext]="false"
     (close)="closeModal()">
@@ -141,6 +152,7 @@
   <!-- Startup modal -->
   <app-startup-modal
     *ngIf="dataModal?.descripcionStartup"
+    style="font-family: Helvetica, Arial, sans-serif;"
     [data]="dataModal"
     [showNext]="false"
     (close)="closeModal()">
