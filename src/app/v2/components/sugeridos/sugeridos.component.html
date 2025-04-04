@@ -32,10 +32,10 @@
 
     <!-- Listado de sugeridos con hover y transiciones -->
     <ng-container *ngFor="let item of sugeridos; let i = index;">
-      <!-- Cursos: tienen 'modalidad' y 'duracion' -->
+      <!-- Cursos -->
       <ng-container *ngIf="item?.modalidad && item?.duracion">
         <app-course-item 
-          class="block bg-white shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-blue-500" 
+          class="block bg-[#FFFDF6] shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 border border-[#C4A003] rounded-lg" 
           style="font-family: Helvetica, Arial, sans-serif;"
           [simplified]="true" 
           [data]="item" 
@@ -43,10 +43,10 @@
         </app-course-item>
       </ng-container>
 
-      <!-- Proveedores: tienen 'nombreEmpresa' y (rut_md5 o correoElectronicoEmpresa) -->
+      <!-- Proveedores -->
       <ng-container *ngIf="item?.nombreEmpresa && (item?.rut_md5 || item?.correoElectronicoEmpresa)">
         <app-supplier-item 
-          class="block bg-white shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-[#fbcc2c]" 
+          class="block bg-[#FFFDF6] shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 border border-[#C4A003] rounded-lg" 
           style="font-family: Helvetica, Arial, sans-serif;"
           [simplified]="true" 
           [data]="item" 
@@ -54,10 +54,10 @@
         </app-supplier-item>
       </ng-container>
 
-      <!-- Financiamiento: tienen 'porcentaje_cobertura' -->
+      <!-- Financiamiento -->
       <ng-container *ngIf="item?.porcentaje_cobertura">
         <app-financing-item 
-          class="block bg-white shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-[#fbcc2c]" 
+          class="block bg-[#FFFDF6] shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 border border-[#C4A003] rounded-lg" 
           style="font-family: Helvetica, Arial, sans-serif;"
           [simplified]="true" 
           [data]="item" 
@@ -65,10 +65,10 @@
         </app-financing-item>
       </ng-container>
 
-      <!-- Artículos: tienen 'articulo_paper' -->
+      <!-- Artículos -->
       <ng-container *ngIf="item?.articulo_paper">
         <app-article-item 
-          class="block bg-white shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-[#0c243c]" 
+          class="block bg-[#FFFDF6] shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 border border-[#C4A003] rounded-lg" 
           style="font-family: Helvetica, Arial, sans-serif;"
           [simplified]="true" 
           [data]="item" 
@@ -76,10 +76,10 @@
         </app-article-item>
       </ng-container>
 
-      <!-- Proyectos: tienen 'localidad' -->
+      <!-- Proyectos -->
       <ng-container *ngIf="item?.localidad">
         <app-projects-item 
-          class="block bg-white shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-[#0c243c]" 
+          class="block bg-[#FFFDF6] shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 border border-[#C4A003] rounded-lg" 
           style="font-family: Helvetica, Arial, sans-serif;"
           [simplified]="true" 
           [data]="item" 
@@ -87,10 +87,10 @@
         </app-projects-item>
       </ng-container>
 
-      <!-- Startups: tienen 'descripcionStartup' -->
+      <!-- Startups -->
       <ng-container *ngIf="item?.descripcionStartup">
         <app-startup-item 
-          class="block bg-white shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-[#fbcc2c]" 
+          class="block bg-[#FFFDF6] shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 border border-[#C4A003] rounded-lg" 
           style="font-family: Helvetica, Arial, sans-serif;"
           [simplified]="true" 
           [data]="item" 
