@@ -1,7 +1,6 @@
 // src/app/app.routes.ts
 import { Routes } from '@angular/router';
 import { HomeComponent } from '@v2/v2.module';
-import { authGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -42,7 +41,6 @@ export const routes: Routes = [
           import(
             '@v2/modules/evaluaciones-madurez/evaluaciones-madurez.component'
           ).then((m) => m.EvaluacionesMadurezComponent),
-        canActivate: [authGuard],
       },
       {
         path: 'evaluaciones-proveedor',
@@ -50,7 +48,6 @@ export const routes: Routes = [
           import(
             '@v2/modules/evaluaciones-proveedor/evaluaciones-proveedor.component'
           ).then((m) => m.EvaluacionesProveedorComponent),
-        canActivate: [authGuard],
       },
       {
         path: 'evaluaciones-startup',
@@ -58,7 +55,6 @@ export const routes: Routes = [
           import(
             '@v2/modules/evaluaciones-startup/evaluaciones-startup.component'
           ).then((m) => m.EvaluacionesStartupComponent),
-        canActivate: [authGuard],
       },
       {
         path: 'investigacion-podcasts',
