@@ -1,9 +1,19 @@
-import { Component, OnInit, inject, signal, computed } from '@angular/core';
+import { Component, OnInit, inject, signal, WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ResourceService } from '@v2/services';
 import { BreadcrumbsComponent, ArticleItemComponent, ArticleModalComponent } from '@v2/components';
 import { Breadcrumb } from '@v2/models';
 import { ACTUALIDAD_ARTICULOS } from '@v2/constants';
+
+// Interface to define the structure for each article section
+interface ArticleSection {
+  key: string; 
+  label: string; 
+  searchKey: string; 
+  articles: WritableSignal<any[]>;
+  loading: WritableSignal<boolean>;
+  error: WritableSignal<string | null>;
+}
 
 @Component({
   selector: 'app-articles',
@@ -21,55 +31,45 @@ export class ArticlesComponent implements OnInit {
   private resourceService = inject(ResourceService);
 
   breadcrumbs: Breadcrumb[] = ACTUALIDAD_ARTICULOS;
-  articles = signal<any[]>([]);
-  loading = signal<boolean>(true);
-  error = signal<string | null>(null);
+
+  // Define the sections with their keywords and signals
+  sections: ArticleSection[] = [
+    { key: 'iot', label: 'Internet de las Cosas (IoT)', searchKey: 'iot', articles: signal([]), loading: signal(true), error: signal(null) },
+    { key: 'lagos', label: 'Industria en Los Lagos', searchKey: 'los lagos', articles: signal([]), loading: signal(true), error: signal(null) },
+    { key: 'ia', label: 'Inteligencia Artificial (IA)', searchKey: 'ia', articles: signal([]), loading: signal(true), error: signal(null) },
+    { key: 'gemelos', label: 'Gemelos Digitales', searchKey: 'gemelos digitales', articles: signal([]), loading: signal(true), error: signal(null) },
+    { key: 'ingles', label: 'Artículos en Inglés', searchKey: 'ingles', articles: signal([]), loading: signal(true), error: signal(null) }, 
+    { key: 'paper', label: 'Papers Científicos', searchKey: 'paper', articles: signal([]), loading: signal(true), error: signal(null) },
+  ];
+  
+  // Modal Signals (remain the same)
   isModalOpen = signal<boolean>(false);
   selectedArticle = signal<any | null>(null);
-  searchTerm = signal<string>('');
-
-  filteredArticles = computed(() => {
-    const term = this.searchTerm().toLowerCase().trim();
-    if (!term) {
-      return this.articles();
-    }
-    return this.articles().filter(article => 
-      article.titulo?.toLowerCase().includes(term) || 
-      article.resumen?.toLowerCase().includes(term) ||
-      article.articulo_paper?.toLowerCase().includes(term)
-    );
-  });
 
   ngOnInit(): void {
-    this.fetchArticles();
+    // Fetch articles for each section when the component initializes
+    this.sections.forEach(section => this.fetchArticlesForSection(section));
   }
 
-  fetchArticles(limit: number = 32): void {
-    this.loading.set(true);
-    this.error.set(null);
-    const { pathMatch, searchKey } = {
-      pathMatch: 'articles',
-      searchKey: 'articulo',
-    };
+  fetchArticlesForSection(section: ArticleSection, limit: number = 6): void {
+    section.loading.set(true);
+    section.error.set(null);
+    const pathMatch = 'articles'; // Use the common articles endpoint path
 
-    this.resourceService.searchResources(searchKey, pathMatch, limit).subscribe({
+    this.resourceService.searchResources(section.searchKey, pathMatch, limit).subscribe({
       next: (data) => {
-        this.articles.set(data);
-        this.loading.set(false);
+        section.articles.set(data);
+        section.loading.set(false);
       },
       error: (err) => {
-        console.error('Error fetching articles:', err);
-        this.error.set('No se pudieron cargar los artículos. Intente nuevamente más tarde.');
-        this.loading.set(false);
+        console.error(`Error fetching articles for section ${section.label}:`, err);
+        section.error.set(`No se pudieron cargar los artículos para "${section.label}".`);
+        section.loading.set(false);
       },
     });
   }
 
-  onSearchTermChange(event: Event): void {
-    const inputElement = event.target as HTMLInputElement;
-    this.searchTerm.set(inputElement.value);
-  }
-
+  // Modal methods (remain the same)
   openArticleModal(article: any): void {
     this.selectedArticle.set(article);
     this.isModalOpen.set(true);
@@ -79,4 +79,13 @@ export class ArticlesComponent implements OnInit {
     this.isModalOpen.set(false);
     this.selectedArticle.set(null);
   }
+
+  // --- New Method for Scrolling ---
+  scrollToSection(sectionKey: string): void {
+    const element = document.getElementById(sectionKey);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+  // --- End New Method ---
 } 
