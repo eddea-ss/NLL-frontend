@@ -102,6 +102,11 @@ export class NavbarComponent {
         route: '/investigacion-diagnostico',
         alwaysVisible: true,
       },
+      {
+        label: 'Artículos',
+        route: '/articulos',
+        alwaysVisible: true,
+      },
     ],
     isOpenSignal: signal(false),
   };
