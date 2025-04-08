@@ -32,19 +32,12 @@
     </div>
     
     <!-- Grid de contenido con diseño elegante y moderno -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       @for (item of getActiveContent(); track $index) {
-      <div class="group bg-white border border-[#0c243c]/20 hover:border-[#0c243c] shadow-lg hover:shadow-xl transition-all duration-300 relative">
-        <!-- Línea decorativa superior -->
-        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#0c243c] to-[#eab308]"></div>
-        
-        <div class="p-8 h-full flex flex-col relative overflow-hidden">
-          <!-- Decoración visual -->
-          <div class="absolute top-0 right-0 w-32 h-32 bg-[#0c243c]/5 rounded-bl-full -mr-16 -mt-16"></div>
-          
-          <!-- Header -->
-          <div class="flex justify-between items-center mb-6 relative">
-            <span class="text-xs font-medium text-[#0c243c] tracking-wider uppercase">
+      <div class="group bg-white border border-gray-100 hover:border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 flex flex-col overflow-hidden">
+        <div class="p-6 h-full flex flex-col">
+          <div class="mb-4">
+            <span class="text-xs font-medium text-gray-500 uppercase tracking-wider">
               @switch (activeTab) {
                 @case ('articles') {
                   {{ item.articulo_paper }}
@@ -60,79 +53,72 @@
                 }
               }
             </span>
-            <span class="text-2xl font-light text-[#0c243c]/10">0{{$index + 1}}</span>
           </div>
           
-          <!-- Título con subrayado elegante en hover -->
-          <h3 class="text-xl font-semibold text-[#0c243c] mb-4 line-clamp-2 group-hover:text-[#eab308] transition-colors duration-200 relative inline-block">
+          <h3 class="text-lg font-medium text-[#0c243c] mb-3 line-clamp-2 group-hover:text-[#eab308] transition-colors duration-200">
             {{ item?.titulo }}
-            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-[#eab308] group-hover:w-full transition-all duration-300"></span>
           </h3>
           
-          <!-- Etiquetas con diseño elegante -->
-          <div class="flex flex-wrap gap-2 mb-6">
+          <div class="flex flex-wrap gap-1.5 mb-4">
             @if (activeTab === 'articles') {
               @if (item?.idioma?.toLowerCase() === 'ingles') {
-              <span class="bg-[#0c243c]/5 text-[#0c243c] px-4 py-1.5 text-xs font-medium border-l-2 border-[#0c243c]">En Inglés</span>
+              <span class="bg-gray-100 text-gray-700 px-2 py-1 text-xs font-medium rounded">En Inglés</span>
               }
               @if (item?.articulo_paper?.toLowerCase() === 'paper') {
-              <span class="bg-[#0c243c]/5 text-[#0c243c] px-4 py-1.5 text-xs font-medium border-l-2 border-[#eab308]">Paper</span>
+              <span class="bg-[#eab308]/10 text-[#eab308] px-2 py-1 text-xs font-medium rounded">Paper</span>
               }
               @if (item?.articulo_paper?.toLowerCase() === 'articulo') {
-              <span class="bg-[#0c243c]/5 text-[#0c243c] px-4 py-1.5 text-xs font-medium border-l-2 border-[#eab308]">Artículo</span>
+              <span class="bg-[#eab308]/10 text-[#eab308] px-2 py-1 text-xs font-medium rounded">Artículo</span>
               }
             }
             @if (activeTab === 'courses') {
               @if (item?.tipo?.toLowerCase() === 'gratuito') {
-              <span class="bg-[#0c243c]/5 text-[#0c243c] px-4 py-1.5 text-xs font-medium border-l-2 border-green-500">Gratuito</span>
+              <span class="bg-green-100 text-green-700 px-2 py-1 text-xs font-medium rounded">Gratuito</span>
               }
               @if (item?.tipo?.toLowerCase() === 'de pago') {
-              <span class="bg-[#0c243c]/5 text-[#0c243c] px-4 py-1.5 text-xs font-medium border-l-2 border-[#eab308]">De Pago</span>
+              <span class="bg-gray-100 text-gray-700 px-2 py-1 text-xs font-medium rounded">De Pago</span>
               }
               @if (item?.idioma?.toLowerCase() === 'ingles') {
-              <span class="bg-[#0c243c]/5 text-[#0c243c] px-4 py-1.5 text-xs font-medium border-l-2 border-[#0c243c]">En Inglés</span>
+              <span class="bg-gray-100 text-gray-700 px-2 py-1 text-xs font-medium rounded">En Inglés</span>
               }
             }
             @if (activeTab === 'projects') {
               @if (item?.estado) {
-              <span class="bg-[#0c243c]/5 text-[#0c243c] px-4 py-1.5 text-xs font-medium border-l-2 border-green-500">{{ item.estado }}</span>
+              <span class="bg-blue-100 text-blue-700 px-2 py-1 text-xs font-medium rounded">{{ item.estado }}</span>
               }
               @if (item?.sector) {
-              <span class="bg-[#0c243c]/5 text-[#0c243c] px-4 py-1.5 text-xs font-medium border-l-2 border-[#0c243c]">{{ item.sector }}</span>
+              <span class="bg-gray-100 text-gray-700 px-2 py-1 text-xs font-medium rounded">{{ item.sector }}</span>
               }
             }
             @if (activeTab === 'financing') {
               @if (item?.monto) {
-              <span class="bg-[#0c243c]/5 text-[#0c243c] px-4 py-1.5 text-xs font-medium border-l-2 border-green-500">{{ item.monto }}</span>
+              <span class="bg-green-100 text-green-700 px-2 py-1 text-xs font-medium rounded">{{ item.monto }}</span>
               }
               @if (item?.plazo) {
-              <span class="bg-[#0c243c]/5 text-[#0c243c] px-4 py-1.5 text-xs font-medium border-l-2 border-[#0c243c]">{{ item.plazo }}</span>
+              <span class="bg-gray-100 text-gray-700 px-2 py-1 text-xs font-medium rounded">{{ item.plazo }}</span>
               }
             }
           </div>
           
-          <!-- Contenido -->
-          <div class="space-y-4 flex-grow">
-            <!-- Descripción principal con borde sutil -->
+          <div class="space-y-3 flex-grow mb-4">
             <div 
-              class="text-base text-gray-600 leading-relaxed prose prose-sm max-w-none line-clamp-3 pl-3 border-l border-[#0c243c]/20"
+              class="text-sm text-gray-600 leading-relaxed prose prose-sm max-w-none line-clamp-3"
               [innerHTML]="(recursosService.sanitizedString(item?.resumen_de_la_solucion_ || item?.descripcion || item?.resumen, true) | truncate:150) + '...'"
             ></div>
             
-            <!-- Información adicional específica por tipo -->
-            <div class="space-y-2 mt-4">
+            <div class="space-y-1.5 mt-3">
               @if (activeTab === 'courses') {
                 @if (item?.duracion) {
-                <p class="text-sm text-gray-500 flex items-center gap-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-[#0c243c]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <p class="text-xs text-gray-500 flex items-center gap-1.5">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                   <span>Duración: {{ item.duracion }}</span>
                 </p>
                 }
                 @if (item?.nivel) {
-                <p class="text-sm text-gray-500 flex items-center gap-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-[#0c243c]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <p class="text-xs text-gray-500 flex items-center gap-1.5">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                   </svg>
                   <span>Nivel: {{ item.nivel }}</span>
@@ -141,8 +127,8 @@
               }
               @if (activeTab === 'projects') {
                 @if (item?.fecha_inicio) {
-                <p class="text-sm text-gray-500 flex items-center gap-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-[#0c243c]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <p class="text-xs text-gray-500 flex items-center gap-1.5">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
                   <span>Inicio: {{ item.fecha_inicio | date:'dd/MM/yyyy' }}</span>
@@ -151,8 +137,8 @@
               }
               @if (activeTab === 'financing') {
                 @if (item?.monto_maximo) {
-                <p class="text-sm text-gray-500 flex items-center gap-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-[#0c243c]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <p class="text-xs text-gray-500 flex items-center gap-1.5">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                   <span>Monto máximo: {{ item.monto_maximo | currency:'CLP':'symbol':'1.0-0' }}</span>
@@ -162,9 +148,8 @@
             </div>
           </div>
           
-          <!-- Footer con diseño elegante y moderno -->
-          <div class="flex justify-between items-center pt-6 border-t border-[#0c243c]/10 mt-auto">
-            <span class="text-sm font-medium text-[#0c243c]/70 italic">
+          <div class="flex justify-between items-center pt-4 border-t border-gray-100 mt-auto">
+            <span class="text-xs text-gray-500 italic">
               @switch (activeTab) {
                 @case ('articles') {
                   {{ recursosService.getDomain(item.link) }}
@@ -181,26 +166,26 @@
               }
             </span>
             <button
-              class="group/btn flex items-center gap-2 px-6 py-2 text-sm font-medium text-[#0c243c] border border-[#0c243c]/10 hover:border-[#0c243c] hover:bg-[#0c243c]/5 transition-all duration-200"
+              class="group/btn flex items-center gap-1 px-3 py-1.5 text-sm font-medium text-[#0c243c] hover:text-[#eab308] transition-colors duration-200"
               (click)="openModal($index, activeTab)"
             >
               <span>
                 @switch (activeTab) {
                   @case ('articles') {
-                    Leer artículo
+                    Leer más
                   }
                   @case ('courses') {
-                    Ver curso
+                    Ver más
                   }
                   @case ('projects') {
-                    Ver proyecto
+                    Ver más
                   }
                   @case ('financing') {
-                    Ver financiamiento
+                    Ver más
                   }
                 }
               </span>
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform group-hover/btn:translate-x-1 transition-transform" viewBox="0 0 20 20" fill="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 transform group-hover/btn:translate-x-0.5 transition-transform" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
               </svg>
             </button>
