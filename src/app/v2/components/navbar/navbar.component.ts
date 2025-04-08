@@ -49,7 +49,7 @@ export class NavbarComponent {
 
   // Menús principales
   projectMenu: DropdownMenu = {
-    label: 'Proyecto',
+    label: 'Quiénes Somos',
     isDropdown: true,
     items: [
       { label: 'Equipo', route: '/proyecto-equipo', alwaysVisible: true },
@@ -89,7 +89,7 @@ export class NavbarComponent {
   };
 
   investigacionMenu: DropdownMenu = {
-    label: 'Investigación',
+    label: 'Actualidad',
     isDropdown: true,
     items: [
       {
@@ -116,7 +116,7 @@ export class NavbarComponent {
 
   asistenteMenu: DropdownMenu = {
     isDropdown: false,
-    label: 'Asistente',
+    label: 'Asistente IA',
     route: 'https://asistente.nuevoloslagos.org',
     items: [],
     isOpenSignal: signal(false),

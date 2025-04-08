@@ -1,5 +1,5 @@
 const PROYECTO = {
-  label: 'Proyecto',
+  label: 'Quiénes Somos',
   url: '/',
 };
 
@@ -9,7 +9,7 @@ const EVALUACIONES = {
 };
 
 const INVESTIGACION = {
-  label: 'Investigacion',
+  label: 'Actualidad',
   url: '/',
 };
 
