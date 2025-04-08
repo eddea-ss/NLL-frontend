@@ -120,6 +120,13 @@ export const routes: Routes = [
             (m) => m.AvisoLegalComponent
           ),
       },
+      {
+        path: 'articulos',
+        loadComponent: () =>
+          import('@v2/modules/articles/articles.component').then(
+            (m) => m.ArticlesComponent
+          ),
+      },
     ],
   },
   { path: '**', redirectTo: '', pathMatch: 'full' },

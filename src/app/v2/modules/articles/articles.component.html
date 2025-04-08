@@ -1,0 +1,82 @@
+<!-- Breadcrumbs -->
+<app-breadcrumbs [breadcrumbs]="breadcrumbs"></app-breadcrumbs>
+
+<main class="container mx-auto py-8 px-4">
+  <h1 class="text-3xl font-bold mb-8 text-gray-900 border-b pb-4">Artículos Destacados por Tema</h1>
+
+  <!-- Anchor Link Navigation -->
+  <nav class="mb-12 sticky top-0 z-10 bg-white py-3 shadow-sm rounded-lg border border-gray-100">
+    <ul class="flex flex-wrap justify-center gap-2 px-4">
+      @for (section of sections; track section.key) {
+        <li>
+          <a 
+            (click)="scrollToSection(section.key)" 
+            style="cursor: pointer;" 
+            class="px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200 ease-in-out 
+                   bg-gray-100 text-gray-700 hover:bg-[#fbcc2c] hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#fbcc2c] focus:ring-offset-2"
+          >
+            {{ section.label }}
+          </a>
+        </li>
+      }
+    </ul>
+  </nav>
+
+  <!-- Loop through each section -->
+  @for (section of sections; track section.key) {
+    <section 
+      [id]="section.key" 
+      class="mb-16 p-6 sm:p-8 bg-gradient-to-br from-white via-gray-50 to-gray-100 rounded-xl shadow-md border border-gray-200 scroll-mt-28" 
+    >
+      <!-- scroll-mt provides top margin when jumping to anchor due to sticky nav -->
+      <h2 class="text-2xl font-semibold mb-6 text-[#0c243c] border-l-4 border-[#fbcc2c] pl-4">
+        {{ section.label }}
+      </h2>
+
+      <!-- Loading State for Section -->
+      @if (section.loading()) {
+        <div class="flex justify-center items-center py-10">
+          <div class="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-[#0c243c]"></div>
+        </div>
+      } @else if (section.error()) {
+        <!-- Error State for Section -->
+        <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-md" role="alert">
+          <p class="font-bold">Error</p>
+          <p>{{ section.error() }}</p>
+        </div>
+      } @else if (section.articles().length === 0) {
+        <!-- Empty State for Section -->
+        <div class="text-center py-10 bg-gray-50 rounded-lg">
+          <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+          </svg>
+          <h3 class="mt-2 text-sm font-medium text-gray-900">Sin resultados</h3>
+          <p class="mt-1 text-sm text-gray-500">No se encontraron artículos sobre "{{ section.label }}".</p>
+        </div>
+      } @else {
+        <!-- Articles Grid for Section -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          @for (article of section.articles(); track article.id) {
+            <div class="transform transition duration-300 ease-in-out hover:scale-[1.02]">
+              <app-article-item 
+                [data]="article" 
+                (click)="openArticleModal(article)"
+                (keypress.enter)="openArticleModal(article)"
+                class="cursor-pointer block h-full bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:border-[#fbcc2c]">
+              </app-article-item>
+            </div>
+          }
+        </div>
+      }
+    </section>
+  }
+
+</main>
+
+<!-- Article Modal (remains the same) -->
+@if (isModalOpen() && selectedArticle()) {
+  <app-article-modal 
+    [data]="selectedArticle()" 
+    (close)="closeModal()">
+  </app-article-modal>
+} 

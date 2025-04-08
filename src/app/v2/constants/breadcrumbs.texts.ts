@@ -91,3 +91,13 @@ export const INVESTIGACION_PODCASTS = [
     isActive: true,
   },
 ];
+
+export const ACTUALIDAD_ARTICULOS = [
+  ...INICIO,
+  INVESTIGACION,
+  {
+    label: 'Artículos',
+    url: '/articulos',
+    isActive: true,
+  },
+];
