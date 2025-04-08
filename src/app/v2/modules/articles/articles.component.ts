@@ -2,7 +2,7 @@ import { Component, OnInit, inject, signal, WritableSignal } from '@angular/core
 import { CommonModule } from '@angular/common';
 import { ResourceService } from '@v2/services';
 import { BreadcrumbsComponent, ArticleItemComponent, ArticleModalComponent } from '@v2/components';
-import { Breadcrumb } from '@v2/models';
+import { Breadcrumb } from '@v2/models'; 
 import { ACTUALIDAD_ARTICULOS } from '@v2/constants';
 
 // Interface to define the structure for each article section
@@ -42,7 +42,7 @@ export class ArticlesComponent implements OnInit {
     { key: 'paper', label: 'Papers Científicos', searchKey: 'paper', articles: signal([]), loading: signal(true), error: signal(null) },
   ];
   
-  // Modal Signals (remain the same)
+  // Modal Signals
   isModalOpen = signal<boolean>(false);
   selectedArticle = signal<any | null>(null);
 
@@ -69,7 +69,18 @@ export class ArticlesComponent implements OnInit {
     });
   }
 
-  // Modal methods (remain the same)
+  // Method for Smooth Scrolling
+  scrollToSection(sectionKey: string): void {
+    const element = document.getElementById(sectionKey);
+    if (element) {
+      // Use a slight timeout to ensure the element is fully rendered if needed, though often not necessary
+      // setTimeout(() => { 
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // }, 0); 
+    }
+  }
+
+  // Modal methods
   openArticleModal(article: any): void {
     this.selectedArticle.set(article);
     this.isModalOpen.set(true);
@@ -79,13 +90,4 @@ export class ArticlesComponent implements OnInit {
     this.isModalOpen.set(false);
     this.selectedArticle.set(null);
   }
-
-  // --- New Method for Scrolling ---
-  scrollToSection(sectionKey: string): void {
-    const element = document.getElementById(sectionKey);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  }
-  // --- End New Method ---
 } 
