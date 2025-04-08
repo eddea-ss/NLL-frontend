@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, OnInit, inject, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ResourceService } from '@v2/services';
 import { BreadcrumbsComponent, ArticleItemComponent, ArticleModalComponent } from '@v2/components';
@@ -26,6 +26,19 @@ export class ArticlesComponent implements OnInit {
   error = signal<string | null>(null);
   isModalOpen = signal<boolean>(false);
   selectedArticle = signal<any | null>(null);
+  searchTerm = signal<string>('');
+
+  filteredArticles = computed(() => {
+    const term = this.searchTerm().toLowerCase().trim();
+    if (!term) {
+      return this.articles();
+    }
+    return this.articles().filter(article => 
+      article.titulo?.toLowerCase().includes(term) || 
+      article.resumen?.toLowerCase().includes(term) ||
+      article.articulo_paper?.toLowerCase().includes(term)
+    );
+  });
 
   ngOnInit(): void {
     this.fetchArticles();
@@ -35,8 +48,8 @@ export class ArticlesComponent implements OnInit {
     this.loading.set(true);
     this.error.set(null);
     const { pathMatch, searchKey } = {
-      pathMatch: 'articles', // Endpoint path for articles
-      searchKey: 'articulo',   // Search term for articles
+      pathMatch: 'articles',
+      searchKey: 'articulo',
     };
 
     this.resourceService.searchResources(searchKey, pathMatch, limit).subscribe({
@@ -52,12 +65,9 @@ export class ArticlesComponent implements OnInit {
     });
   }
 
-  // Placeholder for filter logic
-  applyFilters(filters: any): void {
-    console.log('Applying filters:', filters);
-    // Implement filter logic here and call fetchArticles with updated params
-    // For now, just refetch with default limit
-    // this.fetchArticles(); // Example: Refetch or apply client-side filtering
+  onSearchTermChange(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+    this.searchTerm.set(inputElement.value);
   }
 
   openArticleModal(article: any): void {
