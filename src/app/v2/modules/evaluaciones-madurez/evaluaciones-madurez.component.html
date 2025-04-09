@@ -92,12 +92,10 @@
           </h3>
           
           <!-- Modelo de madurez general -->
-          <button
-            [disabled]="modeloMadurez()?.puntaje_general !== null"
-            (click)="modeloMadurezService.openLinkGeneral()"
-            class="w-full mb-3  overflow-hidden transition-all duration-300 border border-blue-600 bg-white text-blue-700"
-            [ngClass]="{'opacity-75 cursor-not-allowed': modeloMadurez()?.puntaje_general !== null}"
-          >
+          <button [disabled]="modeloMadurez()?.puntaje_general !== null"
+                  (click)="modeloMadurezService.openLinkGeneral()"
+                  class="w-full mb-3 overflow-hidden transition-all duration-300 border-2 border-amber-600 bg-amber-50"
+                  [ngClass]="{'opacity-75 cursor-not-allowed': modeloMadurez()?.puntaje_general !== null}">
             <div class="flex items-center p-4">
               <div class=" bg-white p-2 mr-3 shadow-sm">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -105,7 +103,7 @@
                 </svg>
               </div>
               <div class="flex flex-col text-left">
-                <strong class="text-base font-medium">Modelo de Madurez General</strong>
+                <strong class="text-base font-medium text-gray-900">Modelo de Madurez General</strong>
                 <span class="text-sm mt-1 flex items-center">
                   @if (modeloMadurez()?.puntaje_general !== null) {
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-green-600 mr-1" viewBox="0 0 20 20" fill="currentColor">
@@ -131,12 +129,10 @@
           </button>
           
           <!-- Modelo de madurez sectorial -->
-          <button
-            [disabled]="modeloMadurez() && modeloMadurez()?.puntaje_sector !== null"
-            (click)="modeloMadurezService.openLinkSectorial()"
-            class="w-full mb-3  overflow-hidden transition-all duration-300 border border-blue-600 bg-white text-blue-700"
-            [ngClass]="{'opacity-75 cursor-not-allowed': modeloMadurez()?.puntaje_sector !== null}"
-          >
+          <button [disabled]="modeloMadurez() && modeloMadurez()?.puntaje_sector !== null"
+                  (click)="modeloMadurezService.openLinkSectorial()"
+                  class="w-full mb-3 overflow-hidden transition-all duration-300 border-2 border-amber-600 bg-amber-50"
+                  [ngClass]="{'opacity-75 cursor-not-allowed': modeloMadurez()?.puntaje_sector !== null}">
             <div class="flex items-center p-4">
               <div class=" bg-white p-2 mr-3 shadow-sm">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -144,7 +140,7 @@
                 </svg>
               </div>
               <div class="flex flex-col text-left">
-                <strong class="text-base font-medium">Modelo de Madurez de Sector {{ currentUser()?.sector }}</strong>
+                <strong class="text-base font-medium text-gray-900">Modelo de Madurez Sectorial</strong>
                 <span class="text-sm mt-1 flex items-center">
                   @if (modeloMadurez()?.puntaje_sector !== null) {
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-green-600 mr-1" viewBox="0 0 20 20" fill="currentColor">
@@ -169,13 +165,11 @@
             </div>
           </button>
 
-          <!-- Modelo de formacion -->
-          <button
-            [disabled]="modeloMadurez() && modeloMadurez()?.respuestas_formacion !== null"
-            (click)="modeloMadurezService.openLinkFormacion()"
-            class="w-full mb-3  overflow-hidden transition-all duration-300 border border-blue-600 bg-white text-blue-700"
-            [ngClass]="{'opacity-75 cursor-not-allowed': modeloMadurez()?.respuestas_formacion !== null}"
-          >
+          <!-- Modelo de formación -->
+          <button [disabled]="modeloMadurez() && modeloMadurez()?.respuestas_formacion !== null"
+                  (click)="modeloMadurezService.openLinkFormacion()"
+                  class="w-full mb-3 overflow-hidden transition-all duration-300 border-2 border-amber-600 bg-amber-50"
+                  [ngClass]="{'opacity-75 cursor-not-allowed': modeloMadurez()?.respuestas_formacion !== null}">
             <div class="flex items-center p-4">
               <div class=" bg-white p-2 mr-3 shadow-sm">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -185,7 +179,7 @@
                 </svg>
               </div>
               <div class="flex flex-col text-left">
-                <strong class="text-base font-medium">Encuesta de Formación</strong>
+                <strong class="text-base font-medium text-gray-900">Encuesta de Formación</strong>
                 <span class="text-sm mt-1 flex items-center">
                   @if (modeloMadurez()?.respuestas_formacion !== null) {
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-green-600 mr-1" viewBox="0 0 20 20" fill="currentColor">
@@ -211,12 +205,10 @@
           </button>
 
           <!-- Modelo de proveedor -->
-          <button
-            [disabled]="modeloMadurez() && modeloMadurez()?.respuestas_proveedor !== null"
-            (click)="modeloMadurezService.openLinkProveedores()"
-            class="w-full mb-3  overflow-hidden transition-all duration-300 border border-blue-600 bg-white text-blue-700"
-            [ngClass]="{'opacity-75 cursor-not-allowed': modeloMadurez()?.respuestas_proveedor !== null}"
-          >
+          <button [disabled]="modeloMadurez() && modeloMadurez()?.respuestas_proveedor !== null"
+                  (click)="modeloMadurezService.openLinkProveedores()"
+                  class="w-full mb-3 overflow-hidden transition-all duration-300 border-2 border-amber-600 bg-amber-50"
+                  [ngClass]="{'opacity-75 cursor-not-allowed': modeloMadurez()?.respuestas_proveedor !== null}">
             <div class="flex items-center p-4">
               <div class=" bg-white p-2 mr-3 shadow-sm">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -224,7 +216,7 @@
                 </svg>
               </div>
               <div class="flex flex-col text-left">
-                <strong class="text-base font-medium">Encuesta de Proveedores</strong>
+                <strong class="text-base font-medium text-gray-900">Encuesta de Proveedores</strong>
                 <span class="text-sm mt-1 flex items-center">
                   @if (modeloMadurez()?.respuestas_proveedor !== null) {
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-green-600 mr-1" viewBox="0 0 20 20" fill="currentColor">
