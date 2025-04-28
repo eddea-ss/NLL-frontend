@@ -4,19 +4,17 @@
 <main class="container mx-auto py-16 flex flex-col lg:flex-row">
   <div class="w-full lg:w-3/4 pr-8 p-8">
     <!-- Header con diseño mejorado -->
+    <h1 class="text-4xl font-bold mb-12 border-b-2 border-[#FBCC2C] pb-4">Podcast Industria 4.0</h1>
 
-      <h1 class="text-4xl font-bold mb-12 border-b-2 border-[#fbcc2c] pb-4">Podcast Industria 4.0</h1>
-
-      <p class="mt-6 text-xl leading-relaxed opacity-90">
-        Sumérgete en conversaciones profundas sobre tecnología, innovación y transformación digital. 
-        Nuestros podcasts combinan la experiencia de líderes industriales con análisis basados en IA 
-        para ofrecerte contenido único y valioso.
-      </p>
-
+    <p class="mt-6 text-xl leading-relaxed text-gray-900">
+      Sumérgete en conversaciones profundas sobre tecnología, innovación y transformación digital. 
+      Nuestros podcasts combinan la experiencia de líderes industriales con análisis basados en IA 
+      para ofrecerte contenido único y valioso.
+    </p>
 
     <!-- Carrusel de episodios destacados -->
     <section class="bg-white overflow-hidden">
-      <h2 class="text-2xl font-bold p-6 border-b border-gray-100">Episodios Destacados</h2>
+      <h2 class="text-2xl font-bold p-6 border-b border-[#FBCC2C]">Episodios Destacados</h2>
       <app-carousel
         [slides]="episodiosDestacados"
         [autoPlay]="true"
@@ -28,11 +26,11 @@
     </section>
 
     <!-- Secciones con diseño mejorado -->
-    <section class="bg-white p-12 duration-300 border-l-4 border-blue-600">
+    <section class="bg-white p-12 duration-300 border-l-4 border-[#FBCC2C]">
       <h2 class="text-3xl font-bold text-gray-900 mb-6">
         Aprendizaje Inmersivo
       </h2>
-      <p class="text-gray-700 leading-relaxed text-lg">
+      <p class="text-gray-900 leading-relaxed text-lg">
         Cada episodio está diseñado para proporcionar conocimientos prácticos y aplicables. 
         Utilizamos tecnología de IA avanzada para crear experiencias de audio que se adaptan 
         a tu nivel de experiencia, permitiéndote profundizar en temas complejos de manera natural 
@@ -53,11 +51,11 @@
       />
     </div>
 
-    <section class="bg-white p-12 duration-300 border-l-4 border-blue-600">
+    <section class="bg-white p-12 duration-300 border-l-4 border-[#FBCC2C]">
       <h2 class="text-3xl font-bold text-gray-900 mb-6">
         Experiencia Multiplataforma
       </h2>
-      <p class="text-gray-700 leading-relaxed text-lg">
+      <p class="text-gray-900 leading-relaxed text-lg">
         Accede a nuestro contenido donde y cuando quieras. Nuestros podcasts están optimizados 
         para cualquier dispositivo, permitiéndote aprovechar al máximo tu tiempo mientras te 
         mantienes actualizado con las últimas tendencias en Industria 4.0.
@@ -66,7 +64,7 @@
 
     <!-- Reproductor de episodios recientes -->
     <section class="bg-white overflow-hidden">
-      <h2 class="text-2xl font-bold p-6 border-b border-gray-100">Episodios Recientes</h2>
+      <h2 class="text-2xl font-bold p-6 border-b border-[#FBCC2C]">Episodios Recientes</h2>
       <div class="p-6">
         <div class="mb-12">
           <iframe
@@ -104,7 +102,7 @@
         <div class="flex justify-center mt-8">
           <button 
             (click)="toggleVideosDisplay()"
-            class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6  transition-colors duration-300 flex items-center gap-2">
+            class="bg-[#FBCC2C] hover:bg-[#e6b927] text-gray-900 font-semibold py-3 px-6 transition-colors duration-300 flex items-center gap-2">
             {{ showAllVideos ? 'Mostrar menos' : 'Mostrar todos' }}
             <svg 
               [class.rotate-180]="showAllVideos"
