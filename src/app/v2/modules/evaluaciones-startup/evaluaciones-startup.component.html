@@ -2,131 +2,94 @@
 <app-breadcrumbs [breadcrumbs]="breadcrumbs"></app-breadcrumbs>
 <div>
   <!--Login como empresa y modelo completado-->
-  @if (authState()===AuthState.LoggedIn && currentUser()?.type ===
-  UserType.STARTUP) {
+  @if (authState()===AuthState.LoggedIn && currentUser()?.type === UserType.STARTUP) {
   <section class="max-w-7xl mx-auto px-4 py-8">
     <!-- Company Header -->
     <h1 class="text-4xl font-bold text-gray-700 mb-8">
-      <strong> </strong>
       {{ currentUser()?.name?.toLocaleUpperCase() ?? "No disponible" }}
     </h1>
 
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-      <div class="lg:col-span-2">
-        <!-- Evaluation Status Section -->
-        <div class="mb-8">
-          <h2 class="text-2xl text-gray-600 mb-4">
-            Completa modelo de formación de emprendedores
-          </h2>
-          <p class="text-gray-500 mb-6">
-            Actualmente tu Modelo de formación de emprendedores no ha sido
-            completado. Te invitamos a contestar este modelo y a conocer las
-            acciones necesarias para alcanzar la madurez tecnológica. Para
-            completar el modelo y acceder a todas sus funcionalidades.
-          </p>
-          <p class="text-gray-500 mb-6">
-            Por favor, haz clic en el botón a continuación:
-          </p>
-        </div>
+    <!-- First Section -->
+    <div class="flex justify-between items-start mb-12">
+      <!-- Left side - Text content -->
+      <div class="w-2/3 pr-8">
+        <h2 class="text-2xl text-gray-600 mb-4">
+          Completa modelo de formación de emprendedores
+        </h2>
+        <p class="text-gray-500 mb-6">
+          Actualmente tu Modelo de formación de emprendedores no ha sido
+          completado. Te invitamos a contestar este modelo y a conocer las
+          acciones necesarias para alcanzar la madurez tecnológica.
+        </p>
+        <p class="text-gray-500">
+          Por favor, haz clic en el botón a continuación:
+        </p>
       </div>
 
-      <!-- Take Survey Button -->
-      <div class="lg:col-span-1" style="align-self: flex-end">
-        <!--Modelo de madurez-->
+      <!-- Right side - Button -->
+      <div class="w-1/3">
         @if (formacionEmprendedores()) {
-        <button
-          disabled
-          (click)="openLink()"
-          class="my-1 w-full border border-blue-700 p-8 bg-white-700 flex text-blue-700"
-        >
+        <button disabled (click)="openLink()"
+          class="w-full border-2 border-[#FBCC2C] p-8 bg-amber-50 text-gray-700 flex justify-between items-center">
           Modelo de formación realizado
-          <svg
-            aria-hidden="true"
-            class="w-5 h-5 text-blue-700"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M16.707 5.293a1 1 0 010 1.414L8.414 15 5 11.586a1 1 0 011.414-1.414L8.414 12.172l7.879-7.879a1 1 0 011.414 0z"
-              clip-rule="evenodd"
-            ></path>
+          <svg class="w-5 h-5 text-[#FBCC2C]" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414L8.414 15 5 11.586a1 1 0 011.414-1.414L8.414 12.172l7.879-7.879a1 1 0 011.414 0z" clip-rule="evenodd"></path>
           </svg>
         </button>
-        }@else {
-        <div class="lg:col-span-1">
-          <button
-            (click)="openLink()"
-            class="my-1 w-full border border-blue-700 p-8 bg-white-700 flex text-blue-700 hover:bg-gray-100 transition"
-          >
-            Realizar Modelo de Formación para emprendedores
-          </button>
-        </div>
+        } @else {
+        <button (click)="openLink()"
+          class="w-full border-2 border-[#FBCC2C] p-8 bg-amber-50 text-gray-700 hover:bg-amber-100 transition flex justify-between items-center">
+          Realizar Modelo de Formación
+          <svg class="w-5 h-5 text-[#FBCC2C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+          </svg>
+        </button>
         }
       </div>
     </div>
 
-    <!---->
-    <div class="lg:col-span-2" style="margin-top: 3em">
-      <!-- Evaluation Status Section -->
-      <div class="mb-8">
+    <!-- Second Section -->
+    <div class="flex justify-between items-start">
+      <!-- Left side - Text content -->
+      <div class="w-2/3 pr-8">
         <h2 class="text-2xl text-gray-600 mb-4">
           Completa modelo para Startups o Emprendedores
         </h2>
         <p class="text-gray-500 mb-6">
           Actualmente, tu Modelo de formación de emprendedores o de Startup no
           ha sido completado. Te invitamos a contestar este modelo y a conocer
-          las acciones necesarias para alcanzar la madurez tecnológica. Para
-          completar el modelo y acceder a todas sus funcionalidades.
+          las acciones necesarias para alcanzar la madurez tecnológica.
         </p>
-        <p class="text-gray-500 mb-6">
+        <p class="text-gray-500">
           Por favor, haz clic en el botón a continuación:
         </p>
       </div>
 
-      <!--Modelo de madurez-->
-      <div>
+      <!-- Right side - Buttons -->
+      <div class="w-1/3">
         @if (startup()) {
-        <button
-          style="max-width: 350px"
-          disabled
-          (click)="openLink()"
-          class="my-1 w-full border border-blue-700 p-8 bg-white-700 flex text-blue-700"
-        >
+        <button disabled (click)="openLink()"
+          class="w-full border-2 border-[#FBCC2C] p-8 bg-amber-50 text-gray-700 flex justify-between items-center">
           Modelo de Startup | Emprendimiento realizado
-          <svg
-            aria-hidden="true"
-            class="w-5 h-5 text-blue-700"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M16.707 5.293a1 1 0 010 1.414L8.414 15 5 11.586a1 1 0 011.414-1.414L8.414 12.172l7.879-7.879a1 1 0 011.414 0z"
-              clip-rule="evenodd"
-            ></path>
+          <svg class="w-5 h-5 text-[#FBCC2C]" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414L8.414 15 5 11.586a1 1 0 011.414-1.414L8.414 12.172l7.879-7.879a1 1 0 011.414 0z" clip-rule="evenodd"></path>
           </svg>
         </button>
-        }@else {
-        <div
-          class="lg:col-span-1 flex"
-          style="gap: 20px; justify-content: center"
-        >
-          <button
-            style="max-width: 350px"
-            (click)="openLinkStartup()"
-            class="my-1 w-full border border-blue-700 p-8 bg-white-700 flex text-blue-700 hover:bg-gray-100 transition"
-          >
+        } @else {
+        <div class="space-y-4">
+          <button (click)="openLinkStartup()"
+            class="w-full border-2 border-[#FBCC2C] p-8 bg-amber-50 text-gray-700 hover:bg-amber-100 transition flex justify-between items-center">
             Realizar Modelo de Startup
+            <svg class="w-5 h-5 text-[#FBCC2C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
           </button>
-          <button
-            style="max-width: 350px"
-            (click)="openLinkEmprendimiento()"
-            class="my-1 w-full border border-blue-700 p-8 bg-white-700 flex text-blue-700 hover:bg-gray-100 transition"
-          >
+          <button (click)="openLinkEmprendimiento()"
+            class="w-full border-2 border-[#FBCC2C] p-8 bg-amber-50 text-gray-700 hover:bg-amber-100 transition flex justify-between items-center">
             Realizar Modelo de Emprendimiento
+            <svg class="w-5 h-5 text-[#FBCC2C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
           </button>
         </div>
         }
