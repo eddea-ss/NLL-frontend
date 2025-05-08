@@ -15,7 +15,7 @@
 }
 
 .custom-shape-divider-bottom-1736997406 .shape-fill {
-  fill: #eab308;
+  fill: #009C88;
 }
 .custom-shape-divider-top-1736997818 {
   top: 0;
@@ -34,7 +34,7 @@
 }
 
 .custom-shape-divider-top-1736997818 .shape-fill {
-  fill: #eab308;
+  fill: #009C88;
 }
 .custom-shape-divider-bottom-1736997902 {
   bottom: 0;
@@ -54,7 +54,7 @@
 }
 
 .custom-shape-divider-bottom-1736997902 .shape-fill {
-  fill: #eab308;
+  fill: #009C88;
 }
 .custom-shape-divider-bottom-1736999892 {
   position: absolute;
@@ -242,7 +242,7 @@
 
 // Definir variables
 :host {
-  --primary-color: #eab308;
+  --primary-color: #009C88;
   --card-padding: 2rem;
   --card-border-color: #f0f0f0;
   --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
@@ -319,7 +319,7 @@ nav {
     }
     
     &:hover::after,
-    &[class*="border-[#eab308]"]::after {
+    &[class*="border-[#009C88]"]::after {
       width: 100%;
     }
   }
@@ -456,7 +456,7 @@ button, a {
     transition: all 0.3s ease;
     
     &:hover {
-      background: darken(#eab308, 5%);
+      background: darken(#009C88, 5%);
       transform: translateY(-2px);
     }
   }

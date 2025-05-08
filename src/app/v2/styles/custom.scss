@@ -111,10 +111,10 @@
   }
 
   .btn-primary-yellow {
-    @apply inline-block bg-[#EAB308] text-white font-semibold py-3 px-6  hover:bg-yellow-600 transition-colors;
+    @apply inline-block bg-[#009C88] text-white font-semibold py-3 px-6  hover:bg-[#009C88] transition-colors;
   }
 
   .btn-primary-white {
-    @apply inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center    focus:ring-4  border border-[#fbcc2c]  hover:border-yellow-600 hover:bg-[#fbcc2c];
+    @apply inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center    focus:ring-4  border border-[#009C88]  hover:border-[#009C88] hover:bg-[#009C88];
   }
 }

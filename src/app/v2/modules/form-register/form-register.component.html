@@ -164,11 +164,11 @@
                     <svg
                       (click)="rate(field.name, star)"
                       [ngClass]="{
-                        'text-yellow-400': formGroup.get(field.name)?.value >= star,
+                        'text-[#009C88]': formGroup.get(field.name)?.value >= star,
                         'text-gray-200': formGroup.get(field.name)?.value < star
                       }"
                       xmlns="http://www.w3.org/2000/svg"
-                      class="h-6 w-6 cursor-pointer hover:text-yellow-300 transition-colors"
+                      class="h-6 w-6 cursor-pointer hover:text-[#009C88] transition-colors"
                       fill="currentColor"
                       viewBox="0 0 24 24"
                     >

@@ -29,7 +29,7 @@
     height: 5rem;
     width: 5rem;
     border-radius: 9999px;
-    background-color: #1f2937;
+    background-color: #00362F;
     transform: scale(1);
     transition: all 0.5s;
   }
@@ -48,7 +48,7 @@
     width: 5rem;
     place-items: center;
     border-radius: 9999px;
-    background-color: #1f2937;
+    background-color: #00362F;
     transition: all 0.3s;
     
     svg {
@@ -64,7 +64,7 @@
     transition: all 0.3s;
     
     h3 {
-      color: #1f2937;
+      color: #00362F;
       transition: color 0.3s;
       .registro-card:hover & {
         color: white;

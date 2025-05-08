@@ -4,7 +4,7 @@
 <main class="container mx-auto py-16 flex flex-col lg:flex-row">
   <div class="w-full lg:w-3/4 pr-8 p-8">
     <!-- Header con diseño mejorado -->
-    <h1 class="text-4xl font-bold mb-12 border-b-2 border-[#FBCC2C] pb-4">Podcast Industria 4.0</h1>
+    <h1 class="text-4xl font-bold mb-12 border-b-2 border-[#009C88] pb-4">Podcast Industria 4.0</h1>
 
     <p class="mt-6 text-xl leading-relaxed text-gray-900">
       Sumérgete en conversaciones profundas sobre tecnología, innovación y transformación digital. 
@@ -14,7 +14,7 @@
 
     <!-- Carrusel de episodios destacados -->
     <section class="bg-white overflow-hidden">
-      <h2 class="text-2xl font-bold p-6 border-b border-[#FBCC2C]">Episodios Destacados</h2>
+      <h2 class="text-2xl font-bold p-6 border-b border-[#009C88]">Episodios Destacados</h2>
       <app-carousel
         [slides]="episodiosDestacados"
         [autoPlay]="true"
@@ -26,7 +26,7 @@
     </section>
 
     <!-- Secciones con diseño mejorado -->
-    <section class="bg-white p-12 duration-300 border-l-4 border-[#FBCC2C]">
+    <section class="bg-white p-12 duration-300 border-l-4 border-[#009C88]">
       <h2 class="text-3xl font-bold text-gray-900 mb-6">
         Aprendizaje Inmersivo
       </h2>
@@ -51,7 +51,7 @@
       />
     </div>
 
-    <section class="bg-white p-12 duration-300 border-l-4 border-[#FBCC2C]">
+    <section class="bg-white p-12 duration-300 border-l-4 border-[#009C88]">
       <h2 class="text-3xl font-bold text-gray-900 mb-6">
         Experiencia Multiplataforma
       </h2>
@@ -64,7 +64,7 @@
 
     <!-- Reproductor de episodios recientes -->
     <section class="bg-white overflow-hidden">
-      <h2 class="text-2xl font-bold p-6 border-b border-[#FBCC2C]">Episodios Recientes</h2>
+      <h2 class="text-2xl font-bold p-6 border-b border-[#009C88]">Episodios Recientes</h2>
       <div class="p-6">
         <div class="mb-12">
           <iframe
@@ -102,7 +102,7 @@
         <div class="flex justify-center mt-8">
           <button 
             (click)="toggleVideosDisplay()"
-            class="bg-[#FBCC2C] hover:bg-[#e6b927] text-gray-900 font-semibold py-3 px-6 transition-colors duration-300 flex items-center gap-2">
+            class="bg-[#009C88] hover:bg-[#e6b927] text-gray-900 font-semibold py-3 px-6 transition-colors duration-300 flex items-center gap-2">
             {{ showAllVideos ? 'Mostrar menos' : 'Mostrar todos' }}
             <svg 
               [class.rotate-180]="showAllVideos"

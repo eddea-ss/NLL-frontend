@@ -8,6 +8,9 @@ module.exports = {
 
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Roboto', 'sans-serif'],
+      },
       animation: {
         "fade-in": "fadeIn 1.5s ease-out forwards",
       },

@@ -3,7 +3,7 @@
     <div class="progress-bar-container mb-4">
       <div class="progress-bar bg-gray-200 ">
         <div
-          class="progress-bar-fill bg-[#EAB308] "
+          class="progress-bar-fill bg-[#009C88] "
           [style.width]="survey.getProgress() + '%'"
         ></div>
       </div>
@@ -17,7 +17,7 @@
     <button
       *ngIf="this.survey.state === 'completed'"
       (click)="onSubmit()"
-      class="px-4 py-2 bg-[#EAB308] text-gray-800 font-semibold  hover:bg-[#fbcc2c] transition-colors"
+      class="px-4 py-2 bg-[#009C88] text-gray-800 font-semibold  hover:bg-[#009C88] transition-colors"
     >
       Enviar
     </button>

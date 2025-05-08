@@ -9,7 +9,7 @@
       <h2 class="text-5xl font-bold mb-6 text-gray-900 tracking-tight">
         Contenido Destacado
       </h2>
-      <div class="w-24 h-1 bg-[#eab308] mx-auto"></div>
+      <div class="w-24 h-1 bg-[#009C88] mx-auto"></div>
     </div>
     
     <!-- Pestañas con diseño elegante -->
@@ -19,7 +19,7 @@
         <button
           (click)="setActiveTab(tab.id)"
           class="px-8 py-3 text-sm font-medium rounded-md transition-all duration-200"
-          [class.bg-[#eab308]]="activeTab === tab.id"
+          [class.bg-[#009C88]]="activeTab === tab.id"
           [class.text-white]="activeTab === tab.id"
           [class.bg-transparent]="activeTab !== tab.id"
           [class.text-gray-600]="activeTab !== tab.id"
@@ -55,7 +55,7 @@
             </span>
           </div>
           
-          <h3 class="text-lg font-medium text-[#0c243c] mb-3 line-clamp-2 group-hover:text-[#eab308] transition-colors duration-200">
+          <h3 class="text-lg font-medium text-[#0c243c] mb-3 line-clamp-2 group-hover:text-[#009C88] transition-colors duration-200">
             {{ item?.titulo }}
           </h3>
           
@@ -65,10 +65,10 @@
               <span class="bg-gray-100 text-gray-700 px-2 py-1 text-xs font-medium rounded">En Inglés</span>
               }
               @if (item?.articulo_paper?.toLowerCase() === 'paper') {
-              <span class="bg-[#eab308]/10 text-[#eab308] px-2 py-1 text-xs font-medium rounded">Paper</span>
+              <span class="bg-[#009C88]/10 text-[#009C88] px-2 py-1 text-xs font-medium rounded">Paper</span>
               }
               @if (item?.articulo_paper?.toLowerCase() === 'articulo') {
-              <span class="bg-[#eab308]/10 text-[#eab308] px-2 py-1 text-xs font-medium rounded">Artículo</span>
+              <span class="bg-[#009C88]/10 text-[#009C88] px-2 py-1 text-xs font-medium rounded">Artículo</span>
               }
             }
             @if (activeTab === 'courses') {
@@ -166,7 +166,7 @@
               }
             </span>
             <button
-              class="group/btn flex items-center gap-1 px-3 py-1.5 text-sm font-medium text-[#0c243c] hover:text-[#eab308] transition-colors duration-200"
+              class="group/btn flex items-center gap-1 px-3 py-1.5 text-sm font-medium text-[#0c243c] hover:text-[#009C88] transition-colors duration-200"
               (click)="openModal($index, activeTab)"
             >
               <span>
@@ -212,7 +212,7 @@
       <div class="max-w-4xl mx-auto px-8 sm:px-16">
         <div class="space-y-8">
           <h2 class="text-5xl font-bold text-white leading-tight max-w-2xl">
-            Encuentra la innovación en <span class="text-[#eab308]">Nuevo Los Lagos</span>
+            Encuentra la innovación en <span class="text-[#009C88]">Nuevo Los Lagos</span>
           </h2>
           <p class="text-xl text-gray-200 leading-relaxed max-w-xl">
             Descubre cómo la transformación digital y las tecnologías emergentes pueden 
@@ -221,7 +221,7 @@
           <div class="pt-4">
             <a 
               href="/evaluaciones-madurez" 
-              class="inline-block bg-[#eab308] text-gray-900 font-medium px-12 py-4 hover:bg-yellow-400 transform hover:-translate-y-1 transition-all duration-300 shadow-xl hover:shadow-2xl"
+              class="inline-block bg-[#009C88] text-gray-900 font-medium px-12 py-4 hover:bg-[#009C88] transform hover:-translate-y-1 transition-all duration-300 shadow-xl hover:shadow-2xl"
             >
               Iniciar Evaluación de Madurez
             </a>
@@ -249,7 +249,7 @@
 </section>
 
 <!-- Section podcasts con diseño moderno -->
-<section class="relative py-20 bg-[#eab308] overflow-hidden">
+<section class="relative py-20 bg-[#009C88] overflow-hidden">
   <div class="absolute inset-0 bg-gradient-to-r from-black/10 to-transparent"></div>
   <div class="relative max-w-6xl mx-auto px-8">
     <div class="flex flex-col lg:flex-row items-center gap-16">
@@ -298,7 +298,7 @@
           </p>
           <a 
             href="/plataforma" 
-            class="inline-block bg-[#eab308] text-white px-12 py-4 hover:bg-yellow-400 transition-all duration-300"
+            class="inline-block bg-[#009C88] text-white px-12 py-4 hover:bg-[#009C88] transition-all duration-300"
           >
             Descubrir Plataforma
           </a>

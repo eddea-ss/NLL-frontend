@@ -13,7 +13,7 @@
             (click)="scrollToSection(section.key)" 
             style="cursor: pointer;" 
             class="px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200 ease-in-out 
-                   bg-gray-100 text-gray-700 hover:bg-[#fbcc2c] hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#fbcc2c] focus:ring-offset-2"
+                   bg-gray-100 text-gray-700 hover:bg-[#009C88] hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#009C88] focus:ring-offset-2"
           >
             {{ section.label }}
           </a>
@@ -29,7 +29,7 @@
       class="mb-16 p-6 sm:p-8 bg-gradient-to-br from-white via-gray-50 to-gray-100 rounded-xl shadow-md border border-gray-200 scroll-mt-28" 
     >
       <!-- scroll-mt provides top margin when jumping to anchor due to sticky nav -->
-      <h2 class="text-2xl font-semibold mb-6 text-[#0c243c] border-l-4 border-[#fbcc2c] pl-4">
+      <h2 class="text-2xl font-semibold mb-6 text-[#0c243c] border-l-4 border-[#009C88] pl-4">
         {{ section.label }}
       </h2>
 
@@ -62,7 +62,7 @@
                 [data]="article" 
                 (click)="openArticleModal(article)"
                 (keypress.enter)="openArticleModal(article)"
-                class="cursor-pointer block h-full bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:border-[#fbcc2c]">
+                class="cursor-pointer block h-full bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:border-[#009C88]">
               </app-article-item>
             </div>
           }

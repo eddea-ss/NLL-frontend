@@ -40,7 +40,7 @@ export class NavbarComponent {
   public AuthState = AuthState;
   public Role = Role;
 
-  @Input() background = '#1f2937';
+  @Input() background = '#00362F';
   @Input() zindex = '';
 
   // Estado del menú móvil

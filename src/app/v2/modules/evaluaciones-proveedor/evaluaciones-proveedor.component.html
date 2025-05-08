@@ -6,7 +6,7 @@
   UserType.SUPPLIER) {
   <section class="max-w-7xl mx-auto px-4 py-8">
     <!-- Company Header -->
-    <h1 class="text-4xl font-bold text-gray-900 mb-8 border-b-2 border-[#FBCC2C] pb-3">
+    <h1 class="text-4xl font-bold text-gray-900 mb-8 border-b-2 border-[#009C88] pb-3">
       <strong>Empresa:</strong>
       {{ currentUser()?.name ?? "No disponible" }}
     </h1>
@@ -36,13 +36,13 @@
           @if (getSurveyData(i+1)) {
           <button
             disabled
-            class="my-1 w-full border-2 border-[#FBCC2C] p-8 bg-amber-50 text-gray-900 flex justify-between items-center"
+            class="my-1 w-full border-2 border-[#009C88] p-8 bg-amber-50 text-gray-900 flex justify-between items-center"
           >
             {{ titlesSurvey[i] }}
             <svg
               style="width: 30px"
               aria-hidden="true"
-              class="w-5 h-5 text-[#FBCC2C]"
+              class="w-5 h-5 text-[#009C88]"
               fill="currentColor"
               viewBox="0 0 20 20"
               xmlns="http://www.w3.org/2000/svg"
@@ -101,9 +101,9 @@
   </div>
   
   <!-- Error State -->
-  <div *ngIf="errorFeaturedCompanies" class="bg-[#FBCC2C]/10 border-2 border-gray-900 text-gray-900 p-4 text-center mx-auto max-w-2xl">
+  <div *ngIf="errorFeaturedCompanies" class="bg-[#009C88]/10 border-2 border-gray-900 text-gray-900 p-4 text-center mx-auto max-w-2xl">
     <p>{{ errorFeaturedCompanies }}</p>
-    <button (click)="loadFeaturedCompanies()" class="mt-2 text-gray-900 hover:text-[#FBCC2C]">
+    <button (click)="loadFeaturedCompanies()" class="mt-2 text-gray-900 hover:text-[#009C88]">
     Intentar nuevamente
     </button>
   </div>
@@ -119,8 +119,8 @@
     <div *ngFor="let company of featuredCompanies" 
        class="bg-white shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg border-2 border-gray-900 cursor-pointer flex flex-col h-full"
        (click)="openCompanyModal(company)">
-    <div class="h-32 bg-[#FBCC2C]" class="relative">
-      <div *ngIf="company.verified" class="absolute bottom-0 right-0 w-24 h-24 bg-[#FBCC2C] flex items-end justify-start p-4">
+    <div class="h-32 bg-[#009C88]" class="relative">
+      <div *ngIf="company.verified" class="absolute bottom-0 right-0 w-24 h-24 bg-[#009C88] flex items-end justify-start p-4">
       <span class="text-gray-900 font-bold text-xs">VERIFICADA</span>
       </div>
     </div>
@@ -131,20 +131,20 @@
       </div>
       <p class="text-gray-900 text-sm mb-4 flex-grow">{{ company.description }}</p>
       <div class="flex flex-wrap gap-2 mb-4">
-      <span *ngFor="let tag of company.tags.slice(0, 3)" class="bg-[#FBCC2C] text-gray-900 text-xs px-2 py-1">{{ tag }}</span>
-      <span *ngIf="company.tags.length > 3" class="bg-[#FBCC2C] text-gray-900 text-xs px-2 py-1">+{{ company.tags.length - 3 }}</span>
+      <span *ngFor="let tag of company.tags.slice(0, 3)" class="bg-[#009C88] text-gray-900 text-xs px-2 py-1">{{ tag }}</span>
+      <span *ngIf="company.tags.length > 3" class="bg-[#009C88] text-gray-900 text-xs px-2 py-1">+{{ company.tags.length - 3 }}</span>
       </div>
       
       <!-- Company Contact Info -->
       <div class="border-t border-gray-200 pt-3 mb-3">
       <div class="flex justify-between items-center">
         <div class="flex items-center">
-        <svg class="w-4 h-4 text-[#FBCC2C]" fill="currentColor" viewBox="0 0 20 20">
+        <svg class="w-4 h-4 text-[#009C88]" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
                 </svg>
                 <span class="text-gray-900 text-xs ml-1">{{ company.location }}</span>
               </div>
-              <a *ngIf="company.website" [href]="company.website" target="_blank" class="text-gray-900 text-xs hover:text-[#FBCC2C] flex items-center" (click)="$event.stopPropagation()">
+              <a *ngIf="company.website" [href]="company.website" target="_blank" class="text-gray-900 text-xs hover:text-[#009C88] flex items-center" (click)="$event.stopPropagation()">
                 <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
                 </svg>
@@ -154,7 +154,7 @@
           </div>
           
           <div class="flex justify-end items-center">
-            <a class="inline-flex items-center text-gray-900 text-sm font-medium hover:text-[#FBCC2C]">
+            <a class="inline-flex items-center text-gray-900 text-sm font-medium hover:text-[#009C88]">
               Ver perfil
               <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
@@ -181,7 +181,7 @@
         
         <div class="space-y-6">
           <div class="flex items-start">
-            <div class="flex-shrink-0 h-12 w-12 flex items-center justify-center rounded-full bg-[#FBCC2C] text-gray-900">
+            <div class="flex-shrink-0 h-12 w-12 flex items-center justify-center rounded-full bg-[#009C88] text-gray-900">
               <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
               </svg>
@@ -193,7 +193,7 @@
           </div>
           
           <div class="flex items-start">
-            <div class="flex-shrink-0 h-12 w-12 flex items-center justify-center rounded-full bg-[#FBCC2C] text-gray-900">
+            <div class="flex-shrink-0 h-12 w-12 flex items-center justify-center rounded-full bg-[#009C88] text-gray-900">
               <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                 <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path>
               </svg>
@@ -205,7 +205,7 @@
           </div>
           
           <div class="flex items-start">
-            <div class="flex-shrink-0 h-12 w-12 flex items-center justify-center rounded-full bg-[#FBCC2C] text-gray-900">
+            <div class="flex-shrink-0 h-12 w-12 flex items-center justify-center rounded-full bg-[#009C88] text-gray-900">
               <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd"></path>
                 <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z"></path>
@@ -234,7 +234,7 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
       <!-- Tarjeta 1 -->
       <div class="bg-white overflow-hidden transition-transform duration-300 hover:transform hover:scale-105 border-2 border-gray-900">
-        <div class="bg-[#FBCC2C] h-2"></div>
+        <div class="bg-[#009C88] h-2"></div>
         <div class="p-6">
           <div class="w-20 h-20 bg-gray-900 text-white flex items-center justify-center mb-6 mx-auto">
             <span class="text-2xl font-bold">1</span>
@@ -243,33 +243,33 @@
           <p class="text-center text-gray-900 mb-4">Crea tu cuenta como proveedor en nuestra plataforma para comenzar tu viaje.</p>
           <ul class="text-gray-900 space-y-2 mb-6">
             <li class="flex items-center">
-              <svg class="w-5 h-5 mr-2 text-[#FBCC2C]" fill="currentColor" viewBox="0 0 20 20">
+              <svg class="w-5 h-5 mr-2 text-[#009C88]" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
               </svg>
               <span class="text-gray-900">Proceso simple y rápido</span>
             </li>
             <li class="flex items-center">
-              <svg class="w-5 h-5 mr-2 text-[#FBCC2C]" fill="currentColor" viewBox="0 0 20 20">
+              <svg class="w-5 h-5 mr-2 text-[#009C88]" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
               </svg>
               <span class="text-gray-900">Datos básicos de contacto</span>
             </li>
             <li class="flex items-center">
-              <svg class="w-5 h-5 mr-2 text-[#FBCC2C]" fill="currentColor" viewBox="0 0 20 20">
+              <svg class="w-5 h-5 mr-2 text-[#009C88]" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
               </svg>
               <span class="text-gray-900">Verificación segura</span>
             </li>
           </ul>
           <div class="text-center">
-            <a href="/registro-proveedor" class="inline-block px-6 py-3 bg-[#FBCC2C] text-gray-900 hover:bg-amber-400 transition-all duration-300">Comenzar</a>
+            <a href="/registro-proveedor" class="inline-block px-6 py-3 bg-[#009C88] text-gray-900 hover:bg-amber-400 transition-all duration-300">Comenzar</a>
           </div>
         </div>
       </div>
       
       <!-- Tarjeta 2 -->
       <div class="bg-white overflow-hidden transition-transform duration-300 hover:transform hover:scale-105 border-2 border-gray-900">
-        <div class="bg-[#FBCC2C] h-2"></div>
+        <div class="bg-[#009C88] h-2"></div>
         <div class="p-6">
           <div class="w-20 h-20 bg-gray-900 text-white flex items-center justify-center mb-6 mx-auto">
             <span class="text-2xl font-bold">2</span>
@@ -278,19 +278,19 @@
           <p class="text-center text-gray-900 mb-4">Completa la información detallada de tu empresa para destacar tus servicios.</p>
           <ul class="text-gray-900 space-y-2 mb-6">
             <li class="flex items-center">
-              <svg class="w-5 h-5 mr-2 text-[#FBCC2C]" fill="currentColor" viewBox="0 0 20 20">
+              <svg class="w-5 h-5 mr-2 text-[#009C88]" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
               </svg>
               <span class="text-gray-900">Descripción de servicios</span>
             </li>
             <li class="flex items-center">
-              <svg class="w-5 h-5 mr-2 text-[#FBCC2C]" fill="currentColor" viewBox="0 0 20 20">
+              <svg class="w-5 h-5 mr-2 text-[#009C88]" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
               </svg>
               <span class="text-gray-900">Capacidades técnicas</span>
             </li>
             <li class="flex items-center">
-              <svg class="w-5 h-5 mr-2 text-[#FBCC2C]" fill="currentColor" viewBox="0 0 20 20">
+              <svg class="w-5 h-5 mr-2 text-[#009C88]" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
               </svg>
               <span class="text-gray-900">Experiencia y certificaciones</span>
@@ -304,7 +304,7 @@
       
       <!-- Tarjeta 3 -->
       <div class="bg-white overflow-hidden transition-transform duration-300 hover:transform hover:scale-105 border-2 border-gray-900">
-        <div class="bg-[#FBCC2C] h-2"></div>
+        <div class="bg-[#009C88] h-2"></div>
         <div class="p-6">
           <div class="w-20 h-20 bg-gray-900 text-white flex items-center justify-center mb-6 mx-auto">
             <span class="text-2xl font-bold">3</span>
@@ -313,19 +313,19 @@
           <p class="text-center text-gray-900 mb-4">Accede a nuevas oportunidades de negocio conectándote con clientes potenciales.</p>
           <ul class="text-gray-900 space-y-2 mb-6">
             <li class="flex items-center">
-              <svg class="w-5 h-5 mr-2 text-[#FBCC2C]" fill="currentColor" viewBox="0 0 20 20">
+              <svg class="w-5 h-5 mr-2 text-[#009C88]" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
               </svg>
               <span class="text-gray-900">Visibilidad regional</span>
             </li>
             <li class="flex items-center">
-              <svg class="w-5 h-5 mr-2 text-[#FBCC2C]" fill="currentColor" viewBox="0 0 20 20">
+              <svg class="w-5 h-5 mr-2 text-[#009C88]" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
               </svg>
               <span class="text-gray-900">Oportunidades de negocio</span>
             </li>
             <li class="flex items-center">
-              <svg class="w-5 h-5 mr-2 text-[#FBCC2C]" fill="currentColor" viewBox="0 0 20 20">
+              <svg class="w-5 h-5 mr-2 text-[#009C88]" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
               </svg>
               <span class="text-gray-900">Networking estratégico</span>
