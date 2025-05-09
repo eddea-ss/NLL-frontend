@@ -32,7 +32,7 @@
         </div>
         <div class="w-full bg-gray-200  h-2.5">
           <div 
-            class="bg-blue-600 h-2.5  transition-all duration-300 ease-in-out"
+            class="bg-[#009C88] h-2.5  transition-all duration-300 ease-in-out"
             [style.width]="(currentStep / totalSteps * 100) + '%'"
           ></div>
         </div>
@@ -96,7 +96,7 @@
                     (click)="field.name === 'password' ? togglePasswordVisibility() : toggleConfirmPasswordVisibility()"
                   >
                     <svg
-                      [ngClass]="field.name === 'password' ? (isPasswordVisible ? 'text-blue-600' : '') : (isConfirmPasswordVisible ? 'text-blue-600' : '')"
+                      [ngClass]="field.name === 'password' ? (isPasswordVisible ? 'text-[#009C88]' : '') : (isConfirmPasswordVisible ? 'text-[#009C88]' : '')"
                       xmlns="http://www.w3.org/2000/svg"
                       class="h-5 w-5"
                       fill="none"
@@ -217,8 +217,8 @@
             <button
               type="button"
               (click)="nextStep()"
-              class="px-6 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white  
-                     hover:from-blue-500 hover:to-blue-600 focus:outline-none focus:ring-2 
+              class="px-6 py-2 bg-gradient-to-r from-[#009C88] to-[#009C88] text-white  
+                     hover:from-blue-500 hover:to-[#009C88] focus:outline-none focus:ring-2 
                      focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200"
             >
               {{ currentStep === totalSteps ? 'Registrar' : 'Siguiente' }}

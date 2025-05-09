@@ -61,7 +61,7 @@
               (click)="togglePasswordVisibility()"
             >
               <svg
-                [ngClass]="isPasswordVisible ? 'text-blue-600' : 'text-gray-400'"
+                [ngClass]="isPasswordVisible ? 'text-[#009C88]' : 'text-gray-400'"
                 xmlns="http://www.w3.org/2000/svg"
                 class="h-5 w-5"
                 fill="none"
@@ -143,7 +143,7 @@
           type="submit"
           [disabled]="isLoading || !loginForm.valid"
           class="w-full flex justify-center py-3 px-4 border border-transparent  shadow-sm text-sm font-medium text-white
-                 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600
+                 bg-gradient-to-r from-[#009C88] to-[#009C88] hover:from-blue-500 hover:to-[#009C88]
                  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 
                  disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
         >
@@ -168,8 +168,8 @@
           <a
             routerLink="/registro"
             class="w-full flex justify-center py-3 px-4  text-sm font-medium
-                   bg-gradient-to-r from-blue-800 to-blue-900 text-white
-                   hover:from-blue-700 hover:to-blue-800 transition-all duration-200"
+                 bg-gradient-to-r from-[#009C88] to-[#008877] text-white
+                 hover:from-[#008877] hover:to-[#007766] transition-all duration-200"
           >
             Crear Cuenta
           </a>

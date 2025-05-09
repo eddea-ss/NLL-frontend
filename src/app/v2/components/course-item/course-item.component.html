@@ -1,7 +1,7 @@
 @if (simplified) {
 <article class="p-4  transition-all duration-300">
   <!-- Título con efecto de hover suave -->
-  <h3 class="text-xl font-bold mb-2 text-gray-800 group-hover:text-blue-600">{{ data?.titulo }}</h3>
+  <h3 class="text-xl font-bold mb-2 text-gray-800 group-hover:text-[#009C88]">{{ data?.titulo }}</h3>
   
   <!-- Etiquetas con estilos mejorados -->
   <div class="mb-2 flex flex-wrap gap-1">
@@ -25,7 +25,7 @@
       (click)="onOpenModal()"
       (keypress.enter)="onOpenModal()"
       (keypress.space)="onOpenModal()"
-      class="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors duration-300 font-medium"
+      class="inline-flex items-center text-[#009C88] hover:text-blue-800 transition-colors duration-300 font-medium"
     >
       Ver Más
       <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -46,7 +46,7 @@
   <!-- Título con efecto de hover -->
   <a
     style="cursor: pointer"
-    class="text-xl font-semibold text-gray-800 hover:text-blue-600 transition-colors duration-300 block mb-2"
+    class="text-xl font-semibold text-gray-800 hover:text-[#009C88] transition-colors duration-300 block mb-2"
   >
     {{ data.titulo }}
   </a>
@@ -66,7 +66,7 @@
   <!-- Etiquetas con estilos mejorados -->
   <div class="mb-3 flex flex-wrap gap-2">
     @if (data?.idioma?.toLowerCase() === 'ingles') {
-    <span class="bg-blue-50 text-blue-600 px-2 py-1 text-xs "> En Inglés </span>
+    <span class="bg-blue-50 text-[#009C88] px-2 py-1 text-xs "> En Inglés </span>
     } 
     @if (data?.tipo?.toLowerCase() === 'de pago') {
     <span class="bg-amber-50 text-amber-600 px-2 py-1 text-xs "> De Pago </span>
