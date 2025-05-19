@@ -35,7 +35,7 @@
       <!-- Cursos: tienen 'modalidad' y 'duracion' -->
       <ng-container *ngIf="item?.modalidad && item?.duracion">
         <app-course-item 
-          class="block bg-gray-50 border-2 border-gray-800 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-blue-500" 
+          class="block bg-gray-100 border-2 border-gray-800 shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-blue-500 rounded-md text-sm" 
           [simplified]="true" 
           [data]="item" 
           (openModal)="openModal(i)">
@@ -45,7 +45,7 @@
       <!-- Proveedores: tienen 'nombreEmpresa' y (rut_md5 o correoElectronicoEmpresa) -->
       <ng-container *ngIf="item?.nombreEmpresa && (item?.rut_md5 || item?.correoElectronicoEmpresa)">
         <app-supplier-item 
-          class="block bg-gray-50 border-2 border-gray-800 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-[#009C88]" 
+          class="block bg-gray-100 border-2 border-gray-800 shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-[#009C88] rounded-md text-sm" 
           [simplified]="true" 
           [data]="item" 
           (openModal)="openModal(i)">
@@ -55,7 +55,7 @@
       <!-- Financiamiento: tienen 'porcentaje_cobertura' -->
       <ng-container *ngIf="item?.porcentaje_cobertura">
         <app-financing-item 
-          class="block bg-gray-50 border-2 border-gray-800 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-[#009C88]" 
+          class="block bg-gray-100 border-2 border-gray-800 shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-[#009C88] rounded-md text-sm" 
           [simplified]="true" 
           [data]="item" 
           (openModal)="openModal(i)">
@@ -65,7 +65,7 @@
       <!-- Artículos: tienen 'articulo_paper' -->
       <ng-container *ngIf="item?.articulo_paper">
         <app-article-item 
-          class="block bg-gray-50 border-2 border-gray-800 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-[#0c243c]" 
+          class="block bg-gray-100 border border-gray-300 shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 rounded-md p-3 text-sm" 
           [simplified]="true" 
           [data]="item" 
           (openModal)="openModal(i)">
@@ -75,7 +75,7 @@
       <!-- Proyectos: tienen 'localidad' -->
       <ng-container *ngIf="item?.localidad">
         <app-projects-item 
-          class="block bg-gray-50 border-2 border-gray-800 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-[#0c243c]" 
+          class="block bg-gray-100 border-2 border-gray-800 shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 text-sm border-l-4 border-gray-500 rounded-md" 
           [simplified]="true" 
           [data]="item" 
           (openModal)="openModal(i)">
@@ -85,7 +85,7 @@
       <!-- Startups: tienen 'descripcionStartup' -->
       <ng-container *ngIf="item?.descripcionStartup">
         <app-startup-item 
-          class="block bg-gray-50 border-2 border-gray-800 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-[#009C88]" 
+          class="block bg-gray-100 border-2 border-gray-800 shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-[#009C88] rounded-md text-sm" 
           [simplified]="true" 
           [data]="item" 
           (openModal)="openModal(i)">
